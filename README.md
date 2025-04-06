@@ -1,3 +1,10 @@
+# Updated version of storybook test template
+
+customized test setup so standard function test also run in browser environment  
+see comment in vitest.workspace
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
