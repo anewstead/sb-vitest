@@ -1,5 +1,5 @@
 /*
- * setup for functional .test.ts files
- * (not storybook, see .storybook/vitest.setup.ts)
+ * this setup for functional .test.ts files
+ * all tsx should be stories
+ * see also .storybook/vitest.setup.ts
  */
-export { describe, it, expect } from "vitest";

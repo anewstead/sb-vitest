@@ -66,6 +66,7 @@ export default defineWorkspace([
         provider: "playwright",
         instances: [{ browser: "chromium" }],
         headless: true,
+        screenshotFailures: false,
       },
       setupFiles: [sbSetup],
     },
