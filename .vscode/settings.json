@@ -1,0 +1,78 @@
+{
+  "[markdown]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false
+  },
+
+  "css.validate": false,
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.quickSuggestions": {
+    "comments": false,
+    "other": true,
+    "strings": false
+  },
+
+  "editor.renderWhitespace": "all",
+
+  "eslint.format.enable": true,
+
+  "files.exclude": {
+    ".eslintcache": true,
+    ".stylelintcache": true,
+    "tsconfig.tsbuildinfo": true
+  },
+
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.hg/store/**": true,
+    "**/node_modules/*/**": true
+  },
+
+  "html.format.enable": false,
+
+  "javascript.format.enable": false,
+  "javascript.validate.enable": false,
+
+  "jest.runMode": {
+    "deferred": true,
+    "runAllTestsOnStartup": false,
+    "type": "on-demand"
+  },
+
+  "json.format.enable": false,
+
+  "less.validate": false,
+
+  "npm.packageManager": "pnpm",
+
+  "open-in-browser.default": "chrome",
+  "scss.validate": false,
+
+  "search.exclude": {
+    "**/*.code-search": true,
+    "**/bower_components": true,
+    "**/node_modules": true,
+    "package-lock.json": true,
+    "pnpm-lock.yaml": true,
+    "yarn.lock": true
+  },
+
+  "somesass.suggestFromUseOnly": true,
+
+  "stylelint.packageManager": "pnpm",
+  "stylelint.validate": ["css", "scss", "less"],
+
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.format.enable": false,
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.validate.enable": true
+}

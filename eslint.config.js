@@ -9,6 +9,7 @@ import tseslint from "typescript-eslint";
 import json from "eslint-plugin-json";
 import vitest from "@vitest/eslint-plugin";
 import prettier from "eslint-config-prettier/flat";
+import importPlugin from "eslint-plugin-import";
 
 const baseIgnores = {
   ignores: [
@@ -40,6 +41,84 @@ const testConfig = {
   },
 };
 
+const importOrderRules = {
+  ...importPlugin.configs.recommended.rules,
+  "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+  "import/no-default-export": "error",
+  "import/no-unassigned-import": ["warn", { allow: ["**/*.css"] }],
+  "import/no-extraneous-dependencies": "off",
+
+  /*
+    import/order should result in:
+    1. css > scss > unknown
+    2. react > the rest!
+    3. react types > other types
+    THE PLUGIN DOES NOT AUTOFIX UNASSIGNED IMPORTS
+    e.g. import "myFile.css"
+    its assumes unnamed imports have side effects
+    where import position may be relevant
+    preferred placement is suggested in a lint warning
+    but will need to be moved manually
+    css/scss imports should be able to be wherever required
+    */
+
+  "import/order": [
+    "warn",
+    {
+      alphabetize: {
+        caseInsensitive: true,
+        order: "asc",
+      },
+      named: true,
+      distinctGroup: true,
+      groups: [
+        "unknown",
+        "builtin",
+        "external",
+        "internal",
+        "parent",
+        "sibling",
+        "index",
+        "object",
+        "type",
+      ],
+      "newlines-between": "always",
+      pathGroups: [
+        {
+          group: "external",
+          pattern: "react+(|-native)",
+          position: "before",
+        },
+        {
+          group: "type",
+          pattern: "react+(|-native)",
+          position: "after",
+        },
+        {
+          group: "unknown",
+          pattern: "*.css",
+          position: "before",
+          patternOptions: { matchBase: true },
+        },
+        {
+          group: "unknown",
+          pattern: "*.scss",
+          position: "before",
+          patternOptions: { matchBase: true },
+        },
+      ],
+      pathGroupsExcludedImportTypes: [
+        "react+(|-native)",
+        "type",
+        "*.css",
+        "*.scss",
+      ],
+      warnOnUnassignedImports: true,
+    },
+  ],
+  "import/prefer-default-export": "off",
+};
+
 const reactConfig = {
   files: ["src/**/*.{ts,tsx}"],
   extends: [
@@ -50,6 +129,7 @@ const reactConfig = {
   languageOptions: {
     ecmaVersion: 2020,
     globals: globals.browser,
+    sourceType: "module",
     parserOptions: {
       ecmaFeatures: {
         jsx: true,
@@ -69,6 +149,7 @@ const reactConfig = {
     "react-refresh": reactRefresh,
     "jsx-a11y": jsxA11y,
     storybook: storybook,
+    import: importPlugin,
   },
   rules: {
     ...react.configs.recommended.rules,
@@ -76,6 +157,7 @@ const reactConfig = {
     ...reactHooks.configs.recommended.rules,
     ...jsxA11y.configs.recommended.rules,
     ...storybook.configs.recommended.rules,
+    ...importOrderRules,
   },
 };
 
