@@ -1,0 +1,14 @@
+node_modules
+dist
+build
+storybook-static
+.storybook/static
+
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+**/vendor
+**/polyfils
+**/generated
+

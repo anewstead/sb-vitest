@@ -8,6 +8,7 @@ import jsxA11y from "eslint-plugin-jsx-a11y";
 import tseslint from "typescript-eslint";
 import json from "eslint-plugin-json";
 import vitest from "@vitest/eslint-plugin";
+import prettier from "eslint-config-prettier/flat";
 
 const baseIgnores = {
   ignores: [
@@ -82,5 +83,6 @@ export default tseslint.config(
   baseIgnores,
   jsonConfig,
   testConfig,
-  reactConfig
+  reactConfig,
+  prettier
 );
