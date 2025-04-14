@@ -41,7 +41,7 @@ const testConfig = {
   },
 };
 
-const importOrderRules = {
+const importRules = {
   ...importPlugin.configs.recommended.rules,
   "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
   "import/no-default-export": "error",
@@ -157,7 +157,7 @@ const reactConfig = {
     ...reactHooks.configs.recommended.rules,
     ...jsxA11y.configs.recommended.rules,
     ...storybook.configs.recommended.rules,
-    ...importOrderRules,
+    ...importRules,
   },
 };
 
