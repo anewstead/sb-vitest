@@ -66,7 +66,8 @@
     "yarn.lock": true
   },
 
-  "somesass.suggestFromUseOnly": true,
+  "somesass.sass.completion.suggestFromUseOnly": true,
+  "somesass.scss.completion.suggestFromUseOnly": true,
 
   "stylelint.packageManager": "pnpm",
   "stylelint.validate": ["css", "scss", "less"],
