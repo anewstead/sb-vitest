@@ -1,4 +1,11 @@
+import { initialize as mswInitialize, mswLoader } from "msw-storybook-addon";
+
 import type { Preview } from "@storybook/react";
+
+// https://github.com/mswjs/msw-storybook-addon#configuring-msw
+mswInitialize({
+  onUnhandledRequest: "bypass",
+});
 
 const preview: Preview = {
   parameters: {
@@ -17,6 +24,8 @@ const preview: Preview = {
   //   // 'off' - skip a11y checks entirely
   //   test: "todo",
   // },
+  loaders: [mswLoader],
+  tags: ["autodocs"],
 };
 
 export default preview;

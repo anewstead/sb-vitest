@@ -4,6 +4,7 @@
     "editor.formatOnSave": false
   },
 
+  "cSpell.language": "en-GB",
   "css.validate": false,
 
   "editor.codeActionsOnSave": {
