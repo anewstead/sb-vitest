@@ -15,6 +15,15 @@ import { baseRules } from "./eslint.rules.base.js";
 import { importRules } from "./eslint.rules.import.js";
 import { tsRules } from "./eslint.rules.typescript.js";
 
+/*
+this is the actual eslint config
+its used to layer config up from js -> tsx and more
+generally we use recommended configs from plugins, 
+and only override where necessary,
+where there are more than just a couple of additional rules added
+they are moved to a separate file to help keep this file clean 
+*/
+
 // applies to all json files
 const jsonConfig = {
   files: ["**/*.json"],
@@ -148,9 +157,9 @@ const allowDefaultExport = {
 };
 
 /*
-  Note the order of the configs is important.
-  each config is deep merged into a final config
-  any overrides/additions need to apply in correct order
+the order of the configs is important.
+each config is merged into a final config
+overrides/additions must apply in correct order
 */
 export default tsEslint.config(
   jsonConfig,

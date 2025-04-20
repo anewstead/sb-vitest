@@ -14,8 +14,6 @@ suggest if you need a position other than preferred that
 also add a eslint-disable-next-line import/order comment
 */
 
-// import importPlugin from "eslint-plugin-import";
-
 export const importRules = {
   "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
   "import/no-default-export": "error",
