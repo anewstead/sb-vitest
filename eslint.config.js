@@ -28,27 +28,11 @@ const baseIgnores = {
   ],
 };
 
-const baseSettings = {
-  settings: {
-    "import/ignore": ["node_modules"],
-    "import/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
-        moduleDirectory: ["src", "node_modules"],
-      },
-    },
-  },
-};
-
 const jsonConfig = {
   files: ["**/*.json"],
   ...json.configs["recommended-with-comments"],
 };
 
-/*
-testConfig will merge with reactConfig 
-due to the file glob
-*/
 const testConfig = {
   files: ["src/**/*.test.{ts,tsx}"],
   plugins: {
@@ -60,10 +44,6 @@ const testConfig = {
   },
 };
 
-/*
-storybookConfig will merge with reactConfig
-due to the file glob
-*/
 const storybookConfig = {
   files: ["src/**/*.stories.{ts,tsx}"],
   plugins: {
@@ -102,6 +82,7 @@ const reactConfig = {
   extends: [
     js.configs.recommended,
     importPlugin.flatConfigs.recommended,
+    importPlugin.flatConfigs.typescript,
     ...tsEslint.configs.strictTypeChecked,
     ...tsEslint.configs.stylisticTypeChecked,
   ],
@@ -146,7 +127,6 @@ const reactConfig = {
 
 export default tsEslint.config(
   baseIgnores,
-  baseSettings,
   nodeConfig,
   jsonConfig,
   reactConfig,
