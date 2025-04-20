@@ -1,13 +1,13 @@
-import js from "@eslint/js";
-import vitest from "@vitest/eslint-plugin";
-import prettier from "eslint-config-prettier/flat";
+import eslintJs from "@eslint/js";
+import vitestPlugin from "@vitest/eslint-plugin";
+import prettierConfig from "eslint-config-prettier/flat";
 import importPlugin from "eslint-plugin-import";
-import json from "eslint-plugin-json";
-import jsxA11y from "eslint-plugin-jsx-a11y";
-import react from "eslint-plugin-react";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
-import storybook from "eslint-plugin-storybook";
+import jsonPlugin from "eslint-plugin-json";
+import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+import reactRefreshPlugin from "eslint-plugin-react-refresh";
+import storybookPlugin from "eslint-plugin-storybook";
 import globals from "globals";
 import tsEslint from "typescript-eslint";
 
@@ -15,6 +15,7 @@ import { baseRules } from "./eslint.rules.base.js";
 import { importRules } from "./eslint.rules.import.js";
 import { tsRules } from "./eslint.rules.typescript.js";
 
+// applies to all files
 const baseIgnores = {
   ignores: [
     "!**/.storybook/**",
@@ -28,95 +29,116 @@ const baseIgnores = {
   ],
 };
 
-const jsonConfig = {
-  files: ["**/*.json"],
-  ...json.configs["recommended-with-comments"],
-};
-
-const nodeConfig = {
-  files: ["**/*.{js,cjs,mjs}"],
-  extends: [js.configs.recommended],
+// applies to all files
+const baseConfig = {
+  extends: [
+    eslintJs.configs.recommended,
+    importPlugin.flatConfigs.recommended,
+    importPlugin.flatConfigs.typescript,
+  ],
   languageOptions: {
     ecmaVersion: 2020,
+    sourceType: "module",
     globals: {
       ...globals.node,
     },
   },
+  settings: {
+    "import/ignore": ["node_modules"],
+    "import/resolver": {
+      typescript: true,
+      node: true,
+    },
+  },
   rules: {
     ...baseRules,
+    ...importRules,
   },
 };
 
-const reactConfig = {
-  files: ["src/**/*.{ts,tsx}"],
+// applies to all json files
+const jsonConfig = {
+  files: ["**/*.json"],
+  ...jsonPlugin.configs["recommended-with-comments"],
+};
+
+// builds on baseConfig
+// applies to all ts/tsx files
+const tsConfig = {
+  files: ["**/*.{ts,tsx}"],
   extends: [
-    js.configs.recommended,
-    importPlugin.flatConfigs.recommended,
-    importPlugin.flatConfigs.typescript,
     ...tsEslint.configs.strictTypeChecked,
     ...tsEslint.configs.stylisticTypeChecked,
   ],
   languageOptions: {
-    ecmaVersion: 2020,
+    parserOptions: {
+      projectService: true,
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+  rules: {
+    ...tsRules,
+  },
+};
+
+// builds on tsConfig
+// applies to src react files
+const reactConfig = {
+  files: ["src/**/*.{ts,tsx}"],
+  languageOptions: {
     globals: globals.browser,
-    sourceType: "module",
     parserOptions: {
       ecmaFeatures: {
         jsx: true,
       },
-      projectService: true,
-      tsconfigRootDir: import.meta.dirname,
     },
   },
   settings: {
     react: {
       version: "detect",
     },
-    "import/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
-      },
-    },
   },
   plugins: {
-    react: react,
-    "react-hooks": reactHooks,
-    "react-refresh": reactRefresh,
-    "jsx-a11y": jsxA11y,
+    react: reactPlugin,
+    "react-hooks": reactHooksPlugin,
+    "react-refresh": reactRefreshPlugin,
+    "jsx-a11y": jsxA11yPlugin,
   },
   rules: {
-    ...react.configs.recommended.rules,
-    ...reactRefresh.configs.vite.rules,
-    ...reactHooks.configs.recommended.rules,
-    ...jsxA11y.configs.recommended.rules,
-    ...baseRules,
-    ...importRules,
-    ...tsRules,
+    ...reactPlugin.configs.recommended.rules,
+    ...reactRefreshPlugin.configs.vite.rules,
+    ...reactHooksPlugin.configs.recommended.rules,
+    ...jsxA11yPlugin.configs.recommended.rules,
   },
 };
 
+// builds on reactConfig
+// applies to src test files
 const testConfig = {
   files: ["src/**/*.test.{ts,tsx}"],
   plugins: {
-    vitest: vitest,
+    vitest: vitestPlugin,
   },
   rules: {
-    ...vitest.configs.recommended.rules,
+    ...vitestPlugin.configs.recommended.rules,
     "vitest/prefer-hooks-on-top": "error",
   },
 };
 
+// builds on reactConfig
+// applies to src storybook files
 const storiesConfig = {
   files: ["src/**/*.stories.{ts,tsx}"],
   plugins: {
-    storybook: storybook,
+    storybook: storybookPlugin,
   },
-  extends: [storybook.configs["flat/recommended"]],
+  extends: [storybookPlugin.configs["flat/recommended"]],
   rules: {
     "storybook/use-storybook-expect": "off",
   },
 };
 
+// override
 const allowDefaultExport = {
   files: ["./*", ".storybook/**/*", "src/**/*.stories.{ts,tsx}"],
   rules: {
@@ -124,13 +146,19 @@ const allowDefaultExport = {
   },
 };
 
+/*
+  Note the order of the configs is important.
+  each config is deep merged into a final config
+  any overrides/additions need to apply in correct order
+*/
 export default tsEslint.config(
   baseIgnores,
+  baseConfig,
   jsonConfig,
-  nodeConfig,
+  tsConfig,
   reactConfig,
   testConfig,
   storiesConfig,
   allowDefaultExport,
-  prettier
+  prettierConfig
 );
