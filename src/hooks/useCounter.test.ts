@@ -1,6 +1,8 @@
-import { renderHook } from "vitest-browser-react";
-import { useCounter } from "./useCounter";
 import { act } from "react";
+
+import { renderHook } from "vitest-browser-react";
+
+import { useCounter } from "./useCounter";
 
 /*
 act() currently cause a warning in the console, 

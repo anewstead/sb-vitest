@@ -1,10 +1,10 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { defineWorkspace } from "vitest/config";
-import type { PluginOption } from "vite";
-
 import { storybookTest } from "@storybook/experimental-addon-test/vitest-plugin";
+import { defineWorkspace } from "vitest/config";
+
+import type { PluginOption } from "vite";
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 const sbDir = path.join(rootDir, ".storybook");

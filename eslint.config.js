@@ -1,15 +1,15 @@
 import js from "@eslint/js";
-import globals from "globals";
+import vitest from "@vitest/eslint-plugin";
+import prettier from "eslint-config-prettier/flat";
+import importPlugin from "eslint-plugin-import";
+import json from "eslint-plugin-json";
+import jsxA11y from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import storybook from "eslint-plugin-storybook";
-import jsxA11y from "eslint-plugin-jsx-a11y";
+import globals from "globals";
 import tsEslint from "typescript-eslint";
-import json from "eslint-plugin-json";
-import vitest from "@vitest/eslint-plugin";
-import prettier from "eslint-config-prettier/flat";
-import importPlugin from "eslint-plugin-import";
 
 import { baseRules } from "./eslint.rules.base.js";
 import { importRules } from "./eslint.rules.import.js";
@@ -28,6 +28,18 @@ const baseIgnores = {
   ],
 };
 
+const baseSettings = {
+  settings: {
+    "import/ignore": ["node_modules"],
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        moduleDirectory: ["src", "node_modules"],
+      },
+    },
+  },
+};
+
 const jsonConfig = {
   files: ["**/*.json"],
   ...json.configs["recommended-with-comments"],
@@ -38,7 +50,7 @@ testConfig will merge with reactConfig
 due to the file glob
 */
 const testConfig = {
-  files: ["**/*.test.{ts,tsx}"],
+  files: ["src/**/*.test.{ts,tsx}"],
   plugins: {
     vitest: vitest,
   },
@@ -53,12 +65,21 @@ storybookConfig will merge with reactConfig
 due to the file glob
 */
 const storybookConfig = {
-  files: ["**/*.stories.{ts,tsx}", ".storybook/**/*.{ts,tsx}"],
+  files: ["src/**/*.stories.{ts,tsx}"],
   plugins: {
     storybook: storybook,
   },
+  extends: [storybook.configs["flat/recommended"]],
   rules: {
-    ...storybook.configs.recommended.rules,
+    "import/no-default-export": "off",
+    "storybook/use-storybook-expect": "off",
+  },
+};
+
+const hasDefaults = {
+  files: ["./*", ".storybook/**/*"],
+  rules: {
+    "import/no-default-export": "off",
   },
 };
 
@@ -69,23 +90,18 @@ const nodeConfig = {
     ecmaVersion: 2020,
     globals: {
       ...globals.node,
-      ...globals.es2020,
     },
-    sourceType: "module",
-  },
-  plugins: {
-    import: importPlugin,
   },
   rules: {
     ...baseRules,
-    ...importRules,
   },
 };
 
 const reactConfig = {
-  files: ["**/*.{ts,tsx}"],
+  files: ["src/**/*.{ts,tsx}"],
   extends: [
     js.configs.recommended,
+    importPlugin.flatConfigs.recommended,
     ...tsEslint.configs.strictTypeChecked,
     ...tsEslint.configs.stylisticTypeChecked,
   ],
@@ -105,13 +121,17 @@ const reactConfig = {
     react: {
       version: "detect",
     },
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      },
+    },
   },
   plugins: {
     react: react,
     "react-hooks": reactHooks,
     "react-refresh": reactRefresh,
     "jsx-a11y": jsxA11y,
-    import: importPlugin,
   },
   rules: {
     ...react.configs.recommended.rules,
@@ -126,10 +146,12 @@ const reactConfig = {
 
 export default tsEslint.config(
   baseIgnores,
+  baseSettings,
   nodeConfig,
   jsonConfig,
   reactConfig,
   testConfig,
   storybookConfig,
+  hasDefaults,
   prettier
 );

@@ -14,10 +14,9 @@ suggest if you need a position other than preferred that
 also add a eslint-disable-next-line import/order comment
 */
 
-import importPlugin from "eslint-plugin-import";
+// import importPlugin from "eslint-plugin-import";
 
 export const importRules = {
-  ...importPlugin.configs.recommended.rules,
   "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
   "import/no-default-export": "error",
   "import/no-extraneous-dependencies": "off",
@@ -33,7 +32,6 @@ export const importRules = {
       named: true,
       distinctGroup: true,
       groups: [
-        "unknown",
         "builtin",
         "external",
         "internal",
@@ -42,6 +40,7 @@ export const importRules = {
         "index",
         "object",
         "type",
+        "unknown",
       ],
       "newlines-between": "always",
       pathGroups: [
@@ -55,24 +54,24 @@ export const importRules = {
           pattern: "react+(|-native)",
           position: "after",
         },
-        {
-          group: "unknown",
-          pattern: "*.css",
-          position: "before",
-          patternOptions: { matchBase: true },
-        },
-        {
-          group: "unknown",
-          pattern: "*.scss",
-          position: "before",
-          patternOptions: { matchBase: true },
-        },
+        // {
+        //   group: "unknown",
+        //   pattern: "*.css",
+        //   position: "before",
+        //   patternOptions: { matchBase: true },
+        // },
+        // {
+        //   group: "unknown",
+        //   pattern: "*.scss",
+        //   position: "before",
+        //   patternOptions: { matchBase: true },
+        // },
       ],
       pathGroupsExcludedImportTypes: [
         "react+(|-native)",
         "type",
-        "*.css",
-        "*.scss",
+        // "*.css",
+        // "*.scss",
       ],
       warnOnUnassignedImports: true,
     },
