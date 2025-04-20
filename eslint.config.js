@@ -33,36 +33,6 @@ const jsonConfig = {
   ...json.configs["recommended-with-comments"],
 };
 
-const testConfig = {
-  files: ["src/**/*.test.{ts,tsx}"],
-  plugins: {
-    vitest: vitest,
-  },
-  rules: {
-    ...vitest.configs.recommended.rules,
-    "vitest/prefer-hooks-on-top": "error",
-  },
-};
-
-const storybookConfig = {
-  files: ["src/**/*.stories.{ts,tsx}"],
-  plugins: {
-    storybook: storybook,
-  },
-  extends: [storybook.configs["flat/recommended"]],
-  rules: {
-    "import/no-default-export": "off",
-    "storybook/use-storybook-expect": "off",
-  },
-};
-
-const hasDefaults = {
-  files: ["./*", ".storybook/**/*"],
-  rules: {
-    "import/no-default-export": "off",
-  },
-};
-
 const nodeConfig = {
   files: ["**/*.{js,cjs,mjs}"],
   extends: [js.configs.recommended],
@@ -125,13 +95,42 @@ const reactConfig = {
   },
 };
 
+const testConfig = {
+  files: ["src/**/*.test.{ts,tsx}"],
+  plugins: {
+    vitest: vitest,
+  },
+  rules: {
+    ...vitest.configs.recommended.rules,
+    "vitest/prefer-hooks-on-top": "error",
+  },
+};
+
+const storiesConfig = {
+  files: ["src/**/*.stories.{ts,tsx}"],
+  plugins: {
+    storybook: storybook,
+  },
+  extends: [storybook.configs["flat/recommended"]],
+  rules: {
+    "storybook/use-storybook-expect": "off",
+  },
+};
+
+const allowDefaultExport = {
+  files: ["./*", ".storybook/**/*", "src/**/*.stories.{ts,tsx}"],
+  rules: {
+    "import/no-default-export": "off",
+  },
+};
+
 export default tsEslint.config(
   baseIgnores,
-  nodeConfig,
   jsonConfig,
+  nodeConfig,
   reactConfig,
   testConfig,
-  storybookConfig,
-  hasDefaults,
+  storiesConfig,
+  allowDefaultExport,
   prettier
 );
