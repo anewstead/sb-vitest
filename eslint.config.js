@@ -15,7 +15,13 @@ import { baseRules } from "./eslint.rules.base.js";
 import { importRules } from "./eslint.rules.import.js";
 import { tsRules } from "./eslint.rules.typescript.js";
 
-// applies to all files
+// applies to all json files
+const jsonConfig = {
+  files: ["**/*.json"],
+  ...jsonPlugin.configs["recommended-with-comments"],
+};
+
+// lint ignores
 const baseIgnores = {
   ignores: [
     "!**/.storybook/**",
@@ -29,7 +35,8 @@ const baseIgnores = {
   ],
 };
 
-// applies to all files
+// applies to all script files
+// js,jsx,ts,tsx,mjs,cjs
 const baseConfig = {
   extends: [
     eslintJs.configs.recommended,
@@ -54,12 +61,6 @@ const baseConfig = {
     ...baseRules,
     ...importRules,
   },
-};
-
-// applies to all json files
-const jsonConfig = {
-  files: ["**/*.json"],
-  ...jsonPlugin.configs["recommended-with-comments"],
 };
 
 // builds on baseConfig
@@ -152,9 +153,9 @@ const allowDefaultExport = {
   any overrides/additions need to apply in correct order
 */
 export default tsEslint.config(
+  jsonConfig,
   baseIgnores,
   baseConfig,
-  jsonConfig,
   tsConfig,
   reactConfig,
   testConfig,
