@@ -1,18 +1,18 @@
 import { http, HttpResponse } from "msw";
 
-const MOCK_URL = "http://localhost:3000/api/main";
+import { SAMPLE_API } from "../endpoints";
 
 import { sampleData, sampleError } from "./sampleData";
 
-export const sampleDefault = http.post(MOCK_URL, () => {
+export const sampleDefault = http.post(SAMPLE_API, () => {
   return HttpResponse.json(sampleData);
 });
 
-export const sampleBadRequest = http.post(MOCK_URL, () => {
+export const sampleBadRequest = http.post(SAMPLE_API, () => {
   return HttpResponse.error();
 });
 
-export const sampleErrorResponse = http.post(MOCK_URL, () => {
+export const sampleErrorResponse = http.post(SAMPLE_API, () => {
   return HttpResponse.json(sampleError, {
     status: 400,
   });

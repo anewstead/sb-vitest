@@ -15,6 +15,8 @@ import type { DocsContextProps } from "@storybook/blocks";
 import type { Preview } from "@storybook/react";
 
 // https://github.com/mswjs/msw-storybook-addon#configuring-msw
+// MSW default log level is noisy and a bit misleading
+// hence the quiet option
 mswInitialize({
   onUnhandledRequest: "bypass",
   quiet: true,
