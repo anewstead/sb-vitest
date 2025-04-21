@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 
-import { SAMPLE_API } from "@src/testing/msw/endpoints";
+import { SAMPLE_API } from "@src/services/endpoints";
 
 import { sampleData, sampleError } from "./sampleData";
 

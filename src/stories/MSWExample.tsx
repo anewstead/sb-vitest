@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import { SAMPLE_API } from "@src/testing/msw/endpoints";
+import { SAMPLE_API } from "@src/services/endpoints";
+
+import type { SampleResponse } from "@src/services/endpoints.types";
 
 export const MSWExample = () => {
-  const [data, setData] = useState<{ data?: { mkey: string } } | null>(null);
+  const [data, setData] = useState<SampleResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(SAMPLE_API);
+        // btw, consider using zod for type safety
+        const response = await axios.post<SampleResponse>(SAMPLE_API);
         setData(response.data);
       } catch (err) {
         const error = err as Error;

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { describe, expect, it } from "vitest";
 
+import { SAMPLE_API } from "@src/services/endpoints";
 import { worker } from "@src/testing/msw/browser";
-import { SAMPLE_API } from "@src/testing/msw/endpoints";
 import { sampleData, sampleError } from "@src/testing/msw/handlers/sampleData";
 import {
   sampleBadRequest,
