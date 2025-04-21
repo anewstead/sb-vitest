@@ -1,0 +1,57 @@
+@mixin media-above($width) {
+  @media only screen and (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin media-below($width) {
+  @media only screen and (max-width: $width - 1px) {
+    @content;
+  }
+}
+
+@mixin media-min-max($minWidth, $maxWidth) {
+  @media only screen and (min-width: $minWidth) and (max-width: $maxWidth - 1px) {
+    @content;
+  }
+}
+
+// -
+
+@mixin media-above-landscape($width) {
+  @media only screen and (min-width: $width) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin media-below-landscape($width) {
+  @media only screen and (max-width: $width - 1px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin media-min-max-landscape($minWidth, $maxWidth) {
+  @media only screen and (min-width: $minWidth) and (max-width: $maxWidth - 1px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+// -
+
+@mixin media-above-height($height) {
+  @media only screen and (min-height: $height) {
+    @content;
+  }
+}
+
+@mixin media-below-height($height) {
+  @media only screen and (max-height: $height - 1px) {
+    @content;
+  }
+}
+
+@mixin media-min-max-height($minHeight, $maxHeight) {
+  @media only screen and (min-height: $minHeight) and (max-height: $maxHeight - 1px) {
+    @content;
+  }
+}

@@ -8,8 +8,8 @@ import type { PluginOption } from "vite";
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 const sbDir = path.join(rootDir, ".storybook");
-const sbSetup = path.join(sbDir, "vitest.setup.ts");
-const testSetup = path.join(rootDir, "vitest.setup.ts");
+const sbSetup = path.join(sbDir, "vitest.setup.sb.ts");
+const testSetup = path.join(rootDir, "vitest.setup.fn.ts");
 
 /*
  * Plugin runs tests for stories defined in Storybook config

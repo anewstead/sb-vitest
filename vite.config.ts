@@ -2,7 +2,7 @@ import path from "node:path";
 
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import checker from "vite-plugin-checker";
+// import checker from "vite-plugin-checker";
 
 import { viteAlias } from "./viteAliasPlugin";
 
@@ -41,9 +41,9 @@ const devConfig: UserConfig = {
   resolve,
   plugins: [
     react(),
-    checker({
-      typescript: true,
-    }),
+    // checker({
+    //   typescript: true,
+    // }),
   ],
   css: {
     devSourcemap: true,

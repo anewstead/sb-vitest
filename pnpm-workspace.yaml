@@ -2,4 +2,5 @@ onlyBuiltDependencies:
   - "@parcel/watcher"
   - esbuild
   - msw
+  - storybook-addon-remix-react-router
   - unrs-resolver
