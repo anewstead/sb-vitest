@@ -1,13 +1,13 @@
 import axios from "axios";
 import { describe, expect, it } from "vitest";
 
-import { worker } from "../testing/msw/browser";
-import { SAMPLE_API } from "../testing/msw/endpoints";
-import { sampleData, sampleError } from "../testing/msw/handlers/sampleData";
+import { worker } from "@src/testing/msw/browser";
+import { SAMPLE_API } from "@src/testing/msw/endpoints";
+import { sampleData, sampleError } from "@src/testing/msw/handlers/sampleData";
 import {
   sampleBadRequest,
   sampleErrorResponse,
-} from "../testing/msw/handlers/sampleHandlers";
+} from "@src/testing/msw/handlers/sampleHandlers";
 
 describe("MSW Example Test", () => {
   it("should handle successful API response using default handler", async () => {

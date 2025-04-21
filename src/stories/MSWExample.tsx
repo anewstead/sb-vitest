@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import { SAMPLE_API } from "../testing/msw/endpoints";
+import { SAMPLE_API } from "@src/testing/msw/endpoints";
 
 export const MSWExample = () => {
   const [data, setData] = useState<{ data?: { mkey: string } } | null>(null);
