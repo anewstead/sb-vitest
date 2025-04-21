@@ -1,6 +1,7 @@
 import eslintJs from "@eslint/js";
 import vitestPlugin from "@vitest/eslint-plugin";
 import prettierConfig from "eslint-config-prettier/flat";
+import checkFilePlugin from "eslint-plugin-check-file";
 import importPlugin from "eslint-plugin-import";
 import jsonPlugin from "eslint-plugin-json";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
@@ -12,6 +13,7 @@ import globals from "globals";
 import tsEslint from "typescript-eslint";
 
 import { baseRules } from "./eslint.rules.base.js";
+import { checkFileRules } from "./eslint.rules.checkfile.js";
 import { importRules } from "./eslint.rules.import.js";
 import { tsRules } from "./eslint.rules.typescript.js";
 
@@ -38,6 +40,8 @@ const baseIgnores = {
     "**/build/**",
     "**/dist/**",
     "**/public/**",
+    "**/vendor/**",
+    "**/generated/**",
     "**/.idea/**",
     "**/.DS_Store",
     "**/*.log",
@@ -52,6 +56,9 @@ const baseConfig = {
     importPlugin.flatConfigs.recommended,
     importPlugin.flatConfigs.typescript,
   ],
+  plugins: {
+    "check-file": checkFilePlugin,
+  },
   languageOptions: {
     ecmaVersion: 2020,
     sourceType: "module",
@@ -69,6 +76,7 @@ const baseConfig = {
   rules: {
     ...baseRules,
     ...importRules,
+    ...checkFileRules,
   },
 };
 
@@ -149,6 +157,25 @@ const storiesConfig = {
 };
 
 // override
+const allowParentImports = {
+  files: ["**/__{tests,mocks}__/**"],
+  rules: {
+    "no-restricted-imports": [
+      "warn",
+      {
+        patterns: [
+          {
+            group: ["../.."],
+            message:
+              "Folder allows 1 level relative parent import, otherwise use absolute @ alias path.",
+          },
+        ],
+      },
+    ],
+  },
+};
+
+// override
 const allowDefaultExport = {
   files: ["./*", ".storybook/**/*", "src/**/*.stories.{ts,tsx}"],
   rules: {
@@ -170,5 +197,6 @@ export default tsEslint.config(
   testConfig,
   storiesConfig,
   allowDefaultExport,
+  allowParentImports,
   prettierConfig
 );

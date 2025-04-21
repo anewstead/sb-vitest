@@ -17,7 +17,20 @@ also add a eslint-disable-next-line import/order comment
 export const importRules = {
   "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
   "import/no-default-export": "error",
-  "import/no-extraneous-dependencies": "off",
+  "import/no-extraneous-dependencies": [
+    "warn",
+    {
+      devDependencies: [
+        "./*",
+        ".storybook/**",
+        "scripts/**",
+        "src/testing/**",
+        "**/__tests__/**",
+        "**/__mocks__/**",
+        "**/*.{test,tests,mock,mocks,stories}.{js,jsx,ts,tsx}",
+      ],
+    },
+  ],
   "import/no-unassigned-import": ["warn", { allow: ["**/*.css"] }],
 
   "import/order": [

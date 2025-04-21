@@ -3,6 +3,7 @@ base eslint rules only
 i.e. not plugins
 */
 export const baseRules = {
+  "arrow-body-style": ["error", "always"],
   curly: "error",
   "no-alert": ["warn"],
 
@@ -33,6 +34,18 @@ export const baseRules = {
     },
   ],
 
+  "no-restricted-imports": [
+    "warn",
+    {
+      patterns: [
+        {
+          group: [".."],
+          message: "Avoid relative parent imports, use absolute @ alias path.",
+        },
+      ],
+    },
+  ],
+
   "no-restricted-syntax": [
     "error",
     {
@@ -57,10 +70,13 @@ export const baseRules = {
     },
   ],
 
+  "no-underscore-dangle": "warn",
+
   "no-void": [
     "error",
     {
       allowAsStatement: true,
     },
   ],
+  "prefer-template": "error",
 };
