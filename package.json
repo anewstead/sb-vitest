@@ -7,14 +7,14 @@
     "prepare": "husky",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "PLAYWRIGHT_BROWSERS_PATH=0 playwright install chromium --with-deps --no-shell",
-    "dev": "vite --host --open --port 3003",
-    "dev-sb": "storybook dev --port 6006",
+    "dev": "vite --host --open",
+    "dev-sb": "storybook dev",
     "build": "tsc && vite build",
     "build-sb": "npm run build-storybook",
-    "build-storybook": "storybook build --quiet --loglevel warn",
+    "build-storybook": "storybook build",
     "build-stats": "analyze",
-    "start": "vite preview --host --port 3003",
-    "start-sb": "http-server storybook-static --port 6006",
+    "start": "vite preview --host",
+    "start-sb": "http-server storybook-static",
     "lint": "npm run lint-js; npm run lint-style; npm run pretty",
     "lint-js": "eslint . --fix",
     "lint-style": "stylelint ./'**/*.{css,scss}' --fix --cache --cache-location=node_modules/.cache/stylelint/",
@@ -113,6 +113,7 @@
   },
   "msw": {
     "workerDirectory": [
+      ".storybook/static",
       "public"
     ]
   }

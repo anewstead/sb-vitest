@@ -9,7 +9,7 @@ import type { PluginOption } from "vite";
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 const sbDir = path.join(rootDir, ".storybook");
 const sbSetup = path.join(sbDir, "vitest.setup.sb.ts");
-const testSetup = path.join(rootDir, "vitest.setup.fn.ts");
+const fnSetup = path.join(rootDir, "vitest.setup.fn.ts");
 
 /*
  * Plugin runs tests for stories defined in Storybook config
@@ -51,7 +51,7 @@ export default defineWorkspace([
         headless: true,
         screenshotFailures: false,
       },
-      setupFiles: [testSetup],
+      setupFiles: [fnSetup],
     },
   },
   {

@@ -1,4 +1,6 @@
-export const sampleData = {
+import type { SampleResponse } from "@src/services/endpoints.types";
+
+export const sampleData: SampleResponse = {
   data: {
     mkey: "mvalue",
   },

@@ -3,7 +3,6 @@ import React from "react";
 import { themes } from "@storybook/theming";
 import { initialize as mswInitialize, mswLoader } from "msw-storybook-addon";
 
-// TODO: msw example
 import { handlers } from "@src/testing/msw/handlers/all";
 
 import { AutoDocsTemplate } from "./AutoDocsTemplate";
