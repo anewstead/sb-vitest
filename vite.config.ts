@@ -25,6 +25,7 @@ const resolve: UserConfig["resolve"] = {
  * - Path.resolve("./dist") = dist folder in project root\
  * - Dist = all "dist" folders\
  */
+// TODO: check if need to resolve paths or just use relative paths
 export const devServer: ServerOptions = {
   watch: {
     ignored: [
