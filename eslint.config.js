@@ -37,6 +37,7 @@ const baseIgnores = {
   ignores: [
     "!**/.storybook/**",
     "**/.storybook/static/**",
+    "**/storybook-static/**",
     "**/node_modules/**",
     "**/build/**",
     "**/dist/**",
