@@ -27,7 +27,7 @@ export const importRules = {
         "src/testing/**",
         "**/__tests__/**",
         "**/__mocks__/**",
-        "**/*.{test,tests,mock,mocks,stories}.{js,jsx,ts,tsx}",
+        "**/*.{test,mock,stories}.{js,jsx,ts,tsx}",
       ],
     },
   ],

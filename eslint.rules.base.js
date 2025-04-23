@@ -68,6 +68,11 @@ export const baseRules = {
         "`with` is disallowed in strict mode because it makes code impossible to predict and optimize.",
       selector: "WithStatement",
     },
+    {
+      selector: "TSEnumDeclaration",
+      message:
+        "Avoid using `enum`, always prefer standard `const` object or union types.",
+    },
   ],
 
   "no-underscore-dangle": "warn",
