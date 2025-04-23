@@ -31,7 +31,7 @@ export const importRules = {
       ],
     },
   ],
-  "import/no-unassigned-import": ["warn", { allow: ["**/*.css"] }],
+  "import/no-unassigned-import": ["warn"],
 
   "import/order": [
     "warn",
@@ -43,6 +43,7 @@ export const importRules = {
       named: true,
       distinctGroup: true,
       groups: [
+        "unknown",
         "builtin",
         "external",
         "internal",
@@ -51,7 +52,6 @@ export const importRules = {
         "index",
         "object",
         "type",
-        "unknown",
       ],
       "newlines-between": "always",
       pathGroups: [
@@ -65,24 +65,24 @@ export const importRules = {
           pattern: "react+(|-native)",
           position: "after",
         },
-        // {
-        //   group: "unknown",
-        //   pattern: "*.css",
-        //   position: "before",
-        //   patternOptions: { matchBase: true },
-        // },
-        // {
-        //   group: "unknown",
-        //   pattern: "*.scss",
-        //   position: "before",
-        //   patternOptions: { matchBase: true },
-        // },
+        {
+          group: "unknown",
+          pattern: "*.css",
+          position: "before",
+          patternOptions: { matchBase: true },
+        },
+        {
+          group: "unknown",
+          pattern: "*.scss",
+          position: "before",
+          patternOptions: { matchBase: true },
+        },
       ],
       pathGroupsExcludedImportTypes: [
         "react+(|-native)",
         "type",
-        // "*.css",
-        // "*.scss",
+        "*.css",
+        "*.scss",
       ],
       warnOnUnassignedImports: true,
     },

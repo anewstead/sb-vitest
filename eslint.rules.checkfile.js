@@ -31,10 +31,14 @@ export const checkFileRules = {
       // should be plural
       "**/*.rule.*": "*.rules.*",
       "**/*.story.*": "*.stories.*",
+
+      // should be different file type
+      "**/*.stories.ts": "*.stories.tsx",
+      "**/*.test.tsx": "*.test.ts",
     },
     {
       errorMessage:
-        'Single/Plural middle extension name "{{ target }}" incorrect, should be opposite!"',
+        'Incorrect filename (pluralise mid ext) or (test file type) -> rule: "{{ target }}" ;',
     },
   ],
 
