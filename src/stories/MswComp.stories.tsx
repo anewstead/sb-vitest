@@ -3,12 +3,11 @@ import {
   sampleErrorResponse,
 } from "@src/testing/msw/handlers/sampleHandlers";
 
-import { MSWExample } from "./MswExample";
+import { MSWExample } from "./MswComp";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
-  title: "Example/MSWExample",
   component: MSWExample,
 } satisfies Meta<typeof MSWExample>;
 

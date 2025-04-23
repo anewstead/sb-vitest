@@ -1,4 +1,4 @@
-import type { SampleResponse } from "@src/services/endpoints.types";
+import type { SampleResponse } from "@src/services/endpoints.type";
 
 export const sampleData: SampleResponse = {
   data: {

@@ -18,8 +18,8 @@ import { importRules } from "./eslint.rules.import.js";
 import { tsRules } from "./eslint.rules.typescript.js";
 
 /*
-this is the actual eslint config
-its used to layer config up from js -> tsx and more
+The eslint config
+layers up config from base js -> tsx and more
 generally we use recommended configs from plugins, 
 and only override where necessary,
 where there are more than just a couple of additional rules added
@@ -159,7 +159,7 @@ const storiesConfig = {
 
 // override
 const allowParentImports = {
-  files: ["**/__{tests,mocks}__/**"],
+  files: ["**/__{tests,mocks}__/**", ".storybook/**/*"],
   rules: {
     "no-restricted-imports": [
       "warn",

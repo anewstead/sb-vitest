@@ -1,7 +1,5 @@
 /*
 @eslint-plugin-check-file rules only
-
-
 */
 
 export const checkFileRules = {

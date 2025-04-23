@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { SAMPLE_API } from "@src/services/endpoints";
 
-import type { SampleResponse } from "@src/services/endpoints.types";
+import type { SampleResponse } from "@src/services/endpoints.type";
 
 export const MSWExample = () => {
   const [data, setData] = useState<SampleResponse | null>(null);

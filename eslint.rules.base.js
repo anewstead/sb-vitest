@@ -2,6 +2,7 @@
 base eslint rules only
 i.e. not plugins
 */
+
 export const baseRules = {
   "arrow-body-style": ["error", "always"],
   curly: "error",
