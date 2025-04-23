@@ -3,7 +3,7 @@ import {
   sampleErrorResponse,
 } from "@src/testing/msw/handlers/sampleHandlers";
 
-import { MSWExample } from "./MSWExample";
+import { MSWExample } from "./MswExample";
 
 import type { Meta, StoryObj } from "@storybook/react";
 

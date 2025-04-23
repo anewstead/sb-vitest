@@ -6,6 +6,7 @@ export default defineConfig({
   ...viteConfig({ command: "serve", mode: "development" }),
   test: {
     globals: true,
+    watch: false,
     browser: {
       enabled: true,
       provider: "playwright",

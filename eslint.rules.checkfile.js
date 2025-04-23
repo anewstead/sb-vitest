@@ -6,7 +6,7 @@ export const checkFileRules = {
   "check-file/filename-naming-convention": [
     "error",
     {
-      "src/(!index)/**/*.{jsx,tsx}": "PASCAL_CASE",
+      "src/**/*.{jsx,tsx}": "PASCAL_CASE",
       "src/**/*.{js,ts,css,scss}": "CAMEL_CASE",
     },
     { ignoreMiddleExtensions: true },

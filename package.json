@@ -19,9 +19,9 @@
     "lint-js": "eslint . --fix",
     "lint-style": "stylelint ./'**/*.{css,scss}' --fix --cache --cache-location=node_modules/.cache/stylelint/",
     "pretty": "prettier . --write --log-level warn --cache --no-error-on-unmatched-pattern  --ignore-unknown",
-    "test": "vitest --watch=false",
-    "test-fn": "vitest --watch=false --project=functions",
-    "test-sb": "vitest --watch=false --project=storybook"
+    "test": "vitest",
+    "test-fn": "vitest --project=functions",
+    "test-sb": "vitest --project=storybook"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,cjs,mjs,json}": [
