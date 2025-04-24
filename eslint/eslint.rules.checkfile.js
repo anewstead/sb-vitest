@@ -32,13 +32,12 @@ export const checkFileRules = {
       "**/*.rule.*": "*.rules.*",
       "**/*.story.*": "*.stories.*",
 
-      // should be different file type
+      // should be file type
       "**/*.stories.ts": "*.stories.tsx",
       "**/*.test.tsx": "*.test.ts",
     },
     {
-      errorMessage:
-        'Incorrect filename (pluralise mid ext) or (test file type) -> rule: "{{ target }}" ;',
+      errorMessage: 'Incorrect filename: A should be B -> "{{ target }}";',
     },
   ],
 

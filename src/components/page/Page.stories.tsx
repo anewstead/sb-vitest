@@ -1,4 +1,4 @@
-import { userEvent, within } from "@storybook/test";
+import { expect, userEvent, within } from "@storybook/test";
 
 import { Page } from "./Page";
 
@@ -17,11 +17,11 @@ export const LoggedIn: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const loginButton = canvas.getByRole("button", { name: /Log in/i });
-    expect(loginButton).toBeInTheDocument();
+    await expect(loginButton).toBeInTheDocument();
     await userEvent.click(loginButton);
-    expect(loginButton).not.toBeInTheDocument();
+    await expect(loginButton).not.toBeInTheDocument();
 
     const logoutButton = canvas.getByRole("button", { name: /Log out/i });
-    expect(logoutButton).toBeInTheDocument();
+    await expect(logoutButton).toBeInTheDocument();
   },
 };
