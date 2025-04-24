@@ -8,7 +8,7 @@ export default defineConfig({
     globals: true,
     watch: false,
     name: "functions",
-    setupFiles: ["./vitest.setup.fn.ts"],
+    setupFiles: ["./src/test/vitest.setup.ts"],
     browser: {
       enabled: true,
       provider: "playwright",

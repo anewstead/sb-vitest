@@ -12,10 +12,10 @@ import storybookPlugin from "eslint-plugin-storybook";
 import globals from "globals";
 import tsEslint from "typescript-eslint";
 
-import { baseRules } from "./eslint.rules.base.js";
-import { checkFileRules } from "./eslint.rules.checkfile.js";
-import { importRules } from "./eslint.rules.import.js";
-import { tsRules } from "./eslint.rules.typescript.js";
+import { baseRules } from "./eslint/eslint.rules.base.js";
+import { checkFileRules } from "./eslint/eslint.rules.checkfile.js";
+import { importRules } from "./eslint/eslint.rules.import.js";
+import { tsRules } from "./eslint/eslint.rules.typescript.js";
 
 /*
 The eslint config

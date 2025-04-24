@@ -1,7 +1,7 @@
 import {
   sampleBadRequest,
   sampleErrorResponse,
-} from "@src/testing/msw/handlers/sampleHandlers";
+} from "@src/test/msw/handlers/sampleHandlers";
 
 import { MSWExample } from "./MswComp";
 

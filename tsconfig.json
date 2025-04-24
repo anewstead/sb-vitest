@@ -32,5 +32,13 @@
     "public",
     "coverage"
   ],
-  "include": ["./*", "src/**/*", ".storybook/**/*"]
+  "include": [
+    "./*",
+    "src/**/*",
+    ".storybook/**/*",
+    "eslint/eslint.rules.base.js",
+    "eslint/eslint.rules.checkfile.js",
+    "eslint/eslint.rules.import.js",
+    "eslint/eslint.rules.typescript.js"
+  ]
 }

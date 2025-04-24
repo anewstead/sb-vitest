@@ -5,7 +5,7 @@ import type { PluginOption } from "vite";
 
 const sbPlugin = storybookTest({
   configDir: ".storybook",
-  storybookScript: "pnpm dev-sb --ci",
+  storybookScript: "npm run dev-sb --ci",
 }) as PluginOption;
 
 export default defineWorkspace([
@@ -15,7 +15,7 @@ export default defineWorkspace([
     plugins: [sbPlugin],
     test: {
       name: "storybook",
-      setupFiles: [".storybook/vitest.setup.sb.ts"],
+      setupFiles: [".storybook/vitest.setup.ts"],
     },
   },
 ]);

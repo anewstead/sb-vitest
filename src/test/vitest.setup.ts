@@ -1,10 +1,10 @@
-import { worker } from "@src/testing/msw/browser";
-
 /*
 setup for functional .test.ts files
-all tsx should be stories
+all tsx are components and should be .stories.tsx
 see also .storybook/vitest.setup.ts
 */
+
+import { worker } from "./msw/browser";
 
 // MSW default log level is noisy and a bit misleading
 // hence the quiet option
