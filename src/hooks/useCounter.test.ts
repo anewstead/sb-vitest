@@ -1,5 +1,6 @@
 import { act } from "react";
 
+import { waitFor } from "@storybook/test";
 import { renderHook } from "vitest-browser-react";
 
 import { useCounter } from "./useCounter";
@@ -34,13 +35,15 @@ describe("useCounter", () => {
     expect(result.current.count).toBe(1);
   });
 
-  it("should decrement the count", () => {
+  it("should decrement the count", async () => {
     const { result } = renderHook(() => {
       return useCounter(5);
     });
-    act(() => {
-      result.current.decrement();
+
+    result.current.decrement();
+
+    await waitFor(() => {
+      expect(result.current.count).toBe(4);
     });
-    expect(result.current.count).toBe(4);
   });
 });

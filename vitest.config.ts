@@ -7,13 +7,15 @@ export default defineConfig({
   test: {
     globals: true,
     watch: false,
+    name: "functions",
+    setupFiles: ["./vitest.setup.fn.ts"],
     browser: {
       enabled: true,
       provider: "playwright",
       instances: [{ browser: "chromium" }],
       headless: true,
       screenshotFailures: false,
-      isolate: true,
+      connectTimeout: 20000,
     },
   },
 });

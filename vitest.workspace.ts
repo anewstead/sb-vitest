@@ -9,13 +9,7 @@ const sbPlugin = storybookTest({
 }) as PluginOption;
 
 export default defineWorkspace([
-  {
-    extends: "./vitest.config.ts",
-    test: {
-      name: "functions",
-      setupFiles: ["./vitest.setup.fn.ts"],
-    },
-  },
+  "./vitest.config.ts",
   {
     extends: "./vitest.config.ts",
     plugins: [sbPlugin],
