@@ -19,9 +19,10 @@
     "lint-js": "eslint . --fix",
     "lint-style": "stylelint ./'**/*.{css,scss}' --fix --cache --cache-location=node_modules/.cache/stylelint/",
     "pretty": "prettier . --write --log-level warn --cache --no-error-on-unmatched-pattern  --ignore-unknown",
-    "test": "vitest",
-    "test-fn": "vitest --project=functions",
-    "test-sb": "vitest --project=storybook"
+    "test": "vitest --coverage",
+    "test-fn": "vitest --project=functions --coverage",
+    "test-sb": "vitest --project=storybook --coverage",
+    "test-sb:coverage": "vitest --project=storybook --coverage"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,cjs,mjs,json}": [
