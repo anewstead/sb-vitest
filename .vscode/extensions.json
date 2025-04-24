@@ -6,12 +6,9 @@
     "esbenp.prettier-vscode",
     "somewhatstationery.some-sass",
     "stylelint.vscode-stylelint",
-    "gruntfuggly.todo-tree",
     "unifiedjs.vscode-mdx",
     "eamodio.gitlens",
-    "joelday.docthis",
-    "ms-playwright.playwright",
-    "orta.vscode-jest"
+    "vitest.explorer"
   ],
 
   "unwantedRecommendations": []

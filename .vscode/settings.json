@@ -73,6 +73,8 @@
   "stylelint.packageManager": "pnpm",
   "stylelint.validate": ["css", "scss", "less"],
 
+  "terminal.integrated.scrollback": 9999,
+
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.format.enable": false,
   "typescript.tsdk": "./node_modules/typescript/lib",

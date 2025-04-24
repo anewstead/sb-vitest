@@ -36,18 +36,19 @@ const jsonConfig = {
 // lint ignores
 const baseIgnores = {
   ignores: [
-    "!**/.storybook/**",
-    "**/.storybook/static/**",
-    "**/storybook-static/**",
+    "**/.idea/**",
+    "**/.DS_Store",
+    "**/*.log",
+    "**/*.ans",
     "**/node_modules/**",
     "**/build/**",
     "**/dist/**",
     "**/public/**",
     "**/vendor/**",
     "**/generated/**",
-    "**/.idea/**",
-    "**/.DS_Store",
-    "**/*.log",
+    "!**/.storybook/**",
+    "**/.storybook/static/**",
+    "**/storybook-static/**",
   ],
 };
 
@@ -164,8 +165,8 @@ any duplicate rules in later items will override earlier
 e.g you can have a general rule and override it for specific cases
 */
 export default tsEslint.config(
-  jsonConfig,
   baseIgnores,
+  jsonConfig,
   baseConfig,
   tsConfig,
   reactConfig,

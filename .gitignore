@@ -1,19 +1,17 @@
-# Logs
+# Folders
 logs
-*.log*
-
 node_modules
 dist
 dist-ssr
 storybook-static
 coverage
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
+# Files
 .idea
 .DS_Store
+
+*.log*
+*.ans
 *.suo
 *.ntvs*
 *.njsproj
@@ -21,7 +19,6 @@ coverage
 *.sw?
 .stylelintcache
 
-# Environment variables
 *.env
 *.env.*
 *.local
