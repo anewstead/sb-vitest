@@ -2,7 +2,7 @@ import "./app.css";
 
 import React, { useState } from "react";
 
-import reactLogo from "./assets/react.svg";
+import reactLogo from "@src/assets/react.svg";
 
 export const App = () => {
   const [count, setCount] = useState(0);

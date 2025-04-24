@@ -1,15 +1,15 @@
 # @types Directory
 
 Global TypeScript type declarations.
+Generally not own application code.
 
 3rd party type integrations that TypeScript needs to know about
 so you don't need to explicitly add in every file.
-Generally these are for project level setup (build tools, testing frameworks, etc.)
-and relate to types for code found in node_modules.
+Generally these relate to types for code found in node_modules.
 
 Own application types are not global in the same sense
 they belong alongside their implementation, not be added here
-they will be imported explicitly in each app/test file when required
+and will be imported explicitly in each app/test file when required
 
 ## Usage
 

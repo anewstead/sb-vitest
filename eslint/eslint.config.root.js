@@ -36,6 +36,7 @@ const jsonConfig = {
 // lint ignores
 const baseIgnores = {
   ignores: [
+    ".husky/**",
     "**/.idea/**",
     "**/.DS_Store",
     "**/*.log",
@@ -46,6 +47,7 @@ const baseIgnores = {
     "**/public/**",
     "**/vendor/**",
     "**/generated/**",
+    "**/coverage/**",
     "!**/.storybook/**",
     "**/.storybook/static/**",
     "**/storybook-static/**",
