@@ -24,7 +24,7 @@ export const importRules = {
         "./*",
         ".storybook/**",
         "scripts/**",
-        "src/testing/**",
+        "src/test/**",
         "**/__tests__/**",
         "**/__mocks__/**",
         "**/*.{test,mock,stories}.{js,jsx,ts,tsx}",

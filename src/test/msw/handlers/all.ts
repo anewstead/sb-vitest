@@ -20,7 +20,7 @@ then to override for a specific test:
 e.g. test load error (returns 400 bad): 
 
 myUtil.test.ts
-import { server } from "@src/testing/msw/server";
+import { server } from "@src/test/msw/server";
 server.use(myRequestHandlerReject);
 
 and then in the storybook addon:
