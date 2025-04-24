@@ -2,15 +2,16 @@ import path from "node:path";
 
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 // import checker from "vite-plugin-checker";
-
-import { viteAlias } from "./viteAliasPlugin";
 
 import type { ServerOptions, UserConfig } from "vite";
 
+// this resolve should not be used for aliases
+// alias are set in tsconfig.json
+// and reused here via vite-tsconfig-paths
 const resolve: UserConfig["resolve"] = {
   conditions: ["mui-modern", "module", "browser", "development|production"],
-  alias: [viteAlias("@src/", "./src/")],
 };
 
 /**
@@ -41,6 +42,7 @@ export const devServer: ServerOptions = {
 const devConfig: UserConfig = {
   resolve,
   plugins: [
+    tsconfigPaths(),
     react(),
     // checker({
     //   typescript: true,
@@ -54,7 +56,7 @@ const devConfig: UserConfig = {
 
 const buildProd: UserConfig = {
   resolve,
-  plugins: [react()],
+  plugins: [tsconfigPaths(), react()],
   css: {
     devSourcemap: false,
   },
