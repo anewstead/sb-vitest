@@ -7,6 +7,10 @@
 **/coverage
 **/public
 
+**/*.ans
+**/*.log
+**/*.log.*
+
 storybook-static
 .storybook/static
 

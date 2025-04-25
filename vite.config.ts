@@ -1,32 +1,18 @@
 import path from "node:path";
 
-import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import checker from "vite-plugin-checker";
 import tsconfigPaths from "vite-tsconfig-paths";
-// import checker from "vite-plugin-checker";
 
-import type { ServerOptions, UserConfig } from "vite";
+import type { PluginOption, ServerOptions, UserConfig } from "vite";
 
-// this resolve should not be used for aliases
-// alias are set in tsconfig.json
-// and reused here via vite-tsconfig-paths
+// resolve here is not for alias paths
+// see paths in tsconfig.json loaded via vite-tsconfig-paths
 const resolve: UserConfig["resolve"] = {
   conditions: ["mui-modern", "module", "browser", "development|production"],
 };
 
-/**
- * DevServer\
- * This config also used by storybook\
- *
- * HMR watch options for localhost during development\
- * Cannot set cwd to ./src as also need to watch public folder (and others)\
- * So specify what not to watch (.git and node_modules are default ignored)\
- * Glob but must be root path or be fully recursive\
- *
- * - Path.resolve("./dist") = dist folder in project root\
- * - Dist = all "dist" folders\
- */
-// TODO: check if need to resolve paths or just use relative paths
 export const devServer: ServerOptions = {
   watch: {
     ignored: [
@@ -39,33 +25,25 @@ export const devServer: ServerOptions = {
   },
 };
 
-const devConfig: UserConfig = {
-  resolve,
-  plugins: [
-    tsconfigPaths(),
-    react(),
-    // checker({
-    //   typescript: true,
-    // }),
-  ],
-  css: {
-    devSourcemap: true,
-  },
-  server: devServer,
-};
+/*
+https://vitejs.dev/guide/env-and-mode.html#modes
+*/
+export default defineConfig(({ command, mode }) => {
+  const isDev = command === "serve" && mode === "development";
+  const isTest = command === "serve" && process.env.VITEST;
 
-const buildProd: UserConfig = {
-  resolve,
-  plugins: [tsconfigPaths(), react()],
-  css: {
-    devSourcemap: false,
-  },
-};
+  const plugins: PluginOption[] = [tsconfigPaths(), react()];
 
-// https://vitejs.dev/guide/env-and-mode.html#modes
-export default defineConfig(({ command }) => {
-  if (command === "serve") {
-    return devConfig;
+  if (!isTest) {
+    plugins.push(checker({ typescript: true }));
   }
-  return buildProd;
+
+  return {
+    resolve,
+    plugins,
+    css: {
+      devSourcemap: isDev,
+    },
+    server: devServer,
+  };
 });

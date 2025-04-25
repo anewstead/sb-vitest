@@ -5,6 +5,7 @@ Generally not own application code.
 
 3rd party type integrations that TypeScript needs to know about
 these types are needed for typescript when either:
+
 - you dont want/cant explicitly add the type in every file when used
 - you need to define type for a package/script that does not have types itself
 
