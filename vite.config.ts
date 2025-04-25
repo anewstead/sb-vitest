@@ -1,6 +1,6 @@
-/*
-https://vitejs.dev/guide/env-and-mode.html#modes
-*/
+/**
+ * https://vitejs.dev/guide/env-and-mode.html#modes
+ */
 
 import path from "node:path";
 
@@ -31,11 +31,11 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       watch: {
-        /* 
-        cannot set list of paths to watch
-        or set root/cwd to src as we need to watch other too
-        so have to add ignores, so no HMR when they change 
-        */
+        /**
+         * Cannot set list of paths to watch\
+         * Or set root/cwd to src as we need to watch other too\
+         * So have to add ignores, so no HMR when they change
+         */
         ignored: [
           path.resolve("./coverage"),
           path.resolve("./dist"),

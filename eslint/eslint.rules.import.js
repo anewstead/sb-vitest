@@ -1,18 +1,20 @@
-/*
-eslint-plugin-import based rules only 
-
-import/order should result in:
-1. css > scss > unknown
-2. react > other classes
-3. react types > other types
-THE PLUGIN DOES NOT AUTOFIX UNASSIGNED IMPORTS
-e.g. import "myFile.css"
-unnamed imports may have side effects where sort order is relevant
-preferred placement is first and suggested in lint warning
-but they will need to be moved manually
-suggest if you need a position other than preferred that
-also add a eslint-disable-next-line import/order comment
-*/
+/**
+ * Eslint-plugin-import based rules only
+ *
+ * Import/order should result in:\
+ *
+ * 1. Css > scss > unknown
+ * 2. React > other classes
+ * 3. React types > other types
+ *
+ * The plugin does not auto-fix unassigned imports\
+ * E.g. import "myFile.css"\
+ * Unnamed imports may have side effects where sort order is relevant\
+ * Preferred placement is first and suggested in lint warning\
+ * But they will need to be moved manually\
+ * Suggest if you need a position other than preferred that\
+ * Also add a eslint-disable-next-line import/order comment
+ */
 
 export const importRules = {
   "import/consistent-type-specifier-style": ["error", "prefer-top-level"],

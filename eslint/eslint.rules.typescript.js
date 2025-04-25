@@ -1,6 +1,6 @@
-/*
-@typescript-eslint rules only
-*/
+/**
+ * @typescript-eslint rules only
+ */
 
 export const tsRules = {
   "@typescript-eslint/ban-ts-comment": [

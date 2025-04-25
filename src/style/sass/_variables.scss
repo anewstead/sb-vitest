@@ -1,28 +1,29 @@
-/*
-root font size
-browser default is usually 16px
-you should ensure that:
-html = 16px
-body = 1rem
-if using a component system check this is same
-*/
+/**
+ * Root font size
+ * Browser default is usually 16px
+ * You should ensure that:
+ * html = 16px
+ * body = 1rem
+ * If using a component system check this is same
+ */
 $root-font-size: 16px;
 
-/*
-breakpoints
-mobile first approach is to layout classes for mobile first
-then incrementally add features for larger devices
-concept is smaller devices do not need to handle additional code
-therefore it is expected most media queries will be for greater than breakpoint
-IMPORTANT:
-primarily use sm/md/lg these should actually cover most design cases
-then use xs/xl sparingly for extremes
-generally expect that most sm works for xs, and most lg works for xl
-e.g. xl might limit site width to prevent over spacing
-note:
-breakpoints are not specific screen resolutions
-they aim to group approx devices
-*/
+/**
+ * Breakpoints
+ * Mobile first approach is to layout classes for mobile first
+ * Then incrementally add features for larger devices
+ * Concept is smaller devices do not need to handle additional code
+ * Therefore it is expected most media queries will be for greater than breakpoint
+ * IMPORTANT:
+ * Primarily use sm/md/lg these should actually cover most design cases
+ * Then use xs/xl sparingly for extremes
+ * Generally expect that most sm works for xs, and most lg works for xl
+ * E.g. xl might limit site width to prevent over spacing
+ *
+ * Note:
+ * Breakpoints are not specific screen resolutions
+ * They aim to group approx devices
+ */
 $breakpoint-xs: 400px; // < sml mobile
 $breakpoint-sm: 600px; // < mobile | > tablet
 $breakpoint-md: 900px; // < tablet | > laptop

@@ -1,6 +1,6 @@
-/*
-@eslint-plugin-check-file rules only
-*/
+/**
+ * @eslint-plugin-check-file rules only
+ */
 
 export const checkFileRules = {
   // filename-blocklist

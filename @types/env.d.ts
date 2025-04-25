@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 
-/*
-extra types added to import.meta.env
-
-TYPE ONLY, ABSOLUTELY NO VALUES
-
-this file is added to git repo.
-values go in .env file(s) in the root of the project
-
-ImportMeta/ImportMetaEnv are "interface",
-as such we can add to their type definitions
-not possible if they were "type"
-*/
+/**
+ * Extra types added to import.meta.env\
+ *
+ * TYPE ONLY, ABSOLUTELY NO VALUES\
+ *
+ * This file is added to git repo.\
+ * Values go in .env file(s) in the root of the project\
+ *
+ * ImportMeta/ImportMetaEnv are "interface",\
+ * As such we can add to their type definitions\
+ * Not possible if they were "type"
+ */
 
 // add env types here
 interface ImportMetaEnv {

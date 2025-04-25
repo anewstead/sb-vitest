@@ -1,6 +1,6 @@
-/*
-override rules for specific files/folders
-*/
+/**
+ * Override rules for specific files/folders
+ */
 
 const allowDefaultExport = {
   files: [
@@ -48,11 +48,11 @@ const allowParentImports = {
   },
 };
 
-/*
-export order may be important.
-eslint's final config is a merge of all configs
-any duplicate rules in later items will override earlier
-*/
+/**
+ * Order may be important\
+ * Eslint's final config is a merge of all configs\
+ * Any duplicate rules in later items will override earlier
+ */
 export const overrideRules = [
   allowDefaultExport,
   allowDevDepImports,

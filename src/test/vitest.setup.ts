@@ -1,8 +1,8 @@
-/*
-setup for functional .test.ts files
-all tsx are components and should be .stories.tsx
-see also .storybook/vitest.setup.ts
-*/
+/**
+ * Setup for functional .test.ts files\
+ * All tsx are components and should be .stories.tsx\
+ * See also .storybook/vitest.setup.ts
+ */
 
 import { worker } from "./msw/browser";
 

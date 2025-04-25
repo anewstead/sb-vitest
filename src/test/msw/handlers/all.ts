@@ -1,36 +1,38 @@
 import { sampleDefault } from "./sampleHandlers";
 
-/*
-IMPORTANT - The default handlers array:
-
-technically this is not all handlers, just the typical cases.
-i.e. there cam only be 1 handler per resource URL at a time
-if the same resource url is referenced twice then the last overwrites previous
-so be sure to only add the default use-case handler for each resource URL here
-
-alternative scenarios are then used as overrides on a per test basis
-
-E.G.
-default case (returns 200 OK):
-
-added here:
-handlers = [myDefaultRequestHandler, other, etc] 
-
-then to override for a specific test:
-e.g. test load error (returns 400 bad): 
-
-myUtil.test.ts
-import { server } from "@src/test/msw/server";
-server.use(myRequestHandlerReject);
-
-and then in the storybook addon:
-
-MyComponent.stories.tsx
-parameters: {
-  msw: {
-    handlers: [myRequestHandlerReject],
-  },
-},
-*/
+/**
+ * IMPORTANT - The default handlers array: \
+ *
+ * Technically this is not all handlers, just the typical cases.\
+ * I.e. there cam only be 1 handler per resource URL at a time\
+ * If same resource url is referenced twice then last overwrites previous\
+ * Be sure to only add default use-case handler for each resource URL here\
+ *
+ * Alternative scenarios are then used as overrides on a per test basis
+ *
+ * E.G.\
+ * Default case (returns 200 OK):
+ *
+ * Added here:\
+ * Handlers = [myDefaultRequestHandler, other, etc]
+ *
+ * Then to override for a specific test:\
+ * E.g. test load error (returns 400 bad):
+ *
+ * MyUtil.test.ts\
+ *
+ *     import { server } from "@src/test/msw/server";
+ *     server.use(myRequestHandlerReject);
+ *
+ * And then in the storybook addon:
+ *
+ * MyComponent.stories.tsx
+ *
+ *     parameters: {
+ *       msw: {
+ *         handlers: [myRequestHandlerReject],
+ *       },
+ *     },
+ */
 
 export const handlers = [sampleDefault];

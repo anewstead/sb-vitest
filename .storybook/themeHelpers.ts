@@ -7,9 +7,9 @@ type ISbDarkModeStore = {
 // storybook theme localstorage key
 const SB_KEY = "sb-addon-themes-3";
 
-/*
-get users system prefered theme
-*/
+/**
+ * Get users system preferred theme
+ */
 export const getUserPreferTheme = () => {
   if (typeof window === "undefined") {
     return "light";
@@ -18,12 +18,13 @@ export const getUserPreferTheme = () => {
   return prefersDark ? "dark" : "light";
 };
 
-/*
-storybook theme uses: 
- - light/dark & userHasExplicitlySetTheTheme
-to sync to Mui this maps it to:
- - light/dark/system
-*/
+/**
+ * Storybook theme uses:\
+ *
+ * - Light/dark & userHasExplicitlySetTheTheme\
+ *   To sync to Mui this maps it to:\
+ * - Light/dark/system
+ */
 export const getStorybookTheme = () => {
   const getSB = localStorage.getItem(SB_KEY);
   if (getSB) {
@@ -33,10 +34,10 @@ export const getStorybookTheme = () => {
   return "system";
 };
 
-/*
-when Mui theme change to system we need to tell
-storybook to reflect the equivalent state
-*/
+/**
+ * When Mui theme change to system we need to tell\
+ * Storybook to reflect the equivalent state
+ */
 export const setSbThemeToSystem = (isSystem: boolean) => {
   const getSB = localStorage.getItem(SB_KEY);
   if (getSB) {

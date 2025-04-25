@@ -1,7 +1,7 @@
-/*
-base eslint rules only
-i.e. not plugins
-*/
+/**
+ * Base eslint rules only\
+ * I.e. not plugins
+ */
 
 export const baseRules = {
   "arrow-body-style": ["error", "always"],

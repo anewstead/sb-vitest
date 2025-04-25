@@ -18,14 +18,14 @@ import { importRules } from ".//eslint.rules.import.js";
 import { overrideRules } from ".//eslint.rules.overrides.js";
 import { tsRules } from ".//eslint.rules.typescript.js";
 
-/*
-The eslint config
-layers up config from base js -> tsx and more
-generally we use recommended configs from plugins, 
-and only override where necessary,
-where there are more than just a couple of additional rules added
-they are moved to a separate file to help keep this file clean 
-*/
+/**
+ * The eslint config\
+ * Layers up config from base js -> tsx and more\
+ * Generally we use recommended configs from plugins,\
+ * And only override where necessary,\
+ * Where there are more than just a couple of additional rules added\
+ * They are moved to a separate file to help keep this file clean
+ */
 
 // applies to all json files
 const jsonConfig = {
@@ -159,13 +159,13 @@ const storiesConfig = {
   extends: [storybookPlugin.configs["flat/recommended"]],
 };
 
-/*
-the order of the configs is important.
-addition/override must apply in correct order as
-eslint's final config is a merge of all configs
-any duplicate rules in later items will override earlier
-e.g you can have a general rule and override it for specific cases
-*/
+/**
+ * The order of the configs is important.\
+ * Addition/override must apply in correct order as\
+ * Eslint's final config is a merge of all configs\
+ * Any duplicate rules in later items will override earlier\
+ * E.g you can have a general rule and override it for specific cases
+ */
 export default tsEslint.config(
   baseIgnores,
   jsonConfig,

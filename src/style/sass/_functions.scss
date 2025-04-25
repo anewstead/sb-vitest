@@ -2,10 +2,10 @@
 @use "sass:meta";
 @use "variables" as vars;
 
-/*
-remove unit from given number
-e.g. strip-unit(12px) returns 12
-*/
+/**
+ * Remove unit from given number
+ * E.g. strip-unit(12px) returns 12
+ */
 @function strip-unit($num) {
   @if meta.type-of($num) == "number" and not math.is-unitless($num) {
     @return math.div($num, ($num * 0 + 1));
@@ -14,11 +14,11 @@ e.g. strip-unit(12px) returns 12
   @return $num;
 }
 
-/*
-pixels to rem
-based on root font-size (default 16)
-e.g. px2rem(16) returns 1rem
-*/
+/**
+ * Pixels to rem
+ * Based on root font-size (default 16)
+ * E.g. px2rem(16) returns 1rem
+ */
 @function px2rem($num) {
   $root-size: strip-unit(vars.$root-font-size);
 

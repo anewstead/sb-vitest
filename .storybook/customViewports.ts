@@ -1,13 +1,13 @@
-/*
-these are sample screen sizes
-not design breakpoints
-*/
+/**
+ * These are sample screen sizes\
+ * Not design breakpoints
+ */
 
-/*
-Viewport type follows viewport addon (included in addon-essentials)
-https://storybook.js.org/docs/essentials/viewport#add-new-devices
-hard to locate and import type directly from there!
-*/
+/**
+ * Viewport type follows viewport addon (included in addon-essentials)\
+ * https://storybook.js.org/docs/essentials/viewport#add-new-devices\
+ * Hard to locate and import type directly from there!
+ */
 export type Viewport = {
   name: string;
   styles: {
@@ -25,10 +25,10 @@ export type CustomViewports = {
   xl: Viewport;
 };
 
-/*
-custom sizes represent average/typical screen size by device group
-do not use actual screen sizes of specific devices
-*/
+/**
+ * Custom sizes represent average/typical screen size by device group\
+ * Do not use actual screen sizes of specific devices
+ */
 export const customViewports: CustomViewports = {
   xs: {
     name: "Small Mobile (xs)",
