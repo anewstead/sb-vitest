@@ -32,5 +32,5 @@
     "public",
     "coverage"
   ],
-  "include": ["src/**/*", ".storybook/**/*", "@types/**/*"]
+  "include": ["*", "src/**/*", ".storybook/**/*", "@types/**/*"]
 }
