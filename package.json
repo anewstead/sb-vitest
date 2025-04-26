@@ -16,12 +16,13 @@
     "start": "vite preview --host",
     "start-sb": "http-server storybook-static",
     "lint": "pnpm run lint-js; pnpm run lint-style; pnpm run pretty",
-    "lint-js": "eslint . --fix",
+    "lint-js": "eslint . --fix --debug",
     "lint-style": "stylelint ./'**/*.{css,scss}' --fix --cache --cache-location=node_modules/.cache/stylelint/",
     "pretty": "prettier . --write --log-level warn --cache --no-error-on-unmatched-pattern  --ignore-unknown",
     "test": "vitest --coverage",
-    "test-fn": "vitest --project=functions",
-    "test-sb": "vitest --project=storybook"
+    "test-fn": "vitest --project=fn",
+    "test-sb": "vitest --project=sb",
+    "test-node": "vitest --project=node"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,cjs,mjs,json}": [

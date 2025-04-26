@@ -27,20 +27,12 @@ import { tsRules } from ".//eslint.rules.typescript.js";
  * They are moved to a separate file to help keep this file clean
  */
 
-// applies to all json files
-const jsonConfig = {
-  files: ["**/*.json"],
-  ...jsonPlugin.configs["recommended-with-comments"],
-};
-
 // lint ignores
 const baseIgnores = {
   ignores: [
     ".husky/**",
     "**/.idea/**",
     "**/.DS_Store",
-    "**/*.log",
-    "**/*.ans",
     "**/node_modules/**",
     "**/build/**",
     "**/dist/**",
@@ -54,8 +46,13 @@ const baseIgnores = {
   ],
 };
 
+// applies to all json files
+const jsonConfig = {
+  files: ["**/*.json"],
+  ...jsonPlugin.configs["recommended-with-comments"],
+};
+
 // applies to all script files
-// js,jsx,ts,tsx,mjs,cjs
 const baseConfig = {
   extends: [
     eslintJs.configs.recommended,
@@ -87,7 +84,6 @@ const baseConfig = {
 };
 
 // builds on baseConfig
-// applies to all ts/tsx files
 const tsConfig = {
   files: ["**/*.{ts,tsx}"],
   extends: [
@@ -106,7 +102,6 @@ const tsConfig = {
 };
 
 // builds on tsConfig
-// applies to src react files
 const reactConfig = {
   files: ["src/**/*.{ts,tsx}"],
   languageOptions: {
@@ -136,10 +131,9 @@ const reactConfig = {
   },
 };
 
-// builds on reactConfig
-// applies to src test files
+// builds on tsConfig
 const testConfig = {
-  files: ["src/**/*.test.{ts,tsx}"],
+  files: ["**/*.test.ts", "**/*.spec.{js,ts}"],
   plugins: {
     vitest: vitestPlugin,
   },
@@ -150,9 +144,8 @@ const testConfig = {
 };
 
 // builds on reactConfig
-// applies to src storybook files
 const storiesConfig = {
-  files: ["src/**/*.stories.{ts,tsx}"],
+  files: ["**/*.stories.tsx"],
   plugins: {
     storybook: storybookPlugin,
   },
@@ -171,8 +164,8 @@ export default tsEslint.config(
   jsonConfig,
   baseConfig,
   tsConfig,
-  reactConfig,
   testConfig,
+  reactConfig,
   storiesConfig,
   ...overrideRules,
   prettierConfig

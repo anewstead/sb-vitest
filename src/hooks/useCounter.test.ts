@@ -7,10 +7,12 @@ import { useCounter } from "./useCounter";
 
 /**
  * ## Act() currently cause a warning in the console, \
- * The test do run and do pass (its all JS afterall) \
+ *
+ * The test do run and do pass (its all JS afterall)\
  * But the warning is misleading and annoying. \
  *
  * ## stderr | ...test reference \
+ *
  * The current testing environment is not configured to support act(...) \
  *
  * Not sure on fix, waiting on:\

@@ -1,6 +1,6 @@
 {
   "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],
-  "plugins": ["stylelint-scss", "./scripts/stylelintFilename.js"],
+  "plugins": ["stylelint-scss", "./scripts/stylelint/filenamePlugin.js"],
   "rules": {
     "no-descending-specificity": null,
     "scss/at-rule-no-unknown": [

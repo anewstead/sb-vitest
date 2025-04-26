@@ -34,12 +34,13 @@ export default defineConfig(({ command, mode }) => {
         /**
          * Cannot set list of paths to watch\
          * Or set root/cwd to src as we need to watch other too\
-         * So have to add ignores, so no HMR when they change
+         * So have to add ignores, so they don't trigger HMR when changed
+         * node_modules and .git ignored by default
          */
         ignored: [
+          path.resolve("./build"),
           path.resolve("./coverage"),
           path.resolve("./dist"),
-          path.resolve("./build"),
           path.resolve("./storybook-static"),
         ],
       },

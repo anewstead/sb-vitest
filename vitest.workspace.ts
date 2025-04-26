@@ -9,13 +9,46 @@ const sbPlugin = storybookTest({
 }) as PluginOption;
 
 export default defineWorkspace([
-  "./vitest.config.ts",
+  {
+    extends: "./vitest.config.ts",
+    test: {
+      globals: true,
+      name: "node",
+      environment: "node",
+      exclude: ["**/*.stories.*", "**/*.test.*"],
+    },
+  },
+  {
+    extends: "./vitest.config.ts",
+    test: {
+      name: "fn",
+      exclude: ["**/*.stories.*", "**/*.spec.*"],
+      setupFiles: ["src/test/vitest.setup.ts"],
+      browser: {
+        enabled: true,
+        provider: "playwright",
+        instances: [{ browser: "chromium" }],
+        headless: true,
+        screenshotFailures: false,
+        connectTimeout: 20000,
+      },
+    },
+  },
   {
     extends: "./vitest.config.ts",
     plugins: [sbPlugin],
     test: {
-      name: "storybook",
+      name: "sb",
+      // exclude: ["**/*.spec.*", "**/*.test.*"],
       setupFiles: [".storybook/vitest.setup.ts"],
+      browser: {
+        enabled: true,
+        provider: "playwright",
+        instances: [{ browser: "chromium" }],
+        headless: true,
+        screenshotFailures: false,
+        connectTimeout: 20000,
+      },
     },
   },
 ]);

@@ -7,16 +7,16 @@ export default defineConfig({
   test: {
     globals: true,
     watch: false,
-    name: "functions",
-    setupFiles: ["./src/test/vitest.setup.ts"],
-    browser: {
-      enabled: true,
-      provider: "playwright",
-      instances: [{ browser: "chromium" }],
-      headless: true,
-      screenshotFailures: false,
-      connectTimeout: 20000,
-    },
+    exclude: [
+      "**/.*/**",
+      "**/build/**",
+      "**/coverage/**",
+      "**/dist/**",
+      "**/eslint/**",
+      "**/node_modules/**",
+      "**/public/**",
+      "**/storybook-static/**",
+    ],
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],

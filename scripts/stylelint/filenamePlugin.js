@@ -8,7 +8,7 @@
  * Usage: stylelintrc.json
  *
  * ```json
- * "plugins":["./scripts/cssFileName.js"];
+ * "plugins":["./scripts/filenamePlugin.js"];
  *
  * "rules": {
  *   "filenames/match-case":["error","camelcase"];
@@ -37,6 +37,9 @@ You may need to reload the file after a rename to see the changes in your IDE.
     "Invalid naming convention specified. Available conventions: camelCase, pascalCase",
 });
 
+const EXAMPLE_CAMEL_CASE = "myFile or myfile";
+const EXAMPLE_PASCAL_CASE = "MyFile or Myfile";
+
 // also allow underscore prefix (scss convention)
 const namingConventions = {
   camelCase: /^_?[a-z][a-zA-Z0-9]*$/,
@@ -46,9 +49,9 @@ const namingConventions = {
 const getExample = (convention) => {
   switch (convention) {
     case "pascalCase":
-      return "MyFile or Myfile";
+      return EXAMPLE_PASCAL_CASE;
     default:
-      return "myFile or myfile"; // camelCase
+      return EXAMPLE_CAMEL_CASE; // camelCase
   }
 };
 
@@ -80,6 +83,7 @@ const ruleFunction = (primaryOption) => {
     });
 
     if (!actualFile) {
+      // keep log for debugging
       // eslint-disable-next-line no-console
       console.log("Debug: File not found in directory:", {
         filename,
@@ -93,16 +97,16 @@ const ruleFunction = (primaryOption) => {
     const name = actualFile.split(".")[0];
     const matchRegex = regex.test(name);
 
-    // log for debugging
-    console.log("Debug:", {
-      filename,
-      reportedName,
-      actualFile,
-      name,
-      convention,
-      matches: matchRegex,
-      filesInDir: files,
-    });
+    // keep log for debugging
+    // console.log("Debug:", {
+    //   filename,
+    //   reportedName,
+    //   actualFile,
+    //   name,
+    //   convention,
+    //   matches: matchRegex,
+    //   filesInDir: files,
+    // });
 
     if (matchRegex) {
       return; // Filename matches convention, no error

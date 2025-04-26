@@ -21,6 +21,7 @@ export const checkFileRules = {
       "**/*.models.*": "*.model.*",
       "**/*.services.*": "*.service.*",
       "**/*.setups.*": "*.setup.*",
+      "**/*.specs.*": "*.spec.*",
       "**/*.stores.*": "*.store.*",
       "**/*.styles.*": "*.style.*",
       "**/*.tests.*": "*.test.*",
@@ -48,17 +49,17 @@ export const checkFileRules = {
   "check-file/filename-naming-convention": [
     "error",
     {
-      "src/**/*.{js,ts}": "CAMEL_CASE",
-      "src/**/*.{jsx,tsx}": "PASCAL_CASE",
+      "**/*.{js,ts}": "CAMEL_CASE",
+      "**/*.{jsx,tsx}": "PASCAL_CASE",
     },
     { ignoreMiddleExtensions: true },
   ],
 
   // folder-naming-convention
-  // default camelCase
+  // default kebab-case because they should be url-like
   "check-file/folder-naming-convention": [
     "error",
-    { "src/**/!(__{tests,mocks}__|@*)/": "CAMEL_CASE" },
+    { "/**/!(__{tests,mocks}__|@*)/**/": "KEBAB_CASE" },
   ],
 
   "check-file/no-index": "error",
