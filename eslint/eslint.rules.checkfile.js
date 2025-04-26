@@ -33,6 +33,7 @@ export const checkFileRules = {
       "**/*.story.*": "*.stories.*",
 
       // should be file type
+      "**/*.component.*": "*.*",
       "**/*.stories.ts": "*.stories.tsx",
       "**/*.test.tsx": "*.test.ts",
     },
