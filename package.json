@@ -16,7 +16,7 @@
     "start": "vite preview --host",
     "start-sb": "http-server storybook-static",
     "lint": "pnpm run lint-js; pnpm run lint-style; pnpm run pretty",
-    "lint-js": "eslint . --fix --debug",
+    "lint-js": "eslint . --fix",
     "lint-style": "stylelint ./'**/*.{css,scss}' --fix --cache --cache-location=node_modules/.cache/stylelint/",
     "pretty": "prettier . --write --log-level warn --cache --no-error-on-unmatched-pattern  --ignore-unknown",
     "test": "vitest --coverage",
