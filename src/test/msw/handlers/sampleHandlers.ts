@@ -2,18 +2,20 @@ import { http, HttpResponse } from "msw";
 
 import { SAMPLE_API } from "@src/services/endpoints";
 
-import { sampleData, sampleError } from "./sampleData";
+import { sampleData } from "./sampleData";
 
 export const sampleDefault = http.post(SAMPLE_API, () => {
   return HttpResponse.json(sampleData);
 });
 
-export const sampleBadRequest = http.post(SAMPLE_API, () => {
+export const sampleErrorNetwork = http.post(SAMPLE_API, () => {
   return HttpResponse.error();
 });
 
-export const sampleErrorResponse = http.post(SAMPLE_API, () => {
-  return HttpResponse.json(sampleError, {
-    status: 400,
-  });
+export const sampleError400 = http.post(SAMPLE_API, () => {
+  return HttpResponse.json(null, { status: 400 });
+});
+
+export const sampleNoData = http.post(SAMPLE_API, () => {
+  return HttpResponse.json(null);
 });

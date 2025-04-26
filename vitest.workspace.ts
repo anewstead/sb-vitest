@@ -15,14 +15,14 @@ export default defineWorkspace([
       globals: true,
       name: "node",
       environment: "node",
-      exclude: ["**/*.stories.*", "**/*.test.*"],
+      exclude: ["**/*.test.*"],
     },
   },
   {
     extends: "./vitest.config.ts",
     test: {
       name: "fn",
-      exclude: ["**/*.stories.*", "**/*.spec.*"],
+      exclude: ["**/*.spec.*"],
       setupFiles: ["src/test/vitest.setup.ts"],
       browser: {
         enabled: true,
@@ -39,7 +39,6 @@ export default defineWorkspace([
     plugins: [sbPlugin],
     test: {
       name: "sb",
-      // exclude: ["**/*.spec.*", "**/*.test.*"],
       setupFiles: [".storybook/vitest.setup.ts"],
       browser: {
         enabled: true,

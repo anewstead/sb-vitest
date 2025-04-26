@@ -19,7 +19,7 @@ export const MSWExample = () => {
         setData(response.data);
       } catch (err) {
         const error = err as Error;
-        setError(error.message || "Failed to fetch data");
+        setError(error.message);
       } finally {
         setLoading(false);
       }

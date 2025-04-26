@@ -3,10 +3,10 @@ import { describe, expect, it } from "vitest";
 
 import { SAMPLE_API } from "@src/services/endpoints";
 import { worker } from "@src/test/msw/browser";
-import { sampleData, sampleError } from "@src/test/msw/handlers/sampleData";
+import { sampleData } from "@src/test/msw/handlers/sampleData";
 import {
-  sampleBadRequest,
-  sampleErrorResponse,
+  sampleError400,
+  sampleErrorNetwork,
 } from "@src/test/msw/handlers/sampleHandlers";
 
 describe("MSW Example Test", () => {
@@ -20,20 +20,20 @@ describe("MSW Example Test", () => {
 
   it("should handle API error response using error handler", async () => {
     // Use the error handler
-    worker.use(sampleErrorResponse);
+    worker.use(sampleError400);
 
     // Make the API call and expect it to throw
     await expect(axios.post(SAMPLE_API)).rejects.toMatchObject({
       response: {
         status: 400,
-        data: sampleError,
+        data: null,
       },
     });
   });
 
   it("should handle bad request using bad request handler", async () => {
     // Use the bad request handler
-    worker.use(sampleBadRequest);
+    worker.use(sampleErrorNetwork);
 
     // Make the API call and expect it to throw with a network error
     await expect(axios.post(SAMPLE_API)).rejects.toThrow();
