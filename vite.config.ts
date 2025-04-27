@@ -46,9 +46,15 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     optimizeDeps: {
-      // Disable source maps for dependencies in test mode
+      /**
+       * Sourcemaps for dependencies are rarely needed. Only if debug
+       * third-party node_modules, which is uncommon. They will slow down
+       * builds/server and use more memory. For Vitest best if dep sourcemaps
+       * are off, otherwise on failed test output it can additionally report
+       * ENONET for missing sourcemaps, highly misleading when debugging.
+       */
       esbuildOptions: {
-        sourcemap: !isTest,
+        sourcemap: false,
       },
     },
   };
