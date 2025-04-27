@@ -50,7 +50,7 @@ export default defineConfig(({ command, mode }) => {
        * Sourcemaps for dependencies are rarely needed. Only if debug
        * third-party node_modules, which is uncommon. They will slow down
        * builds/server and use more memory. For Vitest best if dep sourcemaps
-       * are off, otherwise on failed test output it can additionally report
+       * are off, otherwise on failed test the output can additionally report
        * ENONET for missing sourcemaps, highly misleading when debugging.
        */
       esbuildOptions: {
