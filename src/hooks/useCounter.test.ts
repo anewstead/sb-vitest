@@ -27,14 +27,15 @@ describe("useCounter", () => {
     expect(result.current.count).toBe(0);
   });
 
-  it("should increment the count", () => {
+  it("should increment the count", async () => {
     const { result } = renderHook(() => {
       return useCounter();
     });
-    act(() => {
-      result.current.increment();
+
+    result.current.increment();
+    await waitFor(() => {
+      expect(result.current.count).toBe(1);
     });
-    expect(result.current.count).toBe(1);
   });
 
   it("should decrement the count", async () => {
