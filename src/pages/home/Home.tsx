@@ -1,17 +1,33 @@
-import styles from "./page.module.css";
+import styles from "./home.module.css";
 
 import React from "react";
 
 import viewportIcon from "@src/assets/viewport-icon.svg";
+import { Button } from "@src/components/button/Button";
 import { Header } from "@src/components/header/Header";
+import { homeActions } from "@src/state/home/slice";
+import { useAppDispatch, useAppSelector } from "@src/state/store";
 
-import type { PageProps } from "./page.type";
+import type { HomeProps } from "./home.type";
 
-export const Page = (props: PageProps) => {
+export const Home = (props: HomeProps) => {
   const { user, onLogin, onLogout, onCreateAccount } = props;
+  const dispatch = useAppDispatch();
+  const exampleText = useAppSelector((state) => {
+    return state.home.example;
+  });
+
+  const handleChangeText = () => {
+    const randomNum = Math.floor(Math.random() * 1000);
+    dispatch(
+      homeActions.SET_EXAMPLE_TEXT(
+        `New text with random number: ${randomNum.toString()}`
+      )
+    );
+  };
 
   return (
-    <article className={styles.page}>
+    <article className={styles.home}>
       <Header
         user={user}
         onLogin={onLogin}
@@ -19,10 +35,16 @@ export const Page = (props: PageProps) => {
         onCreateAccount={onCreateAccount}
       />
 
-      <section className={styles.storybookPage}>
+      <section className={styles.homeContent}>
         <h2>Pages in Storybook</h2>
+
+        <div className={styles.exampleSection}>
+          <p>Example Text from Redux: {exampleText}</p>
+          <Button primary label="Change Text" onClick={handleChangeText} />
+        </div>
+
         <p>
-          We recommend building UIs with a{" "}
+          Building UIs with a{" "}
           <a
             href="https://componentdriven.org"
             target="_blank"
@@ -32,21 +54,6 @@ export const Page = (props: PageProps) => {
           </a>{" "}
           process starting with atomic components and ending with pages.
         </p>
-        <p>
-          Render pages with mock data. This makes it easy to build and review
-          page states without needing to navigate to them in your app. Here are
-          some handy patterns for managing page data in Storybook:
-        </p>
-        <ul>
-          <li>
-            Use a higher-level connected component. Storybook helps you compose
-            such data from the &quot;args&quot; of child component stories
-          </li>
-          <li>
-            Assemble data in the page component from your services. You can mock
-            these services out using Storybook.
-          </li>
-        </ul>
         <p>
           Get a guided tutorial on component-driven development at{" "}
           <a
@@ -68,8 +75,8 @@ export const Page = (props: PageProps) => {
         </p>
         <div className={styles.tipWrapper}>
           <span className={styles.tip}>Tip</span> Adjust the width of the canvas
-          with the <img src={viewportIcon} alt="Viewport icon" />
-          Viewports addon in the toolbar
+          with the <img src={viewportIcon} alt="Viewport icon" /> Viewports
+          addon in the toolbar
         </div>
       </section>
     </article>

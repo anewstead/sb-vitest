@@ -1,37 +1,25 @@
-import "./app.css";
+import React, { StrictMode } from "react";
 
-import React, { useState } from "react";
+import { Provider as ReduxProvider } from "react-redux";
+import { RouterProvider } from "react-router";
 
-import reactLogo from "@src/assets/react.svg";
+import { router } from "@src/routes/routes";
+import { store } from "@src/state/store";
+import { ThemeWrapper } from "@src/wrappers/themeWrapper/ThemeWrapper";
 
+/**
+ * React.StrictMode intentionally double-invokes some functions in dev mode to
+ * help detect issues, notably the render function is called twice, see:
+ * https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects
+ */
 export const App = () => {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button
-          onClick={() => {
-            setCount((count) => {
-              return count + 1;
-            });
-          }}
-        >
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <StrictMode>
+      <ReduxProvider store={store}>
+        <ThemeWrapper>
+          <RouterProvider router={router} />
+        </ThemeWrapper>
+      </ReduxProvider>
+    </StrictMode>
   );
 };

@@ -1,6 +1,6 @@
 import "./root.css";
 
-import React, { StrictMode } from "react";
+import React from "react";
 
 import { createRoot } from "react-dom/client";
 
@@ -17,11 +17,7 @@ if (!container) {
 
 const root = createRoot(container);
 
-root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+root.render(<App />);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

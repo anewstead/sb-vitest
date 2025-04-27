@@ -1,0 +1,46 @@
+.home {
+  padding: 20px;
+}
+
+.homeContent {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tipWrapper {
+  border: 1px solid #0288d1;
+  border-radius: 4px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.tip {
+  border: 1px solid #0288d1;
+  color: #0288d1;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.exampleSection {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button {
+  padding: 8px 16px;
+  background-color: #1ea7fd;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.button:hover {
+  background-color: #0d8ee0;
+}

@@ -1,57 +1,70 @@
-@mixin media-above($width) {
-  @media only screen and (min-width: $width) {
+// buffer taken from max-width to ensure no conflict to min-width
+$-buffer: 0.01rem;
+
+/// apply style upward of a breakpoint
+@mixin breakpoint-up($breakpoint) {
+  @media only screen and (min-width: $breakpoint) {
     @content;
   }
 }
 
-@mixin media-below($width) {
-  @media only screen and (max-width: ($width - 1px)) {
+/// apply style downward of a breakpoint
+@mixin breakpoint-down($breakpoint) {
+  @media only screen and (max-width: ($breakpoint - $-buffer)) {
     @content;
   }
 }
 
-@mixin media-min-max($minWidth, $maxWidth) {
-  @media only screen and (min-width: $minWidth) and (max-width: ($maxWidth - 1px)) {
+@mixin breakpoint-between($min, $max) {
+  @media only screen and (min-width: $min) and (max-width: ( $max - $-buffer)) {
     @content;
   }
 }
 
-// -
+// --
 
-@mixin media-above-landscape($width) {
-  @media only screen and (min-width: $width) and (orientation: landscape) {
+@mixin breakpoint-up-landscape($breakpoint) {
+  @media only screen and (min-width: $breakpoint) and (orientation: landscape) {
     @content;
   }
 }
 
-@mixin media-below-landscape($width) {
-  @media only screen and (max-width: ($width - 1px)) and (orientation: landscape) {
+@mixin breakpoint-down-landscape($breakpoint) {
+  @media only screen and (max-width: ($breakpoint - $-buffer)) and (orientation: landscape) {
     @content;
   }
 }
 
-@mixin media-min-max-landscape($minWidth, $maxWidth) {
-  @media only screen and (min-width: $minWidth) and (max-width: ($maxWidth - 1px)) and (orientation: landscape) {
+@mixin breakpoint-between-landscape($min, $max) {
+  @media only screen and (min-width: $min) and (max-width: ($max - $-buffer)) and (orientation: landscape) {
     @content;
   }
 }
 
-// -
+// --
 
-@mixin media-above-height($height) {
-  @media only screen and (min-height: $height) {
+@mixin breakpoint-up-height($breakpoint) {
+  @media only screen and (min-height: $breakpoint) {
     @content;
   }
 }
 
-@mixin media-below-height($height) {
-  @media only screen and (max-height: ($height - 1px)) {
+@mixin breakpoint-down-height($breakpoint) {
+  @media only screen and (max-height: ($breakpoint - $-buffer)) {
     @content;
   }
 }
 
-@mixin media-min-max-height($minHeight, $maxHeight) {
-  @media only screen and (min-height: $minHeight) and (max-height: ($maxHeight - 1px)) {
+@mixin breakpoint-between-height($min, $max) {
+  @media only screen and (min-height: $min) and (max-height: ($max - $-buffer)) {
+    @content;
+  }
+}
+
+// --
+
+@mixin touch-device-only() {
+  @media (hover: none) and (pointer: coarse) {
     @content;
   }
 }

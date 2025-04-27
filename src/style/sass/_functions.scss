@@ -19,8 +19,8 @@
  * Based on root font-size (default 16)
  * E.g. px2rem(16) returns 1rem
  */
-@function px2rem($num) {
-  $root-size: strip-unit(vars.$root-font-size);
-
-  @return calc($num / $root-size) * 1rem;
+@function px2rem($size) {
+  @if size {
+    @return calc($size / 16) * 1rem;
+  }
 }

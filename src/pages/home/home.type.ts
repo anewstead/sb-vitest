@@ -1,4 +1,4 @@
-export type PageProps = {
+export type HomeProps = {
   user?: {
     name: string;
   };

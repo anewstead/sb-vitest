@@ -1,37 +1,42 @@
-/**
- * Root font size
- * Browser default is usually 16px
- * You should ensure that:
- * html = 16px
- * body = 1rem
- * If using a component system check this is same
- */
-$root-font-size: 16px;
+@import "./functions";
 
-/**
- * Breakpoints
- * Mobile first approach is to layout classes for mobile first
- * Then incrementally add features for larger devices
- * Concept is smaller devices do not need to handle additional code
- * Therefore it is expected most media queries will be for greater than breakpoint
- * IMPORTANT:
- * Primarily use sm/md/lg these should actually cover most design cases
- * Then use xs/xl sparingly for extremes
- * Generally expect that most sm works for xs, and most lg works for xl
- * E.g. xl might limit site width to prevent over spacing
- *
- * Note:
- * Breakpoints are not specific screen resolutions
- * They aim to group approx devices
- */
-$breakpoint-xs: 400px; // < sml mobile
-$breakpoint-sm: 600px; // < mobile | > tablet
-$breakpoint-md: 900px; // < tablet | > laptop
-$breakpoint-lg: 1200px; // < laptop | > desktop
-$breakpoint-xl: 1500px; // > lrg desktop
+// Font
+$default-font: "Roboto Regular", sans-serif;
+$default-font-bold: "Roboto Bold", sans-serif;
+$default-font-light: "Roboto Light", sans-serif;
+$default-font-medium: "Roboto Medium", sans-serif;
 
-// spacing
-$spacing: 8px;
-$spacing2: 16px;
-$spacing3: 24px;
-$spacing4: 32px;
+// Font-size
+$font-3xs: px2rem(8);
+$font-2xs: px2rem(10);
+$font-xs: px2rem(12);
+$font-sm: px2rem(14);
+$font-md: px2rem(16);
+$font-lg: px2rem(18);
+$font-xl: px2rem(20);
+$font-2xl: px2rem(24);
+$font-3xl: px2rem(28);
+$font-4xl: px2rem(32);
+$font-5xl: px2rem(36);
+
+// Break-points
+$break-xs: px2rem(400);
+$break-sm: px2rem(600);
+$break-md: px2rem(900);
+$break-lg: px2rem(1200);
+$break-xl: px2rem(1500);
+
+// Spacing
+$space-3xs: px2rem(2);
+$space-2xs: px2rem(4);
+$space-xs: px2rem(8);
+$space-sm: px2rem(12);
+$space-md: px2rem(16);
+$space-lg: px2rem(24);
+$space-xl: px2rem(32);
+$space-2xl: px2rem(40);
+$space-3xl: px2rem(48);
+$space-4xl: px2rem(56);
+$space-5xl: px2rem(64);
+$space-6xl: px2rem(80);
+$space-7xl: px2rem(96);
