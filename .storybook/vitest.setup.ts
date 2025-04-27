@@ -4,20 +4,42 @@
  * See also root/vitest.setup.ts
  */
 
-// setProjectAnnotations is an important step to apply the right configuration when testing your stories.
-// More info at: https://storybook.js.org/docs/api/portable-stories/portable-stories-vitest#setprojectannotations
-
 import { setProjectAnnotations } from "@storybook/react";
 import { configure } from "@storybook/test";
-import { beforeAll } from "vitest";
+import { afterEach, beforeAll } from "vitest";
 
 import * as projectAnnotations from "./preview";
-// import * as a11yAddonAnnotations from "@storybook/addon-a11y/preview";
 
-// Configure Storybook testing-library to remove DOM dump verbosity
+import type { TestContext } from "vitest";
+
+/**
+ * SetProjectAnnotations is important to apply configuration for story tests.
+ * https://storybook.js.org/docs/api/portable-stories/portable-stories-vitest#setprojectannotations
+ */
+const project = setProjectAnnotations([projectAnnotations]);
+
+/**
+ * Remove the debug link from the error message. We do this as the link will
+ * never work as the local server is closed once test run is complete and is a
+ * distraction to debugging.
+ */
+const removeStorybookDebugLink = (task: TestContext["task"]) => {
+  const error = task.result?.errors?.[0];
+  if (error) {
+    // disable lint as need to include ANSI color codes
+    // eslint-disable-next-line no-control-regex
+    const DEBUG_LINK_REGEX = /\n\x1B\[34mClick to debug.*?\x1B\[39m\n\n/s;
+    error.message = error.message.replace(DEBUG_LINK_REGEX, "");
+  }
+};
+
+/**
+ * Configure Storybook (testing-library)\
+ * Remove DOM dump verbosity from failed test error messages
+ */
 configure({
   testIdAttribute: "data-testid",
-  asyncUtilTimeout: 1000,
+  asyncUtilTimeout: 2000,
   getElementError: (message) => {
     const error = new Error(message ?? "Element not found");
     error.name = "TestingLibraryElementError";
@@ -25,11 +47,10 @@ configure({
   },
 });
 
-const project = setProjectAnnotations([
-  // a11yAddonAnnotations,
-  projectAnnotations,
-]);
-
 beforeAll(() => {
   project.beforeAll();
+});
+
+afterEach(({ task }) => {
+  removeStorybookDebugLink(task);
 });
