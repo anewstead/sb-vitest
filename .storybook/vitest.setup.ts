@@ -19,16 +19,16 @@ import type { TestContext } from "vitest";
 const project = setProjectAnnotations([projectAnnotations]);
 
 /**
- * Remove the debug link from the error message. We do this as the link will
- * never work as the local server is closed once test run is complete and is a
- * distraction to debugging.
+ * Remove storybook debug link from the error message. We do this as the link
+ * will never work as the local server is closed once test run is complete and
+ * is a distraction to debugging. message within storybook here:
+ * https://github.com/storybookjs/storybook/blob/next/code/addons/vitest/src/vitest-plugin/setup-file.ts
  */
 const removeStorybookDebugLink = (task: TestContext["task"]) => {
   const error = task.result?.errors?.[0];
   if (error) {
-    // disable lint as need to include ANSI color codes
-    // eslint-disable-next-line no-control-regex
-    const DEBUG_LINK_REGEX = /\n\x1B\[34mClick to debug.*?\x1B\[39m\n\n/s;
+    // Match newline contains 'Click to debug' and 'storybook' (case insensitive)
+    const DEBUG_LINK_REGEX = /\n.*Click to debug.*storybook.*\n\n/is;
     error.message = error.message.replace(DEBUG_LINK_REGEX, "");
   }
 };
