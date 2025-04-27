@@ -23,6 +23,7 @@ export const checkFileRules = {
       "**/*.setups.*": "*.setup.*",
       "**/*.specs.*": "*.spec.*",
       "**/*.stores.*": "*.store.*",
+      "**/*.states.*": "*.state.*",
       "**/*.styles.*": "*.style.*",
       "**/*.tests.*": "*.test.*",
       "**/*.types.*": "*.type.*",
