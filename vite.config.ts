@@ -45,5 +45,11 @@ export default defineConfig(({ command, mode }) => {
         ],
       },
     },
+    optimizeDeps: {
+      // Disable source maps for dependencies in test mode
+      esbuildOptions: {
+        sourcemap: !isTest,
+      },
+    },
   };
 });
