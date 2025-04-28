@@ -1,6 +1,7 @@
 import React from "react";
 
 import { fn } from "@storybook/test";
+import { deepmerge } from "deepmerge-ts";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router";
 
@@ -11,8 +12,19 @@ import { Home } from "./Home";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
+/**
+ * Meta: set component type only
+ */
 const meta = {
   component: Home,
+} satisfies Meta<typeof Home>;
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+/**
+ * Base: default story props
+ */
+const base: Story = {
   args: {
     onLogin: fn(),
     onLogout: fn(),
@@ -27,21 +39,19 @@ const meta = {
       );
     },
   ],
-} satisfies Meta<typeof Home>;
+};
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+/**
+ * Stories: merge over base.\
+ * Typescript requires that non-optional props be explicitly set\
+ * Or ...spread from base when overriding
+ */
+export const LoggedOut: Story = deepmerge(base, {});
 
-export const LoggedIn: Story = {
+export const LoggedIn: Story = deepmerge(base, {
   args: {
     user: {
       name: "Jane Doe",
     },
   },
-};
-
-export const LoggedOut: Story = {
-  args: {
-    user: undefined,
-  },
-};
+});

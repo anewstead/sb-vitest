@@ -11,23 +11,25 @@ import { MSWExample } from "./MswComp";
 
 import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
-// --------------------------------------------------------------------------
-// meta: component type only
-// --------------------------------------------------------------------------
+/**
+ * Meta: set component type only
+ */
 const meta = {
   component: MSWExample,
 } satisfies Meta<typeof MSWExample>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// --------------------------------------------------------------------------
-// base: default story props
-// --------------------------------------------------------------------------
+/**
+ * Base: default story props
+ */
 const base: Story = {};
 
-// --------------------------------------------------------------------------
-// stories: merge over base
-// --------------------------------------------------------------------------
+/**
+ * Stories: merge over base.\
+ * TS requires that non-optional props be explicitly set\
+ * Or ...spread from base when overriding
+ */
 export const Default: Story = deepmerge(base, {
   play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);

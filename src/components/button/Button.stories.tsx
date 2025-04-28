@@ -1,45 +1,56 @@
 import { fn } from "@storybook/test";
+import { deepmerge } from "deepmerge-ts";
 
 import { Button } from "./Button";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
+/**
+ * Meta: set component type only
+ */
 const meta = {
   component: Button,
-
-  argTypes: {
-    backgroundColor: { control: "color" },
-  },
-
-  args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
-
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+/**
+ * Base: default story props
+ */
+const base: Story = {
   args: {
-    primary: true,
     label: "Button",
+    onClick: fn(),
+  },
+  argTypes: {
+    backgroundColor: { control: "color" },
   },
 };
 
-export const Secondary: Story = {
-  args: {
-    label: "Button",
-  },
-};
+/**
+ * Stories: merge over base.\
+ * Typescript requires that non-optional props be explicitly set\
+ * Or ...spread from base when overriding
+ */
+export const Primary: Story = base;
 
-export const Large: Story = {
+export const Secondary: Story = deepmerge(base, {
   args: {
-    size: "large",
-    label: "Button",
+    ...base.args,
+    secondary: true,
   },
-};
+});
 
-export const Small: Story = {
+export const Large: Story = deepmerge(base, {
   args: {
-    size: "small",
-    label: "Button",
+    ...base.args,
+    size: "large" as const,
   },
-};
+});
+
+export const Small: Story = deepmerge(base, {
+  args: {
+    ...base.args,
+    size: "small" as const,
+  },
+});

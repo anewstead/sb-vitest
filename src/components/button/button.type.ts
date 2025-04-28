@@ -1,5 +1,5 @@
 export type ButtonProps = {
-  primary?: boolean;
+  secondary?: boolean;
   backgroundColor?: string;
   size?: "small" | "medium" | "large";
   label: string;

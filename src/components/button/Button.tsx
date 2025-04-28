@@ -8,7 +8,7 @@ import type { ButtonProps } from "./button.type";
 
 export const Button = (props: ButtonProps) => {
   const {
-    primary = false,
+    secondary = false,
     size = "medium",
     backgroundColor,
     label,
@@ -17,7 +17,7 @@ export const Button = (props: ButtonProps) => {
 
   return (
     <MuiButton
-      variant={primary ? "contained" : "outlined"}
+      variant={secondary ? "outlined" : "contained"}
       size={size}
       style={{ backgroundColor }}
       className={styles.button}
