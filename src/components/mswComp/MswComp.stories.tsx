@@ -1,4 +1,5 @@
 import { expect, waitFor, within } from "@storybook/test";
+import { deepmerge } from "deepmerge-ts";
 
 import {
   sampleError400,
@@ -8,32 +9,42 @@ import {
 
 import { MSWExample } from "./MswComp";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
+// --------------------------------------------------------------------------
+// meta: component type only
+// --------------------------------------------------------------------------
 const meta = {
   component: MSWExample,
 } satisfies Meta<typeof MSWExample>;
-
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  play: async ({ canvasElement }) => {
+// --------------------------------------------------------------------------
+// base: default story props
+// --------------------------------------------------------------------------
+const base: Story = {};
+
+// --------------------------------------------------------------------------
+// stories: merge over base
+// --------------------------------------------------------------------------
+export const Default: Story = deepmerge(base, {
+  play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText("Loading...")).toBeVisible();
     await waitFor(async () => {
       await expect(canvas.getByText("MSW Example")).toBeVisible();
     });
   },
-};
+});
 
-export const ErrorResponse: Story = {
+export const ErrorResponse: Story = deepmerge(base, {
   parameters: {
     msw: {
       handlers: [sampleError400],
     },
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText("Loading...")).toBeVisible();
     await waitFor(async () => {
@@ -42,34 +53,34 @@ export const ErrorResponse: Story = {
       ).toBeVisible();
     });
   },
-};
+});
 
-export const BadRequest: Story = {
+export const BadRequest: Story = deepmerge(base, {
   parameters: {
     msw: {
       handlers: [sampleErrorNetwork],
     },
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText("Loading...")).toBeVisible();
     await waitFor(async () => {
       await expect(canvas.getByText("Error: Network Error")).toBeVisible();
     });
   },
-};
+});
 
-export const NoData: Story = {
+export const NoData: Story = deepmerge(base, {
   parameters: {
     msw: {
       handlers: [sampleNoData],
     },
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText("Loading...")).toBeVisible();
     await waitFor(async () => {
       await expect(canvas.getByText("No data")).toBeVisible();
     });
   },
-};
+});
