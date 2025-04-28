@@ -40,7 +40,7 @@ export const Home = (props: HomeProps) => {
 
         <div className={styles.exampleSection}>
           <p>Example Text from Redux: {exampleText}</p>
-          <Button primary label="Change Text" onClick={handleChangeText} />
+          <Button secondary label="Change Text" onClick={handleChangeText} />
         </div>
 
         <p>
