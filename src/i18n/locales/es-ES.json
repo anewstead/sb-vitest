@@ -1,0 +1,10 @@
+{
+  "common": {
+    "goodbye": "Adiós",
+    "hello": "Hola",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "signup": "Registrarse",
+    "welcome": "Bienvenido"
+  }
+}

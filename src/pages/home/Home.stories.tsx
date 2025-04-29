@@ -1,6 +1,5 @@
 import React from "react";
 
-import { fn } from "@storybook/test";
 import { deepmerge } from "deepmerge-ts";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router";
@@ -25,10 +24,13 @@ type Story = StoryObj<typeof meta>;
  * Base: default story props
  */
 const base: Story = {
-  args: {
-    onLogin: fn(),
-    onLogout: fn(),
-    onCreateAccount: fn(),
+  parameters: {
+    reactI18next: {
+      i18n: {
+        defaultLocale: "en-GB",
+        locales: ["en-GB"],
+      },
+    },
   },
   decorators: [
     (Story) => {

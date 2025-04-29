@@ -2,37 +2,45 @@ import styles from "./home.module.css";
 
 import React from "react";
 
+import { useTranslation } from "react-i18next";
+
 import viewportIcon from "@src/assets/viewport-icon.svg";
 import { Button } from "@src/components/button/Button";
 import { Header } from "@src/components/header/Header";
-import { homeActions } from "@src/state/home/slice";
 import { useAppDispatch, useAppSelector } from "@src/state/store";
+
+import {
+  handleChangeText,
+  handleCreateAccount,
+  handleLogin,
+  handleLogout,
+} from "./home.helper";
 
 import type { HomeProps } from "./home.type";
 
 export const Home = (props: HomeProps) => {
-  const { user, onLogin, onLogout, onCreateAccount } = props;
+  const { user } = props;
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const exampleText = useAppSelector((state) => {
     return state.home.example;
   });
 
-  const handleChangeText = () => {
-    const randomNum = Math.floor(Math.random() * 1000);
-    dispatch(
-      homeActions.SET_EXAMPLE_TEXT(
-        `New text with random number: ${randomNum.toString()}`
-      )
-    );
+  const onHandleChangeText = () => {
+    handleChangeText(dispatch);
   };
 
   return (
     <article className={styles.home}>
       <Header
         user={user}
-        onLogin={onLogin}
-        onLogout={onLogout}
-        onCreateAccount={onCreateAccount}
+        welcomeText={t("common:welcome")}
+        loginText={t("common:login")}
+        logoutText={t("common:logout")}
+        signupText={t("common:signup")}
+        onLogin={handleLogin}
+        onLogout={handleLogout}
+        onCreateAccount={handleCreateAccount}
       />
 
       <section className={styles.homeContent}>
@@ -40,7 +48,7 @@ export const Home = (props: HomeProps) => {
 
         <div className={styles.exampleSection}>
           <p>Example Text from Redux: {exampleText}</p>
-          <Button secondary label="Change Text" onClick={handleChangeText} />
+          <Button secondary label="Change Text" onClick={onHandleChangeText} />
         </div>
 
         <p>

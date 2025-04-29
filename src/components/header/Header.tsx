@@ -8,25 +8,34 @@ import { Button } from "@src/components/button/Button";
 import type { HeaderProps } from "./header.type";
 
 export const Header = (props: HeaderProps) => {
-  const { user, onLogin, onLogout, onCreateAccount } = props;
+  const {
+    user,
+    onLogin,
+    onLogout,
+    onCreateAccount,
+    welcomeText,
+    loginText,
+    logoutText,
+    signupText,
+  } = props;
 
   const loggedInContent = (
     <>
       <span className={styles.welcome}>
-        Welcome, <b>{user?.name}</b>!
+        {`${welcomeText} ${user?.name ?? ""}`}
       </span>
-      <Button size="small" onClick={onLogout} label="Log out" />
+      <Button size="small" onClick={onLogout} label={logoutText} />
     </>
   );
 
   const loggedOutContent = (
     <>
-      <Button size="small" onClick={onLogin} label="Log in" />
+      <Button size="small" onClick={onLogin} label={loginText} />
       <Button
         secondary
         size="small"
         onClick={onCreateAccount}
-        label="Sign up"
+        label={signupText}
       />
     </>
   );
