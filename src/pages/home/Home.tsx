@@ -9,6 +9,7 @@ import { Button } from "@src/components/button/Button";
 import { Header } from "@src/components/header/Header";
 import { useMarkdown } from "@src/hooks/useMarkdown";
 import { useAppDispatch, useAppSelector } from "@src/state/store";
+import { cleanHtml } from "@src/utils/cleanHtml";
 
 import {
   handleChangeText,
@@ -65,9 +66,11 @@ export const Home = (props: HomeProps) => {
           mdContent
         )}
         <div className={styles.tipWrapper}>
-          {t("home:viewportTip", {
-            icon: <img src={viewportIcon} alt={t("home:viewportIconAlt")} />,
-          })}
+          {cleanHtml(
+            t("home:viewportTip", {
+              icon: `<img src="${viewportIcon}" alt="viewport icon" />`,
+            })
+          )}
         </div>
       </section>
     </article>

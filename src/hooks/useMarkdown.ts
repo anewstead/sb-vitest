@@ -14,11 +14,13 @@ const loadMarkdown = async (locale: string, section: string) => {
 
 export const useMarkdown = (section: string) => {
   const { i18n } = useTranslation();
+
+  const [mdLoading, setMdLoading] = useState(true);
+  const [mdLoadError, setMdLoadError] = useState<Error | null>(null);
+
   const [mdContent, setMdContent] = useState<
     string | ReactElement | ReactElement[]
   >("");
-  const [mdLoading, setMdLoading] = useState(true);
-  const [mdLoadError, setMdLoadError] = useState<Error | null>(null);
 
   useEffect(() => {
     const loadContent = async () => {

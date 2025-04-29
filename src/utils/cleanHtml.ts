@@ -6,8 +6,6 @@ import parse from "html-react-parser";
  * Provided html must be pre-loaded to pass to here
  */
 export const cleanHtml = (html: string) => {
-  const sanitized = DOMPurify.sanitize(html, {
-    RETURN_DOM: true,
-  }) as Element;
-  return parse(sanitized.outerHTML);
+  const sanitized = DOMPurify.sanitize(html);
+  return parse(sanitized);
 };
