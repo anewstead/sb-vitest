@@ -3,7 +3,7 @@ import { deepmerge } from "deepmerge-ts";
 
 import {
   sampleError400,
-  sampleErrorNetwork,
+  sampleNetworkError,
   sampleNoData,
 } from "@src/test/msw/handlers/sampleHandlers";
 
@@ -60,7 +60,7 @@ export const ErrorResponse: Story = deepmerge(base, {
 export const BadRequest: Story = deepmerge(base, {
   parameters: {
     msw: {
-      handlers: [sampleErrorNetwork],
+      handlers: [sampleNetworkError],
     },
   },
   play: async ({ canvasElement }: StoryContext) => {

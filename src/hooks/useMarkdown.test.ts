@@ -3,6 +3,11 @@ import { describe, expect, it, vi } from "vitest";
 import { renderHook } from "vitest-browser-react";
 
 import { i18nextMock } from "@src/test/mocks/module/reactI18next";
+import { worker } from "@src/test/msw/browser";
+import {
+  markdownNetworkError,
+  markdownNotFound,
+} from "@src/test/msw/handlers/markdownHandlers";
 
 import { useMarkdown } from "./useMarkdown";
 
@@ -45,10 +50,7 @@ describe("useMarkdown", () => {
   });
 
   it("should handle fetch errors", async () => {
-    // Mock fetch to throw an error
-    const originalFetch = window.fetch;
-    window.fetch = vi.fn().mockRejectedValue(new Error("Failed to fetch"));
-
+    worker.use(markdownNetworkError);
     const { result } = renderHook(() => {
       return useMarkdown("home.md");
     });
@@ -59,9 +61,20 @@ describe("useMarkdown", () => {
 
     expect(result.current.mdLoadError).toBeInstanceOf(Error);
     expect(result.current.mdLoadError?.message).toBe("Failed to fetch");
+  });
 
-    // Restore original fetch
-    window.fetch = originalFetch;
+  it("should handle not found errors", async () => {
+    worker.use(markdownNotFound);
+    const { result } = renderHook(() => {
+      return useMarkdown("home.md");
+    });
+
+    await waitFor(() => {
+      expect(result.current.mdLoading).toBe(false);
+    });
+
+    expect(result.current.mdLoadError).toBeInstanceOf(Error);
+    expect(result.current.mdLoadError?.message).toBe("Markdown file not found");
   });
 
   it("should reload content when language changes", async () => {

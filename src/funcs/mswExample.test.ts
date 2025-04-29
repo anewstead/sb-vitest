@@ -6,7 +6,7 @@ import { worker } from "@src/test/msw/browser";
 import { sampleData } from "@src/test/msw/handlers/sampleData";
 import {
   sampleError400,
-  sampleErrorNetwork,
+  sampleNetworkError,
 } from "@src/test/msw/handlers/sampleHandlers";
 
 describe("MSW Example Test", () => {
@@ -33,7 +33,7 @@ describe("MSW Example Test", () => {
 
   it("should handle bad request using bad request handler", async () => {
     // Use the bad request handler
-    worker.use(sampleErrorNetwork);
+    worker.use(sampleNetworkError);
 
     // Make the API call and expect it to throw with a network error
     await expect(axios.post(SAMPLE_API)).rejects.toThrow();

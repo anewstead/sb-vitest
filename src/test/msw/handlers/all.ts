@@ -1,3 +1,4 @@
+import { markdownDefault } from "./markdownHandlers";
 import { sampleDefault } from "./sampleHandlers";
 
 /**
@@ -35,4 +36,4 @@ import { sampleDefault } from "./sampleHandlers";
  *     },
  */
 
-export const handlers = [sampleDefault];
+export const handlers = [sampleDefault, markdownDefault];

@@ -10,6 +10,13 @@ const dir = "/i18n/content";
 
 const loadMarkdown = async (url: string) => {
   const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(
+      response.status === 404
+        ? "Markdown file not found"
+        : `Failed to load: ${url}`
+    );
+  }
   const markdown = await response.text();
   return cleanMd(markdown);
 };

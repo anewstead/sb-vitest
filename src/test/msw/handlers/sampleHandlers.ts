@@ -8,7 +8,7 @@ export const sampleDefault = http.post(SAMPLE_API, () => {
   return HttpResponse.json(sampleData);
 });
 
-export const sampleErrorNetwork = http.post(SAMPLE_API, () => {
+export const sampleNetworkError = http.post(SAMPLE_API, () => {
   return HttpResponse.error();
 });
 
