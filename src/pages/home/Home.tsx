@@ -7,8 +7,8 @@ import { useTranslation } from "react-i18next";
 import viewportIcon from "@src/assets/viewport-icon.svg";
 import { Button } from "@src/components/button/Button";
 import { Header } from "@src/components/header/Header";
+import { useMarkdown } from "@src/hooks/useMarkdown";
 import { useAppDispatch, useAppSelector } from "@src/state/store";
-import { sanitizeHTML } from "@src/utils/sanitizeHTML";
 
 import {
   handleChangeText,
@@ -26,6 +26,7 @@ export const Home = (props: HomeProps) => {
   const exampleText = useAppSelector((state) => {
     return state.home.example;
   });
+  const { mdContent, mdLoading, mdLoadError } = useMarkdown("home");
 
   const onHandleChangeText = () => {
     handleChangeText(dispatch);
@@ -56,13 +57,17 @@ export const Home = (props: HomeProps) => {
           />
         </div>
 
-        <div>{sanitizeHTML(t("home:content"))}</div>
+        {mdLoading ? (
+          <div>{t("common:loading")}</div>
+        ) : mdLoadError ? (
+          <div>{t("common:errorLoading", { error: mdLoadError.message })}</div>
+        ) : (
+          mdContent
+        )}
         <div className={styles.tipWrapper}>
-          {sanitizeHTML(
-            t("home:viewportTip", {
-              icon: `<img src="${viewportIcon}" alt="${t("home:viewportIconAlt")}" />`,
-            })
-          )}
+          {t("home:viewportTip", {
+            icon: <img src={viewportIcon} alt={t("home:viewportIconAlt")} />,
+          })}
         </div>
       </section>
     </article>

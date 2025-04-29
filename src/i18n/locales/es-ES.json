@@ -1,10 +1,13 @@
 {
   "common": {
+    "errorLoading": "Error al cargar el contenido: {{error}}",
     "goodbye": "Adiós",
     "hello": "Hola",
+    "loading": "Cargando...",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
     "signup": "Registrarse",
     "welcome": "Bienvenido"
-  }
+  },
+  "home": {}
 }
