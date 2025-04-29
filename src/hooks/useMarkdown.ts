@@ -34,6 +34,14 @@ export const useMarkdown = (filename: string) => {
 
   useEffect(() => {
     const loadContent = async () => {
+      if (!filename.endsWith(".md")) {
+        setMdLoadError(
+          new Error(`Filename "${filename}" must end with .md extension`)
+        );
+        setMdLoading(false);
+        return;
+      }
+
       const url = `${dir}/${i18n.language}/${filename}`;
       try {
         setMdLoading(true);

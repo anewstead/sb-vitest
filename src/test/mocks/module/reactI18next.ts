@@ -1,11 +1,16 @@
 import { vi } from "vitest";
 
-vi.mock("react-i18next", () => {
+export const i18nextMock = (language: string) => {
   return {
     useTranslation: () => {
-      const t = vi.fn();
-      const i18n = { language: "en-GB" };
-      return { t, i18n };
+      return {
+        t: vi.fn(),
+        i18n: { language },
+      };
     },
   };
+};
+
+vi.mock("react-i18next", () => {
+  return i18nextMock("en-GB");
 });

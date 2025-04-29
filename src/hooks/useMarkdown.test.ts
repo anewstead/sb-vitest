@@ -2,14 +2,29 @@ import { waitFor } from "@storybook/test";
 import { describe, expect, it, vi } from "vitest";
 import { renderHook } from "vitest-browser-react";
 
-import "@src/test/mocks/module/reactI18next";
+import { i18nextMock } from "@src/test/mocks/module/reactI18next";
 
 import { useMarkdown } from "./useMarkdown";
 
 describe("useMarkdown", () => {
-  it("should start in loading state", () => {
+  it("should fail when filename is missing .md extension", async () => {
     const { result } = renderHook(() => {
       return useMarkdown("home");
+    });
+
+    await waitFor(() => {
+      expect(result.current.mdLoading).toBe(false);
+    });
+
+    expect(result.current.mdLoadError).toBeInstanceOf(Error);
+    expect(result.current.mdLoadError?.message).toBe(
+      'Filename "home" must end with .md extension'
+    );
+  });
+
+  it("should start in loading state", () => {
+    const { result } = renderHook(() => {
+      return useMarkdown("home.md");
     });
     expect(result.current.mdLoading).toBe(true);
     expect(result.current.mdContent).toBe("");
@@ -18,7 +33,7 @@ describe("useMarkdown", () => {
 
   it("should load markdown content successfully", async () => {
     const { result } = renderHook(() => {
-      return useMarkdown("home");
+      return useMarkdown("home.md");
     });
 
     await waitFor(() => {
@@ -35,7 +50,7 @@ describe("useMarkdown", () => {
     window.fetch = vi.fn().mockRejectedValue(new Error("Failed to fetch"));
 
     const { result } = renderHook(() => {
-      return useMarkdown("home");
+      return useMarkdown("home.md");
     });
 
     await waitFor(() => {
@@ -51,7 +66,7 @@ describe("useMarkdown", () => {
 
   it("should reload content when language changes", async () => {
     const { result, rerender } = renderHook(() => {
-      return useMarkdown("home");
+      return useMarkdown("home.md");
     });
 
     await waitFor(() => {
@@ -60,16 +75,8 @@ describe("useMarkdown", () => {
 
     // Change language by updating the mock
     vi.mock("react-i18next", () => {
-      return {
-        useTranslation: () => {
-          return {
-            t: vi.fn(),
-            i18n: { language: "es-ES" },
-          };
-        },
-      };
+      return i18nextMock("es-ES");
     });
-
     rerender();
 
     await waitFor(() => {
