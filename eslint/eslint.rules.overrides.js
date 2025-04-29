@@ -14,7 +14,7 @@ const allowDefaultExport = {
   },
 };
 
-const allowDevDepImports = {
+const allowRelaxedImports = {
   files: [
     "./*",
     ".storybook/**",
@@ -27,6 +27,7 @@ const allowDevDepImports = {
   ],
   rules: {
     "import/no-extraneous-dependencies": ["warn", { devDependencies: true }],
+    "import/no-unassigned-import": "off",
   },
 };
 
@@ -55,6 +56,6 @@ const allowParentImports = {
  */
 export const overrideRules = [
   allowDefaultExport,
-  allowDevDepImports,
+  allowRelaxedImports,
   allowParentImports,
 ];

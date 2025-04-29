@@ -6,13 +6,23 @@ import { cleanMd } from "@src/utils/cleanMd";
 
 import type { ReactElement } from "react";
 
-const loadMarkdown = async (locale: string, section: string) => {
-  const response = await fetch(`/content/${locale}/${section}.md`);
+const dir = "/i18n/content";
+
+const loadMarkdown = async (url: string) => {
+  const response = await fetch(url);
   const markdown = await response.text();
   return cleanMd(markdown);
 };
 
-export const useMarkdown = (section: string) => {
+/**
+ * Loads a markdown file from i18n/content/[locale]/[filename.md]
+ *
+ * [locale] is detected from current language via react-i18next
+ *
+ * @param filename - Filename.md
+ * @returns The markdown content
+ */
+export const useMarkdown = (filename: string) => {
   const { i18n } = useTranslation();
 
   const [mdLoading, setMdLoading] = useState(true);
@@ -24,14 +34,15 @@ export const useMarkdown = (section: string) => {
 
   useEffect(() => {
     const loadContent = async () => {
+      const url = `${dir}/${i18n.language}/${filename}`;
       try {
         setMdLoading(true);
-        const html = await loadMarkdown(i18n.language, section);
+        const html = await loadMarkdown(url);
         setMdContent(html);
         setMdLoadError(null);
       } catch (err) {
         setMdLoadError(
-          err instanceof Error ? err : new Error("Failed to load content")
+          err instanceof Error ? err : new Error(`Failed to load: ${url}`)
         );
       } finally {
         setMdLoading(false);
@@ -39,7 +50,7 @@ export const useMarkdown = (section: string) => {
     };
 
     void loadContent();
-  }, [i18n.language, section]);
+  }, [i18n.language, filename]);
 
   return { mdContent, mdLoading, mdLoadError };
 };

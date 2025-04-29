@@ -1,0 +1,79 @@
+import { waitFor } from "@storybook/test";
+import { describe, expect, it, vi } from "vitest";
+import { renderHook } from "vitest-browser-react";
+
+import "@src/test/mocks/module/reactI18next";
+
+import { useMarkdown } from "./useMarkdown";
+
+describe("useMarkdown", () => {
+  it("should start in loading state", () => {
+    const { result } = renderHook(() => {
+      return useMarkdown("home");
+    });
+    expect(result.current.mdLoading).toBe(true);
+    expect(result.current.mdContent).toBe("");
+    expect(result.current.mdLoadError).toBe(null);
+  });
+
+  it("should load markdown content successfully", async () => {
+    const { result } = renderHook(() => {
+      return useMarkdown("home");
+    });
+
+    await waitFor(() => {
+      expect(result.current.mdLoading).toBe(false);
+    });
+
+    expect(result.current.mdContent).toBeDefined();
+    expect(result.current.mdLoadError).toBe(null);
+  });
+
+  it("should handle fetch errors", async () => {
+    // Mock fetch to throw an error
+    const originalFetch = window.fetch;
+    window.fetch = vi.fn().mockRejectedValue(new Error("Failed to fetch"));
+
+    const { result } = renderHook(() => {
+      return useMarkdown("home");
+    });
+
+    await waitFor(() => {
+      expect(result.current.mdLoading).toBe(false);
+    });
+
+    expect(result.current.mdLoadError).toBeInstanceOf(Error);
+    expect(result.current.mdLoadError?.message).toBe("Failed to fetch");
+
+    // Restore original fetch
+    window.fetch = originalFetch;
+  });
+
+  it("should reload content when language changes", async () => {
+    const { result, rerender } = renderHook(() => {
+      return useMarkdown("home");
+    });
+
+    await waitFor(() => {
+      expect(result.current.mdLoading).toBe(false);
+    });
+
+    // Change language by updating the mock
+    vi.mock("react-i18next", () => {
+      return {
+        useTranslation: () => {
+          return {
+            t: vi.fn(),
+            i18n: { language: "es-ES" },
+          };
+        },
+      };
+    });
+
+    rerender();
+
+    await waitFor(() => {
+      expect(result.current.mdLoading).toBe(false);
+    });
+  });
+});
