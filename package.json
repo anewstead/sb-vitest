@@ -46,6 +46,7 @@
     "axios-hooks": "^5.1.1",
     "clsx": "^2.1.1",
     "dompurify": "^3.2.5",
+    "html-react-parser": "^5.2.3",
     "i18next": "^25.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

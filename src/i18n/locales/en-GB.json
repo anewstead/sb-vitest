@@ -6,5 +6,13 @@
     "logout": "Log out",
     "signup": "Sign up",
     "welcome": "Welcome"
+  },
+  "home": {
+    "changeText": "Change Text",
+    "content": "<p>Building UIs with a <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>component-driven</strong></a> process starting with atomic components and ending with pages.</p><p>Get a guided tutorial on component-driven development at <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">Storybook tutorials</a>. Read more in the <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\">docs</a>.</p>",
+    "exampleTextFromRedux": "Example Text from Redux: {{text}}",
+    "pagesInStorybook": "Pages in Storybook",
+    "viewportIconAlt": "Viewport icon",
+    "viewportTip": "<span class=\"tip\">Tip</span> Adjust the width of the canvas with the {{icon}} Viewports addon in the toolbar"
   }
 }
