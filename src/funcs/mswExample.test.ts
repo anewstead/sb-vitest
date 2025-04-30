@@ -3,11 +3,11 @@ import { describe, expect, it } from "vitest";
 
 import { SAMPLE_API } from "@src/services/endpoints";
 import { worker } from "@src/test/msw/browser";
-import { sampleData } from "@src/test/msw/handlers/sampleData";
+import { sampleData } from "@src/test/msw/handlers/sample/sampleData";
 import {
   sampleError400,
   sampleNetworkError,
-} from "@src/test/msw/handlers/sampleHandlers";
+} from "@src/test/msw/handlers/sample/sampleHandlers";
 
 describe("MSW Example Test", () => {
   it("should handle successful API response using default handler", async () => {

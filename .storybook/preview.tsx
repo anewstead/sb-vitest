@@ -4,7 +4,7 @@ import { themes } from "@storybook/theming";
 import { initialize as mswInitialize, mswLoader } from "msw-storybook-addon";
 
 import { i18n } from "@src/i18n/i18n";
-import { handlers } from "@src/test/msw/handlers/all";
+import { handlers } from "@src/test/msw/handlers/defaults";
 
 import { AutoDocsTemplate } from "./AutoDocsTemplate";
 import { customViewports } from "./customViewports";
