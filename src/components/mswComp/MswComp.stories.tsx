@@ -12,7 +12,7 @@ import { MSWExample } from "./MswComp";
 import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
 /**
- * Meta: set component type only
+ * Meta: ONLY set meta.component
  */
 const meta = {
   component: MSWExample,

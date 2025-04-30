@@ -1,6 +1,7 @@
 import React from "react";
 
 import { deepmerge } from "deepmerge-ts";
+import { http, HttpResponse } from "msw";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router";
 
@@ -12,7 +13,7 @@ import { Home } from "./Home";
 import type { Meta, StoryObj } from "@storybook/react";
 
 /**
- * Meta: set component type only
+ * Meta: ONLY set meta.component
  */
 const meta = {
   component: Home,
@@ -46,6 +47,18 @@ export const LoggedIn: Story = deepmerge(base, {
   args: {
     user: {
       name: "Jane Doe",
+    },
+  },
+});
+
+export const Error: Story = deepmerge(base, {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get("/i18n/content/en-GB/home.md", () => {
+          return HttpResponse.error();
+        }),
+      ],
     },
   },
 });
