@@ -1,28 +1,12 @@
 import { waitFor } from "@storybook/test";
 import { http, HttpResponse } from "msw";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { renderHook } from "vitest-browser-react";
 
+import { i18n } from "@src/i18n/i18n";
 import { worker } from "@src/test/msw/browser";
 
 import { INVALID_FILENAME, useMarkdown } from "./useMarkdown";
-
-// mock for default language
-let currentLanguage = "en-GB";
-vi.mock("react-i18next", () => {
-  return {
-    useTranslation: () => {
-      return {
-        t: vi.fn(),
-        i18n: {
-          get language() {
-            return currentLanguage;
-          },
-        },
-      };
-    },
-  };
-});
 
 const getHook = (filename: string) => {
   return renderHook(() => {
@@ -137,7 +121,7 @@ describe("useMarkdown", () => {
     ]);
 
     // Change language and trigger re-render
-    currentLanguage = "es-ES";
+    await i18n.changeLanguage("es-ES");
     rerender();
 
     await waitFor(() => {
