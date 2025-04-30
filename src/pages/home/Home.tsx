@@ -22,11 +22,15 @@ import type { HomeProps } from "./home.type";
 
 export const Home = (props: HomeProps) => {
   const { user } = props;
+
   const dispatch = useAppDispatch();
+
   const { t } = useTranslation();
+
   const exampleText = useAppSelector((state) => {
     return state.home.example;
   });
+
   const { content, loading, error } = useContent("home.md");
 
   const onHandleChangeText = () => {
@@ -50,7 +54,9 @@ export const Home = (props: HomeProps) => {
         <h2>{t("home:pagesInStorybook")}</h2>
 
         <div className={styles.exampleSection}>
-          <p>{t("home:exampleTextFromRedux", { text: exampleText })}</p>
+          <p data-testid="example-text">
+            {t("home:exampleTextFromRedux", { text: exampleText })}
+          </p>
           <Button
             secondary
             label={t("home:changeText")}

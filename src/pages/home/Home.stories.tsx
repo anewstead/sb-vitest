@@ -1,5 +1,6 @@
 import React from "react";
 
+import { expect, waitFor, within } from "@storybook/test";
 import { deepmerge } from "deepmerge-ts";
 import { http, HttpResponse } from "msw";
 import { Provider } from "react-redux";
@@ -10,7 +11,7 @@ import { setupStore } from "@src/state/store";
 
 import { Home } from "./Home";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
 /**
  * Meta: ONLY set meta.component
@@ -41,7 +42,27 @@ const base: Story = {
  * Typescript requires that non-optional props be explicitly set\
  * Or ...spread from base when overriding
  */
-export const LoggedOut: Story = deepmerge(base, {});
+export const LoggedOut: Story = deepmerge(base, {
+  play: async ({ canvasElement }: StoryContext) => {
+    const canvas = within(canvasElement);
+    const text = canvas.getByTestId("example-text");
+    const initialText = text.textContent ?? "";
+
+    const button = canvas.getByRole("button", { name: /change text/i });
+    button.click();
+
+    await waitFor(async () => {
+      await expect(text.textContent).not.toBe(initialText);
+    });
+    const newText = text.textContent ?? "";
+
+    button.click();
+
+    await waitFor(async () => {
+      await expect(text.textContent).not.toBe(newText);
+    });
+  },
+});
 
 export const LoggedIn: Story = deepmerge(base, {
   args: {
