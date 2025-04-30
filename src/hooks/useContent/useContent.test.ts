@@ -6,7 +6,7 @@ import { renderHook } from "vitest-browser-react";
 import { i18n } from "@src/i18n/i18n";
 import { worker } from "@src/test/msw/worker";
 
-import { INVALID_FILENAME, useContent } from "./useMarkdown";
+import { INVALID_FILENAME, useContent } from "./useContent";
 
 const getHook = (filename: string) => {
   return renderHook(() => {
