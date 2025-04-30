@@ -24,14 +24,6 @@ type Story = StoryObj<typeof meta>;
  * Base: default story props
  */
 const base: Story = {
-  parameters: {
-    reactI18next: {
-      i18n: {
-        defaultLocale: "en-GB",
-        locales: ["en-GB"],
-      },
-    },
-  },
   decorators: [
     (Story) => {
       return (

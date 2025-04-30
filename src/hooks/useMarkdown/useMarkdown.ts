@@ -8,18 +8,12 @@ import type { ReactElement } from "react";
 
 const dir = "/i18n/content";
 
-export const FILE_NOT_FOUND = "File not found";
-export const FAILED_TO_LOAD = "Failed to load";
-export const INVALID_FILENAME = "File should have .md extension";
+export const INVALID_FILENAME = "Incorrect file extension";
 
 const loadMarkdown = async (url: string) => {
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(
-      response.status === 404
-        ? `${FILE_NOT_FOUND}: ${url}`
-        : `${FAILED_TO_LOAD}: ${url}`
-    );
+    throw new Error(`${response.statusText}: ${url}`);
   }
   const markdown = await response.text();
   return cleanMd(markdown);
@@ -58,9 +52,7 @@ export const useMarkdown = (filename: string) => {
         setMdContent(html);
         setMdLoadError(null);
       } catch (err) {
-        setMdLoadError(
-          err instanceof Error ? err : new Error(`${FAILED_TO_LOAD}: ${url}`)
-        );
+        setMdLoadError(err as Error);
       } finally {
         setMdLoading(false);
       }

@@ -5,12 +5,7 @@ import { renderHook } from "vitest-browser-react";
 
 import { worker } from "@src/test/msw/browser";
 
-import {
-  FAILED_TO_LOAD,
-  FILE_NOT_FOUND,
-  INVALID_FILENAME,
-  useMarkdown,
-} from "./useMarkdown";
+import { INVALID_FILENAME, useMarkdown } from "./useMarkdown";
 
 // mock for default language
 let currentLanguage = "en-GB";
@@ -97,7 +92,7 @@ describe("useMarkdown", () => {
     expect(result.current.mdLoadError).toBe(null);
   });
 
-  it("should handle fetch errors", async () => {
+  it("should handle fetch server error", async () => {
     worker.use(mswNetworkError);
 
     const { result } = getHook("home.md");
@@ -108,7 +103,7 @@ describe("useMarkdown", () => {
 
     expect(result.current.mdLoadError).toBeInstanceOf(Error);
     expect(result.current.mdLoadError?.message).toBe(
-      `${FAILED_TO_LOAD}: ${MD_BASE_URL}/en-GB/home.md`
+      `Internal Server Error: ${MD_BASE_URL}/en-GB/home.md`
     );
   });
 
@@ -123,7 +118,7 @@ describe("useMarkdown", () => {
 
     expect(result.current.mdLoadError).toBeInstanceOf(Error);
     expect(result.current.mdLoadError?.message).toBe(
-      `${FILE_NOT_FOUND}: ${MD_BASE_URL}/en-GB/home.md`
+      `Not Found: ${MD_BASE_URL}/en-GB/home.md`
     );
   });
 
