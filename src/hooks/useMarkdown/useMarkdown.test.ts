@@ -3,7 +3,6 @@ import { http, HttpResponse } from "msw";
 import { describe, expect, it, vi } from "vitest";
 import { renderHook } from "vitest-browser-react";
 
-import { i18nextMock } from "@src/test/mocks/module/reactI18next";
 import { worker } from "@src/test/msw/browser";
 
 import {
@@ -14,8 +13,20 @@ import {
 } from "./useMarkdown";
 
 // mock for default language
+let currentLanguage = "en-GB";
 vi.mock("react-i18next", () => {
-  return i18nextMock("en-GB");
+  return {
+    useTranslation: () => {
+      return {
+        t: vi.fn(),
+        i18n: {
+          get language() {
+            return currentLanguage;
+          },
+        },
+      };
+    },
+  };
 });
 
 const getHook = (filename: string) => {
@@ -27,8 +38,11 @@ const getHook = (filename: string) => {
 const MD_BASE_URL = "/i18n/content";
 const MSW_MD_URL = `${MD_BASE_URL}/:locale/:filename`;
 
-const mswSuccessEN = http.get(MSW_MD_URL, () => {
-  return HttpResponse.text("# MD English");
+const mswSuccess = http.get(MSW_MD_URL, ({ params }) => {
+  if (params.locale) {
+    return HttpResponse.text(`# MD ${params.locale as string}`);
+  }
+  return HttpResponse.text("# MD no locale");
 });
 
 const mswNetworkError = http.get(MSW_MD_URL, () => {
@@ -41,7 +55,7 @@ const mswFileNotFound = http.get(MSW_MD_URL, () => {
 
 describe("useMarkdown", () => {
   beforeEach(() => {
-    worker.use(mswSuccessEN);
+    worker.use(mswSuccess);
   });
 
   it("should fail when filename is missing .md extension", async () => {
@@ -75,7 +89,7 @@ describe("useMarkdown", () => {
       {
         type: "h1",
         props: {
-          children: "MD English",
+          children: "MD en-GB",
         },
       },
       "\n",
@@ -119,16 +133,32 @@ describe("useMarkdown", () => {
     await waitFor(() => {
       expect(result.current.mdLoading).toBe(false);
     });
+    expect(result.current.mdContent).toMatchObject([
+      {
+        type: "h1",
+        props: {
+          children: "MD en-GB",
+        },
+      },
+      "\n",
+    ]);
 
-    // change mock language in this test scope
-    vi.doMock("react-i18next", () => {
-      return i18nextMock("es-ES");
-    });
-
+    // Change language and trigger re-render
+    currentLanguage = "es-ES";
     rerender();
 
     await waitFor(() => {
       expect(result.current.mdLoading).toBe(false);
     });
+
+    expect(result.current.mdContent).toMatchObject([
+      {
+        type: "h1",
+        props: {
+          children: "MD es-ES",
+        },
+      },
+      "\n",
+    ]);
   });
 });

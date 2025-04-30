@@ -27,7 +27,7 @@ export const Home = (props: HomeProps) => {
   const exampleText = useAppSelector((state) => {
     return state.home.example;
   });
-  const { mdContent, mdLoading, mdLoadError } = useMarkdown("home");
+  const { mdContent, mdLoading, mdLoadError } = useMarkdown("home.md");
 
   const onHandleChangeText = () => {
     handleChangeText(dispatch);
