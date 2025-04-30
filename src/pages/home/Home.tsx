@@ -27,7 +27,7 @@ export const Home = (props: HomeProps) => {
   const exampleText = useAppSelector((state) => {
     return state.home.example;
   });
-  const { mdContent, mdLoading, mdLoadError } = useMarkdown("home.md");
+  const { content, loading, error } = useMarkdown("home.md");
 
   const onHandleChangeText = () => {
     handleChangeText(dispatch);
@@ -58,12 +58,12 @@ export const Home = (props: HomeProps) => {
           />
         </div>
 
-        {mdLoading ? (
+        {loading ? (
           <div>{t("common:loading")}</div>
-        ) : mdLoadError ? (
-          <div>{t("common:errorLoading", { error: mdLoadError.message })}</div>
+        ) : error ? (
+          <div>{t("common:errorLoading", { error: error.message })}</div>
         ) : (
-          mdContent
+          content
         )}
         <div className={styles.tipWrapper}>
           {cleanHtml(

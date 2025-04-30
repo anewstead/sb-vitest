@@ -57,30 +57,28 @@ describe("useMarkdown", () => {
     const { result } = getHook("home");
 
     await waitFor(() => {
-      expect(result.current.mdLoading).toBe(false);
+      expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.mdLoadError).toBeInstanceOf(Error);
-    expect(result.current.mdLoadError?.message).toBe(
-      `${INVALID_FILENAME}: home`
-    );
+    expect(result.current.error).toBeInstanceOf(Error);
+    expect(result.current.error?.message).toBe(`${INVALID_FILENAME}: home`);
   });
 
   it("should start in loading state", () => {
     const { result } = getHook("home.md");
-    expect(result.current.mdLoading).toBe(true);
-    expect(result.current.mdContent).toBe("");
-    expect(result.current.mdLoadError).toBe(null);
+    expect(result.current.loading).toBe(true);
+    expect(result.current.content).toBe("");
+    expect(result.current.error).toBe(null);
   });
 
   it("should load markdown content successfully", async () => {
     const { result } = getHook("home.md");
 
     await waitFor(() => {
-      expect(result.current.mdLoading).toBe(false);
+      expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.mdContent).toMatchObject([
+    expect(result.current.content).toMatchObject([
       {
         type: "h1",
         props: {
@@ -89,7 +87,7 @@ describe("useMarkdown", () => {
       },
       "\n",
     ]);
-    expect(result.current.mdLoadError).toBe(null);
+    expect(result.current.error).toBe(null);
   });
 
   it("should handle fetch server error", async () => {
@@ -98,11 +96,11 @@ describe("useMarkdown", () => {
     const { result } = getHook("home.md");
 
     await waitFor(() => {
-      expect(result.current.mdLoading).toBe(false);
+      expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.mdLoadError).toBeInstanceOf(Error);
-    expect(result.current.mdLoadError?.message).toBe(
+    expect(result.current.error).toBeInstanceOf(Error);
+    expect(result.current.error?.message).toBe(
       `Internal Server Error: ${MD_BASE_URL}/en-GB/home.md`
     );
   });
@@ -113,11 +111,11 @@ describe("useMarkdown", () => {
     const { result } = getHook("home.md");
 
     await waitFor(() => {
-      expect(result.current.mdLoading).toBe(false);
+      expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.mdLoadError).toBeInstanceOf(Error);
-    expect(result.current.mdLoadError?.message).toBe(
+    expect(result.current.error).toBeInstanceOf(Error);
+    expect(result.current.error?.message).toBe(
       `Not Found: ${MD_BASE_URL}/en-GB/home.md`
     );
   });
@@ -126,9 +124,9 @@ describe("useMarkdown", () => {
     const { result, rerender } = getHook("home.md");
 
     await waitFor(() => {
-      expect(result.current.mdLoading).toBe(false);
+      expect(result.current.loading).toBe(false);
     });
-    expect(result.current.mdContent).toMatchObject([
+    expect(result.current.content).toMatchObject([
       {
         type: "h1",
         props: {
@@ -143,10 +141,10 @@ describe("useMarkdown", () => {
     rerender();
 
     await waitFor(() => {
-      expect(result.current.mdLoading).toBe(false);
+      expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.mdContent).toMatchObject([
+    expect(result.current.content).toMatchObject([
       {
         type: "h1",
         props: {

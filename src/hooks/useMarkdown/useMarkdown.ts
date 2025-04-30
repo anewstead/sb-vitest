@@ -30,36 +30,35 @@ const loadMarkdown = async (url: string) => {
 export const useMarkdown = (filename: string) => {
   const { i18n } = useTranslation();
 
-  const [mdLoading, setMdLoading] = useState(true);
-  const [mdLoadError, setMdLoadError] = useState<Error | null>(null);
-
-  const [mdContent, setMdContent] = useState<
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [content, setContent] = useState<
     string | ReactElement | ReactElement[]
   >("");
 
   useEffect(() => {
     const loadContent = async () => {
       if (!filename.endsWith(".md")) {
-        setMdLoadError(new Error(`${INVALID_FILENAME}: ${filename}`));
-        setMdLoading(false);
+        setError(new Error(`${INVALID_FILENAME}: ${filename}`));
+        setLoading(false);
         return;
       }
 
       const url = `${dir}/${i18n.language}/${filename}`;
       try {
-        setMdLoading(true);
+        setLoading(true);
         const html = await loadMarkdown(url);
-        setMdContent(html);
-        setMdLoadError(null);
+        setContent(html);
+        setError(null);
       } catch (err) {
-        setMdLoadError(err as Error);
+        setError(err as Error);
       } finally {
-        setMdLoading(false);
+        setLoading(false);
       }
     };
 
     void loadContent();
   }, [i18n.language, filename]);
 
-  return { mdContent, mdLoading, mdLoadError };
+  return { content, loading, error };
 };
