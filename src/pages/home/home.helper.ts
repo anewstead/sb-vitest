@@ -3,17 +3,14 @@ import { homeActions } from "@src/state/home/slice";
 import type { AppDispatch } from "@src/state/store";
 
 export const handleLogin = () => {
-  //  login logic
   // console.log("Login clicked");
 };
 
 export const handleLogout = () => {
-  // logout logic
   // console.log("Logout clicked");
 };
 
 export const handleCreateAccount = () => {
-  // create account logic
   // console.log("Create account clicked");
 };
 

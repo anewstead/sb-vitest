@@ -2,32 +2,33 @@ import { useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 
+import { cleanHtml } from "@src/utils/cleanHtml";
 import { cleanMd } from "@src/utils/cleanMd";
 
 import type { ReactElement } from "react";
 
 const dir = "/i18n/content";
 
-export const INVALID_FILENAME = "Incorrect file extension";
+export const INVALID_FILENAME = "File must have .md or .html extension";
 
-const loadMarkdown = async (url: string) => {
+const loadContent = async (url: string, isMarkdown: boolean) => {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`${response.statusText}: ${url}`);
   }
-  const markdown = await response.text();
-  return cleanMd(markdown);
+  const content = await response.text();
+  return isMarkdown ? cleanMd(content) : cleanHtml(content);
 };
 
 /**
- * Loads a markdown file from i18n/content/[locale]/[filename.md]
+ * Loads a markdown or HTML file from i18n/content/[locale]/[filename]
  *
  * [locale] is detected from current language via react-i18next
  *
- * @param filename - Filename.md
- * @returns The markdown content
+ * @param filename - Filename.md or Filename.html
+ * @returns The content as HTML
  */
-export const useMarkdown = (filename: string) => {
+export const useContent = (filename: string) => {
   const { i18n } = useTranslation();
 
   const [loading, setLoading] = useState(true);
@@ -37,8 +38,11 @@ export const useMarkdown = (filename: string) => {
   >("");
 
   useEffect(() => {
-    const loadContent = async () => {
-      if (!filename.endsWith(".md")) {
+    const loadFile = async () => {
+      const isMarkdown = filename.endsWith(".md");
+      const isHtml = filename.endsWith(".html");
+
+      if (!isMarkdown && !isHtml) {
         setError(new Error(`${INVALID_FILENAME}: ${filename}`));
         setLoading(false);
         return;
@@ -47,7 +51,7 @@ export const useMarkdown = (filename: string) => {
       const url = `${dir}/${i18n.language}/${filename}`;
       try {
         setLoading(true);
-        const html = await loadMarkdown(url);
+        const html = await loadContent(url, isMarkdown);
         setContent(html);
         setError(null);
       } catch (err) {
@@ -57,7 +61,7 @@ export const useMarkdown = (filename: string) => {
       }
     };
 
-    void loadContent();
+    void loadFile();
   }, [i18n.language, filename]);
 
   return { content, loading, error };

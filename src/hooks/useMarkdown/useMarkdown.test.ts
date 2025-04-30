@@ -6,38 +6,45 @@ import { renderHook } from "vitest-browser-react";
 import { i18n } from "@src/i18n/i18n";
 import { worker } from "@src/test/msw/worker";
 
-import { INVALID_FILENAME, useMarkdown } from "./useMarkdown";
+import { INVALID_FILENAME, useContent } from "./useMarkdown";
 
 const getHook = (filename: string) => {
   return renderHook(() => {
-    return useMarkdown(filename);
+    return useContent(filename);
   });
 };
 
 const MD_BASE_URL = "/i18n/content";
-const MSW_MD_URL = `${MD_BASE_URL}/:locale/:filename`;
+const MSW_CONTENT_URL = `${MD_BASE_URL}/:locale/:filename`;
 
-const mswSuccess = http.get(MSW_MD_URL, ({ params }) => {
-  if (params.locale) {
-    return HttpResponse.text(`# MD ${params.locale as string}`);
+const mswSuccess = http.get(MSW_CONTENT_URL, ({ params }) => {
+  const locale = params.locale as string;
+  if (locale) {
+    const filename = params.filename as string;
+    if (filename.endsWith(".md")) {
+      return HttpResponse.text(`# MD ${locale}`);
+    } else if (filename.endsWith(".html")) {
+      return HttpResponse.text(`<h1>HTML ${locale}</h1>`);
+    }
   }
-  return HttpResponse.text("# MD no locale");
+  return HttpResponse.text("# Content no locale");
 });
 
-const mswNetworkError = http.get(MSW_MD_URL, () => {
+const mswNetworkError = http.get(MSW_CONTENT_URL, () => {
   return new HttpResponse(null, { status: 500 });
 });
 
-const mswFileNotFound = http.get(MSW_MD_URL, () => {
+const mswFileNotFound = http.get(MSW_CONTENT_URL, () => {
   return new HttpResponse(null, { status: 404 });
 });
 
-describe("useMarkdown", () => {
-  beforeEach(() => {
+describe("useContent", () => {
+  beforeEach(async () => {
     worker.use(mswSuccess);
+    await i18n.changeLanguage("en-GB");
   });
 
-  it("should fail when filename is missing .md extension", async () => {
+  it("should fail when filename is missing .md or .html extension", async () => {
     const { result } = getHook("home");
 
     await waitFor(() => {
@@ -62,7 +69,8 @@ describe("useMarkdown", () => {
       expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.content).toMatchObject([
+    const content = result.current.content;
+    expect(content).toMatchObject([
       {
         type: "h1",
         props: {
@@ -72,6 +80,22 @@ describe("useMarkdown", () => {
       "\n",
     ]);
     expect(result.current.error).toBe(null);
+  });
+
+  it("should load HTML content successfully", async () => {
+    const { result } = getHook("home.html");
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+    });
+
+    const content = result.current.content;
+    expect(content).toMatchObject({
+      type: "h1",
+      props: {
+        children: "HTML en-GB",
+      },
+    });
   });
 
   it("should handle fetch server error", async () => {
@@ -110,6 +134,7 @@ describe("useMarkdown", () => {
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
     });
+
     expect(result.current.content).toMatchObject([
       {
         type: "h1",

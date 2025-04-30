@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import viewportIcon from "@src/assets/viewport-icon.svg";
 import { Button } from "@src/components/button/Button";
 import { Header } from "@src/components/header/Header";
-import { useMarkdown } from "@src/hooks/useMarkdown/useMarkdown";
+import { useContent } from "@src/hooks/useMarkdown/useMarkdown";
 import { useAppDispatch, useAppSelector } from "@src/state/store";
 import { cleanHtml } from "@src/utils/cleanHtml";
 
@@ -27,7 +27,7 @@ export const Home = (props: HomeProps) => {
   const exampleText = useAppSelector((state) => {
     return state.home.example;
   });
-  const { content, loading, error } = useMarkdown("home.md");
+  const { content, loading, error } = useContent("home.md");
 
   const onHandleChangeText = () => {
     handleChangeText(dispatch);
