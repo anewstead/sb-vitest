@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import viewportIcon from "@src/assets/viewport-icon.svg";
 import { Button } from "@src/components/button/Button";
 import { Header } from "@src/components/header/Header";
-import { useMarkdown } from "@src/hooks/useMarkdown";
+import { useMarkdown } from "@src/hooks/useMarkdown/useMarkdown";
 import { useAppDispatch, useAppSelector } from "@src/state/store";
 import { cleanHtml } from "@src/utils/cleanHtml";
 
