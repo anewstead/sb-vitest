@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { renderHook } from "vitest-browser-react";
 
 import { i18n } from "@src/i18n/i18n";
-import { worker } from "@src/test/msw/browser";
+import { worker } from "@src/test/msw/worker";
 
 import { INVALID_FILENAME, useMarkdown } from "./useMarkdown";
 

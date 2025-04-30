@@ -6,7 +6,7 @@
 
 import { i18n } from "@src/i18n/i18n";
 
-import { worker } from "./msw/browser";
+import { worker } from "./msw/worker";
 
 // Initialize i18n and MSW before all tests
 beforeAll(async () => {

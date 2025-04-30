@@ -4,7 +4,7 @@ import { sampleDefault } from "./sample/sampleHandlers";
  * IMPORTANT - The default handlers array: \
  *
  * This is not all handlers.\
- * I.e. there cam only be 1 handler per resource URL at a time\
+ * I.e. there can only be 1 handler per resource URL at a time\
  * If same url is referenced twice then last overwrites previous\
  * Be sure to only add default use-case handler for each resource URL here\
  *

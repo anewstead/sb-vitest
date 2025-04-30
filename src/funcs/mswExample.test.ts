@@ -2,7 +2,7 @@ import axios from "axios";
 import { describe, expect, it } from "vitest";
 
 import { SAMPLE_API } from "@src/services/endpoints";
-import { worker } from "@src/test/msw/browser";
+import { worker } from "@src/test/msw/worker";
 import { sampleData } from "@src/test/msw/handlers/sample/sampleData";
 import {
   sampleError400,
