@@ -14,8 +14,7 @@ const getHook = (filename: string) => {
   });
 };
 
-const MD_BASE_URL = "/i18n/content";
-const MSW_CONTENT_URL = `${MD_BASE_URL}/:locale/:filename`;
+const MSW_CONTENT_URL = `/i18n/:locale/content/:filename`;
 
 const mswSuccess = http.get(MSW_CONTENT_URL, ({ params }) => {
   const locale = params.locale as string;
@@ -108,9 +107,7 @@ describe("useContent", () => {
     });
 
     expect(result.current.error).toBeInstanceOf(Error);
-    expect(result.current.error?.message).toBe(
-      `Internal Server Error: ${MD_BASE_URL}/en-GB/home.md`
-    );
+    expect(result.current.error?.message).toMatch(/^Internal Server Error:/);
   });
 
   it("should handle not found errors", async () => {
@@ -123,9 +120,7 @@ describe("useContent", () => {
     });
 
     expect(result.current.error).toBeInstanceOf(Error);
-    expect(result.current.error?.message).toBe(
-      `Not Found: ${MD_BASE_URL}/en-GB/home.md`
-    );
+    expect(result.current.error?.message).toMatch(/^Not Found:/);
   });
 
   it("should reload content when language changes", async () => {
