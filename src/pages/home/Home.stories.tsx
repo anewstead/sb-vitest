@@ -1,13 +1,10 @@
-import React from "react";
-
 import { expect, waitFor, within } from "@storybook/test";
 import { deepmerge } from "deepmerge-ts";
 import { http, HttpResponse } from "msw";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router";
+import { withRouter } from "storybook-addon-remix-react-router";
 
 import { homeReducer } from "@src/state/home/slice";
-import { setupStore } from "@src/state/store";
+import { withStore } from "@src/test/storybook/Decorators";
 
 import { Home } from "./Home";
 
@@ -26,17 +23,8 @@ type Story = StoryObj<typeof meta>;
  * Base: default story props
  */
 const base: Story = {
-  decorators: [
-    (Story) => {
-      return (
-        <Provider store={setupStore({ home: homeReducer })}>
-          <BrowserRouter>{Story()}</BrowserRouter>
-        </Provider>
-      );
-    },
-  ],
+  decorators: [withRouter, withStore({ home: homeReducer })],
 };
-
 /**
  * Stories: merge over base.\
  * Typescript requires that non-optional props be explicitly set\
