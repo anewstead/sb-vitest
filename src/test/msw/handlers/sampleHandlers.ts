@@ -1,8 +1,7 @@
 import { http, HttpResponse } from "msw";
 
 import { SAMPLE_API } from "@src/services/endpoints";
-
-import { sampleData } from "./sampleData";
+import { sampleData } from "@src/test/mocks/sampleData";
 
 export const sampleDefault = http.post(SAMPLE_API, () => {
   return HttpResponse.json(sampleData);

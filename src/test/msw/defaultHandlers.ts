@@ -1,4 +1,4 @@
-import { sampleDefault } from "./sample/sampleHandlers";
+import { sampleDefault } from "./handlers/sampleHandlers";
 
 /**
  * IMPORTANT - The default handlers array: \

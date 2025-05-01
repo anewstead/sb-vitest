@@ -5,7 +5,7 @@ import {
   sampleError400,
   sampleNetworkError,
   sampleNoData,
-} from "@src/test/msw/handlers/sample/sampleHandlers";
+} from "@src/test/msw/handlers/sampleHandlers";
 
 import { MSWExample } from "./MswComp";
 
