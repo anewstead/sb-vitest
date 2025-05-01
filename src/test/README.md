@@ -2,6 +2,5 @@
 
 _Do not put actual test in this folder_
 
-/mocks/module = mocks for modules
-/mocks/state = mocks for redux state
-/msw = intercept mocks for remote data
+/mocks = mocks for data/state and modules if globally required
+/msw = intercept mocks for remote data/api

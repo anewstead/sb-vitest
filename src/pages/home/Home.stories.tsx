@@ -4,7 +4,7 @@ import { http, HttpResponse } from "msw";
 import { withRouter } from "storybook-addon-remix-react-router";
 
 import { homeReducer } from "@src/state/home/slice";
-import { withStore } from "@src/test/storybook/Decorators";
+import { withStore } from "@src/state/StoryStore";
 
 import { Home } from "./Home";
 
