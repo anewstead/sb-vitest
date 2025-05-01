@@ -1,4 +1,4 @@
-# Home Content
+# Home Content MD
 
 Building UIs with a [component-driven](https://componentdriven.org) process starting with atomic components and ending with pages.
 

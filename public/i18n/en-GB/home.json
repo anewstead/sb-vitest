@@ -1,0 +1,6 @@
+{
+  "changeText": "Change Text",
+  "exampleTextFromRedux": "Example Text from Redux: {{text}}",
+  "pagesInStorybook": "Pages in Storybook",
+  "viewportTip": "<span class=\"tip\">Tip</span> Adjust the width of the canvas with the {{icon}} Viewports addon in the toolbar"
+} 

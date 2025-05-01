@@ -7,8 +7,6 @@ import { cleanMd } from "@src/utils/cleanMd";
 
 import type { ReactElement } from "react";
 
-const dir = "/i18n/content";
-
 export const INVALID_FILENAME = "File must have .md or .html extension";
 
 const loadContent = async (url: string, isMarkdown: boolean) => {
@@ -30,6 +28,7 @@ const loadContent = async (url: string, isMarkdown: boolean) => {
  */
 export const useContent = (filename: string) => {
   const { i18n } = useTranslation();
+  const dir = `/i18n/${i18n.language}/content`;
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -48,7 +47,7 @@ export const useContent = (filename: string) => {
         return;
       }
 
-      const url = `${dir}/${i18n.language}/${filename}`;
+      const url = `${dir}/${filename}`;
       try {
         setLoading(true);
         const html = await loadContent(url, isMarkdown);

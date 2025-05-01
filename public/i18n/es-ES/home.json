@@ -1,0 +1,6 @@
+{
+  "changeText": "Cambiar Texto",
+  "exampleTextFromRedux": "Ejemplo de Texto desde Redux: {{text}}",
+  "pagesInStorybook": "Páginas en Storybook",
+  "viewportTip": "<span class=\"tip\">Consejo</span> Ajusta el ancho del lienzo con el addon {{icon}} de Viewports en la barra de herramientas"
+}
