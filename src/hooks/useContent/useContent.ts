@@ -19,7 +19,7 @@ const loadContent = async (url: string, isMarkdown: boolean) => {
 };
 
 /**
- * Loads a markdown or HTML file from i18n/content/[locale]/[filename]
+ * Loads a markdown or HTML file from i18n/[locale]/content/[filename]
  *
  * [locale] is detected from current language via react-i18next
  *
