@@ -46,6 +46,18 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     optimizeDeps: {
+      include: [
+        "i18next",
+        "i18next-http-backend",
+        "react-dom/client",
+        "web-vitals",
+        "react-router",
+        "@emotion/cache",
+        "@emotion/react",
+        "@mui/material",
+        "@mui/material/styles",
+        "@mui/material/colors",
+      ],
       /**
        * Sourcemaps for dependencies are rarely needed. Only if debug
        * third-party node_modules, which is uncommon. They will slow down
