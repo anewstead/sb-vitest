@@ -29,6 +29,13 @@ const mswSuccess = http.get(MSW_CONTENT_URL, ({ params }) => {
   return HttpResponse.text("# Content no locale");
 });
 
+const mswSlow = http.get(MSW_CONTENT_URL, async () => {
+  await new Promise((resolve) => {
+    return setTimeout(resolve, 1000);
+  });
+  return HttpResponse.text("Content");
+});
+
 const mswNetworkError = http.get(MSW_CONTENT_URL, () => {
   return new HttpResponse(null, { status: 500 });
 });
@@ -47,53 +54,46 @@ describe("useContent", () => {
     const { result } = getHook("home");
 
     await waitFor(() => {
-      expect(result.current.loading).toBe(false);
+      const msg = result.current;
+      expect(msg).toBe(`Error: ${INVALID_FILENAME}: home`);
     });
-
-    expect(result.current.error).toBeInstanceOf(Error);
-    expect(result.current.error?.message).toBe(`${INVALID_FILENAME}: home`);
   });
 
-  it("should start in loading state", () => {
+  it("should start in loading state", async () => {
+    worker.use(mswSlow);
     const { result } = getHook("home.md");
-    expect(result.current.loading).toBe(true);
-    expect(result.current.content).toBe("");
-    expect(result.current.error).toBe(null);
+
+    await waitFor(() => {
+      expect(result.current).toBe("..");
+    });
   });
 
   it("should load markdown content successfully", async () => {
     const { result } = getHook("home.md");
 
     await waitFor(() => {
-      expect(result.current.loading).toBe(false);
-    });
-
-    const content = result.current.content;
-    expect(content).toMatchObject([
-      {
-        type: "h1",
-        props: {
-          children: "MD en-GB",
+      expect(result.current).toMatchObject([
+        {
+          type: "h1",
+          props: {
+            children: "MD en-GB",
+          },
         },
-      },
-      "\n",
-    ]);
-    expect(result.current.error).toBe(null);
+        "\n",
+      ]);
+    });
   });
 
   it("should load HTML content successfully", async () => {
     const { result } = getHook("home.html");
 
     await waitFor(() => {
-      expect(result.current.loading).toBe(false);
-    });
-
-    const content = result.current.content;
-    expect(content).toMatchObject({
-      type: "h1",
-      props: {
-        children: "HTML en-GB",
-      },
+      expect(result.current).toMatchObject({
+        type: "h1",
+        props: {
+          children: "HTML en-GB",
+        },
+      });
     });
   });
 
@@ -103,11 +103,8 @@ describe("useContent", () => {
     const { result } = getHook("home.md");
 
     await waitFor(() => {
-      expect(result.current.loading).toBe(false);
+      expect(result.current).toMatch(/^Error: Internal Server Error:/);
     });
-
-    expect(result.current.error).toBeInstanceOf(Error);
-    expect(result.current.error?.message).toMatch(/^Internal Server Error:/);
   });
 
   it("should handle not found errors", async () => {
@@ -116,46 +113,39 @@ describe("useContent", () => {
     const { result } = getHook("home.md");
 
     await waitFor(() => {
-      expect(result.current.loading).toBe(false);
+      expect(result.current).toMatch(/^Error: Not Found:/);
     });
-
-    expect(result.current.error).toBeInstanceOf(Error);
-    expect(result.current.error?.message).toMatch(/^Not Found:/);
   });
 
   it("should reload content when language changes", async () => {
     const { result, rerender } = getHook("home.md");
 
     await waitFor(() => {
-      expect(result.current.loading).toBe(false);
-    });
-
-    expect(result.current.content).toMatchObject([
-      {
-        type: "h1",
-        props: {
-          children: "MD en-GB",
+      expect(result.current).toMatchObject([
+        {
+          type: "h1",
+          props: {
+            children: "MD en-GB",
+          },
         },
-      },
-      "\n",
-    ]);
+        "\n",
+      ]);
+    });
 
     // Change language and trigger re-render
     await i18n.changeLanguage("es-ES");
     rerender();
 
     await waitFor(() => {
-      expect(result.current.loading).toBe(false);
-    });
-
-    expect(result.current.content).toMatchObject([
-      {
-        type: "h1",
-        props: {
-          children: "MD es-ES",
+      expect(result.current).toMatchObject([
+        {
+          type: "h1",
+          props: {
+            children: "MD es-ES",
+          },
         },
-      },
-      "\n",
-    ]);
+        "\n",
+      ]);
+    });
   });
 });

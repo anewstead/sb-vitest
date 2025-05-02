@@ -31,7 +31,7 @@ export const Home = (props: HomeProps) => {
     return state.home.example;
   });
 
-  const { content, loading, error } = useContent("home.md");
+  const content = useContent("home.md");
 
   const onHandleChangeText = () => {
     handleChangeText(dispatch);
@@ -64,13 +64,8 @@ export const Home = (props: HomeProps) => {
           />
         </div>
 
-        {loading ? (
-          <div>{t("common:loading")}</div>
-        ) : error ? (
-          <div>{t("common:errorLoading", { error: error.message })}</div>
-        ) : (
-          content
-        )}
+        <div data-testid="content">{content}</div>
+
         <div className={styles.tipWrapper}>
           {cleanHtml(
             t("home:viewportTip", {

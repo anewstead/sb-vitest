@@ -64,10 +64,41 @@ export const Error: Story = deepmerge(base, {
   parameters: {
     msw: {
       handlers: [
-        http.get("/i18n/content/en-GB/home.md", () => {
+        http.get("/i18n/en-GB/content/home.md", () => {
           return HttpResponse.error();
         }),
       ],
     },
+  },
+  play: async ({ canvasElement }: StoryContext) => {
+    const canvas = within(canvasElement);
+    const content = canvas.getByTestId("content");
+
+    await waitFor(async () => {
+      await expect(content).toHaveTextContent(/^Error:/);
+    });
+  },
+});
+
+export const Loading: Story = deepmerge(base, {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get("/i18n/en-GB/content/home.md", async () => {
+          await new Promise((resolve) => {
+            return setTimeout(resolve, 2000);
+          });
+          return HttpResponse.text("# Content");
+        }),
+      ],
+    },
+  },
+  play: async ({ canvasElement }: StoryContext) => {
+    const canvas = within(canvasElement);
+    const content = canvas.getByTestId("content");
+
+    await waitFor(async () => {
+      await expect(content).toHaveTextContent("...");
+    });
   },
 });

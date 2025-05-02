@@ -30,38 +30,71 @@ export const useContent = (filename: string) => {
   const { i18n } = useTranslation();
   const dir = `/i18n/${i18n.language}/content`;
 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [loadingDots, setLoadingDots] = useState("");
+  const [error, setError] = useState(false);
   const [content, setContent] = useState<
     string | ReactElement | ReactElement[]
   >("");
 
+  /**
+   * Load content from file
+   */
   useEffect(() => {
     const loadFile = async () => {
       const isMarkdown = filename.endsWith(".md");
       const isHtml = filename.endsWith(".html");
 
       if (!isMarkdown && !isHtml) {
-        setError(new Error(`${INVALID_FILENAME}: ${filename}`));
-        setLoading(false);
+        setError(true);
+        setContent(`Error: ${INVALID_FILENAME}: ${filename}`);
         return;
       }
 
+      setLoading(true);
+      setError(false);
       const url = `${dir}/${filename}`;
       try {
-        setLoading(true);
         const html = await loadContent(url, isMarkdown);
         setContent(html);
-        setError(null);
       } catch (err) {
-        setError(err as Error);
+        setError(true);
+        setContent(`Error: ${(err as Error).message}`);
       } finally {
         setLoading(false);
       }
     };
 
     void loadFile();
-  }, [i18n.language, filename]);
+  }, [i18n.language, filename, dir]);
 
-  return { content, loading, error };
+  /**
+   * Update loading dots animation when loading
+   */
+  useEffect(() => {
+    if (!loading) return;
+
+    const interval = setInterval(() => {
+      setLoadingDots((dots) => {
+        /* v8 ignore next */
+        if (dots.length >= 3) return "\u00A0";
+        return `${dots}.`;
+      });
+    }, 200);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [loading]);
+
+  /**
+   * Show loading dots when loading and not in error state
+   */
+  useEffect(() => {
+    if (loading && !error) {
+      setContent(loadingDots);
+    }
+  }, [loading, loadingDots, error]);
+
+  return content;
 };
