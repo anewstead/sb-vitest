@@ -9,7 +9,7 @@ import {
 } from "@src/test/msw/handlers/contentHandlers";
 import { server } from "@src/test/msw/server";
 
-import { INVALID_FILENAME, useContent } from "./useContent";
+import { INVALID_FILENAME, useContent } from "../useContent";
 
 const getHook = (filename: string) => {
   return renderHook(() => {

@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { i18nError } from "@src/test/msw/handlers/i18nHandlers";
 import { server } from "@src/test/msw/server";
 
-import { i18n } from "./i18n";
+import { i18n } from "../i18n";
 
 describe("i18n setup with MSW", () => {
   beforeEach(async () => {
