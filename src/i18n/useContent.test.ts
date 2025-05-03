@@ -1,8 +1,12 @@
 import { renderHook, waitFor } from "@testing-library/react";
-import { http, HttpResponse } from "msw";
 import { describe, expect, it } from "vitest";
 
 import { i18n } from "@src/i18n/i18n";
+import {
+  contentError,
+  contentSlow,
+  contentSuccess,
+} from "@src/test/msw/handlers/contentHandlers";
 import { server } from "@src/test/msw/server";
 
 import { INVALID_FILENAME, useContent } from "./useContent";
@@ -13,39 +17,9 @@ const getHook = (filename: string) => {
   });
 };
 
-const MSW_CONTENT_URL = `i18n/:locale/content/:filename`;
-
-const mswSuccess = http.get(MSW_CONTENT_URL, ({ params }) => {
-  const locale = params.locale as string;
-  if (locale) {
-    const filename = params.filename as string;
-    if (filename.endsWith(".md")) {
-      return HttpResponse.text(`# MD ${locale}`);
-    } else if (filename.endsWith(".html")) {
-      return HttpResponse.text(`<h1>HTML ${locale}</h1>`);
-    }
-  }
-  return HttpResponse.text("# Content no locale");
-});
-
-const mswSlow = http.get(MSW_CONTENT_URL, async () => {
-  await new Promise((resolve) => {
-    return setTimeout(resolve, 1000);
-  });
-  return HttpResponse.text("Content");
-});
-
-const mswNetworkError = http.get(MSW_CONTENT_URL, () => {
-  return new HttpResponse(null, { status: 500 });
-});
-
-const mswFileNotFound = http.get(MSW_CONTENT_URL, () => {
-  return new HttpResponse(null, { status: 404 });
-});
-
 describe("useContent", () => {
   beforeEach(async () => {
-    server.use(mswSuccess);
+    server.use(contentSuccess);
     await i18n.changeLanguage("en-GB");
   });
 
@@ -59,7 +33,7 @@ describe("useContent", () => {
   });
 
   it("should start in loading state", async () => {
-    server.use(mswSlow);
+    server.use(contentSlow);
     const { result } = getHook("home.md");
 
     await waitFor(() => {
@@ -75,7 +49,7 @@ describe("useContent", () => {
         {
           type: "h1",
           props: {
-            children: "MD en-GB",
+            children: "MD Content en-GB",
           },
         },
         "\n",
@@ -90,14 +64,14 @@ describe("useContent", () => {
       expect(result.current).toMatchObject({
         type: "h1",
         props: {
-          children: "HTML en-GB",
+          children: "HTML Content en-GB",
         },
       });
     });
   });
 
   it("should handle fetch server error", async () => {
-    server.use(mswNetworkError);
+    server.use(contentError);
 
     const { result } = getHook("home.md");
 
@@ -107,12 +81,12 @@ describe("useContent", () => {
   });
 
   it("should handle not found errors", async () => {
-    server.use(mswFileNotFound);
+    server.use(contentError);
 
     const { result } = getHook("home.md");
 
     await waitFor(() => {
-      expect(result.current).toMatch(/^Error: Not Found:/);
+      expect(result.current).toMatch(/^Error: Internal Server Error:/);
     });
   });
 
@@ -124,7 +98,7 @@ describe("useContent", () => {
         {
           type: "h1",
           props: {
-            children: "MD en-GB",
+            children: "MD Content en-GB",
           },
         },
         "\n",
@@ -143,7 +117,7 @@ describe("useContent", () => {
         {
           type: "h1",
           props: {
-            children: "MD es-ES",
+            children: "MD Content es-ES",
           },
         },
         "\n",
