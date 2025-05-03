@@ -1,10 +1,9 @@
-import { waitFor } from "@storybook/test";
+import { renderHook, waitFor } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
 import { describe, expect, it } from "vitest";
-import { renderHook } from "vitest-browser-react";
 
 import { i18n } from "@src/i18n/i18n";
-import { worker } from "@src/test/msw/worker";
+import { server } from "@src/test/msw/server";
 
 import { INVALID_FILENAME, useContent } from "./useContent";
 
@@ -14,7 +13,7 @@ const getHook = (filename: string) => {
   });
 };
 
-const MSW_CONTENT_URL = `/i18n/:locale/content/:filename`;
+const MSW_CONTENT_URL = `i18n/:locale/content/:filename`;
 
 const mswSuccess = http.get(MSW_CONTENT_URL, ({ params }) => {
   const locale = params.locale as string;
@@ -46,7 +45,7 @@ const mswFileNotFound = http.get(MSW_CONTENT_URL, () => {
 
 describe("useContent", () => {
   beforeEach(async () => {
-    worker.use(mswSuccess);
+    server.use(mswSuccess);
     await i18n.changeLanguage("en-GB");
   });
 
@@ -60,7 +59,7 @@ describe("useContent", () => {
   });
 
   it("should start in loading state", async () => {
-    worker.use(mswSlow);
+    server.use(mswSlow);
     const { result } = getHook("home.md");
 
     await waitFor(() => {
@@ -98,7 +97,7 @@ describe("useContent", () => {
   });
 
   it("should handle fetch server error", async () => {
-    worker.use(mswNetworkError);
+    server.use(mswNetworkError);
 
     const { result } = getHook("home.md");
 
@@ -108,7 +107,7 @@ describe("useContent", () => {
   });
 
   it("should handle not found errors", async () => {
-    worker.use(mswFileNotFound);
+    server.use(mswFileNotFound);
 
     const { result } = getHook("home.md");
 
@@ -133,7 +132,10 @@ describe("useContent", () => {
     });
 
     // Change language and trigger re-render
-    await i18n.changeLanguage("es-ES");
+    await waitFor(async () => {
+      await i18n.changeLanguage("es-ES");
+    });
+
     rerender();
 
     await waitFor(() => {

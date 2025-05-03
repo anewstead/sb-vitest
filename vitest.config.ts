@@ -2,6 +2,10 @@ import { defineConfig } from "vitest/config";
 
 import viteConfig from "./vite.config";
 
+/**
+ * Base vitest config\
+ * Final test configs are in vitest.workspace
+ */
 export default defineConfig({
   ...viteConfig({ command: "serve", mode: "development" }),
   test: {

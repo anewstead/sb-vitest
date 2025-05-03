@@ -1,5 +1,3 @@
-import { sampleDefault } from "./handlers/sampleHandlers";
-
 /**
  * IMPORTANT - The default handlers array: \
  *
@@ -35,4 +33,8 @@ import { sampleDefault } from "./handlers/sampleHandlers";
  *     },
  */
 
-export const handlers = [sampleDefault];
+import { contentSuccess } from "./handlers/contentHandlers";
+import { i18nSuccess } from "./handlers/i18nHandlers";
+import { sampleDefault } from "./handlers/sampleHandlers";
+
+export const handlers = [sampleDefault, i18nSuccess, contentSuccess];

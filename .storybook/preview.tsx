@@ -15,8 +15,8 @@ import type { DocsContextProps } from "@storybook/blocks";
 import type { Preview } from "@storybook/react";
 
 // https://github.com/mswjs/msw-storybook-addon#configuring-msw
-// MSW default log level is noisy and a bit misleading
-// hence the quiet option
+// quiet : true - MSW log is noisy when running tests in terminal \
+// it can be a bit misleading and a distraction to debugging
 mswInitialize({
   onUnhandledRequest: "bypass",
   quiet: true,
@@ -24,7 +24,6 @@ mswInitialize({
 
 const preview: Preview = {
   parameters: {
-    // actions: { argTypesRegex: "^on[A-Z].*" },  // tmp commented possibly uneeded
     controls: {
       matchers: {
         color: /(background|color)$/i,

@@ -10,6 +10,7 @@ const sbPlugin = storybookTest({
 
 export default defineWorkspace([
   {
+    // this should only pick up .spec files
     extends: "./vitest.config.ts",
     test: {
       globals: true,
@@ -19,22 +20,18 @@ export default defineWorkspace([
     },
   },
   {
+    // this should only pick up .test files
     extends: "./vitest.config.ts",
     test: {
+      globals: true,
       name: "fn",
+      environment: "jsdom",
       exclude: ["**/*.spec.*"],
       setupFiles: ["src/test/vitest.setup.ts"],
-      browser: {
-        enabled: true,
-        provider: "playwright",
-        instances: [{ browser: "chromium" }],
-        headless: true,
-        screenshotFailures: false,
-        connectTimeout: 20000,
-      },
     },
   },
   {
+    // this should only pick up .stories files
     extends: "./vitest.config.ts",
     plugins: [sbPlugin],
     test: {

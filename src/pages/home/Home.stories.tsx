@@ -5,11 +5,15 @@ import { withRouter } from "storybook-addon-remix-react-router";
 
 import { homeReducer } from "@src/state/home/slice";
 import { withStore } from "@src/state/StoryStore";
+import {
+  contentError,
+  contentSuccess,
+} from "@src/test/msw/handlers/contentHandlers";
+import { i18nSuccess } from "@src/test/msw/handlers/i18nHandlers";
 
 import { Home } from "./Home";
 
 import type { Meta, StoryContext, StoryObj } from "@storybook/react";
-
 /**
  * Meta: ONLY set meta.component
  */
@@ -24,6 +28,11 @@ type Story = StoryObj<typeof meta>;
  */
 const base: Story = {
   decorators: [withRouter, withStore({ home: homeReducer })],
+  parameters: {
+    msw: {
+      handlers: [i18nSuccess, contentSuccess],
+    },
+  },
 };
 /**
  * Stories: merge over base.\
@@ -60,13 +69,16 @@ export const LoggedIn: Story = deepmerge(base, {
   },
 });
 
-export const Error: Story = deepmerge(base, {
+export const Error: Story = {
+  ...base,
   parameters: {
+    ...base.parameters,
     msw: {
       handlers: [
-        http.get("/i18n/en-GB/content/home.md", () => {
-          return HttpResponse.error();
+        http.get("/i18n/:lng/:ns.json", () => {
+          return new HttpResponse(null, { status: 500 });
         }),
+        contentError,
       ],
     },
   },
@@ -74,21 +86,32 @@ export const Error: Story = deepmerge(base, {
     const canvas = within(canvasElement);
     const content = canvas.getByTestId("content");
 
-    await waitFor(async () => {
-      await expect(content).toHaveTextContent(/^Error:/);
-    });
+    await waitFor(
+      async () => {
+        await expect(content).toHaveTextContent(/^Error:/);
+      },
+      { timeout: 5000 }
+    );
   },
-});
+};
 
-export const Loading: Story = deepmerge(base, {
+export const Loading: Story = {
+  ...base,
   parameters: {
+    ...base.parameters,
     msw: {
       handlers: [
-        http.get("/i18n/en-GB/content/home.md", async () => {
+        http.get("/i18n/:lng/:ns.json", async () => {
           await new Promise((resolve) => {
             return setTimeout(resolve, 2000);
           });
-          return HttpResponse.text("# Content");
+          return HttpResponse.json({});
+        }),
+        http.get("/i18n/:locale/content/:filename", async () => {
+          await new Promise((resolve) => {
+            return setTimeout(resolve, 2000);
+          });
+          return HttpResponse.text("# Slow Content");
         }),
       ],
     },
@@ -101,4 +124,4 @@ export const Loading: Story = deepmerge(base, {
       await expect(content).toHaveTextContent("...");
     });
   },
-});
+};

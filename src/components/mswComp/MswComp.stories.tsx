@@ -37,6 +37,7 @@ export const Default: Story = deepmerge(base, {
     await waitFor(async () => {
       await expect(canvas.getByText("MSW Example")).toBeVisible();
     });
+    await expect(canvas.getByText(/mockValue/i)).toBeVisible();
   },
 });
 

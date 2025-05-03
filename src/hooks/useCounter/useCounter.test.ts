@@ -1,5 +1,4 @@
-import { waitFor } from "@storybook/test";
-import { renderHook } from "vitest-browser-react";
+import { renderHook, waitFor } from "@testing-library/react";
 
 import { useCounter } from "./useCounter";
 
@@ -15,8 +14,9 @@ describe("useCounter", () => {
     const { result } = renderHook(() => {
       return useCounter();
     });
-
-    result.current.increment();
+    await waitFor(() => {
+      result.current.increment();
+    });
     await waitFor(() => {
       expect(result.current.count).toBe(1);
     });
@@ -26,9 +26,9 @@ describe("useCounter", () => {
     const { result } = renderHook(() => {
       return useCounter(5);
     });
-
-    result.current.decrement();
-
+    await waitFor(() => {
+      result.current.decrement();
+    });
     await waitFor(() => {
       expect(result.current.count).toBe(4);
     });

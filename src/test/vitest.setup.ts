@@ -4,27 +4,20 @@
  * See also .storybook/vitest.setup.ts
  */
 
-import { i18n } from "@src/i18n/i18n";
+import { server } from "./msw/server";
 
-import { worker } from "./msw/worker";
-
-// Initialize i18n and MSW before all tests
-beforeAll(async () => {
-  // Initialize i18n for tests
-  await i18n.init();
-
-  // MSW default log level is noisy and a bit misleading
-  // hence the quiet option
-  await worker.start({
+// Initialize MSW and i18n before all tests
+beforeAll(() => {
+  // Start MSW server first to intercept requests
+  server.listen({
     onUnhandledRequest: "bypass",
-    quiet: true,
   });
 });
 
 afterEach(() => {
-  worker.resetHandlers();
+  server.resetHandlers();
 });
 
 afterAll(() => {
-  worker.stop();
+  server.close();
 });

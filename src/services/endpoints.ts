@@ -1,1 +1,1 @@
-export const SAMPLE_API = "http://localhost:3000/api/main";
+export const SAMPLE_API = "/api/main";
