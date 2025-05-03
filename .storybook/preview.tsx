@@ -4,6 +4,7 @@ import { themes } from "@storybook/theming";
 import { initialize as mswInitialize, mswLoader } from "msw-storybook-addon";
 
 import { i18n } from "@src/i18n/i18n";
+import { I18N } from "@src/i18n/i18n.const";
 import { handlers } from "@src/test/msw/defaultHandlers";
 
 import { AutoDocsTemplate } from "./AutoDocsTemplate";
@@ -61,11 +62,12 @@ const preview: Preview = {
   },
 
   initialGlobals: {
-    locale: "en-GB",
-    locales: {
-      "en-GB": "English (GB)",
-      "es-ES": "Español (ES)",
-    },
+    locale: I18N.DEFAULT_LOCALE,
+    locales: Object.fromEntries(
+      Object.values(I18N.LOCALE).map((value) => {
+        return [value, value];
+      })
+    ),
   },
 
   decorators: [

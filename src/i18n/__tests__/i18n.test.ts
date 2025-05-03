@@ -16,23 +16,23 @@ describe("i18n setup with MSW", () => {
   it("should load translations successfully using MSW", () => {
     // Test common namespace
     const commonText = i18n.t("common:hello");
-    expect(commonText).toBe("[en-GB] Hello");
+    expect(commonText).toBe(`[${I18N.DEFAULT_LOCALE}] Hello`);
 
     // Test home namespace
     const homeText = i18n.t("home:changeText");
-    expect(homeText).toBe("[en-GB] Change Text");
+    expect(homeText).toBe(`[${I18N.DEFAULT_LOCALE}] Change Text`);
   });
 
   it("should handle language switching with MSW", async () => {
     // Get text in English
     const enText = i18n.t("common:hello");
-    expect(enText).toBe("[en-GB] Hello");
+    expect(enText).toBe(`[${I18N.DEFAULT_LOCALE}] Hello`);
 
     // Switch to Spanish
     await i18n.changeLanguage(I18N.LOCALE.ES_ES);
     await waitFor(() => {
       const esText = i18n.t("common:hello");
-      expect(esText).toBe("[es-ES] Hello");
+      expect(esText).toBe(`[${I18N.LOCALE.ES_ES}] Hello`);
     });
   });
 
@@ -41,7 +41,7 @@ describe("i18n setup with MSW", () => {
     await i18n.changeLanguage(I18N.LOCALE.ES_ES);
     await waitFor(() => {
       const text = i18n.t("common:hello");
-      expect(text).toBe("[es-ES] Hello");
+      expect(text).toBe(`[${I18N.LOCALE.ES_ES}] Hello`);
     });
 
     // Override with error handler
@@ -53,7 +53,7 @@ describe("i18n setup with MSW", () => {
     // Should keep existing Spanish translations
     await waitFor(() => {
       const text = i18n.t("common:hello");
-      expect(text).toBe("[es-ES] Hello");
+      expect(text).toBe(`[${I18N.LOCALE.ES_ES}] Hello`);
     });
   });
 
@@ -64,7 +64,7 @@ describe("i18n setup with MSW", () => {
     await waitFor(() => {
       const text = i18n.t("common:hello");
       // Should use fallback language (en-GB)
-      expect(text).toBe("[en-GB] Hello");
+      expect(text).toBe(`[${I18N.DEFAULT_LOCALE}] Hello`);
     });
   });
 });
