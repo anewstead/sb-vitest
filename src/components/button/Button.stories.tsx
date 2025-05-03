@@ -5,18 +5,14 @@ import { Button } from "./Button";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-/**
- * Meta: ONLY set meta.component
- */
+// Meta: ONLY set meta.component
 const meta = {
   component: Button,
 } satisfies Meta<typeof Button>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * Base: default story props
- */
+// Base: default story props
 const base: Story = {
   args: {
     label: "Button",

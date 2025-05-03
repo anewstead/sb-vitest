@@ -14,18 +14,15 @@ import { i18nSuccess } from "@src/test/msw/handlers/i18nHandlers";
 import { Home } from "./Home";
 
 import type { Meta, StoryContext, StoryObj } from "@storybook/react";
-/**
- * Meta: ONLY set meta.component
- */
+
+// Meta: ONLY set meta.component
 const meta = {
   component: Home,
 } satisfies Meta<typeof Home>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * Base: default story props
- */
+// Base: default story props
 const base: Story = {
   decorators: [withRouter, withStore({ home: homeReducer })],
   parameters: {
@@ -34,6 +31,7 @@ const base: Story = {
     },
   },
 };
+
 /**
  * Stories: merge over base.\
  * Typescript requires that non-optional props be explicitly set\

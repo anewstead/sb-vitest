@@ -4,18 +4,14 @@ import { Header } from "./Header";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-/**
- * Meta: ONLY set meta.component
- */
+// Meta: ONLY set meta.component
 const meta = {
   component: Header,
 } satisfies Meta<typeof Header>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * Base: default story props
- */
+// Base: default story props
 const base: Story = {
   args: {
     onLogin: fn(),
