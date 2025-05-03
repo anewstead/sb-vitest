@@ -3,6 +3,8 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import HttpBackend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 
+import { I18N } from "./i18n.const";
+
 // IMPORTANT - language configure to only be lang-COUNTRY
 void i18n
   .use(LanguageDetector)
@@ -10,17 +12,17 @@ void i18n
   .use(initReactI18next)
   .init({
     backend: {
-      loadPath: "/i18n/{{lng}}/{{ns}}.json",
+      loadPath: I18N.JSON.PATH,
     },
     detection: {
       order: ["htmlTag", "navigator", "localStorage", "cookie"], // optional, override as needed
       caches: [], // disable saving detected language to localStorage or cookie for clean testing
     },
     // load: "languageOnly", // keep if commented just in case (not obvious find in docs)
-    ns: ["common", "home"],
-    defaultNS: "common",
-    fallbackLng: "en-GB",
-    supportedLngs: ["en-GB", "es-ES"],
+    ns: Object.values(I18N.JSON.NS),
+    defaultNS: I18N.JSON.NS.COMMON,
+    fallbackLng: I18N.LOCALE.EN_GB,
+    supportedLngs: Object.values(I18N.LOCALE),
     nonExplicitSupportedLngs: false,
     interpolation: {
       escapeValue: false,

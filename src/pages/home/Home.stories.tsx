@@ -1,12 +1,12 @@
 import { expect, waitFor, within } from "@storybook/test";
 import { deepmerge } from "deepmerge-ts";
-import { http, HttpResponse } from "msw";
 import { withRouter } from "storybook-addon-remix-react-router";
 
 import { homeReducer } from "@src/state/home/slice";
 import { withStore } from "@src/state/StoryStore";
 import {
   contentError,
+  contentSlow,
   contentSuccess,
 } from "@src/test/msw/handlers/contentHandlers";
 import { i18nSuccess } from "@src/test/msw/handlers/i18nHandlers";
@@ -74,24 +74,16 @@ export const Error: Story = {
   parameters: {
     ...base.parameters,
     msw: {
-      handlers: [
-        http.get("/i18n/:lng/:ns.json", () => {
-          return new HttpResponse(null, { status: 500 });
-        }),
-        contentError,
-      ],
+      handlers: [contentError],
     },
   },
   play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
     const content = canvas.getByTestId("content");
 
-    await waitFor(
-      async () => {
-        await expect(content).toHaveTextContent(/^Error:/);
-      },
-      { timeout: 5000 }
-    );
+    await waitFor(async () => {
+      await expect(content).toHaveTextContent(/^Error:/);
+    });
   },
 };
 
@@ -100,20 +92,7 @@ export const Loading: Story = {
   parameters: {
     ...base.parameters,
     msw: {
-      handlers: [
-        http.get("/i18n/:lng/:ns.json", async () => {
-          await new Promise((resolve) => {
-            return setTimeout(resolve, 2000);
-          });
-          return HttpResponse.json({});
-        }),
-        http.get("/i18n/:locale/content/:filename", async () => {
-          await new Promise((resolve) => {
-            return setTimeout(resolve, 2000);
-          });
-          return HttpResponse.text("# Slow Content");
-        }),
-      ],
+      handlers: [contentSlow],
     },
   },
   play: async ({ canvasElement }: StoryContext) => {

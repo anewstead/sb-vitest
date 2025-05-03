@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { cleanHtml } from "@src/utils/cleanHtml";
 import { cleanMd } from "@src/utils/cleanMd";
 
+import { I18N } from "./i18n.const";
+
 import type { ReactElement } from "react";
 
 export const INVALID_FILENAME = "File must have .md or .html extension";
@@ -19,16 +21,15 @@ const loadContent = async (url: string, isMarkdown: boolean) => {
 };
 
 /**
- * Loads a markdown or HTML file from i18n/[locale]/content/[filename]
+ * Loads a markdown or HTML file (public folder)
  *
  * [locale] is detected from current language via react-i18next
  *
- * @param filename - Filename.md or Filename.html
+ * @param filename - .md or .html
  * @returns The content as HTML
  */
 export const useContent = (filename: string) => {
   const { i18n } = useTranslation();
-  const dir = `/i18n/${i18n.language}/content`;
 
   const [loading, setLoading] = useState(false);
   const [loadingDots, setLoadingDots] = useState("");
@@ -53,9 +54,10 @@ export const useContent = (filename: string) => {
 
       setLoading(true);
       setError(false);
-      const url = `${dir}/${filename}`;
+      const folder = I18N.CONTENT.PATH.replace("{{lng}}", i18n.language);
+      const file = folder.replace("{{ns}}", filename);
       try {
-        const html = await loadContent(url, isMarkdown);
+        const html = await loadContent(file, isMarkdown);
         setContent(html);
       } catch (err) {
         setError(true);
@@ -66,7 +68,7 @@ export const useContent = (filename: string) => {
     };
 
     void loadFile();
-  }, [i18n.language, filename, dir]);
+  }, [i18n.language, filename]);
 
   /**
    * Update loading dots animation when loading

@@ -1,11 +1,8 @@
 import { http, HttpResponse } from "msw";
 
-const I18N_PATH = "/i18n/:lng/:ns.json";
+import { I18N } from "@src/i18n/i18n.const";
 
-type Locale = "en-GB" | "es-ES";
-type Namespace = "common" | "home";
-
-type Translations = Record<Locale, Record<Namespace, Record<string, string>>>;
+import type { Locale, Namespace } from "@src/i18n/i18n.const";
 
 // Single source of truth for translations
 const baseTranslations = {
@@ -30,8 +27,8 @@ const baseTranslations = {
 // Helper to create language-specific translations\
 // adds language prefix to all translations\
 // e.g. [en-GB] Hello
-const createTranslations = (lang: Locale) => {
-  const prefix = `[${lang}] `;
+const createTranslations = (locale: Locale) => {
+  const prefix = `[${locale}] `;
   return Object.fromEntries(
     Object.entries(baseTranslations).map(([namespace, translations]) => {
       return [
@@ -47,30 +44,31 @@ const createTranslations = (lang: Locale) => {
 };
 
 // Generate translations for all supported languages
-const mockTranslations: Translations = {
-  "en-GB": createTranslations("en-GB"),
-  "es-ES": createTranslations("es-ES"),
-};
+const mockTranslations = Object.fromEntries(
+  Object.values(I18N.LOCALE).map((locale) => {
+    return [locale, createTranslations(locale)];
+  })
+);
 
-export const i18nSuccess = http.get(I18N_PATH, ({ params }) => {
-  const locale = params.lng as Locale;
-  const namespace = params.ns as Namespace;
+export const i18nSuccess = http.get(I18N.JSON.MSW, ({ params }) => {
+  const lng = params.lng as Locale;
+  const ns = params.ns as Namespace;
 
-  if (locale in mockTranslations && namespace in mockTranslations[locale]) {
-    return HttpResponse.json(mockTranslations[locale][namespace]);
+  if (lng in mockTranslations && ns in mockTranslations[lng]) {
+    return HttpResponse.json(mockTranslations[lng][ns]);
   }
 
   return new HttpResponse(null, { status: 404 });
 });
 
-export const i18nError = http.get(I18N_PATH, () => {
+export const i18nError = http.get(I18N.JSON.MSW, () => {
   console.error("[MSW] Simulating content load error (500)");
   return new HttpResponse(null, { status: 500 });
 });
 
-export const i18nSlow = http.get(I18N_PATH, async () => {
+export const i18nSlow = http.get(I18N.JSON.MSW, async () => {
   await new Promise((resolve) => {
-    return setTimeout(resolve, 2000);
+    return setTimeout(resolve, 1000);
   });
-  return HttpResponse.json(mockTranslations["en-GB"].common);
+  return HttpResponse.json(mockTranslations[I18N.DEFAULT_LOCALE].common);
 });

@@ -2,6 +2,7 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { i18n } from "@src/i18n/i18n";
+import { I18N } from "@src/i18n/i18n.const";
 import {
   contentError,
   contentSlow,
@@ -20,7 +21,7 @@ const getHook = (filename: string) => {
 describe("useContent", () => {
   beforeEach(async () => {
     server.use(contentSuccess);
-    await i18n.changeLanguage("en-GB");
+    await i18n.changeLanguage(I18N.DEFAULT_LOCALE);
   });
 
   it("should fail when filename is missing .md or .html extension", async () => {
@@ -107,7 +108,7 @@ describe("useContent", () => {
 
     // Change language and trigger re-render
     await waitFor(async () => {
-      await i18n.changeLanguage("es-ES");
+      await i18n.changeLanguage(I18N.LOCALE.ES_ES);
     });
 
     rerender();

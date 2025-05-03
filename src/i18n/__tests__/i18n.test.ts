@@ -1,6 +1,7 @@
 import { waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
+import { I18N } from "@src/i18n/i18n.const";
 import { i18nError } from "@src/test/msw/handlers/i18nHandlers";
 import { server } from "@src/test/msw/server";
 
@@ -9,7 +10,7 @@ import { i18n } from "../i18n";
 describe("i18n setup with MSW", () => {
   beforeEach(async () => {
     // Reset to default language before each test
-    await i18n.changeLanguage("en-GB");
+    await i18n.changeLanguage(I18N.DEFAULT_LOCALE);
   });
 
   it("should load translations successfully using MSW", () => {
@@ -28,7 +29,7 @@ describe("i18n setup with MSW", () => {
     expect(enText).toBe("[en-GB] Hello");
 
     // Switch to Spanish
-    await i18n.changeLanguage("es-ES");
+    await i18n.changeLanguage(I18N.LOCALE.ES_ES);
     await waitFor(() => {
       const esText = i18n.t("common:hello");
       expect(esText).toBe("[es-ES] Hello");
@@ -37,7 +38,7 @@ describe("i18n setup with MSW", () => {
 
   it("should handle server errors by keeping existing translations", async () => {
     // First load Spanish translations successfully
-    await i18n.changeLanguage("es-ES");
+    await i18n.changeLanguage(I18N.LOCALE.ES_ES);
     await waitFor(() => {
       const text = i18n.t("common:hello");
       expect(text).toBe("[es-ES] Hello");
@@ -47,7 +48,7 @@ describe("i18n setup with MSW", () => {
     server.use(i18nError);
 
     // Try to reload Spanish translations (this will fail)
-    await i18n.changeLanguage("es-ES");
+    await i18n.changeLanguage(I18N.LOCALE.ES_ES);
 
     // Should keep existing Spanish translations
     await waitFor(() => {
@@ -58,7 +59,7 @@ describe("i18n setup with MSW", () => {
 
   it("should use fallback language when requested language is not supported", async () => {
     // Try to switch to unsupported language
-    await i18n.changeLanguage("fr-FR");
+    await i18n.changeLanguage("xx_XX");
 
     await waitFor(() => {
       const text = i18n.t("common:hello");
