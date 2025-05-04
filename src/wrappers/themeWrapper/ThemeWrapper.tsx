@@ -5,7 +5,7 @@ import { CacheProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 
-import { theme } from "@src/style/theme";
+import { blueTheme, greenTheme } from "@src/style/theme";
 
 import type { PropsWithChildren } from "react";
 
@@ -20,7 +20,7 @@ const muiCache = createCache({
 export const ThemeWrapper = ({ children }: IThemeBaseProps) => {
   return (
     <CacheProvider value={muiCache}>
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={greenTheme}>
         <CssBaseline />
         {children}
       </MuiThemeProvider>
