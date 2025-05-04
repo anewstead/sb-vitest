@@ -1,0 +1,50 @@
+import React from "react";
+
+import AutoMode from "@mui/icons-material/AutoMode";
+import DarkMode from "@mui/icons-material/DarkMode";
+import LightMode from "@mui/icons-material/LightMode";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import { useColorScheme } from "@mui/material/styles";
+
+type MuiMode = "light" | "dark" | "system";
+
+export const ThemeButtons = () => {
+  const { mode, setMode } = useColorScheme();
+
+  const handleMode = (newVal: MuiMode) => {
+    setMode(newVal);
+  };
+
+  return (
+    <ButtonGroup aria-label="theme buttons" size="small">
+      <Button
+        variant={mode === "light" ? "contained" : "outlined"}
+        onClick={() => {
+          return handleMode("light");
+        }}
+        aria-label="light"
+      >
+        <LightMode />
+      </Button>
+      <Button
+        variant={mode === "system" ? "contained" : "outlined"}
+        onClick={() => {
+          return handleMode("system");
+        }}
+        aria-label="system"
+      >
+        <AutoMode />
+      </Button>
+      <Button
+        variant={mode === "dark" ? "contained" : "outlined"}
+        onClick={() => {
+          return handleMode("dark");
+        }}
+        aria-label="dark"
+      >
+        <DarkMode />
+      </Button>
+    </ButtonGroup>
+  );
+};
