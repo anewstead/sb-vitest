@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
 
 import { I18N } from "@src/i18n/i18n.const";
-import { l, loremHTML, loremMD } from "@src/test/mocks/i18n/content/lorem";
+import { loremHTML, loremMD } from "@src/test/mocks/i18n/content/lorem";
 
 export const contentSuccess = http.get(I18N.CONTENT.MSW, ({ params }) => {
   const lng = params.lng as string;
