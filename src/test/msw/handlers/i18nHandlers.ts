@@ -1,27 +1,15 @@
 import { http, HttpResponse } from "msw";
 
 import { I18N } from "@src/i18n/i18n.const";
+import { common } from "@src/test/mocks/i18n/common";
+import { home } from "@src/test/mocks/i18n/home";
 
 import type { Locale, Namespace } from "@src/i18n/i18n.const";
 
 // Single source of truth for translations
 const baseTranslations = {
-  common: {
-    errorLoading: "Error loading: {{error}}",
-    goodbye: "Goodbye",
-    hello: "Hello",
-    loading: "Loading...",
-    login: "Login",
-    logout: "Logout",
-    signup: "Sign Up",
-    welcome: "Welcome",
-  },
-  home: {
-    changeText: "Change Text",
-    exampleTextFromRedux: "Example Text: {{text}}",
-    pagesInStorybook: "Pages in Storybook",
-    viewportTip: "Viewport Tip: {{icon}}",
-  },
+  common,
+  home,
 };
 
 // Helper to create language-specific translations\

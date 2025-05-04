@@ -46,15 +46,19 @@ describe("useContent", () => {
     const { result } = getHook("home.md");
 
     await waitFor(() => {
-      expect(result.current).toMatchObject([
-        {
-          type: "h1",
-          props: {
-            children: "MD Content en-GB",
-          },
-        },
-        "\n",
-      ]);
+      const content = result.current;
+      expect(content).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            type: "h2",
+            props: { children: I18N.DEFAULT_LOCALE }
+          }),
+          expect.objectContaining({
+            type: "h1",
+            props: { children: "MD Lorem ipsum" }
+          })
+        ])
+      );
     });
   });
 
@@ -62,12 +66,19 @@ describe("useContent", () => {
     const { result } = getHook("home.html");
 
     await waitFor(() => {
-      expect(result.current).toMatchObject({
-        type: "h1",
-        props: {
-          children: "HTML Content en-GB",
-        },
-      });
+      const content = result.current;
+      expect(content).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            type: "h2",
+            props: { children: I18N.DEFAULT_LOCALE }
+          }),
+          expect.objectContaining({
+            type: "h3",
+            props: { children: "HTML Lorem ipsum" }
+          })
+        ])
+      );
     });
   });
 
@@ -95,15 +106,19 @@ describe("useContent", () => {
     const { result, rerender } = getHook("home.md");
 
     await waitFor(() => {
-      expect(result.current).toMatchObject([
-        {
-          type: "h1",
-          props: {
-            children: "MD Content en-GB",
-          },
-        },
-        "\n",
-      ]);
+      const content = result.current;
+      expect(content).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            type: "h2",
+            props: { children: I18N.DEFAULT_LOCALE }
+          }),
+          expect.objectContaining({
+            type: "h1",
+            props: { children: "MD Lorem ipsum" }
+          })
+        ])
+      );
     });
 
     // Change language and trigger re-render
@@ -114,15 +129,19 @@ describe("useContent", () => {
     rerender();
 
     await waitFor(() => {
-      expect(result.current).toMatchObject([
-        {
-          type: "h1",
-          props: {
-            children: "MD Content es-ES",
-          },
-        },
-        "\n",
-      ]);
+      const content = result.current;
+      expect(content).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            type: "h2",
+            props: { children: I18N.LOCALE.ES_ES }
+          }),
+          expect.objectContaining({
+            type: "h1",
+            props: { children: "MD Lorem ipsum" }
+          })
+        ])
+      );
     });
   });
 });
