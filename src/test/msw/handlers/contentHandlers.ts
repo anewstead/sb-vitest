@@ -17,7 +17,6 @@ export const contentSuccess = http.get(I18N.CONTENT.MSW, ({ params }) => {
 });
 
 export const contentError = http.get(I18N.CONTENT.MSW, () => {
-  console.error("[MSW] Simulating content load error (500)");
   return new HttpResponse(null, { status: 500 });
 });
 

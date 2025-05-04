@@ -46,18 +46,22 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     optimizeDeps: {
-      include: [
-        "i18next",
-        "i18next-http-backend",
-        "react-dom/client",
-        "web-vitals",
-        "react-router",
-        "@emotion/cache",
-        "@emotion/react",
-        "@mui/material",
-        "@mui/material/styles",
-        "@mui/material/colors",
-      ],
+      // tmp disable includes array, may no longer be required
+      // if needed you will see a warning in the console when running dev servers or tests
+      // can delete if not seen after a while!
+      // include: [
+      //   "i18next",
+      //   "i18next-http-backend",
+      //   "react-dom/client",
+      //   "web-vitals",
+      //   "react-router",
+      //   "@emotion/cache",
+      //   "@emotion/react",
+      //   "@mui/material",
+      //   "@mui/material/styles",
+      //   "@mui/material/colors",
+      // ],
+
       /**
        * Sourcemaps for dependencies are rarely needed. Only if debug
        * third-party node_modules, which is uncommon. They will slow down

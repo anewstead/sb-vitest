@@ -84,8 +84,7 @@ const ruleFunction = (primaryOption) => {
 
     if (!actualFile) {
       // keep log for debugging
-      // eslint-disable-next-line no-console
-      console.log("Debug: File not found in directory:", {
+      console.warn("Debug: File not found in directory:", {
         filename,
         reportedName,
         filesInDir: files,

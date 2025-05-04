@@ -13,7 +13,7 @@ const baseTranslations = {
 };
 
 // Helper to create language-specific translations\
-// adds language prefix to all translations\
+// adds language prefix to base i18n mock entries\
 // e.g. [en-GB] Hello
 const createTranslations = (locale: Locale) => {
   const prefix = `[${locale}] `;
@@ -41,16 +41,13 @@ const mockTranslations = Object.fromEntries(
 export const i18nSuccess = http.get(I18N.JSON.MSW, ({ params }) => {
   const lng = params.lng as Locale;
   const ns = params.ns as Namespace;
-
   if (lng in mockTranslations && ns in mockTranslations[lng]) {
     return HttpResponse.json(mockTranslations[lng][ns]);
   }
-
   return new HttpResponse(null, { status: 404 });
 });
 
 export const i18nError = http.get(I18N.JSON.MSW, () => {
-  console.error("[MSW] Simulating content load error (500)");
   return new HttpResponse(null, { status: 500 });
 });
 
