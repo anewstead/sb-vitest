@@ -3,9 +3,9 @@
  *
  * Import/order should result in:\
  *
- * 1. Css > scss > unknown
- * 2. React > other classes
- * 3. React types > other types
+ * 1. React > other classes
+ * 2. React types > other types
+ * 3. Css > scss > unknown
  *
  * The plugin does not auto-fix unassigned imports\
  * E.g. import "myFile.css"\
@@ -32,7 +32,6 @@ export const importRules = {
       named: true,
       distinctGroup: true,
       groups: [
-        "unknown",
         "builtin",
         "external",
         "internal",
@@ -40,6 +39,7 @@ export const importRules = {
         "sibling",
         "index",
         "object",
+        "unknown",
         "type",
       ],
       "newlines-between": "always",

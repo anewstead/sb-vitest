@@ -1,9 +1,9 @@
-import styles from "./header.module.css";
-
 import React from "react";
 
 import logo from "@src/assets/acme-logo.svg";
 import { Button } from "@src/components/button/Button";
+
+import styles from "./header.module.css";
 
 import type { HeaderProps } from "./header.type";
 

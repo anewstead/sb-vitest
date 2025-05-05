@@ -1,8 +1,8 @@
-import styles from "./button.module.css";
-
 import React from "react";
 
 import { Button as MuiButton } from "@mui/material";
+
+import styles from "./button.module.css";
 
 import type { ButtonProps } from "./button.type";
 

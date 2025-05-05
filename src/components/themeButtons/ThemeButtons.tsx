@@ -21,7 +21,7 @@ export const ThemeButtons = () => {
       <Button
         variant={mode === "light" ? "contained" : "outlined"}
         onClick={() => {
-          return handleMode("light");
+          handleMode("light");
         }}
         aria-label="light"
       >
@@ -30,7 +30,7 @@ export const ThemeButtons = () => {
       <Button
         variant={mode === "system" ? "contained" : "outlined"}
         onClick={() => {
-          return handleMode("system");
+          handleMode("system");
         }}
         aria-label="system"
       >
@@ -39,7 +39,7 @@ export const ThemeButtons = () => {
       <Button
         variant={mode === "dark" ? "contained" : "outlined"}
         onClick={() => {
-          return handleMode("dark");
+          handleMode("dark");
         }}
         aria-label="dark"
       >
