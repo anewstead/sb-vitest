@@ -4,12 +4,13 @@ const sbConfig: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
 
   addons: [
+    "@storybook/addon-a11y",
     "@storybook/addon-essentials",
     "@storybook/addon-links",
+    "@storybook/addon-themes",
     "@storybook/experimental-addon-test",
-    "storybook-dark-mode",
     "storybook-addon-remix-react-router",
-    "@storybook/addon-a11y",
+    "storybook-dark-mode",
     "storybook-react-i18next",
   ],
 

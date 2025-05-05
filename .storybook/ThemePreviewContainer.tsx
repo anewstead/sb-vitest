@@ -9,62 +9,72 @@ import {
 import { ThemeWrapper } from "@src/wrappers/themeWrapper/ThemeWrapper";
 
 import {
-  getStorybookTheme,
-  getUserPreferTheme,
-  setSbThemeToSystem,
+  getStorybookMode,
+  getUserPreferMode,
+  setSbModeToSystem,
 } from "./themeHelpers";
-import { ThemeSyncStorybookMui } from "./ThemeSyncStorybookMui";
+import {
+  MUI_MODE_CHANGE_EVENT,
+  ThemeSyncStorybookMui,
+} from "./ThemeSyncStorybookMui";
 
+import type { Theme } from "@mui/material/styles";
 import type { ReactNode } from "react";
 
 type ThemeMode = "light" | "dark" | "system";
 
-type IThemePreviewContainerProps = { children: ReactNode };
+type IThemePreviewContainerProps = {
+  children: ReactNode;
+  theme: Theme;
+};
 
 const channel = addons.getChannel();
 
+export const SB_MODE_CHANGE_EVENT = "SB_MODE_CHANGE_EVENT";
+
 export const ThemePreviewContainer = ({
   children,
+  theme,
 }: IThemePreviewContainerProps) => {
   const allowThemeDispatch = useRef(true);
 
-  const onSbThemeChange = useCallback(() => {
+  const onSbModeChange = useCallback(() => {
     if (allowThemeDispatch.current) {
       document.dispatchEvent(
-        new CustomEvent("SB_THEME_CHANGED", { detail: getStorybookTheme() })
+        new CustomEvent(SB_MODE_CHANGE_EVENT, { detail: getStorybookMode() })
       );
     } else {
       allowThemeDispatch.current = true;
     }
   }, []);
 
-  const onMuiThemeChange = useCallback((e: Event) => {
-    const muiTheme = (e as CustomEvent).detail as ThemeMode;
-    const isSystem = muiTheme === "system";
-    const updateTheme = isSystem ? getUserPreferTheme() : muiTheme;
+  const onMuiModeChange = useCallback((e: Event) => {
+    const muiMode = (e as CustomEvent).detail as ThemeMode;
+    const isSystem = muiMode === "system";
+    const updateMode = isSystem ? getUserPreferMode() : muiMode;
     allowThemeDispatch.current = false;
-    channel.emit(UPDATE_DARK_MODE_EVENT_NAME, updateTheme);
-    setSbThemeToSystem(isSystem);
+    channel.emit(UPDATE_DARK_MODE_EVENT_NAME, updateMode);
+    setSbModeToSystem(isSystem);
   }, []);
 
   // init: darkmode-addon listener
   useEffect(() => {
-    channel.on(DARK_MODE_EVENT_NAME, onSbThemeChange);
+    channel.on(DARK_MODE_EVENT_NAME, onSbModeChange);
     return () => {
-      channel.removeListener(DARK_MODE_EVENT_NAME, onSbThemeChange);
+      channel.removeListener(DARK_MODE_EVENT_NAME, onSbModeChange);
     };
-  }, [onSbThemeChange]);
+  }, [onSbModeChange]);
 
-  // init: mui-theme listener
+  // init: mui-mode listener
   useEffect(() => {
-    document.addEventListener("MUI_THEME_CHANGED", onMuiThemeChange);
+    document.addEventListener(MUI_MODE_CHANGE_EVENT, onMuiModeChange);
     return () => {
-      document.removeEventListener("MUI_THEME_CHANGED", onMuiThemeChange);
+      document.removeEventListener(MUI_MODE_CHANGE_EVENT, onMuiModeChange);
     };
-  }, [onMuiThemeChange]);
+  }, [onMuiModeChange]);
 
   return (
-    <ThemeWrapper>
+    <ThemeWrapper theme={theme}>
       <ThemeSyncStorybookMui />
       {children}
     </ThemeWrapper>

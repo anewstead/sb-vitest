@@ -2,9 +2,11 @@ import React, { useCallback, useEffect, useRef } from "react";
 
 import { useColorScheme } from "@mui/material";
 
-import { getStorybookTheme } from "./themeHelpers";
+import { getStorybookMode } from "./themeHelpers";
+import { SB_MODE_CHANGE_EVENT } from "./ThemePreviewContainer";
 
 export type ThemeMode = "light" | "dark" | "system";
+export const MUI_MODE_CHANGE_EVENT = "MUI_MODE_CHANGE_EVENT";
 
 /**
  * Custom events sync storybook theme and mui theme\
@@ -44,12 +46,12 @@ export const ThemeSyncStorybookMui = () => {
    */
   useEffect(() => {
     if (!mode) {
-      setMode(getStorybookTheme());
+      setMode(getStorybookMode());
     } else if (!modeHasInited.current) {
       modeHasInited.current = true;
     } else if (allowModeDispatch.current) {
       document.dispatchEvent(
-        new CustomEvent("MUI_THEME_CHANGED", { detail: mode })
+        new CustomEvent(MUI_MODE_CHANGE_EVENT, { detail: mode })
       );
     } else {
       allowModeDispatch.current = true;
@@ -57,9 +59,9 @@ export const ThemeSyncStorybookMui = () => {
   }, [mode, setMode]);
 
   useEffect(() => {
-    document.addEventListener("SB_THEME_CHANGED", onExternalThemeChange);
+    document.addEventListener(SB_MODE_CHANGE_EVENT, onExternalThemeChange);
     return () => {
-      document.removeEventListener("SB_THEME_CHANGED", onExternalThemeChange);
+      document.removeEventListener(SB_MODE_CHANGE_EVENT, onExternalThemeChange);
     };
   });
 

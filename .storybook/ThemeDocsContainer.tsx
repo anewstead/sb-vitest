@@ -5,7 +5,7 @@ import { addons } from "@storybook/preview-api";
 import { themes as storybookThemes } from "@storybook/theming";
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode";
 
-import { getStorybookTheme, getUserPreferTheme } from "./themeHelpers";
+import { getStorybookMode, getUserPreferMode } from "./themeHelpers";
 
 import type { DocsContainerProps } from "@storybook/addon-docs";
 import type { ReactNode } from "react";
@@ -38,9 +38,9 @@ export const ThemeDocsContainer = ({
 
   // init: ensure correct theme on first load
   useEffect(() => {
-    let initTheme = getStorybookTheme();
+    let initTheme = getStorybookMode();
     if (initTheme === "system") {
-      initTheme = getUserPreferTheme();
+      initTheme = getUserPreferMode();
     }
     setDark(initTheme === "dark");
   }, []);

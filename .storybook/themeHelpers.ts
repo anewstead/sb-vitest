@@ -1,16 +1,16 @@
-// type for storybook theme localstorage
+// type for storybook-dark-mode addon localstorage
 type ISbDarkModeStore = {
   current: "light" | "dark";
   userHasExplicitlySetTheTheme: boolean;
 };
 
-// storybook theme localstorage key
-const SB_KEY = "sb-addon-themes-3";
+// storybook-dark-mode addon localstorage key
+const SB_DM_KEY = "sb-addon-themes-3";
 
 /**
- * Get users system preferred theme
+ * Get users system preferred mode
  */
-export const getUserPreferTheme = () => {
+export const getUserPreferMode = () => {
   if (typeof window === "undefined") {
     return "light";
   }
@@ -19,32 +19,32 @@ export const getUserPreferTheme = () => {
 };
 
 /**
- * Storybook theme uses:\
+ * Storybook mode uses:\
  *
  * - Light/dark & userHasExplicitlySetTheTheme\
  *   To sync to Mui this maps it to:\
  * - Light/dark/system
  */
-export const getStorybookTheme = () => {
-  const getSB = localStorage.getItem(SB_KEY);
-  if (getSB) {
-    const sbObj = JSON.parse(getSB) as ISbDarkModeStore;
+export const getStorybookMode = () => {
+  const getSbDm = localStorage.getItem(SB_DM_KEY);
+  if (getSbDm) {
+    const sbObj = JSON.parse(getSbDm) as ISbDarkModeStore;
     return sbObj.userHasExplicitlySetTheTheme ? sbObj.current : "system";
   }
   return "system";
 };
 
 /**
- * When Mui theme change to system we need to tell\
+ * When Mui mode change to system we need to tell\
  * Storybook to reflect the equivalent state
  */
-export const setSbThemeToSystem = (isSystem: boolean) => {
-  const getSB = localStorage.getItem(SB_KEY);
-  if (getSB) {
-    const systemTheme = getUserPreferTheme();
-    const sbObj = JSON.parse(getSB) as ISbDarkModeStore;
+export const setSbModeToSystem = (isSystem: boolean) => {
+  const getSbDm = localStorage.getItem(SB_DM_KEY);
+  if (getSbDm) {
+    const systemMode = getUserPreferMode();
+    const sbObj = JSON.parse(getSbDm) as ISbDarkModeStore;
     sbObj.userHasExplicitlySetTheTheme = !isSystem;
-    sbObj.current = systemTheme;
-    localStorage.setItem(SB_KEY, JSON.stringify(sbObj));
+    sbObj.current = systemMode;
+    localStorage.setItem(SB_DM_KEY, JSON.stringify(sbObj));
   }
 };

@@ -5,11 +5,14 @@ import { CacheProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 
-import { blueTheme, greenTheme } from "@src/style/theme";
+import { blueTheme } from "@src/style/theme";
 
+import type { Theme } from "@mui/material/styles";
 import type { PropsWithChildren } from "react";
 
-export type IThemeBaseProps = PropsWithChildren;
+export type IThemeBaseProps = PropsWithChildren & {
+  theme?: Theme;
+};
 
 // https://mui.com/material-ui/guides/interoperability/#css-injection-order
 const muiCache = createCache({
@@ -17,10 +20,13 @@ const muiCache = createCache({
   prepend: true,
 });
 
-export const ThemeWrapper = ({ children }: IThemeBaseProps) => {
+export const ThemeWrapper = ({
+  children,
+  theme = blueTheme,
+}: IThemeBaseProps) => {
   return (
     <CacheProvider value={muiCache}>
-      <MuiThemeProvider theme={greenTheme}>
+      <MuiThemeProvider theme={theme}>
         <CssBaseline />
         {children}
       </MuiThemeProvider>
