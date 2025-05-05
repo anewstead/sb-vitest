@@ -18,18 +18,18 @@ export const MUI_MODE_CHANGE_EVENT = "MUI_MODE_CHANGE_EVENT";
  *       {children / story_component}
  *     </EG_StoryBookPreview_MUIThemedWrapper>;
  */
-export const ThemeSyncStorybookMui = () => {
+export const ThemeSyncSbMuiMode = () => {
   const { mode, setMode } = useColorScheme(); // mode always undefined 1st render
 
   const allowModeDispatch = useRef(true);
   const modeHasInited = useRef(false);
 
-  const onExternalThemeChange = useCallback(
+  const onExternalModeChange = useCallback(
     (e: Event) => {
-      const externalTheme = (e as CustomEvent).detail as ThemeMode;
-      if (mode !== externalTheme) {
+      const externalMode = (e as CustomEvent).detail as ThemeMode;
+      if (mode !== externalMode) {
         allowModeDispatch.current = false;
-        setMode(externalTheme);
+        setMode(externalMode);
       }
     },
     [mode, setMode]
@@ -59,9 +59,9 @@ export const ThemeSyncStorybookMui = () => {
   }, [mode, setMode]);
 
   useEffect(() => {
-    document.addEventListener(SB_MODE_CHANGE_EVENT, onExternalThemeChange);
+    document.addEventListener(SB_MODE_CHANGE_EVENT, onExternalModeChange);
     return () => {
-      document.removeEventListener(SB_MODE_CHANGE_EVENT, onExternalThemeChange);
+      document.removeEventListener(SB_MODE_CHANGE_EVENT, onExternalModeChange);
     };
   });
 

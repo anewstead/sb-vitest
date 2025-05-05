@@ -15,7 +15,7 @@ import {
 } from "./themeHelpersMode";
 import {
   MUI_MODE_CHANGE_EVENT,
-  ThemeSyncStorybookMui,
+  ThemeSyncSbMuiMode,
 } from "./ThemeSyncSbMuiMode";
 
 import type { Theme } from "@mui/material/styles";
@@ -36,15 +36,15 @@ export const ThemePreviewContainer = ({
   children,
   theme,
 }: IThemePreviewContainerProps) => {
-  const allowThemeDispatch = useRef(true);
+  const allowModeDispatch = useRef(true);
 
   const onSbModeChange = useCallback(() => {
-    if (allowThemeDispatch.current) {
+    if (allowModeDispatch.current) {
       document.dispatchEvent(
         new CustomEvent(SB_MODE_CHANGE_EVENT, { detail: getStorybookMode() })
       );
     } else {
-      allowThemeDispatch.current = true;
+      allowModeDispatch.current = true;
     }
   }, []);
 
@@ -52,7 +52,7 @@ export const ThemePreviewContainer = ({
     const muiMode = (e as CustomEvent).detail as ThemeMode;
     const isSystem = muiMode === "system";
     const updateMode = isSystem ? getUserPreferMode() : muiMode;
-    allowThemeDispatch.current = false;
+    allowModeDispatch.current = false;
     channel.emit(UPDATE_DARK_MODE_EVENT_NAME, updateMode);
     setSbModeToSystem(isSystem);
   }, []);
@@ -74,8 +74,8 @@ export const ThemePreviewContainer = ({
   }, [onMuiModeChange]);
 
   return (
-    <ThemeWrapper theme={theme}>
-      <ThemeSyncStorybookMui />
+    <ThemeWrapper initialTheme={theme}>
+      <ThemeSyncSbMuiMode />
       {children}
     </ThemeWrapper>
   );
