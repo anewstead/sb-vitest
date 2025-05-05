@@ -1,13 +1,12 @@
 import React from "react";
 
-import { CssBaseline } from "@mui/material";
 import { withThemeFromJSXProvider } from "@storybook/addon-themes";
 import { themes } from "@storybook/theming";
 import { initialize as mswInitialize, mswLoader } from "msw-storybook-addon";
 
 import { i18n } from "@src/i18n/i18n";
 import { I18N } from "@src/i18n/i18n.const";
-import { blueTheme, greenTheme } from "@src/style/theme";
+import { allThemes } from "@src/style/theme";
 import { handlers } from "@src/test/msw/defaultHandlers";
 
 import { AutoDocsTemplate } from "./AutoDocsTemplate";
@@ -72,13 +71,9 @@ const preview: Preview = {
 
   decorators: [
     withThemeFromJSXProvider({
-      themes: {
-        blue: blueTheme,
-        green: greenTheme,
-      },
+      themes: allThemes,
       defaultTheme: "blue",
       Provider: ThemePreviewContainer,
-      GlobalStyles: CssBaseline,
     }),
   ],
 
