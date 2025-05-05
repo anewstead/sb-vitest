@@ -8,4 +8,6 @@ export const allThemes = {
   blue: blueTheme,
   green: greenTheme,
   red: redTheme,
-};
+} as const;
+
+export type ThemeName = keyof typeof allThemes;

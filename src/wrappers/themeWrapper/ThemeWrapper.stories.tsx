@@ -24,7 +24,7 @@ const Template: Story = {
       <ThemeWrapper {...args}>
         <div data-testid="child-content">
           <h2>Theme Wrapper</h2>
-          <p>See Toggle buttons for additional behavior</p>
+          <p>See Theme buttons for additional behavior</p>
         </div>
       </ThemeWrapper>
     );

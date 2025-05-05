@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 
-import { defaultTheme } from "@src/style/theme";
+import { allThemes, defaultTheme } from "@src/style/theme";
+
+import { ThemeWrapperContext } from "./ThemeWrapperContext";
 
 import type { Theme } from "@mui/material/styles";
+import type { ThemeName } from "@src/style/theme";
 import type { PropsWithChildren } from "react";
 
 export type IThemeBaseProps = PropsWithChildren & {
-  theme?: Theme;
+  initialTheme?: Theme;
 };
 
 // https://mui.com/material-ui/guides/interoperability/#css-injection-order
@@ -21,14 +24,22 @@ const muiCache = createCache({
 });
 
 export const ThemeWrapper = (props: IThemeBaseProps) => {
-  const { children, theme = defaultTheme } = props;
+  const { children, initialTheme = defaultTheme } = props;
+  const [theme, setTheme] = useState<Theme>(initialTheme);
+  const [currentTheme, setCurrentTheme] = useState<ThemeName>("blue");
+
+  useEffect(() => {
+    setTheme(allThemes[currentTheme]);
+  }, [currentTheme]);
 
   return (
-    <CacheProvider value={muiCache}>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </MuiThemeProvider>
-    </CacheProvider>
+    <ThemeWrapperContext.Provider value={{ currentTheme, setCurrentTheme }}>
+      <CacheProvider value={muiCache}>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          {children}
+        </MuiThemeProvider>
+      </CacheProvider>
+    </ThemeWrapperContext.Provider>
   );
 };
