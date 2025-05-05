@@ -1,4 +1,6 @@
-// Base theme configuration
+/**
+ * Base theme configuration, applies to all themes
+ */
 export const baseThemeOptions = {
   cssVariables: {
     cssVarPrefix: "dc",
