@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 
 import { useColorScheme } from "@mui/material";
 
-import { getStorybookMode } from "./themeHelpers";
+import { getStorybookMode } from "./themeHelpersMode";
 import { SB_MODE_CHANGE_EVENT } from "./ThemePreviewContainer";
 
 export type ThemeMode = "light" | "dark" | "system";
