@@ -25,7 +25,7 @@ const muiCache = createCache({
 });
 
 export const ThemeWrapper = (props: IThemeBaseProps) => {
-  const { children, initialTheme = defaultTheme } = props;
+  const { children, initialTheme = defaultTheme.theme } = props;
   const [theme, setTheme] = useState<Theme>(initialTheme);
   const [currentTheme, setCurrentTheme] = useState<ThemeName>(getStoredTheme);
 
