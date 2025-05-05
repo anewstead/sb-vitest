@@ -6,7 +6,7 @@ import { initialize as mswInitialize, mswLoader } from "msw-storybook-addon";
 
 import { i18n } from "@src/i18n/i18n";
 import { I18N } from "@src/i18n/i18n.const";
-import { allThemes } from "@src/style/theme";
+import { allThemes, defaultTheme } from "@src/style/theme";
 import { handlers } from "@src/test/msw/defaultHandlers";
 
 import { AutoDocsTemplate } from "./AutoDocsTemplate";
@@ -72,7 +72,7 @@ const preview: Preview = {
   decorators: [
     withThemeFromJSXProvider({
       themes: allThemes,
-      defaultTheme: "blue",
+      defaultTheme: defaultTheme.name,
       Provider: ThemePreviewContainer,
     }),
   ],

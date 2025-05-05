@@ -7,6 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
+import { allThemes } from "@src/style/theme";
 import { useTheme } from "@src/wrappers/themeWrapper/useTheme";
 
 import type { SelectChangeEvent } from "@mui/material/Select";
@@ -32,9 +33,13 @@ export const ThemeSelector = () => {
             label="Theme"
             onChange={handleThemeChange}
           >
-            <MenuItem value="blue">Blue</MenuItem>
-            <MenuItem value="green">Green</MenuItem>
-            <MenuItem value="red">Red</MenuItem>
+            {Object.entries(allThemes).map(([name]) => {
+              return (
+                <MenuItem key={name} value={name}>
+                  {name.charAt(0).toUpperCase() + name.slice(1)}
+                </MenuItem>
+              );
+            })}
           </Select>
         </FormControl>
       </Grid>

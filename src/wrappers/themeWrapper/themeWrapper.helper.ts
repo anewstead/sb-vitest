@@ -1,4 +1,4 @@
-import { allThemes } from "@src/style/theme";
+import { allThemes, defaultTheme } from "@src/style/theme";
 
 import type { ThemeName } from "@src/style/theme";
 
@@ -8,7 +8,7 @@ export const getStoredTheme = (): ThemeName => {
   const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
   return savedTheme && Object.keys(allThemes).includes(savedTheme)
     ? (savedTheme as ThemeName)
-    : "blue";
+    : defaultTheme.name;
 };
 
 export const setStoredTheme = (theme: ThemeName): void => {
