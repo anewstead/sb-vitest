@@ -20,10 +20,9 @@ const muiCache = createCache({
   prepend: true,
 });
 
-export const ThemeWrapper = ({
-  children,
-  theme = defaultTheme,
-}: IThemeBaseProps) => {
+export const ThemeWrapper = (props: IThemeBaseProps) => {
+  const { children, theme = defaultTheme } = props;
+
   return (
     <CacheProvider value={muiCache}>
       <MuiThemeProvider theme={theme}>
