@@ -7,6 +7,7 @@ import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 
 import { allThemes, defaultTheme } from "@src/style/theme";
 
+import { getStoredTheme, setStoredTheme } from "./themeWrapper.helper";
 import { ThemeWrapperContext } from "./ThemeWrapperContext";
 
 import type { Theme } from "@mui/material/styles";
@@ -26,10 +27,11 @@ const muiCache = createCache({
 export const ThemeWrapper = (props: IThemeBaseProps) => {
   const { children, initialTheme = defaultTheme } = props;
   const [theme, setTheme] = useState<Theme>(initialTheme);
-  const [currentTheme, setCurrentTheme] = useState<ThemeName>("blue");
+  const [currentTheme, setCurrentTheme] = useState<ThemeName>(getStoredTheme);
 
   useEffect(() => {
     setTheme(allThemes[currentTheme]);
+    setStoredTheme(currentTheme);
   }, [currentTheme]);
 
   return (

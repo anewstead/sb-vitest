@@ -12,11 +12,11 @@ import {
   getStorybookMode,
   getUserPreferMode,
   setSbModeToSystem,
-} from "./themeHelpers";
+} from "./themeHelpersMode";
 import {
   MUI_MODE_CHANGE_EVENT,
   ThemeSyncStorybookMui,
-} from "./ThemeSyncStorybookMui";
+} from "./ThemeSyncSbMuiMode";
 
 import type { Theme } from "@mui/material/styles";
 import type { ReactNode } from "react";

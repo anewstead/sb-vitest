@@ -5,7 +5,7 @@ import { addons } from "@storybook/preview-api";
 import { themes as storybookThemes } from "@storybook/theming";
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode";
 
-import { getStorybookMode, getUserPreferMode } from "./themeHelpers";
+import { getStorybookMode, getUserPreferMode } from "./themeHelpersMode";
 
 import type { DocsContainerProps } from "@storybook/addon-docs";
 import type { ReactNode } from "react";
