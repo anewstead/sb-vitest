@@ -1,5 +1,3 @@
-import styles from "./home.module.css";
-
 import React from "react";
 
 import { useTranslation } from "react-i18next";
@@ -17,6 +15,8 @@ import {
   handleLogin,
   handleLogout,
 } from "./home.helper";
+
+import styles from "./home.module.css";
 
 import type { HomeProps } from "./home.type";
 

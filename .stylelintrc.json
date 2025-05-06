@@ -19,6 +19,7 @@
         ]
       }
     ],
+    "scss/function-no-unknown": null,
     "selector-class-pattern": null,
     "stylelint-filename/match-case": "camelCase"
   }

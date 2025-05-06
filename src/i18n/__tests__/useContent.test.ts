@@ -51,12 +51,12 @@ describe("useContent", () => {
         expect.arrayContaining([
           expect.objectContaining({
             type: "h2",
-            props: { children: I18N.DEFAULT_LOCALE }
+            props: { children: I18N.DEFAULT_LOCALE },
           }),
           expect.objectContaining({
             type: "h1",
-            props: { children: "MD Lorem ipsum" }
-          })
+            props: { children: "MD Lorem ipsum" },
+          }),
         ])
       );
     });
@@ -71,12 +71,12 @@ describe("useContent", () => {
         expect.arrayContaining([
           expect.objectContaining({
             type: "h2",
-            props: { children: I18N.DEFAULT_LOCALE }
+            props: { children: I18N.DEFAULT_LOCALE },
           }),
           expect.objectContaining({
             type: "h3",
-            props: { children: "HTML Lorem ipsum" }
-          })
+            props: { children: "HTML Lorem ipsum" },
+          }),
         ])
       );
     });
@@ -111,12 +111,12 @@ describe("useContent", () => {
         expect.arrayContaining([
           expect.objectContaining({
             type: "h2",
-            props: { children: I18N.DEFAULT_LOCALE }
+            props: { children: I18N.DEFAULT_LOCALE },
           }),
           expect.objectContaining({
             type: "h1",
-            props: { children: "MD Lorem ipsum" }
-          })
+            props: { children: "MD Lorem ipsum" },
+          }),
         ])
       );
     });
@@ -134,12 +134,12 @@ describe("useContent", () => {
         expect.arrayContaining([
           expect.objectContaining({
             type: "h2",
-            props: { children: I18N.LOCALE.ES_ES }
+            props: { children: I18N.LOCALE.ES_ES },
           }),
           expect.objectContaining({
             type: "h1",
-            props: { children: "MD Lorem ipsum" }
-          })
+            props: { children: "MD Lorem ipsum" },
+          }),
         ])
       );
     });

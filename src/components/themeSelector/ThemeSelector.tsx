@@ -17,7 +17,7 @@ export const ThemeSelector = () => {
   const { currentTheme, setCurrentTheme } = useTheme();
 
   const handleThemeChange = (event: SelectChangeEvent<ThemeName>) => {
-    const newTheme = event.target.value as ThemeName;
+    const newTheme = event.target.value;
     setCurrentTheme(newTheme);
   };
 

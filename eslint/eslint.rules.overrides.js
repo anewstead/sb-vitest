@@ -50,6 +50,24 @@ const allowParentImports = {
 };
 
 /**
+ * Should only really be for state. Redux Toolkit allows mutating logic for
+ * state in reducers via Immer library. so we allow no-param-reassign
+ * specifically for state property in this folder
+ */
+const allowParamReassign = {
+  files: ["src/state/**"],
+  rules: {
+    "no-param-reassign": [
+      "error",
+      {
+        ignorePropertyModificationsFor: ["state"],
+        props: true,
+      },
+    ],
+  },
+};
+
+/**
  * Order may be important\
  * Eslint's final config is a merge of all configs\
  * Any duplicate rules in later items will override earlier
@@ -58,4 +76,5 @@ export const overrideRules = [
   allowDefaultExport,
   allowRelaxedImports,
   allowParentImports,
+  allowParamReassign,
 ];

@@ -1,5 +1,5 @@
+/* eslint-disable react/display-name */
 /* 
-eslint-disable react/display-name 
 disabled because linter sees jsx and thinks its a react component 
 but it is not really, its a storybook decorator function
 */

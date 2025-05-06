@@ -1,6 +1,6 @@
 import { setupStore } from "@src/state/store";
 
-import { homeReducer, homeActions } from "./slice";
+import { homeActions, homeReducer } from "./slice";
 
 import type { AppState } from "@src/state/store";
 

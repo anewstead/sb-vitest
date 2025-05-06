@@ -3,13 +3,13 @@ import { deepmerge } from "deepmerge-ts";
 import { withRouter } from "storybook-addon-remix-react-router";
 
 import { homeReducer } from "@src/state/home/slice";
-import { withStore } from "@src/state/StoryStore";
 import {
   contentError,
   contentSlow,
   contentSuccess,
 } from "@src/test/msw/handlers/contentHandlers";
 import { i18nSuccess } from "@src/test/msw/handlers/i18nHandlers";
+import { withStore } from "@src/test/StoryStore";
 
 import { Home } from "./Home";
 
