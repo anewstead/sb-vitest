@@ -37,7 +37,7 @@ export const SyncSbMuiTheme = () => {
     if (!themeHasInited.current) {
       // On first mount, sync from URL to MUI
       const { urlTheme, isValid } = getThemeFromUrl();
-      if (isValid && urlTheme !== currentTheme) {
+      if ((isValid && urlTheme !== currentTheme) || !isValid) {
         shouldUpdateTheme.current = false;
         setCurrentTheme(urlTheme);
       }
