@@ -31,19 +31,19 @@ const channel = addons.getChannel();
  */
 export const SyncSbMuiMode = () => {
   const { mode, setMode } = useColorScheme();
-  const allowModeDispatch = useRef(true);
+  const shouldUpdateMode = useRef(true);
   const modeHasInited = useRef(false);
 
   // Handle Storybook dark mode addon changes
   const onSBDarkModeAddonClick = useCallback(() => {
-    if (allowModeDispatch.current) {
+    if (shouldUpdateMode.current) {
       const sbMode = getStorybookMode();
       if (mode !== sbMode) {
-        allowModeDispatch.current = false;
+        shouldUpdateMode.current = false;
         setMode(sbMode);
       }
     } else {
-      allowModeDispatch.current = true;
+      shouldUpdateMode.current = true;
     }
   }, [mode, setMode]);
 
@@ -51,7 +51,7 @@ export const SyncSbMuiMode = () => {
   const onMuiModeChange = useCallback((newMode: ThemeMode) => {
     const isSystem = newMode === "system";
     const updateMode = isSystem ? getUserPreferMode() : newMode;
-    allowModeDispatch.current = false;
+    shouldUpdateMode.current = false;
     channel.emit(UPDATE_DARK_MODE_EVENT_NAME, updateMode);
     setSbModeToSystem(isSystem);
   }, []);
@@ -62,7 +62,7 @@ export const SyncSbMuiMode = () => {
    * 1. Mui's mode is undefined on first render, don't leave to default, explicitly
    *    init to match storybook
    * 2. Catch second render so does not dispatch from init
-   * 3. Dispatch if mode change from internal from Mui, or Toggle allowDispatch
+   * 3. Dispatch if mode change from internal from Mui, or Toggle shouldUpdateMode
    *    back on if mode change was from external
    */
   useEffect(() => {
@@ -70,10 +70,10 @@ export const SyncSbMuiMode = () => {
       setMode(getStorybookMode());
     } else if (!modeHasInited.current) {
       modeHasInited.current = true;
-    } else if (allowModeDispatch.current) {
+    } else if (shouldUpdateMode.current) {
       onMuiModeChange(mode);
     } else {
-      allowModeDispatch.current = true;
+      shouldUpdateMode.current = true;
     }
   }, [mode, setMode, onMuiModeChange]);
 

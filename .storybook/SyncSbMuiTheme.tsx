@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 
 import { useThemeWrapper } from "@src/wrappers/themeWrapper/useThemeWrapper";
 
@@ -18,24 +18,50 @@ import { getThemeFromUrl, updateUrlWithTheme } from "./themeHelpers";
  */
 export const SyncSbMuiTheme = () => {
   const { currentTheme, setCurrentTheme } = useThemeWrapper();
-  const allowThemeDispatch = useRef(true);
+  const themeHasInited = useRef(false);
+  const shouldUpdateTheme = useRef(true);
 
-  // Handle theme sync and URL updates
-  useEffect(() => {
+  // Handle URL changes from Storybook
+  const onUrlThemeChange = useCallback(() => {
     const { urlTheme, isValid } = getThemeFromUrl();
-    if (!isValid) {
-      // handled here and not directly in helpers in order to trigger re-render
-      updateUrlWithTheme(urlTheme);
-      return;
-    }
-    // Sync theme between app and URL
-    if (currentTheme !== urlTheme) {
-      allowThemeDispatch.current = false;
+    if (isValid && urlTheme !== currentTheme) {
+      shouldUpdateTheme.current = false;
       setCurrentTheme(urlTheme);
     } else {
-      allowThemeDispatch.current = true;
+      shouldUpdateTheme.current = true;
     }
   }, [currentTheme, setCurrentTheme]);
+
+  // Initial sync and theme changes
+  useEffect(() => {
+    if (!themeHasInited.current) {
+      // On first mount, sync from URL to MUI
+      const { urlTheme, isValid } = getThemeFromUrl();
+      if (isValid && urlTheme !== currentTheme) {
+        shouldUpdateTheme.current = false;
+        setCurrentTheme(urlTheme);
+      }
+      themeHasInited.current = true;
+      return;
+    }
+
+    // After initialization, handle theme changes
+    if (shouldUpdateTheme.current) {
+      // Theme changed from MUI, update URL
+      updateUrlWithTheme(currentTheme);
+    } else {
+      // Theme changed from URL, reset flag
+      shouldUpdateTheme.current = true;
+    }
+  }, [currentTheme, setCurrentTheme]);
+
+  // Listen for URL changes
+  useEffect(() => {
+    window.addEventListener("popstate", onUrlThemeChange);
+    return () => {
+      window.removeEventListener("popstate", onUrlThemeChange);
+    };
+  }, [onUrlThemeChange]);
 
   return <></>;
 };
