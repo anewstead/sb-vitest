@@ -1,5 +1,7 @@
 import { expect, userEvent, within } from "@storybook/test";
 
+import { DARK_CLASS, LIGHT_CLASS } from "@src/style/themes/base";
+
 import { ThemeButtons } from "./ThemeButtons";
 
 import type { Meta, StoryObj } from "@storybook/react";
@@ -29,15 +31,12 @@ export const Default: Story = {
     const activeAclass = "MuiButton-contained";
     const themeElement = document.documentElement; // <html> element
 
-    const darkClass = "dc-dark";
-    const lightClass = "dc-light";
-
     await step("Toggle to dark mode", async () => {
       await userEvent.click(darkBtn);
       await expect(lightBtn).not.toHaveClass(activeAclass);
       await expect(darkBtn).toHaveClass(activeAclass);
       await expect(systemBtn).not.toHaveClass(activeAclass);
-      await expect(themeElement).toHaveClass(darkClass);
+      await expect(themeElement).toHaveClass(DARK_CLASS);
     });
 
     await step("Toggle to light mode", async () => {
@@ -45,7 +44,7 @@ export const Default: Story = {
       await expect(lightBtn).toHaveClass(activeAclass);
       await expect(darkBtn).not.toHaveClass(activeAclass);
       await expect(systemBtn).not.toHaveClass(activeAclass);
-      await expect(themeElement).toHaveClass(lightClass);
+      await expect(themeElement).toHaveClass(LIGHT_CLASS);
     });
 
     await step("Toggle to system mode", async () => {
@@ -53,7 +52,7 @@ export const Default: Story = {
       await expect(lightBtn).not.toHaveClass(activeAclass);
       await expect(darkBtn).not.toHaveClass(activeAclass);
       await expect(systemBtn).toHaveClass(activeAclass);
-      const lightOrDarkRegex = new RegExp(`(${lightClass}|${darkClass})`);
+      const lightOrDarkRegex = new RegExp(`(${LIGHT_CLASS}|${DARK_CLASS})`);
       await expect(themeElement.className).toMatch(lightOrDarkRegex);
     });
   },

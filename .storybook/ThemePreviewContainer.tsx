@@ -19,9 +19,8 @@ import {
 } from "./ThemeSyncSbMuiMode";
 
 import type { Theme } from "@mui/material/styles";
+import type { ThemeMode } from "@src/style/theme";
 import type { ReactNode } from "react";
-
-type ThemeMode = "light" | "dark" | "system";
 
 type IThemePreviewContainerProps = {
   children: ReactNode;

@@ -10,6 +10,8 @@ export const allThemes = {
 
 export type ThemeName = keyof typeof allThemes;
 
+export type ThemeMode = "light" | "dark" | "system";
+
 export const defaultTheme = {
   name: "blue" as ThemeName,
   theme: blueTheme,

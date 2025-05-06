@@ -7,12 +7,12 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { useColorScheme } from "@mui/material/styles";
 
-type MuiMode = "light" | "dark" | "system";
+import type { ThemeMode } from "@src/style/theme";
 
 export const ThemeButtons = () => {
   const { mode, setMode } = useColorScheme();
 
-  const handleMode = (newVal: MuiMode) => {
+  const handleMode = (newVal: ThemeMode) => {
     setMode(newVal);
   };
 

@@ -19,3 +19,7 @@ export const baseThemeOptions = {
     },
   },
 } as const;
+
+// html/body classes for light/dark uses cssVarPrefix
+export const LIGHT_CLASS = "dc-light";
+export const DARK_CLASS = "dc-dark";

@@ -2,6 +2,8 @@ import React from "react";
 
 import { expect, waitFor, within } from "@storybook/test";
 
+import { DARK_CLASS, LIGHT_CLASS } from "@src/style/themes/base";
+
 import { ThemeWrapper } from "./ThemeWrapper";
 
 import type { IThemeBaseProps } from "./ThemeWrapper";
@@ -14,9 +16,6 @@ const meta: Meta<typeof ThemeWrapper> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 // -----------------------------------------------------------------------------
-
-const LIGHT_CLASS = "dc-light";
-const DARK_CLASS = "dc-dark";
 
 const Template: Story = {
   render: (args: IThemeBaseProps) => {

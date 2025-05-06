@@ -5,7 +5,8 @@ import { useColorScheme } from "@mui/material";
 import { getStorybookMode } from "./themeHelpersMode";
 import { SB_MODE_CHANGE_EVENT } from "./ThemePreviewContainer";
 
-export type ThemeMode = "light" | "dark" | "system";
+import type { ThemeMode } from "@src/style/theme";
+
 export const MUI_MODE_CHANGE_EVENT = "MUI_MODE_CHANGE_EVENT";
 
 /**
