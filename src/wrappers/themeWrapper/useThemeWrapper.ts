@@ -2,10 +2,10 @@ import { useContext } from "react";
 
 import { ThemeWrapperContext } from "./ThemeWrapperContext";
 
-export const useTheme = () => {
+export const useThemeWrapper = () => {
   const context = useContext(ThemeWrapperContext);
   if (!context) {
-    throw new Error("useTheme must be used within a ThemeWrapper");
+    throw new Error("useThemeWrapper must be used within a ThemeWrapper");
   }
   return context;
 };

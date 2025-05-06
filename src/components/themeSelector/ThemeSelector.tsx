@@ -8,13 +8,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
 import { allThemes } from "@src/style/theme";
-import { useTheme } from "@src/wrappers/themeWrapper/useTheme";
+import { useThemeWrapper } from "@src/wrappers/themeWrapper/useThemeWrapper";
 
 import type { SelectChangeEvent } from "@mui/material/Select";
 import type { ThemeName } from "@src/style/theme";
 
 export const ThemeSelector = () => {
-  const { currentTheme, setCurrentTheme } = useTheme();
+  const { currentTheme, setCurrentTheme } = useThemeWrapper();
 
   const handleThemeChange = (event: SelectChangeEvent<ThemeName>) => {
     const newTheme = event.target.value;

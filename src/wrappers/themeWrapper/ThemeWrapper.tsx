@@ -15,7 +15,7 @@ import type { ThemeName } from "@src/style/theme";
 import type { PropsWithChildren } from "react";
 
 export type IThemeBaseProps = PropsWithChildren & {
-  initialTheme?: Theme;
+  initialTheme?: Theme | ThemeName;
 };
 
 // https://mui.com/material-ui/guides/interoperability/#css-injection-order
@@ -25,8 +25,22 @@ const muiCache = createCache({
 });
 
 export const ThemeWrapper = (props: IThemeBaseProps) => {
-  const { children, initialTheme = defaultTheme.theme } = props;
-  const [theme, setTheme] = useState<Theme>(initialTheme);
+  const { children, initialTheme = defaultTheme.name } = props;
+
+  let setInitialTheme = initialTheme;
+  if (typeof initialTheme === "string") {
+    if (!(initialTheme in allThemes)) {
+      console.warn(
+        `Invalid theme: "${initialTheme}". Using default: "${defaultTheme.name}".`
+      );
+      setInitialTheme = allThemes[defaultTheme.name];
+    } else {
+      setInitialTheme = allThemes[initialTheme];
+    }
+  }
+
+  const [theme, setTheme] = useState<Theme>(setInitialTheme as Theme);
+
   const [currentTheme, setCurrentTheme] = useState<ThemeName>(getStoredTheme);
 
   useEffect(() => {
