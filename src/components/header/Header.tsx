@@ -2,6 +2,8 @@ import React from "react";
 
 import logo from "@src/assets/acme-logo.svg";
 import { Button } from "@src/components/button/Button";
+import { ThemeButtons } from "@src/components/themeButtons/ThemeButtons";
+import { ThemeSelector } from "@src/components/themeSelector/ThemeSelector";
 
 import styles from "./header.module.css";
 
@@ -42,6 +44,14 @@ export const Header = (props: HeaderProps) => {
 
   return (
     <header>
+      <div className={styles.themeControls}>
+        <div className={styles.themeSelector}>
+          <ThemeSelector />
+        </div>
+        <div className={styles.themeButtons}>
+          <ThemeButtons />
+        </div>
+      </div>
       <div className={styles.header}>
         <div>
           <img src={logo} alt="Acme Logo" />

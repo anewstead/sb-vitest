@@ -6,6 +6,7 @@
   ],
   "plugins": ["stylelint-scss", "./scripts/stylelint/filenamePlugin.js"],
   "rules": {
+    "custom-property-pattern": null,
     "no-descending-specificity": null,
     "scss/at-rule-no-unknown": [
       true,

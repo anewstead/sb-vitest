@@ -9,14 +9,14 @@
 }
 
 .tipWrapper {
-  border: 1px solid #0288d1;
+  border: 1px solid var(--dc-palette-primary-main);
   border-radius: 4px;
   padding: 15px;
   margin-top: 20px;
 
   :global(.tip) {
-    border: 1px solid #0288d1;
-    color: #0288d1;
+    border: 1px solid var(--dc-palette-primary-main);
+    color: var(--dc-palette-primary-main);
     padding: 4px 8px;
     border-radius: 4px;
     font-weight: 600;

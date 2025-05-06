@@ -23,7 +23,7 @@ export const ThemeSelector = () => {
 
   return (
     <Grid container spacing={2} sx={{ flexGrow: 1, padding: 1 }}>
-      <Grid size={6}>
+      <Grid size={7}>
         <FormControl size="small" sx={{ display: "flex", flexGrow: 1 }}>
           <InputLabel id="theme-select-label">Theme</InputLabel>
           <Select
@@ -43,7 +43,7 @@ export const ThemeSelector = () => {
           </Select>
         </FormControl>
       </Grid>
-      <Grid size={6}>
+      <Grid size={5}>
         <Box
           sx={{
             bgcolor: "primary.main",
