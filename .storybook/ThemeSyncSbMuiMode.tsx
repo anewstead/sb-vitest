@@ -1,49 +1,69 @@
 import React, { useCallback, useEffect, useRef } from "react";
 
 import { useColorScheme } from "@mui/material";
+import { addons } from "@storybook/preview-api";
+import {
+  DARK_MODE_EVENT_NAME,
+  UPDATE_DARK_MODE_EVENT_NAME,
+} from "storybook-dark-mode";
 
-import { getStorybookMode } from "./themeHelpersMode";
-import { SB_MODE_CHANGE_EVENT } from "./ThemePreviewContainer";
+import {
+  getStorybookMode,
+  getUserPreferMode,
+  setSbModeToSystem,
+} from "./themeHelpers";
 
 import type { ThemeMode } from "@src/style/theme";
 
-export const MUI_MODE_CHANGE_EVENT = "MUI_MODE_CHANGE_EVENT";
+const channel = addons.getChannel();
 
 /**
- * Custom events sync storybook theme and mui theme\
- * (this) component added inside storybooks preview themewrapper context\
- * Which allows it to handle event from both Storybook and Mui context
+ * Component to sync MUI and Storybook dark/light mode\
+ * Should be added inside storybooks preview themewrapper context\
+ * Which allows it to handle event from both Storybook and Mui context\
  *
- *     <EG_StoryBookPreview_MUIThemedWrapper>
- *       <ThemeSyncStorybookMui />
- *       {children / story_component}
- *     </EG_StoryBookPreview_MUIThemedWrapper>;
+ *     <StoryBookPreviewContainer>
+ *       <MUIThemeWrapper>
+ *         <ThemeSyncSbMuiMode />
+ *         {children}
+ *       </MUIThemeWrapper>
+ *     </StoryBookPreviewContainer>;
  */
 export const ThemeSyncSbMuiMode = () => {
-  const { mode, setMode } = useColorScheme(); // mode always undefined 1st render
-
+  const { mode, setMode } = useColorScheme();
   const allowModeDispatch = useRef(true);
   const modeHasInited = useRef(false);
 
-  const onExternalModeChange = useCallback(
-    (e: Event) => {
-      const externalMode = (e as CustomEvent).detail as ThemeMode;
-      if (mode !== externalMode) {
+  // Handle Storybook dark mode addon changes
+  const onSBDarkModeAddonClick = useCallback(() => {
+    if (allowModeDispatch.current) {
+      const sbMode = getStorybookMode();
+      if (mode !== sbMode) {
         allowModeDispatch.current = false;
-        setMode(externalMode);
+        setMode(sbMode);
       }
-    },
-    [mode, setMode]
-  );
+    } else {
+      allowModeDispatch.current = true;
+    }
+  }, [mode, setMode]);
+
+  // Handle MUI mode changes
+  const onMuiModeChange = useCallback((newMode: ThemeMode) => {
+    const isSystem = newMode === "system";
+    const updateMode = isSystem ? getUserPreferMode() : newMode;
+    allowModeDispatch.current = false;
+    channel.emit(UPDATE_DARK_MODE_EVENT_NAME, updateMode);
+    setSbModeToSystem(isSystem);
+  }, []);
 
   /**
-   * Initial renders\
+   * Init
    *
-   * 1. Mode always undefined on first render,\
-   *    Dont leave to default, explicitly init it to match storybook\
-   * 2. Catch second render so does not dispatch from init \
-   * 3. Dispatch if mode change from internal from Mui, or\
-   *    Toggle allowDispatch back on if mode change was from external
+   * 1. Mui's mode is undefined on first render, don't leave to default, explicitly
+   *    init to match storybook
+   * 2. Catch second render so does not dispatch from init
+   * 3. Dispatch if mode change from internal from Mui, or Toggle allowDispatch
+   *    back on if mode change was from external
    */
   useEffect(() => {
     if (!mode) {
@@ -51,20 +71,19 @@ export const ThemeSyncSbMuiMode = () => {
     } else if (!modeHasInited.current) {
       modeHasInited.current = true;
     } else if (allowModeDispatch.current) {
-      document.dispatchEvent(
-        new CustomEvent(MUI_MODE_CHANGE_EVENT, { detail: mode })
-      );
+      onMuiModeChange(mode);
     } else {
       allowModeDispatch.current = true;
     }
-  }, [mode, setMode]);
+  }, [mode, setMode, onMuiModeChange]);
 
+  // Storybook dark mode addon listener
   useEffect(() => {
-    document.addEventListener(SB_MODE_CHANGE_EVENT, onExternalModeChange);
+    channel.on(DARK_MODE_EVENT_NAME, onSBDarkModeAddonClick);
     return () => {
-      document.removeEventListener(SB_MODE_CHANGE_EVENT, onExternalModeChange);
+      channel.removeListener(DARK_MODE_EVENT_NAME, onSBDarkModeAddonClick);
     };
-  });
+  }, [onSBDarkModeAddonClick]);
 
   return <></>;
 };
