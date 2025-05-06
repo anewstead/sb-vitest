@@ -32,10 +32,8 @@ const channel = addons.getChannel();
 
 export const SB_MODE_CHANGE_EVENT = "SB_MODE_CHANGE_EVENT";
 
-export const ThemePreviewContainer = ({
-  children,
-  theme,
-}: IThemePreviewContainerProps) => {
+export const ThemePreviewContainer = (props: IThemePreviewContainerProps) => {
+  const { children, theme } = props;
   const allowModeDispatch = useRef(true);
 
   const onSbModeChange = useCallback(() => {
