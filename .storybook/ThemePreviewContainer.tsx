@@ -2,8 +2,8 @@ import React from "react";
 
 import { ThemeWrapper } from "@src/wrappers/themeWrapper/ThemeWrapper";
 
-import { ThemeSyncSbMuiMode } from "./ThemeSyncSbMuiMode";
-import { ThemeSyncSbTheme } from "./ThemeSyncSbTheme";
+import { SyncSbMuiMode } from "./SyncSbMuiMode";
+import { SyncSbMuiTheme } from "./SyncSbMuiTheme";
 
 import type { Theme } from "@mui/material/styles";
 import type { ReactNode } from "react";
@@ -18,8 +18,8 @@ export const ThemePreviewContainer = (props: IThemePreviewContainerProps) => {
 
   return (
     <ThemeWrapper initialTheme={theme}>
-      <ThemeSyncSbMuiMode />
-      <ThemeSyncSbTheme />
+      <SyncSbMuiMode />
+      <SyncSbMuiTheme />
       {children}
     </ThemeWrapper>
   );

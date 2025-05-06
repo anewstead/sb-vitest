@@ -11,7 +11,7 @@ import {
   getStorybookMode,
   getUserPreferMode,
   setSbModeToSystem,
-} from "./themeHelpers";
+} from "./themeModeHelpers";
 
 import type { ThemeMode } from "@src/style/theme";
 
@@ -29,7 +29,7 @@ const channel = addons.getChannel();
  *       </MUIThemeWrapper>
  *     </StoryBookPreviewContainer>;
  */
-export const ThemeSyncSbMuiMode = () => {
+export const SyncSbMuiMode = () => {
   const { mode, setMode } = useColorScheme();
   const allowModeDispatch = useRef(true);
   const modeHasInited = useRef(false);

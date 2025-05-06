@@ -5,12 +5,18 @@ import { addons } from "@storybook/preview-api";
 import { themes as storybookThemes } from "@storybook/theming";
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode";
 
-import { getStorybookMode, getUserPreferMode } from "./themeHelpers";
+import { getStorybookMode, getUserPreferMode } from "./themeModeHelpers";
 
 import type { DocsContainerProps } from "@storybook/addon-docs";
 import type { ReactNode } from "react";
 
 const channel = addons.getChannel();
+
+const storybookPreviewIframeDocumentStyles = `
+.docs-story {
+  background-color: var(--dc-palette-background-default);
+}
+`;
 
 type IThemeDocsContainerProps = DocsContainerProps & { children: ReactNode };
 
@@ -22,11 +28,6 @@ export const ThemeDocsContainer = ({
 
   // init: add theme styles
   useEffect(() => {
-    const storybookPreviewIframeDocumentStyles = `
-      .docs-story {
-        background-color: var(--dc-palette-background-default);
-      }
-    `;
     const style = document.createElement("style");
     style.innerHTML = storybookPreviewIframeDocumentStyles;
     document.head.appendChild(style);

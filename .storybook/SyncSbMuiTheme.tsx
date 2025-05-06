@@ -16,7 +16,7 @@ import { getThemeFromUrl, updateUrlWithTheme } from "./themeHelpers";
  *       </ThemeWrapper>
  *     </StoryBookPreviewContainer>;
  */
-const ThemeSyncSbTheme = () => {
+export const SyncSbMuiTheme = () => {
   const { currentTheme, setCurrentTheme } = useThemeWrapper();
   const allowThemeDispatch = useRef(true);
 
@@ -39,5 +39,3 @@ const ThemeSyncSbTheme = () => {
 
   return <></>;
 };
-
-export { ThemeSyncSbTheme };
