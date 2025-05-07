@@ -1,7 +1,6 @@
 {
   "[markdown]": {
-    "editor.formatOnPaste": false,
-    "editor.formatOnSave": false
+    "editor.formatOnPaste": false
   },
 
   "cSpell.language": "en-GB",

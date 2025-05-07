@@ -5,7 +5,14 @@
 
 export const baseRules = {
   "arrow-body-style": ["error", "always"],
+
   curly: "error",
+
+  "max-lines": [
+    "error",
+    { max: 450, skipBlankLines: true, skipComments: true },
+  ],
+
   "no-alert": ["warn"],
 
   "no-console": [
