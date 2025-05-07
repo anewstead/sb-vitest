@@ -2,7 +2,7 @@ import { allThemes, defaultTheme } from "@src/style/theme";
 
 import type { ThemeName } from "@src/style/theme";
 
-const THEME_STORAGE_KEY = "app-theme";
+export const THEME_STORAGE_KEY = "app-theme";
 
 export const getStoredTheme = (): ThemeName => {
   const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
