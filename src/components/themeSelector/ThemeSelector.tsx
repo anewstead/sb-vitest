@@ -45,6 +45,7 @@ export const ThemeSelector = () => {
       </Grid>
       <Grid size={5}>
         <Box
+          data-testid="theme-display"
           sx={{
             bgcolor: "primary.main",
             borderRadius: 1,
