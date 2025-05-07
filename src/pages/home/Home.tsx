@@ -33,10 +33,6 @@ export const Home = (props: HomeProps) => {
 
   const content = useContent("home.md");
 
-  const onHandleChangeText = () => {
-    handleChangeText(dispatch);
-  };
-
   return (
     <article className={styles.home}>
       <Header
@@ -60,7 +56,9 @@ export const Home = (props: HomeProps) => {
           <Button
             secondary
             label={t("home:changeText")}
-            onClick={onHandleChangeText}
+            onClick={() => {
+              handleChangeText(dispatch);
+            }}
           />
         </div>
 
