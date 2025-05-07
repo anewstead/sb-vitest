@@ -1,5 +1,19 @@
 # README (WIP)
 
+## Top level tech stack
+
+- Vite
+- Typescript
+- React
+- React Router
+- Redux (toolkit)
+- MaterialUI
+- Vitest (inc. browser mode)
+- Mock Service Worker
+- Storybook
+- Eslint/prettier
+- i18next
+
 ## Set up musts:
 
 [nvm](https://github.com/nvm-sh/nvm)  
@@ -27,6 +41,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
+#### Code Editors
+
+[vscode](https://code.visualstudio.com/)  
+Is provisioned for with shared workspace settings and recommended extension.  
+If you use other IDE it **must** have equivalent extension and pick up lint formatting configs  
+_It should lint as you write and auto-fix on save_  
+**Please avoid in browser editor (github)**  
+you are expected to install and work locally with this repo
+
 ---
 
 ## Quick Start
@@ -40,6 +63,7 @@ pn test-fn    # Run all functional tests (add path or file name to run just one)
 pn test-sb    # Run all storybook tests (add path or file name to run just one)
 pn build      # Compile production build
 pn start      # Start localhost for pre-built production build
+pn lint       # lint everything (husky should lint just changed files on git commit)
 ```
 
 See package.json scripts for more.
@@ -48,12 +72,12 @@ See package.json scripts for more.
 
 ## About files
 
-React component TSX files are primarily for display.  
+React component TSX files are about display.  
 Always remove functional code to at least a component helper TS file.  
 If abstract and reusable consider if worth elevating further maybe hooks or utils?
 
 This is a very important separation of concern,  
-and helps make code easier to read, test, debug and maintain
+and helps make code easier to read, test, reuse, debug and maintain
 
 TSX have **".stories.tsx"** storybook test that run in a headless browser environment.  
 TS have **".test.ts"** files that in a JSDOM emulated browser environment.
