@@ -9,7 +9,7 @@ import { useColorScheme } from "@mui/material/styles";
 
 import type { ThemeMode } from "@src/style/theme";
 
-export const ThemeButtons = () => {
+export const ThemeModeButtons = () => {
   const { mode, setMode } = useColorScheme();
 
   const handleMode = (newVal: ThemeMode) => {

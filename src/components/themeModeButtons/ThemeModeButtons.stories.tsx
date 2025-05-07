@@ -2,13 +2,13 @@ import { expect, userEvent, within } from "@storybook/test";
 
 import { DARK_CLASS, LIGHT_CLASS } from "@src/style/themes/base";
 
-import { ThemeButtons } from "./ThemeButtons";
+import { ThemeModeButtons } from "./ThemeModeButtons";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
 // -----------------------------------------------------------------------------
-const meta: Meta<typeof ThemeButtons> = {
-  component: ThemeButtons,
+const meta: Meta<typeof ThemeModeButtons> = {
+  component: ThemeModeButtons,
 };
 export default meta;
 type Story = StoryObj<typeof meta>;
