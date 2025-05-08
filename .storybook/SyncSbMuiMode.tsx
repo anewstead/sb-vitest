@@ -13,7 +13,7 @@ import {
   setSbModeToSystem,
 } from "./themeModeHelpers";
 
-import type { ThemeMode } from "@src/style/theme";
+import type { IThemeMode } from "@src/style/theme.type";
 
 const channel = addons.getChannel();
 
@@ -48,7 +48,7 @@ export const SyncSbMuiMode = () => {
   }, [mode, setMode]);
 
   // Handle MUI mode changes
-  const onMuiModeChange = useCallback((newMode: ThemeMode) => {
+  const onMuiModeChange = useCallback((newMode: IThemeMode) => {
     const isSystem = newMode === "system";
     const updateMode = isSystem ? getUserPreferMode() : newMode;
     shouldUpdateMode.current = false;

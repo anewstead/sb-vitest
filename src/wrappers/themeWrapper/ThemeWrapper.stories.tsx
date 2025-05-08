@@ -8,8 +8,8 @@ import { DARK_CLASS, LIGHT_CLASS } from "@src/style/themes/base";
 import { ThemeWrapper } from "./ThemeWrapper";
 import { THEME_STORAGE_KEY } from "./themeWrapper.helper";
 
-import type { IThemeBaseProps } from "./ThemeWrapper";
-import type { ThemeName } from "@src/style/theme";
+import type { IThemeBaseProps } from "./themeWrapper.type";
+import type { IThemeName } from "@src/style/theme.type";
 import type { Meta, StoryObj } from "@storybook/react";
 
 // Meta: ONLY set meta.component
@@ -17,10 +17,10 @@ const meta: Meta<typeof ThemeWrapper> = {
   component: ThemeWrapper,
 };
 export default meta;
-type Story = StoryObj<typeof meta>;
+type IStory = StoryObj<typeof meta>;
 
 // Base: default story props
-const base: Story = {
+const base: IStory = {
   render: (args: IThemeBaseProps) => {
     return (
       <ThemeWrapper {...args}>
@@ -38,7 +38,7 @@ const base: Story = {
  * Typescript requires that non-optional props be explicitly set\
  * Or ...spread from base when overriding
  */
-export const Default: Story = {
+export const Default: IStory = {
   ...base,
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -77,10 +77,10 @@ export const Default: Story = {
   },
 };
 
-export const UnknownTheme: Story = {
+export const UnknownTheme: IStory = {
   ...base,
   args: {
-    initialTheme: "unknown-theme" as ThemeName,
+    initialTheme: "unknown-theme" as IThemeName,
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);

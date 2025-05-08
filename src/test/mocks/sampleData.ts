@@ -1,5 +1,5 @@
-import type { SampleResponse } from "@src/services/endpoints.type";
+import type { ISampleResponse } from "@src/services/endpoints.type";
 
-export const sampleData: SampleResponse = {
+export const sampleData: ISampleResponse = {
   mockKey: "mockValue",
 };

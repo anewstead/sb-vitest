@@ -2,6 +2,13 @@
  * @eslint-plugin-check-file rules only
  */
 
+const blockListErrorMsg = `Incorrect filename: {{ target }}
+  a) opposite pluralise file.middlename
+  b) test.tsx > test.ts
+  c) stories.ts > stories.tsx
+  d) file.component not allowed
+`;
+
 export const checkFileRules = {
   // filename-blocklist
   // mostly about singular middle extensions
@@ -13,8 +20,6 @@ export const checkFileRules = {
       "**/*.constants.*": "*.const.*",
       "**/*.consts.*": "*.const.*",
       "**/*.examples.*": "*.example.*",
-      "**/*.functions.*": "*.function.*",
-      "**/*.funcs.*": "*.function.*",
       "**/*.helpers.*": "*.helper.*",
       "**/*.hooks.*": "*.hook.*",
       "**/*.mocks.*": "*.mock.*",
@@ -40,7 +45,7 @@ export const checkFileRules = {
       "**/*.test.tsx": "*.test.ts",
     },
     {
-      errorMessage: 'Incorrect filename: A should be B -> "{{ target }}";',
+      errorMessage: blockListErrorMsg,
     },
   ],
 

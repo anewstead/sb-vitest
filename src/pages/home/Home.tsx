@@ -3,8 +3,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import viewportIcon from "@src/assets/viewport-icon.svg";
-import { Button } from "@src/components/button/Button";
-import { Header } from "@src/components/header/Header";
+import { ExampleSection } from "@src/components/atom/exampleSection/ExampleSection";
+import { TipBox } from "@src/components/atom/tipBox/TipBox";
+import { Header } from "@src/components/compound/header/Header";
 import { useContent } from "@src/i18n/useContent";
 import { useAppDispatch, useAppSelector } from "@src/state/store";
 import { cleanHtml } from "@src/utils/cleanHtml";
@@ -18,60 +19,57 @@ import {
 
 import styles from "./home.module.scss";
 
-import type { HomeProps } from "./home.type";
+import type { IHomeProps } from "./home.type";
 
-export const Home = (props: HomeProps) => {
+export const Home = (props: IHomeProps) => {
   const { user } = props;
 
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
 
-  const exampleText = useAppSelector((state) => {
+  const reduxText = useAppSelector((state) => {
     return state.home.example;
   });
 
   const content = useContent("home.md");
 
+  const viewportTip = cleanHtml(
+    t("home:viewportTip", {
+      icon: `<img src="${viewportIcon}" alt="viewport icon" />`,
+    })
+  );
+
   return (
-    <article className={styles.home}>
+    <div className={styles.home}>
       <Header
-        user={user}
-        welcomeText={t("common:welcome")}
-        loginText={t("common:login")}
-        logoutText={t("common:logout")}
-        signupText={t("common:signup")}
-        onLogin={handleLogin}
-        onLogout={handleLogout}
-        onCreateAccount={handleCreateAccount}
+        loginBarProps={{
+          user: user,
+          onLogin: handleLogin,
+          onLogout: handleLogout,
+          onCreateAccount: handleCreateAccount,
+          welcomeText: t("common:welcome"),
+          loginText: t("common:login"),
+          logoutText: t("common:logout"),
+          signupText: t("common:signup"),
+        }}
       />
 
-      <section className={styles.homeContent}>
+      <section className={styles.content}>
         <h2>{t("home:pagesInStorybook")}</h2>
 
-        <div className={styles.exampleSection}>
-          <p data-testid="example-text">
-            {t("home:exampleTextFromRedux", { text: exampleText })}
-          </p>
-          <Button
-            secondary
-            label={t("home:changeText")}
-            onClick={() => {
-              handleChangeText(dispatch);
-            }}
-          />
-        </div>
+        <ExampleSection
+          buttonLabel={t("home:changeText")}
+          exampleText={reduxText}
+          onChangeText={() => {
+            handleChangeText(dispatch);
+          }}
+        />
 
         <div data-testid="content">{content}</div>
-
-        <div className={styles.tipWrapper}>
-          {cleanHtml(
-            t("home:viewportTip", {
-              icon: `<img src="${viewportIcon}" alt="viewport icon" />`,
-            })
-          )}
-        </div>
       </section>
-    </article>
+
+      <TipBox label={t("common:tip")} text={viewportTip} />
+    </div>
   );
 };

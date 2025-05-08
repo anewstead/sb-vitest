@@ -1,0 +1,33 @@
+.loginBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--dc-palette-divider);
+  border-bottom: 1px solid var(--dc-palette-divider);
+  padding: 15px 20px;
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  svg {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  h1 {
+    display: inline-block;
+    vertical-align: top;
+    margin: 6px 0 6px 10px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  button + button {
+    margin-left: 10px;
+  }
+
+  .welcome {
+    margin-right: 10px;
+    font-size: 14px;
+    color: var(--dc-palette-text-secondary);
+  }
+}

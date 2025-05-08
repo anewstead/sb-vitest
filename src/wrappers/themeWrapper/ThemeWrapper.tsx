@@ -10,13 +10,9 @@ import { allThemes, defaultTheme } from "@src/style/theme";
 import { getStoredTheme, setStoredTheme } from "./themeWrapper.helper";
 import { ThemeWrapperContext } from "./ThemeWrapperContext";
 
+import type { IThemeBaseProps } from "./themeWrapper.type";
 import type { Theme } from "@mui/material/styles";
-import type { ThemeName } from "@src/style/theme";
-import type { PropsWithChildren } from "react";
-
-export type IThemeBaseProps = PropsWithChildren & {
-  initialTheme?: Theme | ThemeName;
-};
+import type { IThemeName } from "@src/style/theme.type";
 
 // https://mui.com/material-ui/guides/interoperability/#css-injection-order
 const muiCache = createCache({
@@ -41,7 +37,7 @@ export const ThemeWrapper = (props: IThemeBaseProps) => {
 
   const [theme, setTheme] = useState<Theme>(setInitialTheme as Theme);
 
-  const [currentTheme, setCurrentTheme] = useState<ThemeName>(getStoredTheme);
+  const [currentTheme, setCurrentTheme] = useState<IThemeName>(getStoredTheme);
 
   useEffect(() => {
     setTheme(allThemes[currentTheme]);

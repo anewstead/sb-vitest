@@ -7,8 +7,8 @@ import {
   contentError,
   contentSlow,
   contentSuccess,
-} from "@src/test/msw/handlers/contentHandlers";
-import { i18nSuccess } from "@src/test/msw/handlers/i18nHandlers";
+} from "@src/test/msw/handlers/i18nContentHandlers";
+import { i18nSuccess } from "@src/test/msw/handlers/i18nJsonHandlers";
 import { withStore } from "@src/test/StoryStore";
 
 import { Home } from "./Home";
@@ -20,10 +20,10 @@ const meta = {
   component: Home,
 } satisfies Meta<typeof Home>;
 export default meta;
-type Story = StoryObj<typeof meta>;
+type IStory = StoryObj<typeof meta>;
 
 // Base: default story props
-const base: Story = {
+const base: IStory = {
   decorators: [withRouter, withStore({ home: homeReducer })],
   parameters: {
     msw: {
@@ -37,7 +37,7 @@ const base: Story = {
  * Typescript requires that non-optional props be explicitly set\
  * Or ...spread from base when overriding
  */
-export const LoggedOut: Story = deepmerge(base, {
+export const LoggedOut: IStory = deepmerge(base, {
   play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
     const text = canvas.getByTestId("example-text");
@@ -59,7 +59,7 @@ export const LoggedOut: Story = deepmerge(base, {
   },
 });
 
-export const LoggedIn: Story = deepmerge(base, {
+export const LoggedIn: IStory = deepmerge(base, {
   args: {
     user: {
       name: "Jane Doe",
@@ -67,7 +67,7 @@ export const LoggedIn: Story = deepmerge(base, {
   },
 });
 
-export const Error: Story = {
+export const Error: IStory = {
   ...base,
   parameters: {
     ...base.parameters,
@@ -85,7 +85,7 @@ export const Error: Story = {
   },
 };
 
-export const Loading: Story = {
+export const Loading: IStory = {
   ...base,
   parameters: {
     ...base.parameters,

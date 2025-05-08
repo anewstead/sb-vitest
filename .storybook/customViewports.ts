@@ -8,7 +8,7 @@
  * https://storybook.js.org/docs/essentials/viewport#add-new-devices\
  * Hard to locate and import type directly from there!
  */
-export type Viewport = {
+export type IViewport = {
   name: string;
   styles: {
     width: string; // e.g. '640px'
@@ -17,19 +17,19 @@ export type Viewport = {
   type: "mobile" | "tablet" | "desktop" | "other";
 };
 
-export type CustomViewports = {
-  xs: Viewport;
-  sm: Viewport;
-  md: Viewport;
-  lg: Viewport;
-  xl: Viewport;
+export type ICustomViewports = {
+  xs: IViewport;
+  sm: IViewport;
+  md: IViewport;
+  lg: IViewport;
+  xl: IViewport;
 };
 
 /**
  * Custom sizes represent average/typical screen size by device group\
  * Do not use actual screen sizes of specific devices
  */
-export const customViewports: CustomViewports = {
+export const customViewports: ICustomViewports = {
   xs: {
     name: "Small Mobile (xs)",
     styles: {

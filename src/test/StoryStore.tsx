@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import { setupStore } from "@src/state/store";
 
 import type { Reducer, ReducersMapObject } from "@reduxjs/toolkit";
-import type { AppState } from "@src/state/store";
+import type { IAppState } from "@src/state/store";
 import type { Decorator } from "@storybook/react";
 
 /**
@@ -45,7 +45,7 @@ import type { Decorator } from "@storybook/react";
  */
 export const withStore = (
   reducer: Reducer | ReducersMapObject,
-  preloadedState?: AppState
+  preloadedState?: IAppState
 ): Decorator => {
   return (Story) => {
     return (

@@ -44,7 +44,7 @@ export { i18n };
  */
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions, @typescript-eslint/naming-convention
   interface Window {
     i18n: typeof i18n;
   }

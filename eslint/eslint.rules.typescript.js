@@ -31,6 +31,14 @@ export const tsRules = {
       format: ["PascalCase"],
       selector: "typeLike",
     },
+    {
+      selector: ["interface", "typeAlias"],
+      format: ["PascalCase"],
+      custom: {
+        regex: "^(I|T)[A-Z]",
+        match: true,
+      },
+    },
   ],
 
   "@typescript-eslint/no-unsafe-argument": "warn",

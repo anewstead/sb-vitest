@@ -1,13 +1,8 @@
 import { createContext } from "react";
 
-import type { ThemeName } from "@src/style/theme";
+import type { IThemeWrapperContextType } from "./themeWrapper.type";
 
-type ThemeWrapperContextType = {
-  currentTheme: ThemeName;
-  setCurrentTheme: (theme: ThemeName) => void;
-};
-
-const ThemeWrapperContext = createContext<ThemeWrapperContextType | undefined>(
+const ThemeWrapperContext = createContext<IThemeWrapperContextType | undefined>(
   undefined
 );
 

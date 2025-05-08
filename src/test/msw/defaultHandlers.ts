@@ -33,8 +33,8 @@
  *     },
  */
 
-import { contentSuccess } from "./handlers/contentHandlers";
-import { i18nSuccess } from "./handlers/i18nHandlers";
+import { contentSuccess } from "./handlers/i18nContentHandlers";
+import { i18nSuccess } from "./handlers/i18nJsonHandlers";
 import { sampleDefault } from "./handlers/sampleHandlers";
 
 export const handlers = [sampleDefault, i18nSuccess, contentSuccess];

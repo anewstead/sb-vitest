@@ -34,7 +34,7 @@ const appReducer = combineSlices({
  */
 export const setupStore = (
   reducer?: Reducer | ReducersMapObject,
-  preloadedState?: AppState
+  preloadedState?: IAppState
 ) => {
   return configureStore({
     reducer: reducer ?? appReducer,
@@ -52,13 +52,13 @@ export const store = setupStore();
  * NOTE. types not in own file and exported directly from here\
  * As we do not want to export the appReducer
  */
-export type AppState = ReturnType<typeof appReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = typeof store.dispatch;
+export type IAppState = ReturnType<typeof appReducer>;
+export type IAppStore = ReturnType<typeof setupStore>;
+export type IAppDispatch = typeof store.dispatch;
 
 /**
  * Typed hooks.\
  * Use throughout app instead of `useDispatch` and `useSelector`
  */
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
+export const useAppDispatch: () => IAppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<IAppState> = useSelector;

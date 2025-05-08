@@ -1,4 +1,4 @@
-export type HomeProps = {
+export type IHomeProps = {
   user?: {
     name: string;
   };

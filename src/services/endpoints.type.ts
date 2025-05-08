@@ -1,3 +1,3 @@
-export type SampleResponse = {
+export type ISampleResponse = {
   mockKey: string;
 };

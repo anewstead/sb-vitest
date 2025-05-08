@@ -2,7 +2,9 @@ import { waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { I18N } from "@src/i18n/i18n.const";
-import { i18nError } from "@src/test/msw/handlers/i18nHandlers";
+import { common } from "@src/test/mocks/i18n/common";
+import { home } from "@src/test/mocks/i18n/home";
+import { i18nError } from "@src/test/msw/handlers/i18nJsonHandlers";
 import { server } from "@src/test/msw/server";
 
 import { i18n } from "../i18n";
@@ -16,23 +18,23 @@ describe("i18n setup with MSW", () => {
   it("should load translations successfully using MSW", () => {
     // Test common namespace
     const commonText = i18n.t("common:hello");
-    expect(commonText).toBe(`[${I18N.DEFAULT_LOCALE}] Hello`);
+    expect(commonText).toBe(`[${I18N.DEFAULT_LOCALE}] ${common.hello}`);
 
     // Test home namespace
     const homeText = i18n.t("home:changeText");
-    expect(homeText).toBe(`[${I18N.DEFAULT_LOCALE}] Change Text`);
+    expect(homeText).toBe(`[${I18N.DEFAULT_LOCALE}] ${home.changeText}`);
   });
 
   it("should handle language switching with MSW", async () => {
     // Get text in English
     const enText = i18n.t("common:hello");
-    expect(enText).toBe(`[${I18N.DEFAULT_LOCALE}] Hello`);
+    expect(enText).toBe(`[${I18N.DEFAULT_LOCALE}] ${common.hello}`);
 
     // Switch to Spanish
     await i18n.changeLanguage(I18N.LOCALE.ES_ES);
     await waitFor(() => {
       const esText = i18n.t("common:hello");
-      expect(esText).toBe(`[${I18N.LOCALE.ES_ES}] Hello`);
+      expect(esText).toBe(`[${I18N.LOCALE.ES_ES}] ${common.hello}`);
     });
   });
 
@@ -41,7 +43,7 @@ describe("i18n setup with MSW", () => {
     await i18n.changeLanguage(I18N.LOCALE.ES_ES);
     await waitFor(() => {
       const text = i18n.t("common:hello");
-      expect(text).toBe(`[${I18N.LOCALE.ES_ES}] Hello`);
+      expect(text).toBe(`[${I18N.LOCALE.ES_ES}] ${common.hello}`);
     });
 
     // Override with error handler
@@ -53,7 +55,7 @@ describe("i18n setup with MSW", () => {
     // Should keep existing Spanish translations
     await waitFor(() => {
       const text = i18n.t("common:hello");
-      expect(text).toBe(`[${I18N.LOCALE.ES_ES}] Hello`);
+      expect(text).toBe(`[${I18N.LOCALE.ES_ES}] ${common.hello}`);
     });
   });
 
@@ -64,7 +66,7 @@ describe("i18n setup with MSW", () => {
     await waitFor(() => {
       const text = i18n.t("common:hello");
       // Should use fallback language (en-GB)
-      expect(text).toBe(`[${I18N.DEFAULT_LOCALE}] Hello`);
+      expect(text).toBe(`[${I18N.DEFAULT_LOCALE}] ${common.hello}`);
     });
   });
 });

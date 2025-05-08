@@ -7,7 +7,7 @@ import {
   contentError,
   contentSlow,
   contentSuccess,
-} from "@src/test/msw/handlers/contentHandlers";
+} from "@src/test/msw/handlers/i18nContentHandlers";
 import { server } from "@src/test/msw/server";
 
 import { INVALID_FILENAME, useContent } from "../useContent";

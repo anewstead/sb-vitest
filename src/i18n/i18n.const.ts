@@ -1,19 +1,15 @@
+import type { ILocale, INamespace } from "./i18n.type";
+
 // i18n folder in public folder
 const base = "/i18n/";
-
-// LOCALE = language-COUNTRY = folder name
-export type Locale = "en-GB" | "es-ES";
-
-// NS = namespace = file name
-export type Namespace = "common" | "home";
 
 export const I18N = {
   JSON: {
     PATH: `${base}{{lng}}/{{ns}}.json`,
     MSW: `${base}:lng/:ns.json`,
     NS: {
-      COMMON: "common" as Namespace,
-      HOME: "home" as Namespace,
+      COMMON: "common" as INamespace,
+      HOME: "home" as INamespace,
     },
   },
   CONTENT: {
@@ -21,8 +17,8 @@ export const I18N = {
     MSW: `${base}:lng/content/:ns`,
   },
   LOCALE: {
-    EN_GB: "en-GB" as Locale,
-    ES_ES: "es-ES" as Locale,
+    EN_GB: "en-GB" as ILocale,
+    ES_ES: "es-ES" as ILocale,
   },
-  DEFAULT_LOCALE: "en-GB" as Locale,
+  DEFAULT_LOCALE: "en-GB" as ILocale,
 } as const;

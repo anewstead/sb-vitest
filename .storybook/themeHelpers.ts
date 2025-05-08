@@ -2,20 +2,20 @@ import { addons } from "@storybook/preview-api";
 
 import { allThemes, defaultTheme } from "@src/style/theme";
 
-import type { ThemeName } from "@src/style/theme";
+import type { IThemeName } from "@src/style/theme.type";
 
 /**
  * Get theme from url Set by sb-addon-theme withThemeFromJSXProvider Returns
  * default theme if no theme is specified in URL
  */
 export const getThemeFromUrl = (): {
-  urlTheme: ThemeName;
+  urlTheme: IThemeName;
   isValid: boolean;
 } => {
   const urlParams = new URLSearchParams(window.location.search);
   const globals = urlParams.get("globals") ?? "";
   const parsed = parseUrlGlobals(globals);
-  const themeName = parsed.theme as ThemeName | undefined;
+  const themeName = parsed.theme as IThemeName | undefined;
   if (themeName && Object.keys(allThemes).includes(themeName)) {
     return { urlTheme: themeName, isValid: true };
   }
@@ -48,7 +48,7 @@ export function stringifyUrlGlobals(obj: Record<string, string>): string {
     .join(";");
 }
 
-export function updateUrlWithTheme(newTheme: ThemeName) {
+export function updateUrlWithTheme(newTheme: IThemeName) {
   const channel = addons.getChannel();
   const topWindow = window.top ?? window;
   const parentUrl = new URL(topWindow.location.href);
