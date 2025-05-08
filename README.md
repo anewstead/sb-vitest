@@ -1,4 +1,4 @@
-# README (WIP)
+# README
 
 ## Top level tech stack
 
@@ -118,13 +118,13 @@ comp.type.ts
 
 ---
 
-## - Styling
+## Styling
 
 Allows for SCSS modules, however use of SCSS language features should be very minimal.  
 MaterialUI has been setup so its theme vars are also accessible by CSS vars.
 
-Always prefer style **classes** in markup, this reduces the compiled CSS footprint.  
-MaterialUI includes many [utility classes](https://mui.com/system/properties)
+Always prefer style **classes** in TSX markup, this reduces the compiled CSS footprint.  
+MaterialUI includes many [utility classes](https://mui.com/system/properties) for margin/padding etc.
 
 There should no style **values** in TS/TSX, only **classes**  
 Be especially careful of this when using MaterialUI's sx prop.  
@@ -133,18 +133,14 @@ If not using an existing utility class create your own situational class.
 Use SCSS as:
 
 ```ts
-import styles from "./comp.modules.scss"
-<div className={styles.myClass}>
-<div className={styles["my-class"]}>
+import styles from "./comp.modules.scss";
+<div className={styles.myClass} />
+<div className={styles["my-class"]} />
 ```
 
-utility [clsx](https://github.com/lukeed/clsx) is included if you need more advance class injection
+Utility [clsx](https://github.com/lukeed/clsx) is included if you need more advance class injection
 
-**Do not use**
-
-- CSS-in-JS
-- styled components
-- emotion
+**Do not use styled-components or similar CSS-in-JS**
 
 ---
 
@@ -153,22 +149,22 @@ utility [clsx](https://github.com/lukeed/clsx) is included if you need more adva
 #### Display components (Comp.stories.tsx)
 
 These allow visual component development in isolation in storybook environment.  
-These test also run on command line and in a **headless browser environment**.
+These test also run on command line in a **headless browser environment**.
 
 #### Typescript functions (file.test.ts)
 
 Here we are testing function logic, input, output,  
 I.E. there should not be anything directly requiring display to be tested.  
 This is Front-end code so test files run in a **JSDOM emulated browser environment**.  
-This environment is significantly more effient than running in actual browser.
+This environment is significantly more effient for functionalhuh wtf, testing than running in actual browser.
 
 #### Node scripts (file.spec.ts)
 
 These are used for node based scripts and are run in a **node environment**.  
 Node scripts are either code for the build system itself or other that would run on the server
 
-#### Mock Service Worker
+#### Mock Service Worker (MSW)
 
-handlers are created to intercept actual API calls,  
+Handlers are created to intercept actual API calls,  
 This will then return mock data  
-Additional scenarios can also be mocked, i.e. error states.
+Additional scenarios can also be mocked, i.e. different data-sets, error states.
