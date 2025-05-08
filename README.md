@@ -13,9 +13,10 @@
 - Mock Service Worker
 - Storybook
 - Eslint
+- axios
 - i18next
 
-## Set up musts:
+## Set up must:
 
 [nvm](https://github.com/nvm-sh/nvm)  
 Node Version Manager installs and switches uses  
@@ -43,7 +44,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
-#### - Code Editors
+#### - Code Editors (IDE)
 
 [vscode](https://code.visualstudio.com/)  
 Is provisioned with shared workspace settings and recommended extension, which should be installed.  
@@ -81,12 +82,10 @@ If abstract and reusable consider if worth elevating further maybe hooks or util
 **This is a very important separation of concern.**  
 It helps make code easier to read, test, reuse, debug and maintain
 
-#### - Styling
+#### - Styles
 
-Current WIP is using SCSS modules, and SCSS itself only minimally, generally use CSS vars.
-
-More detail TBC !  
-Suffice to say there should no css **values** in TS/TSX, only **classes**
+Allows for **SCSS modules** which have namesake **".module.scss"**  
+More details in styling section below
 
 #### - Testing
 
@@ -99,7 +98,7 @@ More detail in testing section below.
 #### - Naming
 
 - PascalCase for **.tsx**
-- camelCase for **.ts**
+- camelCase for **.ts** **.scss** and generally all others
 
 ```
 Comp.tsx
@@ -116,6 +115,36 @@ Particularly where they are exported for use elsewhere or when you have more tha
 comp.const.ts
 comp.type.ts
 ```
+
+---
+
+## - Styling
+
+Allows for SCSS modules, however use of SCSS language features should be very minimal.  
+MaterialUI has been setup so its theme vars are also accessible by CSS vars.
+
+Always prefer style **classes** in markup, this reduces the compiled CSS footprint.  
+MaterialUI includes many [utility classes](https://mui.com/system/properties)
+
+There should no style **values** in TS/TSX, only **classes**  
+Be especially careful of this when using MaterialUI's sx prop.  
+If not using an existing utility class create your own situational class.
+
+Use SCSS as:
+
+```ts
+import styles from "./comp.modules.scss"
+<div className={styles.myClass}>
+<div className={styles["my-class"]}>
+```
+
+utility [clsx](https://github.com/lukeed/clsx) is included if you need more advance class injection
+
+**Do not use**
+
+- CSS-in-JS
+- styled components
+- emotion
 
 ---
 
@@ -137,3 +166,9 @@ This environment is significantly more effient than running in actual browser.
 
 These are used for node based scripts and are run in a **node environment**.  
 Node scripts are either code for the build system itself or other that would run on the server
+
+#### Mock Service Worker
+
+handlers are created to intercept actual API calls,  
+This will then return mock data  
+Additional scenarios can also be mocked, i.e. error states.

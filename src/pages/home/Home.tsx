@@ -16,7 +16,7 @@ import {
   handleLogout,
 } from "./home.helper";
 
-import styles from "./home.module.css";
+import styles from "./home.module.scss";
 
 import type { HomeProps } from "./home.type";
 

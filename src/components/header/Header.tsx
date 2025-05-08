@@ -5,7 +5,7 @@ import { Button } from "@src/components/button/Button";
 import { ThemeModeButtons } from "@src/components/themeModeButtons/ThemeModeButtons";
 import { ThemeSelector } from "@src/components/themeSelector/ThemeSelector";
 
-import styles from "./header.module.css";
+import styles from "./header.module.scss";
 
 import type { HeaderProps } from "./header.type";
 

@@ -46,7 +46,7 @@ export const checkFileRules = {
 
   // filename-naming-convention
   // default camelCase
-  // jsx tsx are PascalCase
+  // jsx tsx are PascalCase because of react requirement
   "check-file/filename-naming-convention": [
     "error",
     {
@@ -57,10 +57,10 @@ export const checkFileRules = {
   ],
 
   // folder-naming-convention
-  // default kebab-case because they should be url-like
+  // default camelCase because just simpler to have same general convention
   "check-file/folder-naming-convention": [
     "error",
-    { "/**/!(__{tests,mocks}__|@*)/**/": "KEBAB_CASE" },
+    { "/**/!(__{tests,mocks}__|@*)/**/": "CAMEL_CASE" },
   ],
 
   "check-file/no-index": "error",
