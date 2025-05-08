@@ -65,7 +65,6 @@
     "@storybook/addon-docs": "^8.6.12",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",
-    "@storybook/addon-mdx-gfm": "^8.6.12",
     "@storybook/addon-themes": "^8.6.12",
     "@storybook/addon-viewport": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
