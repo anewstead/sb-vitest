@@ -17,9 +17,12 @@ import { ThemePreviewContainer } from "./ThemePreviewContainer";
 import type { DocsContextProps } from "@storybook/blocks";
 import type { Preview } from "@storybook/react";
 
+// if running storybook in browser or tests on CLI
+const isVitestEnv = window.location.href.includes("__vitest_test__");
+
 mswInitialize({
   onUnhandledRequest: "bypass",
-  quiet: true, // MSW log is noisy and misleading when test run in terminal
+  quiet: isVitestEnv, // Quiet in test environment
 });
 
 const preview: Preview = {
