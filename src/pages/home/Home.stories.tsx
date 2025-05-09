@@ -77,10 +77,10 @@ export const Error: IStory = {
   },
   play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
-    const content = canvas.getByTestId("content");
+    const content = canvas.getByTestId("pageContent");
 
     await waitFor(async () => {
-      await expect(content).toHaveTextContent(/^Error:/);
+      await expect(content).toHaveTextContent(/Error:/);
     });
   },
 };
@@ -95,7 +95,7 @@ export const Loading: IStory = {
   },
   play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
-    const content = canvas.getByTestId("content");
+    const content = canvas.getByTestId("pageContent");
 
     await waitFor(async () => {
       await expect(content).toHaveTextContent("...");

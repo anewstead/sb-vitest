@@ -1,27 +1,44 @@
 # About
 
-Welcome to our component library! This is a collection of reusable React components built with Storybook.
-
-## Getting Started
-
-To get started with our component library:
-
-1. Install the package
-2. Import the components you need
-3. Use them in your application
+Welcome to our component library!  
+A collection of reusable React components built with Storybook.
 
 ## Features
 
-- 🎨 Beautiful and accessible components
+- 🎨 Beautiful and accessible themed components
 - 🌙 Dark mode support
 - 📱 Responsive design
 - 🧪 Comprehensive testing
 - 📚 Detailed documentation
 
-## Contributing
+## Atomic Design
 
-We welcome contributions! Please see our contributing guidelines for more information.
+Component library follows Atomic Design Pattern principles.
 
-## License
+![Atomic Design Pattern](/atomic-design.jpg)
 
-This project is licensed under the MIT License.
+Each level leading up to pages is stateless and non-specific to content and functionality.  
+Components expect any specific information to be passed into them.  
+Its all about making things highly reusable.
+
+Read more about the Atomic Design Pattern [here](https://atomicdesign.bradfrost.com/chapter-2/)
+
+### Atoms
+
+Most basic cannot be subdivided
+
+### Molecules
+
+Composes only atoms
+
+### Organisms
+
+Composes molecules and atoms
+
+### Templates
+
+Layouts, typically of pages, composes organisms, molecules and atoms
+
+### Pages
+
+Pages are STATEFUL, this is where we add specific content and logic.

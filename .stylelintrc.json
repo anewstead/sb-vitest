@@ -6,6 +6,7 @@
   ],
   "plugins": ["stylelint-scss", "./scripts/stylelint/filenamePlugin.js"],
   "rules": {
+    "alpha-value-notation": "number",
     "custom-property-pattern": null,
     "no-descending-specificity": null,
     "scss/at-rule-no-unknown": [

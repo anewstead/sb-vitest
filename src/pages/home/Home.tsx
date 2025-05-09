@@ -4,8 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import viewportIcon from "@src/assets/viewport-icon.svg";
 import { ExampleRedux } from "@src/components/atom/exampleRedux/ExampleSection";
-import { TipBox } from "@src/components/atom/tipBox/TipBox";
-import { Header } from "@src/components/compound/header/Header";
+import { ContentPage } from "@src/components/template/contentPage/ContentPage";
 import { useContent } from "@src/i18n/useContent";
 import { useAppDispatch, useAppSelector } from "@src/state/store";
 import { cleanHtml } from "@src/utils/cleanHtml";
@@ -16,8 +15,6 @@ import {
   handleLogin,
   handleLogout,
 } from "./home.helper";
-
-import styles from "./home.module.scss";
 
 import type { IHomeProps } from "./home.type";
 
@@ -32,7 +29,7 @@ export const Home = (props: IHomeProps) => {
     return state.home.example;
   });
 
-  const content = useContent("home.md");
+  const i18nContent = useContent("home.md");
 
   const viewportTip = cleanHtml(
     t("home:viewportTip", {
@@ -40,10 +37,25 @@ export const Home = (props: IHomeProps) => {
     })
   );
 
+  const pageContent = (
+    <div data-testid="pageContent">
+      <ExampleRedux
+        buttonLabel={t("home:changeText")}
+        exampleText={reduxText}
+        onChangeText={() => {
+          handleChangeText(dispatch);
+        }}
+      />
+
+      <div data-testid="i18nContent">{i18nContent}</div>
+    </div>
+  );
+
   return (
-    <div className={styles.home}>
-      <Header
-        loginBarProps={{
+    <ContentPage
+      title={t("home:pagesInStorybook")}
+      headerProps={{
+        loginBarProps: {
           user: user,
           onLogin: handleLogin,
           onLogout: handleLogout,
@@ -52,24 +64,13 @@ export const Home = (props: IHomeProps) => {
           loginText: t("common:login"),
           logoutText: t("common:logout"),
           signupText: t("common:signup"),
-        }}
-      />
-
-      <section className={styles.content}>
-        <h2>{t("home:pagesInStorybook")}</h2>
-
-        <ExampleRedux
-          buttonLabel={t("home:changeText")}
-          exampleText={reduxText}
-          onChangeText={() => {
-            handleChangeText(dispatch);
-          }}
-        />
-
-        <div data-testid="content">{content}</div>
-      </section>
-
-      <TipBox label={t("common:tip")} text={viewportTip} />
-    </div>
+        },
+      }}
+      content={pageContent}
+      tipBoxProps={{
+        label: t("common:tip"),
+        text: viewportTip,
+      }}
+    />
   );
 };
