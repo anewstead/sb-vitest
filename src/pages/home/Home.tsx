@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import viewportIcon from "@src/assets/viewport-icon.svg";
-import { ExampleSection } from "@src/components/atom/exampleSection/ExampleSection";
+import { ExampleRedux } from "@src/components/atom/exampleRedux/ExampleSection";
 import { TipBox } from "@src/components/atom/tipBox/TipBox";
 import { Header } from "@src/components/compound/header/Header";
 import { useContent } from "@src/i18n/useContent";
@@ -58,7 +58,7 @@ export const Home = (props: IHomeProps) => {
       <section className={styles.content}>
         <h2>{t("home:pagesInStorybook")}</h2>
 
-        <ExampleSection
+        <ExampleRedux
           buttonLabel={t("home:changeText")}
           exampleText={reduxText}
           onChangeText={() => {

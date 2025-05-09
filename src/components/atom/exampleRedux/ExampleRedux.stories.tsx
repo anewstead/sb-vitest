@@ -1,13 +1,13 @@
 import { fn } from "@storybook/test";
 
-import { ExampleSection } from "./ExampleSection";
+import { ExampleRedux } from "./ExampleSection";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
 // Meta: ONLY set meta.component
 const meta = {
-  component: ExampleSection,
-} satisfies Meta<typeof ExampleSection>;
+  component: ExampleRedux,
+} satisfies Meta<typeof ExampleRedux>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
 

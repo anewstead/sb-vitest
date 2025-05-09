@@ -1,4 +1,4 @@
-export type IExampleSectionProps = {
+export type IExampleReduxProps = {
   exampleText: string;
   onChangeText: () => void;
   buttonLabel: string;
