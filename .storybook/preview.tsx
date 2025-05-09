@@ -19,7 +19,7 @@ import type { Preview } from "@storybook/react";
 
 mswInitialize({
   onUnhandledRequest: "bypass",
-  // quiet: true, // MSW log is noisy and misleading when test run in terminal
+  quiet: true, // MSW log is noisy and misleading when test run in terminal
 });
 
 const preview: Preview = {
