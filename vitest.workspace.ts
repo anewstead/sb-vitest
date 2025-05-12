@@ -3,6 +3,10 @@ import { defineWorkspace } from "vitest/config";
 
 import type { PluginOption } from "vite";
 
+const ROOT_TEST_CONFIG = "./vitest.config.ts";
+const SETUP_FN = "src/common/test/setupFnTest.ts";
+const SETUP_SB = ".storybook/setupSbTest.ts";
+
 const sbPlugin = storybookTest({
   configDir: ".storybook",
   storybookScript: "npm run dev-sb --ci",
@@ -11,7 +15,7 @@ const sbPlugin = storybookTest({
 export default defineWorkspace([
   {
     // this should only pick up .spec files
-    extends: "./vitest.config.ts",
+    extends: ROOT_TEST_CONFIG,
     test: {
       globals: true,
       name: "node",
@@ -21,22 +25,22 @@ export default defineWorkspace([
   },
   {
     // this should only pick up .test files
-    extends: "./vitest.config.ts",
+    extends: ROOT_TEST_CONFIG,
     test: {
       globals: true,
       name: "fn",
       environment: "jsdom",
       exclude: ["**/*.spec.*"],
-      setupFiles: ["src/test/vitest.setup.ts"],
+      setupFiles: [SETUP_FN],
     },
   },
   {
     // this should only pick up .stories files
-    extends: "./vitest.config.ts",
+    extends: ROOT_TEST_CONFIG,
     plugins: [sbPlugin],
     test: {
       name: "sb",
-      setupFiles: [".storybook/vitest.setup.ts"],
+      setupFiles: [SETUP_SB],
       browser: {
         enabled: true,
         provider: "playwright",

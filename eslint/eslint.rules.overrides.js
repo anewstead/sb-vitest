@@ -19,7 +19,7 @@ const allowRelaxedImports = {
     "./*",
     ".storybook/**",
     "scripts/**",
-    "src/test/**",
+    "src/common/test/**",
     "**/eslint**",
     "**/__tests__/**",
     "**/__mocks__/**",
@@ -55,7 +55,7 @@ const allowParentImports = {
  * specifically for state property in this folder
  */
 const allowParamReassign = {
-  files: ["src/state/**"],
+  files: ["src/app/state/**"],
   rules: {
     "no-param-reassign": [
       "error",

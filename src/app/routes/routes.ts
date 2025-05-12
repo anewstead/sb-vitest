@@ -7,7 +7,7 @@ export const router = createBrowserRouter([
   {
     index: true,
     async lazy() {
-      const { Home } = await import("@src/pages/home/Home");
+      const { Home } = await import("@src/app/pages/home/Home");
       return { Component: Home };
     },
     HydrateFallback: () => {

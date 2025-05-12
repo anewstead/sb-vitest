@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 
-import { useThemeWrapper } from "@src/wrappers/themeWrapper/useThemeWrapper";
+import { useThemeWrapper } from "@src/app/wrappers/themeWrapper/useThemeWrapper";
 
 import { getThemeFromUrl, updateUrlWithTheme } from "./themeHelpers";
 

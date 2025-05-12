@@ -1,8 +1,8 @@
 import { addons } from "@storybook/preview-api";
 
-import { allThemes, defaultTheme } from "@src/style/theme";
+import { allThemes, defaultTheme } from "@src/app/style/theme";
 
-import type { IThemeName } from "@src/style/theme.type";
+import type { IThemeName } from "@src/app/style/theme.type";
 
 /**
  * Get theme from url Set by sb-addon-theme withThemeFromJSXProvider Returns
