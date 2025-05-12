@@ -1,6 +1,6 @@
-import { allThemes, defaultTheme } from "@src/app/style/theme";
+import { allThemes, defaultTheme } from "@src/common/style/theme";
 
-import type { IThemeName } from "@src/app/style/theme.type";
+import type { IThemeName } from "@src/common/style/theme.type";
 
 export const THEME_STORAGE_KEY = "app-theme";
 

@@ -2,14 +2,14 @@ import React from "react";
 
 import { expect, waitFor, within } from "@storybook/test";
 
-import { defaultTheme } from "@src/app/style/theme";
-import { DARK_CLASS, LIGHT_CLASS } from "@src/app/style/themes/base";
+import { defaultTheme } from "@src/common/style/theme";
+import { DARK_CLASS, LIGHT_CLASS } from "@src/common/style/themes/base";
 
 import { ThemeWrapper } from "./ThemeWrapper";
 import { THEME_STORAGE_KEY } from "./themeWrapper.helper";
 
 import type { IThemeBaseProps } from "./themeWrapper.type";
-import type { IThemeName } from "@src/app/style/theme.type";
+import type { IThemeName } from "@src/common/style/theme.type";
 import type { Meta, StoryObj } from "@storybook/react";
 
 // Meta: ONLY set meta.component

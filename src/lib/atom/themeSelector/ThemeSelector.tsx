@@ -7,11 +7,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-import { allThemes } from "@src/app/style/theme";
+import { allThemes } from "@src/common/style/theme";
 import { useThemeWrapper } from "@src/app/wrappers/themeWrapper/useThemeWrapper";
 
 import type { SelectChangeEvent } from "@mui/material/Select";
-import type { IThemeName } from "@src/app/style/theme.type";
+import type { IThemeName } from "@src/common/style/theme.type";
 
 export const ThemeSelector = () => {
   const { currentTheme, setCurrentTheme } = useThemeWrapper();

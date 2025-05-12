@@ -5,14 +5,14 @@ import { CacheProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 
-import { allThemes, defaultTheme } from "@src/app/style/theme";
+import { allThemes, defaultTheme } from "@src/common/style/theme";
 
 import { getStoredTheme, setStoredTheme } from "./themeWrapper.helper";
 import { ThemeWrapperContext } from "./ThemeWrapperContext";
 
 import type { IThemeBaseProps } from "./themeWrapper.type";
 import type { Theme } from "@mui/material/styles";
-import type { IThemeName } from "@src/app/style/theme.type";
+import type { IThemeName } from "@src/common/style/theme.type";
 
 // https://mui.com/material-ui/guides/interoperability/#css-injection-order
 const muiCache = createCache({

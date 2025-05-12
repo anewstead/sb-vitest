@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { useColorScheme } from "@mui/material/styles";
 
-import type { IThemeMode } from "@src/app/style/theme.type";
+import type { IThemeMode } from "@src/common/style/theme.type";
 
 export const ThemeModeButtons = () => {
   const { mode, setMode } = useColorScheme();

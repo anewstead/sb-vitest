@@ -13,7 +13,7 @@ import {
   setSbModeToSystem,
 } from "./themeModeHelpers";
 
-import type { IThemeMode } from "@src/app/style/theme.type";
+import type { IThemeMode } from "@src/common/style/theme.type";
 
 const channel = addons.getChannel();
 

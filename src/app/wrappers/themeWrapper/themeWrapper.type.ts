@@ -1,5 +1,5 @@
 import type { Theme } from "@mui/material/styles";
-import type { IThemeName } from "@src/app/style/theme.type";
+import type { IThemeName } from "@src/common/style/theme.type";
 import type { PropsWithChildren } from "react";
 
 export type IThemeBaseProps = PropsWithChildren & {

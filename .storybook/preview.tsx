@@ -6,7 +6,7 @@ import { initialize as mswInitialize, mswLoader } from "msw-storybook-addon";
 
 import { i18n } from "@src/common/i18n/i18n";
 import { I18N } from "@src/common/i18n/i18n.const";
-import { allThemes, defaultTheme } from "@src/app/style/theme";
+import { allThemes, defaultTheme } from "@src/common/style/theme";
 import { handlers } from "@src/common/test/msw/defaultHandlers";
 
 import { AutoDocsTemplate } from "./AutoDocsTemplate";
