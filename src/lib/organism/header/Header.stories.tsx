@@ -13,6 +13,9 @@ type IStory = StoryObj<typeof meta>;
 
 // Base: default story props
 const base: IStory = {
+  argTypes: {
+    loginBarProps: { control: false },
+  },
   args: {
     loginBarProps: {
       onLogin: fn(),
