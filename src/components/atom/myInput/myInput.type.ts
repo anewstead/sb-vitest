@@ -6,4 +6,5 @@ export type IMyInputProps = {
   type?: "text" | "number" | "email" | "password" | "tel";
   placeholder?: string;
   required?: boolean;
+  error?: string;
 };

@@ -35,7 +35,7 @@ export const tsRules = {
       selector: ["interface", "typeAlias"],
       format: ["PascalCase"],
       custom: {
-        regex: "^(I|T)[A-Z]",
+        regex: "^I[A-Z]",
         match: true,
       },
     },

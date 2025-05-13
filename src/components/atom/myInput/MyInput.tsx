@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FormControl, FormLabel, Input } from "@mui/material";
+import { FormControl, FormHelperText, FormLabel, Input } from "@mui/material";
 
 import type { IMyInputProps } from "./myInput.type";
 
@@ -13,6 +13,7 @@ export const MyInput = (props: IMyInputProps) => {
     type = "text",
     placeholder,
     required = false,
+    error,
   } = props;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +29,7 @@ export const MyInput = (props: IMyInputProps) => {
   };
 
   return (
-    <FormControl fullWidth>
+    <FormControl fullWidth error={!!error}>
       <FormLabel htmlFor={id}>{labelText}</FormLabel>
       <Input
         id={id}
@@ -44,6 +45,7 @@ export const MyInput = (props: IMyInputProps) => {
           "data-testid": id,
         }}
       />
+      {error && <FormHelperText>{error}</FormHelperText>}
     </FormControl>
   );
 };

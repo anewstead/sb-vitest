@@ -1,12 +1,12 @@
 import { expect, userEvent, within } from "@storybook/test";
 
-import { LoginPage } from "./LoginPage";
+import { Login } from "./Login";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
-  component: LoginPage,
-} satisfies Meta<typeof LoginPage>;
+  component: Login,
+} satisfies Meta<typeof Login>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
