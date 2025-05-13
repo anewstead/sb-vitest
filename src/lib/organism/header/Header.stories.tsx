@@ -18,6 +18,9 @@ const base: IStory = {
   },
   args: {
     loginBarProps: {
+      user: {
+        name: "Jane Doe",
+      },
       onLogin: fn(),
       onLogout: fn(),
       onCreateAccount: fn(),
