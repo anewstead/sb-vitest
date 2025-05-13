@@ -1,47 +1,45 @@
 import React from "react";
 
 import { Box } from "@mui/material";
-import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 
-import { allThemes } from "@src/common/style/theme";
 import { useThemeWrapper } from "@src/app/wrappers/themeWrapper/useThemeWrapper";
+import { allThemes } from "@src/common/style/theme";
+import { MySelect } from "@src/lib/atom/mySelect/MySelect";
 
-import type { SelectChangeEvent } from "@mui/material/Select";
 import type { IThemeName } from "@src/common/style/theme.type";
+import type { IMySelectItem } from "@src/lib/atom/mySelect/mySelect.type";
 
 export const ThemeSelector = () => {
+  /**
+   * IMPORTANT: This is more for example purposes.\
+   * Normally component should be stateless, but in this case the tie in to the
+   * useThemeWrapper hook is arguably acceptable because it will only ever do
+   * this one thing, and requires no parent param input
+   */
   const { currentTheme, setCurrentTheme } = useThemeWrapper();
 
-  const handleThemeChange = (event: SelectChangeEvent<IThemeName>) => {
-    const newTheme = event.target.value;
-    setCurrentTheme(newTheme);
+  const themeItems: IMySelectItem[] = Object.entries(allThemes).map(([key]) => {
+    return {
+      value: key,
+      label: key.charAt(0).toUpperCase() + key.slice(1),
+    };
+  });
+
+  const handleThemeChange = (selected: IMySelectItem) => {
+    setCurrentTheme(selected.value as IThemeName);
   };
 
   return (
     <Grid container spacing={2} sx={{ flexGrow: 1, padding: 1 }}>
       <Grid size={7}>
-        <FormControl size="small" sx={{ display: "flex", flexGrow: 1 }}>
-          <InputLabel id="theme-select-label">Theme</InputLabel>
-          <Select
-            labelId="theme-select-label"
-            id="theme-select"
-            value={currentTheme}
-            label="Theme"
-            onChange={handleThemeChange}
-          >
-            {Object.entries(allThemes).map(([name]) => {
-              return (
-                <MenuItem key={name} value={name}>
-                  {name.charAt(0).toUpperCase() + name.slice(1)}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
+        <MySelect
+          id="theme-select"
+          labelText="Theme"
+          initialValue={currentTheme}
+          items={themeItems}
+          onChange={handleThemeChange}
+        />
       </Grid>
       <Grid size={5}>
         <Box
