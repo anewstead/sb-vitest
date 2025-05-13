@@ -6,9 +6,9 @@ import { I18nextProvider } from "react-i18next";
 import { Provider as ReduxProvider } from "react-redux";
 import { RouterProvider } from "react-router";
 
-import { i18n } from "@src/common/i18n/i18n";
 import { store } from "@src/app/state/store";
 import { ThemeWrapper } from "@src/app/wrappers/themeWrapper/ThemeWrapper";
+import { i18n } from "@src/common/i18n/i18n";
 
 import { router } from "./routes/routes";
 

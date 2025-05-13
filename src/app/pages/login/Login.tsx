@@ -34,6 +34,8 @@ export const Login = () => {
   const passwordValue = watch("password");
 
   const onSubmit = (data: ILoginFormData) => {
+    //TMP log for dev purposes
+    console.warn(data);
     // Handle login logic here
   };
 
