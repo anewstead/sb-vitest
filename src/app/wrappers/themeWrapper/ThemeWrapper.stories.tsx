@@ -19,7 +19,7 @@ const meta: Meta<typeof ThemeWrapper> = {
 export default meta;
 type IStory = StoryObj<typeof meta>;
 
-// Base: default story props
+// Base: default story props. NO play functions
 const base: IStory = {
   render: (args: IThemeBaseProps) => {
     return (

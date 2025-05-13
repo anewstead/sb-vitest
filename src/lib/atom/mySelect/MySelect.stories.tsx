@@ -15,7 +15,7 @@ const meta = {
 export default meta;
 type IStory = StoryObj<typeof meta>;
 
-// Base: default story props
+// Base: default story props. NO play functions
 const base: IStory = {
   args: {
     labelText: "Select language",
