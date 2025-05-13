@@ -16,6 +16,14 @@ const storybookPreviewIframeDocumentStyles = `
 .docs-story {
   background-color: var(--dc-palette-background-default);
 }
+/* fix mdx headers in darkmode */
+.css-1ofkq6d {
+  float: left;
+  line-height: inherit;
+  padding-right: 10px;
+  margin-left: -24px;
+  color: inherit;
+}
 `;
 
 type IThemeDocsContainerProps = DocsContainerProps & { children: ReactNode };
