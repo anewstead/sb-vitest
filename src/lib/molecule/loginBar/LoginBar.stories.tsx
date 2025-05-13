@@ -4,14 +4,18 @@ import { LoginBar } from "./LoginBar";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-// Meta: ONLY set meta.component
+/*
+Meta: ONLY set meta.component
+*/
 const meta = {
   component: LoginBar,
 } satisfies Meta<typeof LoginBar>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
 
-// Base: default story props. NO play functions
+/*
+Base: default story props. NO play functions
+*/
 const base: IStory = {
   args: {
     onLogin: fn(),

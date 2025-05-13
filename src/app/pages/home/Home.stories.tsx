@@ -1,5 +1,4 @@
 import { expect, waitFor, within } from "@storybook/test";
-import { deepmerge } from "deepmerge-ts";
 import { withRouter } from "storybook-addon-remix-react-router";
 
 import { homeReducer } from "@src/app/state/home/slice";
@@ -15,14 +14,18 @@ import { Home } from "./Home";
 
 import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
-// Meta: ONLY set meta.component
+/*
+Meta: ONLY set meta.component
+*/
 const meta = {
   component: Home,
 } satisfies Meta<typeof Home>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
 
-// Base: default story props. NO play functions
+/*
+Base: default story props. NO play functions
+*/
 const base: IStory = {
   decorators: [withRouter, withStore({ home: homeReducer })],
   parameters: {
@@ -32,12 +35,11 @@ const base: IStory = {
   },
 };
 
-/**
- * Stories: merge over base.\
- * Typescript requires that non-optional props be explicitly set\
- * Or ...spread from base when overriding
- */
-export const LoggedOut: IStory = deepmerge(base, {
+/*
+Stories: each story should ...spread merge from base as required
+*/
+export const LoggedOut: IStory = {
+  ...base,
   play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
     const text = canvas.getByTestId("example-text");
@@ -57,15 +59,16 @@ export const LoggedOut: IStory = deepmerge(base, {
       await expect(text.textContent).not.toBe(newText);
     });
   },
-});
+};
 
-export const LoggedIn: IStory = deepmerge(base, {
+export const LoggedIn: IStory = {
+  ...base,
   args: {
     user: {
       name: "Jane Doe",
     },
   },
-});
+};
 
 export const Error: IStory = {
   ...base,

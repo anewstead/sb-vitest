@@ -1,5 +1,4 @@
 import { expect, waitFor, within } from "@storybook/test";
-import { deepmerge } from "deepmerge-ts";
 
 import {
   sampleError400,
@@ -11,14 +10,18 @@ import { MSWExample } from "./MswComp";
 
 import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
-// Meta: ONLY set meta.component
+/*
+Meta: ONLY set meta.component
+*/
 const meta = {
   component: MSWExample,
 } satisfies Meta<typeof MSWExample>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
 
-// Base: default story props. NO play functions
+/*
+Base: default story props. NO play functions
+*/
 const base: IStory = {};
 
 /**
@@ -26,7 +29,8 @@ const base: IStory = {};
  * TS requires that non-optional props be explicitly set\
  * Or ...spread from base when overriding
  */
-export const Default: IStory = deepmerge(base, {
+export const Default: IStory = {
+  ...base,
   play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText("Loading...")).toBeVisible();
@@ -35,9 +39,10 @@ export const Default: IStory = deepmerge(base, {
     });
     await expect(canvas.getByText(/mockValue/i)).toBeVisible();
   },
-});
+};
 
-export const ErrorResponse: IStory = deepmerge(base, {
+export const ErrorResponse: IStory = {
+  ...base,
   parameters: {
     msw: {
       handlers: [sampleError400],
@@ -52,9 +57,10 @@ export const ErrorResponse: IStory = deepmerge(base, {
       ).toBeVisible();
     });
   },
-});
+};
 
-export const BadRequest: IStory = deepmerge(base, {
+export const BadRequest: IStory = {
+  ...base,
   parameters: {
     msw: {
       handlers: [sampleNetworkError],
@@ -67,9 +73,10 @@ export const BadRequest: IStory = deepmerge(base, {
       await expect(canvas.getByText("Error: Network Error")).toBeVisible();
     });
   },
-});
+};
 
-export const NoData: IStory = deepmerge(base, {
+export const NoData: IStory = {
+  ...base,
   parameters: {
     msw: {
       handlers: [sampleNoData],
@@ -82,4 +89,4 @@ export const NoData: IStory = deepmerge(base, {
       await expect(canvas.getByText("No data")).toBeVisible();
     });
   },
-});
+};

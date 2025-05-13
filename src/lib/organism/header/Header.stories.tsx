@@ -4,14 +4,18 @@ import { Header } from "./Header";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-// Meta: ONLY set meta.component
+/*
+Meta: ONLY set meta.component
+*/
 const meta = {
   component: Header,
 } satisfies Meta<typeof Header>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
 
-// Base: default story props. NO play functions
+/*
+Base: default story props. NO play functions
+*/
 const base: IStory = {
   argTypes: {
     loginBarProps: { control: false },

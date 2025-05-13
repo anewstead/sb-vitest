@@ -4,14 +4,18 @@ import { ContentPage } from "./ContentPage";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-// Meta: ONLY set meta.component
+/*
+Meta: ONLY set meta.component
+*/
 const meta = {
   component: ContentPage,
 } satisfies Meta<typeof ContentPage>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
 
-// Base: default story props. NO play functions
+/*
+Base: default story props. NO play functions
+*/
 const base: IStory = {
   args: {
     title: "Example Content Page",
@@ -34,9 +38,7 @@ const base: IStory = {
   },
 };
 
-/**
- * Stories: merge over base.\
- * Typescript requires that non-optional props be explicitly set\
- * Or ...spread from base when overriding
- */
+/*
+Stories: each story should ...spread merge from base as required
+*/
 export const Default: IStory = base;

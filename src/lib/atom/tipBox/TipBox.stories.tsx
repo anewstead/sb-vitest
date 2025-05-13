@@ -1,19 +1,21 @@
 import React from "react";
 
-import { deepmerge } from "deepmerge-ts";
-
 import { TipBox } from "./TipBox";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-// Meta: ONLY set meta.component
+/*
+Meta: ONLY set meta.component
+*/
 const meta = {
   component: TipBox,
 } satisfies Meta<typeof TipBox>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
 
-// Base: default story props. NO play functions
+/*
+Base: default story props. NO play functions
+*/
 const base: IStory = {
   args: {
     label: "Tip",
@@ -21,14 +23,12 @@ const base: IStory = {
   },
 };
 
-/**
- * Stories: merge over base.\
- * Typescript requires that non-optional props be explicitly set\
- * Or ...spread from base when overriding
- */
+/*
+Stories: each story should ...spread merge from base as required
+*/
 export const Default: IStory = base;
 
-export const WithHTMLContent: IStory = deepmerge(base, {
+export const WithHTMLContent: IStory = {
   args: {
     label: "Important",
     text: (
@@ -40,4 +40,4 @@ export const WithHTMLContent: IStory = deepmerge(base, {
       </div>
     ),
   },
-});
+};

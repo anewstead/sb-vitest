@@ -12,14 +12,18 @@ import type { IThemeBaseProps } from "./themeWrapper.type";
 import type { IThemeName } from "@src/common/style/theme.type";
 import type { Meta, StoryObj } from "@storybook/react";
 
-// Meta: ONLY set meta.component
+/*
+Meta: ONLY set meta.component
+*/
 const meta: Meta<typeof ThemeWrapper> = {
   component: ThemeWrapper,
 };
 export default meta;
 type IStory = StoryObj<typeof meta>;
 
-// Base: default story props. NO play functions
+/*
+Base: default story props. NO play functions
+*/
 const base: IStory = {
   render: (args: IThemeBaseProps) => {
     return (
@@ -33,11 +37,9 @@ const base: IStory = {
   },
 };
 
-/**
- * Stories: merge over base.\
- * Typescript requires that non-optional props be explicitly set\
- * Or ...spread from base when overriding
- */
+/*
+Stories: each story should ...spread merge from base as required
+*/
 export const Default: IStory = {
   ...base,
   play: async ({ canvasElement, step }) => {

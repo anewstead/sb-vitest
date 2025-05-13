@@ -8,14 +8,18 @@ import { MySelect } from "./MySelect";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-// Meta: ONLY set meta.component
+/*
+Meta: ONLY set meta.component
+*/
 const meta = {
   component: MySelect,
 } satisfies Meta<typeof MySelect>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
 
-// Base: default story props. NO play functions
+/*
+Base: default story props. NO play functions
+*/
 const base: IStory = {
   args: {
     labelText: "Select language",
@@ -42,11 +46,9 @@ const base: IStory = {
   },
 };
 
-/**
- * Stories: merge over base.\
- * Typescript requires that non-optional props be explicitly set\
- * Or ...spread from base when overriding
- */
+/*
+Stories: each story should ...spread merge from base as required
+*/
 export const Default: IStory = {
   ...base,
   play: async ({ canvasElement, args }) => {
@@ -55,13 +57,11 @@ export const Default: IStory = {
     const languageSelect = canvas.getByLabelText("Select language");
 
     await expect(languageSelect).toBeVisible();
-
     await expect(languageSelect).toHaveTextContent("English");
 
     await selectMuiOption(languageSelect, "Español");
 
     await expect(languageSelect).toHaveTextContent("Español");
-
     await expect(args.onChange).toHaveBeenCalledWith({
       value: "es-ES",
       label: "Español",
