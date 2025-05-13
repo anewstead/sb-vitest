@@ -1,7 +1,7 @@
 import React from "react";
 
 import logo from "@src/common/assets/acme-logo.svg";
-import { MyButton } from "@src/lib/atom/myButton/MyButton";
+import { MyButton } from "@src/components/atom/myButton/MyButton";
 
 import styles from "./loginBar.module.scss";
 

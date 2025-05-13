@@ -4,4 +4,6 @@ export type IMyButtonProps = {
   size?: "small" | "medium" | "large";
   label: string;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  className?: string;
 };

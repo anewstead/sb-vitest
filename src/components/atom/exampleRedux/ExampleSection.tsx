@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MyButton } from "@src/lib/atom/myButton/MyButton";
+import { MyButton } from "@src/components/atom/myButton/MyButton";
 
 import styles from "./exampleRedux.module.scss";
 

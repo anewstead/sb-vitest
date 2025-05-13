@@ -3,8 +3,7 @@ import React from "react";
 import AutoMode from "@mui/icons-material/AutoMode";
 import DarkMode from "@mui/icons-material/DarkMode";
 import LightMode from "@mui/icons-material/LightMode";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
+import { Button, ButtonGroup } from "@mui/material";
 import { useColorScheme } from "@mui/material/styles";
 
 import type { IThemeMode } from "@src/common/style/theme.type";

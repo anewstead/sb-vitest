@@ -1,7 +1,7 @@
 import React from "react";
 
-import { TipBox } from "@src/lib/atom/tipBox/TipBox";
-import { Header } from "@src/lib/organism/header/Header";
+import { TipBox } from "@src/components/atom/tipBox/TipBox";
+import { Header } from "@src/components/organism/header/Header";
 
 import styles from "./contentPage.module.scss";
 

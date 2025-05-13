@@ -6,8 +6,8 @@ import { useAppDispatch, useAppSelector } from "@src/app/state/store";
 import viewportIcon from "@src/common/assets/viewport-icon.svg";
 import { cleanHtml } from "@src/common/i18n/cleanHtml";
 import { useContent } from "@src/common/i18n/useContent";
-import { ExampleRedux } from "@src/lib/atom/exampleRedux/ExampleSection";
-import { ContentPage } from "@src/lib/template/contentPage/ContentPage";
+import { ExampleRedux } from "@src/components/atom/exampleRedux/ExampleSection";
+import { ContentPage } from "@src/components/template/contentPage/ContentPage";
 
 import {
   handleChangeText,

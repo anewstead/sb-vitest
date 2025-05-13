@@ -1,14 +1,13 @@
 import React from "react";
 
-import { Box } from "@mui/material";
-import Grid from "@mui/material/Grid";
+import { Box, Grid } from "@mui/material";
 
 import { useThemeWrapper } from "@src/app/wrappers/themeWrapper/useThemeWrapper";
 import { allThemes } from "@src/common/style/theme";
-import { MySelect } from "@src/lib/atom/mySelect/MySelect";
+import { MySelect } from "@src/components/atom/mySelect/MySelect";
 
 import type { IThemeName } from "@src/common/style/theme.type";
-import type { IMySelectItem } from "@src/lib/atom/mySelect/mySelect.type";
+import type { IMySelectItem } from "@src/components/atom/mySelect/mySelect.type";
 
 export const ThemeSelector = () => {
   /**

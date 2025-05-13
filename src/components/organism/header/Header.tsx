@@ -1,7 +1,7 @@
 import React from "react";
 
-import { LoginBar } from "@src/lib/molecule/loginBar/LoginBar";
-import { ThemeControls } from "@src/lib/molecule/themecontrols/ThemeControls";
+import { LoginBar } from "@src/components/molecule/loginBar/LoginBar";
+import { ThemeControls } from "@src/components/molecule/themecontrols/ThemeControls";
 
 import styles from "./header.module.scss";
 

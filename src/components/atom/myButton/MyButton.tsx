@@ -1,18 +1,21 @@
 import React from "react";
 
-import Button from "@mui/material/Button";
+import { Button } from "@mui/material";
+import clsx from "clsx";
 
 import styles from "./myButton.module.scss";
 
 import type { IMyButtonProps } from "./myButton.type";
 
-export const MyButton = (props: IMyButtonProps) => {
+export const MyButton: React.FC<IMyButtonProps> = (props) => {
   const {
     secondary = false,
     size = "medium",
     backgroundColor,
     label,
     onClick,
+    type = "button",
+    className,
   } = props;
 
   return (
@@ -20,8 +23,9 @@ export const MyButton = (props: IMyButtonProps) => {
       variant={secondary ? "outlined" : "contained"}
       size={size}
       style={{ backgroundColor }}
-      className={styles.myButton}
+      className={clsx(styles.myButton, className)}
       onClick={onClick}
+      type={type}
     >
       {label}
     </Button>
