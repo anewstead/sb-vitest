@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 import type { IMySelectProps } from "./mySelect.type";
 import type { SelectChangeEvent } from "@mui/material";
@@ -20,25 +20,23 @@ export const MySelect = (props: IMySelectProps) => {
   };
 
   return (
-    <Box>
-      <FormControl fullWidth size="small" variant="standard">
-        <InputLabel id={`${id}-label`}>{labelText}</InputLabel>
-        <Select
-          id={id}
-          labelId={`${id}-label`}
-          value={initialValue}
-          onChange={handleChange}
-          label={labelText}
-        >
-          {items.map((item) => {
-            return (
-              <MenuItem key={item.value} value={item.value}>
-                {item.label}
-              </MenuItem>
-            );
-          })}
-        </Select>
-      </FormControl>
-    </Box>
+    <FormControl fullWidth size="small" variant="standard">
+      <InputLabel id={`${id}-label`}>{labelText}</InputLabel>
+      <Select
+        id={id}
+        labelId={`${id}-label`}
+        value={initialValue}
+        onChange={handleChange}
+        label={labelText}
+      >
+        {items.map((item) => {
+          return (
+            <MenuItem key={item.value} value={item.value}>
+              {item.label}
+            </MenuItem>
+          );
+        })}
+      </Select>
+    </FormControl>
   );
 };
