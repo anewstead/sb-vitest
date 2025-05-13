@@ -35,7 +35,7 @@
   "include": [
     "*",
     "src/**/*",
-    "src_template/**/*",
+    "code_template/**/*",
     ".storybook/**/*",
     "scripts/**/*",
     "@types/**/*"
