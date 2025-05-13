@@ -10,7 +10,7 @@ import { THEME_STORAGE_KEY } from "./themeWrapper.helper";
 
 import type { IThemeBaseProps } from "./themeWrapper.type";
 import type { IThemeName } from "@src/common/style/theme.type";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
 /*
 Meta: ONLY set meta.component
@@ -42,7 +42,7 @@ Stories: each story should ...spread merge from base as required
 */
 export const Default: IStory = {
   ...base,
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: StoryContext) => {
     const canvas = within(canvasElement);
     await step("renders in default theme mode", async () => {
       const content = canvas.getByTestId("child-content");
@@ -84,7 +84,7 @@ export const UnknownTheme: IStory = {
   args: {
     initialTheme: "unknown-theme" as IThemeName,
   },
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: StoryContext) => {
     const canvas = within(canvasElement);
     await step(
       "falls back to default theme when unknown theme is passed",

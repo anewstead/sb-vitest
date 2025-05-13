@@ -32,5 +32,12 @@
     "public",
     "coverage"
   ],
-  "include": ["*", "src/**/*", ".storybook/**/*", "scripts/**/*", "@types/**/*"]
+  "include": [
+    "*",
+    "src/**/*",
+    "src_template/**/*",
+    ".storybook/**/*",
+    "scripts/**/*",
+    "@types/**/*"
+  ]
 }

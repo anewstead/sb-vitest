@@ -4,7 +4,7 @@ import { expect, fn, userEvent, within } from "@storybook/test";
 
 import { MyInput } from "./MyInput";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
 /*
 Meta: ONLY set meta.component
@@ -46,7 +46,7 @@ Stories: each story should ...spread merge from base as required
 */
 export const Default: IStory = {
   ...base,
-  play: async ({ canvasElement, args }) => {
+  play: async ({ canvasElement, args }: StoryContext) => {
     const canvas = within(canvasElement);
 
     const input = canvas.getByRole("textbox", { name: "Username" });
@@ -67,7 +67,7 @@ export const WithInitialValue: IStory = {
     ...base.args,
     initialValue: "pre-filled",
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
     const input = canvas.getByRole("textbox", { name: "Username" });
     await expect(input).toHaveValue("pre-filled");
@@ -82,7 +82,7 @@ export const Password: IStory = {
     type: "password",
     placeholder: "Enter your password",
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement }: StoryContext) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText("Password");
     await expect(input).toHaveAttribute("type", "password");
@@ -98,7 +98,7 @@ export const Number: IStory = {
     placeholder: "Enter your age",
     initialValue: "",
   },
-  play: async ({ canvasElement, args }) => {
+  play: async ({ canvasElement, args }: StoryContext) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText("Age");
 
@@ -127,7 +127,7 @@ export const Phone: IStory = {
     placeholder: "Enter your phone number",
     initialValue: "",
   },
-  play: async ({ canvasElement, args }) => {
+  play: async ({ canvasElement, args }: StoryContext) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText("Phone Number");
 

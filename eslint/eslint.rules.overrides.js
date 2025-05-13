@@ -7,7 +7,8 @@ const allowDefaultExport = {
     "./*",
     ".storybook/**/*",
     "**/eslint/**",
-    "src/**/*.stories.{ts,tsx}",
+    "src/**/*.stories.tsx",
+    "src_template/**/*.stories.tsx",
   ],
   rules: {
     "import/no-default-export": "off",

@@ -6,7 +6,7 @@ import { selectMuiOption } from "@src/common/test/utils/selectMuiOption";
 
 import { MySelect } from "./MySelect";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
 /*
 Meta: ONLY set meta.component
@@ -51,7 +51,7 @@ Stories: each story should ...spread merge from base as required
 */
 export const Default: IStory = {
   ...base,
-  play: async ({ canvasElement, args }) => {
+  play: async ({ canvasElement, args }: StoryContext) => {
     const canvas = within(canvasElement);
 
     const languageSelect = canvas.getByLabelText("Select language");

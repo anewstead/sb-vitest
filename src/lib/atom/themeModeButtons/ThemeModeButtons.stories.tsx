@@ -4,7 +4,7 @@ import { DARK_CLASS, LIGHT_CLASS } from "@src/common/style/themes/base";
 
 import { ThemeModeButtons } from "./ThemeModeButtons";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
 // -----------------------------------------------------------------------------
 const meta: Meta<typeof ThemeModeButtons> = {
@@ -16,7 +16,7 @@ type IStory = StoryObj<typeof meta>;
 
 export const Default: IStory = {
   args: {},
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: StoryContext) => {
     const canvas = within(canvasElement);
     const lightBtn = canvas.getByRole("button", { name: "light" });
     const systemBtn = canvas.getByRole("button", { name: "system" });
