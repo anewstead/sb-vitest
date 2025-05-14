@@ -13,13 +13,13 @@ export const MyInput = (props: IMyInputProps) => {
     type = "text",
     placeholder,
     required = false,
-    error,
+    errorText,
   } = props;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value;
 
-    // Add validation for tel type
+    // Add validation for tel type (possible should move this to zod)
     if (type === "tel") {
       // Only allow numbers, parentheses, spaces, dashes, and plus sign
       value = value.replace(/[^0-9()\s-+]/g, "");
@@ -29,7 +29,7 @@ export const MyInput = (props: IMyInputProps) => {
   };
 
   return (
-    <FormControl fullWidth error={!!error}>
+    <FormControl fullWidth error={!!errorText}>
       <FormLabel htmlFor={id}>{labelText}</FormLabel>
       <Input
         id={id}
@@ -45,7 +45,7 @@ export const MyInput = (props: IMyInputProps) => {
           "data-testid": id,
         }}
       />
-      {error && <FormHelperText>{error}</FormHelperText>}
+      {errorText && <FormHelperText>{errorText}</FormHelperText>}
     </FormControl>
   );
 };

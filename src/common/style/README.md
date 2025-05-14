@@ -1,6 +1,6 @@
 **NEVER WRITE UNWRAPPED CSS CLASSES IN GLOBAL SCSS**  
 Any css that is not wrapped by scss is automatically written into every consuming file  
-Whereas sass will only write the output of a variable, mixins, function in situe when used
+Whereas sass will only write the output of a variable, mixins, function in situ when used
 
 ## Global
 

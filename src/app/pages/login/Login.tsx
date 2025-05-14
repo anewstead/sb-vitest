@@ -6,8 +6,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { validEmail } from "@src/common/utils/zod/validEmail";
-import { MyButton } from "@src/components/atom/myButton/MyButton";
-import { MyInput } from "@src/components/atom/myInput/MyInput";
+import { LoginForm } from "@src/components/molecule/loginForm/LoginForm";
 
 const loginSchema = z.object({
   email: validEmail,
@@ -35,7 +34,7 @@ export const Login = () => {
 
   const onSubmit = (data: ILoginFormData) => {
     //TMP log for dev purposes
-    console.warn(data);
+    console.log(data);
     // Handle login logic here
   };
 
@@ -49,45 +48,32 @@ export const Login = () => {
     <Grid
       container
       spacing={2}
-      sx={{ justifyContent: "center", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        height: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
       <Grid size={{ xs: 12, sm: 8, md: 6, lg: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
           Login
         </Typography>
-        <form onSubmit={handleFormSubmit} noValidate>
-          <Grid container spacing={2}>
-            <Grid size={12}>
-              <MyInput
-                labelText="Email"
-                type="email"
-                id="email"
-                initialValue={emailValue}
-                onChange={(value) => {
-                  setValue("email", value);
-                }}
-                required
-                error={errors.email?.message}
-              />
-            </Grid>
-            <Grid size={12}>
-              <MyInput
-                labelText="Password"
-                type="password"
-                id="password"
-                initialValue={passwordValue}
-                onChange={(value) => {
-                  setValue("password", value);
-                }}
-                required
-                error={errors.password?.message}
-              />
-            </Grid>
-            <Grid size={12}>
-              <MyButton label="Login" type="submit" />
-            </Grid>
-          </Grid>
-        </form>
+        <LoginForm
+          emailLabel="Email"
+          passwordLabel="Password"
+          emailValue={emailValue}
+          passwordValue={passwordValue}
+          onEmailChange={(value) => {
+            setValue("email", value);
+          }}
+          onPasswordChange={(value) => {
+            setValue("password", value);
+          }}
+          onSubmit={handleFormSubmit}
+          emailError={errors.email?.message}
+          passwordError={errors.password?.message}
+        />
       </Grid>
     </Grid>
   );

@@ -41,8 +41,10 @@ Layouts, typically of pages, composes organisms, molecules and (rarely) atoms
 
 ### Pages
 
-Pages are STATEFUL, here meaning they have specific content.  
-However content, functionality, services and state should all be mocked inside storybook.  
-It is possible to show the actual page with all the above mocked, though may not want to if very complex,  
-but as such any pages inside the component library should only really be to illustrate a visual of a template.  
-That is, they are still essentially flat and should not connect to full interactivity and real world content or business logic.
+Pages are STATEFUL, and are the actual production page, meaning they are specific.  
+Importantly however all content, functionality, services and state should all be mocked inside storybook.  
+It is possible to show the actual page but you shouldn't!  
+You want a clear indication of mocked content e.g. Lorem ipsum,  
+and you do not want for example a navigation item to click to another page,  
+As such pages as seen inside the component library should be quite flat and only really illustrative.  
+That is, should intercept/ not connect to full interactivity and real world content or business logic.
