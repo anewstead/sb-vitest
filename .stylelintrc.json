@@ -7,6 +7,7 @@
   "plugins": ["stylelint-scss", "./scripts/stylelint/filenamePlugin.js"],
   "rules": {
     "alpha-value-notation": "number",
+    "at-rule-no-unknown": null,
     "custom-property-pattern": null,
     "no-descending-specificity": null,
     "scss/at-rule-no-unknown": [
@@ -17,7 +18,14 @@
           "apply",
           "variants",
           "responsive",
-          "screen"
+          "screen",
+          "layer",
+          "use",
+          "forward",
+          "mixin",
+          "function",
+          "if",
+          "return"
         ]
       }
     ],

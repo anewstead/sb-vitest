@@ -14,7 +14,7 @@ const channel = addons.getChannel();
 
 const storybookPreviewIframeDocumentStyles = `
 .docs-story {
-  background-color: var(--dc-palette-background-default);
+  background-color: var(--mui-palette-background-default);
 }
 /* fix mdx headers in darkmode */
 .css-1ofkq6d {

@@ -1,6 +1,7 @@
 onlyBuiltDependencies:
-  - "@parcel/watcher"
-  - "@swc/core"
+  - '@parcel/watcher'
+  - '@swc/core'
+  - '@tailwindcss/oxide'
   - esbuild
   - msw
   - storybook-addon-remix-react-router

@@ -10,3 +10,7 @@ Everywhere else in the app should use modules to prevent namespace clashes
 ## theme.ts
 
 theme settings imported via base theme wrapper/provider
+
+## tailwind
+
+Root tailwind setup

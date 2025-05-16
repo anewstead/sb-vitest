@@ -10,6 +10,8 @@ import { allThemes, defaultTheme } from "@src/common/style/theme";
 import { getStoredTheme, setStoredTheme } from "./themeWrapper.helper";
 import { ThemeWrapperContext } from "./ThemeWrapperContext";
 
+import "@src/common/style/tailwind.css";
+
 import type { IThemeBaseProps } from "./themeWrapper.type";
 import type { Theme } from "@mui/material/styles";
 import type { IThemeName } from "@src/common/style/theme.type";

@@ -3,23 +3,23 @@
  */
 export const baseThemeOptions = {
   cssVariables: {
-    cssVarPrefix: "dc",
-    colorSchemeSelector: ".dc-%s",
+    colorSchemeSelector: "class",
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         "html, body, #root, .sb-story, #storybook-root": {
+          // height 100% is important fix for:
+          // - scroll on mobile
+          // - relative position/height for child elements
+          // - storybook items that are as if a body
           height: "100%",
-        },
-        a: {
-          color: "inherit",
         },
       },
     },
   },
 } as const;
 
-// html/body classes for light/dark uses cssVarPrefix
-export const LIGHT_CLASS = "dc-light";
-export const DARK_CLASS = "dc-dark";
+// html/body classes for light/dark (to allow if cssVarPrefix)
+export const LIGHT_CLASS = "light";
+export const DARK_CLASS = "dark";

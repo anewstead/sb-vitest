@@ -4,6 +4,7 @@
 
 import path from "node:path";
 
+import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
@@ -15,7 +16,7 @@ export default defineConfig(({ command, mode }) => {
   const isDev = command === "serve" && mode === "development";
   const isTest = command === "serve" && process.env.VITEST;
 
-  const plugins: PluginOption[] = [tsconfigPaths(), react()];
+  const plugins: PluginOption[] = [tsconfigPaths(), react(), tailwindcss()];
   if (!isTest) {
     plugins.push(checker({ typescript: true }));
   }
