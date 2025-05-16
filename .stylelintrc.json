@@ -25,7 +25,13 @@
           "mixin",
           "function",
           "if",
-          "return"
+          "return",
+          "theme",
+          "base",
+          "mui",
+          "components",
+          "utilities",
+          "utility"
         ]
       }
     ],

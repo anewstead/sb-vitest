@@ -19,12 +19,12 @@ $font-3xl: px2rem(28);
 $font-4xl: px2rem(32);
 $font-5xl: px2rem(36);
 
-// Break-points
-$break-xs: px2rem(400);
+// Break-points (match mui)
 $break-sm: px2rem(600);
 $break-md: px2rem(900);
 $break-lg: px2rem(1200);
-$break-xl: px2rem(1500);
+$break-xl: px2rem(1536);
+$break-2xl: px2rem(1920);
 
 // Spacing
 $space-3xs: px2rem(2);

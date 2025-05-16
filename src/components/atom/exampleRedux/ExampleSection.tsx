@@ -1,8 +1,8 @@
 import React from "react";
 
-import { MyButton } from "@src/components/atom/myButton/MyButton";
+import { Grid } from "@mui/material";
 
-import styles from "./exampleRedux.module.scss";
+import { MyButton } from "@src/components/atom/myButton/MyButton";
 
 import type { IExampleReduxProps } from "./exampleRedux.type";
 
@@ -13,9 +13,17 @@ export const ExampleRedux = (props: IExampleReduxProps) => {
   const { buttonLabel, exampleText, onChangeText } = props;
 
   return (
-    <div className={styles.exampleRedux}>
-      <p data-testid="example-text">{exampleText}</p>
-      <MyButton secondary label={buttonLabel} onClick={onChangeText} />
-    </div>
+    <Grid
+      container
+      spacing={2}
+      className="my-4 p-4 border rounded-xl [border-color:var(--mui-palette-text-primary)]"
+    >
+      <Grid size={12}>
+        <p data-testid="example-text">{exampleText}</p>
+      </Grid>
+      <Grid size={12}>
+        <MyButton secondary label={buttonLabel} onClick={onChangeText} />
+      </Grid>
+    </Grid>
   );
 };
