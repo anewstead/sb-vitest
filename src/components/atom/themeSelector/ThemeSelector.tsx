@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Box, Grid } from "@mui/material";
+import clsx from "clsx";
 
 import { useThemeWrapper } from "@src/app/wrappers/themeWrapper/useThemeWrapper";
 import { allThemes } from "@src/common/style/theme";
@@ -30,7 +31,7 @@ export const ThemeSelector = () => {
   };
 
   return (
-    <Grid container spacing={2} sx={{ flexGrow: 1, padding: 1 }}>
+    <Grid container spacing={2} className="flex-grow p-4">
       <Grid size={7}>
         <MySelect
           id="theme-select"
@@ -43,15 +44,11 @@ export const ThemeSelector = () => {
       <Grid size={5}>
         <Box
           data-testid="theme-display"
-          sx={{
-            bgcolor: "primary.main",
-            borderRadius: 1,
-            borderColor: "primary.dark",
-            height: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          className={clsx(
+            "h-full flex items-center justify-center",
+            "bg-[var(--mui-palette-primary-main)]",
+            "border border-[var(--mui-palette-primary-dark)] rounded"
+          )}
         >
           {currentTheme}
         </Box>

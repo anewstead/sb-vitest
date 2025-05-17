@@ -48,12 +48,7 @@ export const Login = () => {
     <Grid
       container
       spacing={2}
-      sx={{
-        display: "flex",
-        height: "100%",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      className="flex h-full items-center justify-center"
     >
       <Grid size={{ xs: 12, sm: 8, md: 6, lg: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
