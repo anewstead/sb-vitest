@@ -18,8 +18,8 @@ export const ExampleRedux = (props: IExampleReduxProps) => {
       spacing={2}
       className="my-4 p-4 border rounded-xl [border-color:var(--mui-palette-text-primary)]"
     >
-      <Grid size={12}>
-        <p data-testid="example-text">{exampleText}</p>
+      <Grid size={12} data-testid="example-text">
+        {exampleText}
       </Grid>
       <Grid size={12}>
         <MyButton secondary label={buttonLabel} onClick={onChangeText} />

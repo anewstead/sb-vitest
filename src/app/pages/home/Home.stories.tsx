@@ -5,9 +5,7 @@ import { homeReducer } from "@src/app/state/home/slice";
 import {
   contentError,
   contentSlow,
-  contentSuccess,
 } from "@src/common/test/msw/handlers/i18nContentHandlers";
-import { i18nSuccess } from "@src/common/test/msw/handlers/i18nJsonHandlers";
 import { withStore } from "@src/common/test/StoryStore";
 
 import { Home } from "./Home";
@@ -28,11 +26,6 @@ Base: default story props. NO play functions
 */
 const base: IStory = {
   decorators: [withRouter, withStore({ home: homeReducer })],
-  parameters: {
-    msw: {
-      handlers: [i18nSuccess, contentSuccess],
-    },
-  },
 };
 
 /*
