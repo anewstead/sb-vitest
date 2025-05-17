@@ -47,6 +47,12 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     optimizeDeps: {
+      include: [
+        "storybook-dark-mode",
+        "i18next",
+        "i18next-browser-languagedetector",
+        "i18next-http-backend",
+      ],
       /**
        * Sourcemaps for dependencies are rarely needed. Only if debug
        * third-party node_modules, which is uncommon. They will slow down

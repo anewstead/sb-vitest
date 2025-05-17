@@ -34,7 +34,7 @@ export const Login = () => {
 
   const onSubmit = (data: ILoginFormData) => {
     //TMP log for dev purposes
-    console.log(data);
+    console.info(data);
     // Handle login logic here
   };
 
