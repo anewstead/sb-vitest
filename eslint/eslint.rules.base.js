@@ -43,12 +43,24 @@ export const baseRules = {
   ],
 
   "no-restricted-imports": [
-    "warn",
+    "error",
     {
       patterns: [
         {
           group: [".."],
-          message: "Avoid relative parent imports, use absolute @ alias path.",
+          message:
+            "\nAvoid relative parent imports, use absolute @ alias path.",
+        },
+        {
+          group: ["@mui/material"],
+          importNames: ["styled", "css"],
+          message: "\nAvoid using MUI styled. Use Tailwind classes instead.",
+        },
+        {
+          group: ["@emotion"],
+          importNames: ["default", "css", "styled"],
+          message:
+            "\nAvoid using styled imports. Use Tailwind classes instead.",
         },
       ],
     },
@@ -58,12 +70,12 @@ export const baseRules = {
     "error",
     {
       message:
-        "for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.",
+        "for..in loops iterate over the entire prototype chain. Use Object.{keys|values|entries}, and iterate over the resulting array.",
       selector: "ForInStatement",
     },
     {
       message:
-        "iterators/generators require regenerator-runtime, which is too heavyweight for this guide to allow them. Separately, loops should be avoided in favor of array iterations.",
+        "iterators/generators require regenerator-runtime. These loops should be avoided in favor of array iterations.",
       selector: "ForOfStatement",
     },
     {
@@ -80,6 +92,10 @@ export const baseRules = {
       selector: "TSEnumDeclaration",
       message:
         "Avoid using `enum`, always prefer standard `const` object or union types.",
+    },
+    {
+      selector: "JSXAttribute[name.name='sx']",
+      message: "Avoid using MUI sx prop. Use Tailwind classes instead.",
     },
   ],
 
