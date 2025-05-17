@@ -9,12 +9,21 @@
 @import "./muiTailwind.css";
 
 /*
-height 100% fix for:
-- scroll on mobile
+fix 
+- scroll on mobile (judder and pull refresh)
 - relative position/height for child elements
-- storybook items that are as if a body
 */
-body,
+html,
+body {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/*
+fix
+- height 100% items that are as if a body
+- relative position/height for child elements
+*/
 #root,
 .sb-story,
 #storybook-root {
