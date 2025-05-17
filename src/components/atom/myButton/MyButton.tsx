@@ -3,15 +3,12 @@ import React from "react";
 import { Button } from "@mui/material";
 import clsx from "clsx";
 
-import styles from "./myButton.module.scss";
-
 import type { IMyButtonProps } from "./myButton.type";
 
-export const MyButton: React.FC<IMyButtonProps> = (props) => {
+export const MyButton = (props: IMyButtonProps) => {
   const {
     secondary = false,
     size = "medium",
-    backgroundColor,
     label,
     onClick,
     type = "button",
@@ -22,8 +19,11 @@ export const MyButton: React.FC<IMyButtonProps> = (props) => {
     <Button
       variant={secondary ? "outlined" : "contained"}
       size={size}
-      style={{ backgroundColor }}
-      className={clsx(styles.myButton, className)}
+      className={clsx(
+        "normal-case",
+        "hover:-translate-y-0.5 hover:transition-transform hover:duration-200 hover:ease-in-out",
+        className
+      )}
       onClick={onClick}
       type={type}
     >

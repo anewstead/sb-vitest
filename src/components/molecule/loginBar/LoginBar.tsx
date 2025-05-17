@@ -44,7 +44,7 @@ export const LoginBar = (props: ILoginBarProps) => {
     <header>
       <div className={styles.loginBar}>
         <div>
-          <img src={logo} alt="Acme Logo" />
+          <img src={logo} alt="Acme Logo" className="inline-block" />
           <h1>Acme</h1>
         </div>
         <div>{user ? loggedInContent : loggedOutContent}</div>

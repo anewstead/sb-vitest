@@ -1,8 +1,14 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+
+import { addons } from "@storybook/preview-api";
 
 import { useThemeWrapper } from "@src/app/wrappers/themeWrapper/useThemeWrapper";
 
 import { getThemeFromUrl, updateUrlWithTheme } from "./themeHelpers";
+
+import type { IThemeName } from "@src/common/style/theme.type";
+
+const channel = addons.getChannel();
 
 /**
  * Component to sync app theme and Storybook theme Should be added inside
@@ -20,17 +26,6 @@ export const SyncSbMuiTheme = () => {
   const { currentTheme, setCurrentTheme } = useThemeWrapper();
   const themeHasInited = useRef(false);
   const shouldUpdateTheme = useRef(true);
-
-  // Handle URL changes from Storybook
-  const onUrlThemeChange = useCallback(() => {
-    const { urlTheme, isValid } = getThemeFromUrl();
-    if (isValid && urlTheme !== currentTheme) {
-      shouldUpdateTheme.current = false;
-      setCurrentTheme(urlTheme);
-    } else {
-      shouldUpdateTheme.current = true;
-    }
-  }, [currentTheme, setCurrentTheme]);
 
   // Initial sync and theme changes
   useEffect(() => {
@@ -55,13 +50,22 @@ export const SyncSbMuiTheme = () => {
     }
   }, [currentTheme, setCurrentTheme]);
 
-  // Listen for URL changes
+  // Listen for Storybook theme changes (works in both docs and story pages)
   useEffect(() => {
-    window.addEventListener("popstate", onUrlThemeChange);
-    return () => {
-      window.removeEventListener("popstate", onUrlThemeChange);
+    const handleStorybookThemeChange = (event: {
+      globals: { theme: IThemeName };
+    }) => {
+      if (event.globals.theme !== currentTheme) {
+        shouldUpdateTheme.current = false;
+        setCurrentTheme(event.globals.theme);
+      }
     };
-  }, [onUrlThemeChange]);
+
+    channel.on("updateGlobals", handleStorybookThemeChange);
+    return () => {
+      channel.off("updateGlobals", handleStorybookThemeChange);
+    };
+  }, [currentTheme, setCurrentTheme]);
 
   return <></>;
 };

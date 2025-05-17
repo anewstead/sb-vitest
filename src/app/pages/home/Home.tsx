@@ -33,7 +33,7 @@ export const Home = (props: IHomeProps) => {
 
   const viewportTip = cleanHtml(
     t("home:viewportTip", {
-      icon: `<img src="${viewportIcon}" alt="viewport icon" />`,
+      icon: `<img src="${viewportIcon}" alt="viewport icon" class="inline-block" />`,
     })
   );
 

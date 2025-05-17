@@ -21,9 +21,6 @@ const base: IStory = {
     label: "Button",
     onClick: fn(),
   },
-  argTypes: {
-    backgroundColor: { control: "color" },
-  },
 };
 
 /*

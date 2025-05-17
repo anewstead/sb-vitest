@@ -1,22 +1,11 @@
-/* pre-supplied settings from mui */
+/* supplied tailwind sync from mui */
 
 /* https://mui.com/material-ui/integrations/tailwindcss/tailwindcss-v4/#extend-material-ui-classes */
 
 /* stylelint-disable number-max-precision */
 /* stylelint-disable scss/operator-no-unspaced */
 
-@import "@fontsource/roboto/300.css";
-@import "@fontsource/roboto/400.css";
-@import "@fontsource/roboto/500.css";
-@import "@fontsource/roboto/700.css";
-@import "@fontsource/material-icons/index.css";
-
-/* Note NO tailwindcss/preflight(base) to prevent conflicts with MUI base */
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
-
-/* predefined layers */
-@layer theme, base, mui, components, utilities;
+@import "tailwindcss";
 
 @theme inline {
   /* Material UI typography */

@@ -72,7 +72,8 @@
   "stylelint.validate": ["css", "scss", "less"],
 
   "tailwindCSS.experimental.classRegex": [
-    ["className\\s*:\\s*['\"]([^'\"]*)['\"]"]
+    ["className\\s*:\\s*['\"]([^'\"]*)['\"]"],
+    ["clsx\\(([^)]*)\\)"]
   ],
 
   "terminal.integrated.scrollback": 9999,

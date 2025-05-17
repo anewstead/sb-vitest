@@ -1,0 +1,22 @@
+/* fonts */
+@import "@fontsource/roboto/300.css";
+@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto/500.css";
+@import "@fontsource/roboto/700.css";
+@import "@fontsource/material-icons/index.css";
+
+/* custom mui/tailwind */
+@import "./muiTailwind.css";
+
+/*
+height 100% fix for:
+- scroll on mobile
+- relative position/height for child elements
+- storybook items that are as if a body
+*/
+body,
+#root,
+.sb-story,
+#storybook-root {
+  height: 100%;
+}

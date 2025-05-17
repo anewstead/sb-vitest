@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from "react";
 
-import createCache from "@emotion/cache";
-import { CacheProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import GlobalStyles from "@mui/material/GlobalStyles";
+import {
+  StyledEngineProvider,
+  ThemeProvider as MuiThemeProvider,
+} from "@mui/material/styles";
 
 import { allThemes, defaultTheme } from "@src/common/style/theme";
 
 import { getStoredTheme, setStoredTheme } from "./themeWrapper.helper";
 import { ThemeWrapperContext } from "./ThemeWrapperContext";
 
-import "@src/common/style/tailwind.css";
+import "@src/common/style/root.css";
 
 import type { IThemeBaseProps } from "./themeWrapper.type";
 import type { Theme } from "@mui/material/styles";
 import type { IThemeName } from "@src/common/style/theme.type";
-
-// https://mui.com/material-ui/guides/interoperability/#css-injection-order
-const muiCache = createCache({
-  key: "mui",
-  prepend: true,
-});
 
 export const ThemeWrapper = (props: IThemeBaseProps) => {
   const { children, initialTheme = defaultTheme.name } = props;
@@ -48,12 +44,13 @@ export const ThemeWrapper = (props: IThemeBaseProps) => {
 
   return (
     <ThemeWrapperContext.Provider value={{ currentTheme, setCurrentTheme }}>
-      <CacheProvider value={muiCache}>
-        <MuiThemeProvider theme={theme}>
+      <StyledEngineProvider enableCssLayer injectFirst>
+        <MuiThemeProvider theme={theme} noSsr>
+          <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
           <CssBaseline />
           {children}
         </MuiThemeProvider>
-      </CacheProvider>
+      </StyledEngineProvider>
     </ThemeWrapperContext.Provider>
   );
 };
