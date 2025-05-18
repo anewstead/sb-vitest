@@ -50,20 +50,31 @@ export const SyncSbMuiTheme = () => {
     }
   }, [currentTheme, setCurrentTheme]);
 
-  // Listen for Storybook theme changes (works in both docs and story pages)
+  // Listen for all Storybook global updates
   useEffect(() => {
-    const handleStorybookThemeChange = (event: {
-      globals: { theme: IThemeName };
+    const handleStorybookUpdate = (event: {
+      globals: Record<string, unknown>;
     }) => {
-      if (event.globals.theme !== currentTheme) {
-        shouldUpdateTheme.current = false;
-        setCurrentTheme(event.globals.theme);
+      // If theme is in the globals, handle it
+      if ("theme" in event.globals) {
+        const newTheme = event.globals.theme as IThemeName;
+        if (newTheme !== currentTheme) {
+          shouldUpdateTheme.current = false;
+          setCurrentTheme(newTheme);
+        }
+      } else {
+        // For other global updates, re-initialize theme from URL
+        const { urlTheme, isValid } = getThemeFromUrl();
+        if (isValid && urlTheme !== currentTheme) {
+          shouldUpdateTheme.current = false;
+          setCurrentTheme(urlTheme);
+        }
       }
     };
 
-    channel.on("updateGlobals", handleStorybookThemeChange);
+    channel.on("updateGlobals", handleStorybookUpdate);
     return () => {
-      channel.off("updateGlobals", handleStorybookThemeChange);
+      channel.off("updateGlobals", handleStorybookUpdate);
     };
   }, [currentTheme, setCurrentTheme]);
 

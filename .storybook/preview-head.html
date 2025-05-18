@@ -2,20 +2,36 @@
   window.global = window;
 </script>
 <style>
+  :root {
+    --storybook-bg-light: #ffffff;
+    --storybook-bg-dark: #1b1c1d;
+  }
+
+  html.light {
+    --storybook-bg: var(--storybook-bg-light);
+  }
+
+  html.dark {
+    --storybook-bg: var(--storybook-bg-dark);
+  }
+
   /* background color before story loads */
   :root,
+  html,
+  body,
   .sb-preparing-story,
   .sb-preparing-docs,
   .sb-previewBlock,
   .sb-argstableBlock,
   #storybook-preview-iframe {
-    background: var(--mui-palette-common-background);
+    background: var(--storybook-bg);
   }
 
-  /* fix relative height */
+  /* fix relative height and background color */
   .sb-story,
   #storybook-root {
     height: 100%;
+    background-color: var(--mui-palette-background-default);
   }
 
   /* fix background color */
