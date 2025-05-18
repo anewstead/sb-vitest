@@ -13,12 +13,12 @@ export const baseRules = {
     { max: 450, skipBlankLines: true, skipComments: true },
   ],
 
-  "no-alert": ["warn"],
+  "no-alert": ["error"],
 
   "no-console": [
-    "warn",
+    "error",
     {
-      allow: ["warn", "error", "info", "dir", "time", "timeEnd"],
+      allow: ["warn", "error", "time", "timeEnd"],
     },
   ],
 
@@ -99,7 +99,7 @@ export const baseRules = {
     },
   ],
 
-  "no-underscore-dangle": "warn",
+  "no-underscore-dangle": "error",
 
   "no-void": [
     "error",

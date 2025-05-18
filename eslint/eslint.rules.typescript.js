@@ -4,7 +4,7 @@
 
 export const tsRules = {
   "@typescript-eslint/ban-ts-comment": [
-    "warn",
+    "error",
     {
       "ts-check": false,
       "ts-expect-error": "allow-with-description",
@@ -13,12 +13,12 @@ export const tsRules = {
     },
   ],
 
-  "@typescript-eslint/consistent-type-definitions": ["warn", "type"],
+  "@typescript-eslint/consistent-type-definitions": ["error", "type"],
   "@typescript-eslint/consistent-type-exports": "error",
   "@typescript-eslint/consistent-type-imports": "error",
 
   "@typescript-eslint/naming-convention": [
-    "warn",
+    "error",
     {
       format: ["camelCase", "PascalCase", "UPPER_CASE"],
       selector: "variable",
@@ -40,12 +40,4 @@ export const tsRules = {
       },
     },
   ],
-
-  "@typescript-eslint/no-unsafe-argument": "warn",
-  "@typescript-eslint/no-unsafe-assignment": "warn",
-  "@typescript-eslint/no-unsafe-call": "warn",
-  "@typescript-eslint/no-unsafe-return": "warn",
-  "@typescript-eslint/no-unsafe-member-access": "warn",
-  "@typescript-eslint/no-unsafe-enum-comparison": "warn",
-  "@typescript-eslint/no-non-null-assertion": "warn",
 };

@@ -19,11 +19,11 @@
 export const importRules = {
   "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
   "import/no-default-export": "error",
-  "import/no-extraneous-dependencies": "warn",
-  "import/no-unassigned-import": ["warn", { allow: ["**/*.css"] }],
+  "import/no-extraneous-dependencies": "error",
+  "import/no-unassigned-import": ["error", { allow: ["**/*.css"] }],
 
   "import/order": [
-    "warn",
+    "error",
     {
       alphabetize: {
         caseInsensitive: true,

@@ -27,7 +27,7 @@ const allowRelaxedImports = {
     "**/*.{test,mock,stories}.{js,jsx,ts,tsx}",
   ],
   rules: {
-    "import/no-extraneous-dependencies": ["warn", { devDependencies: true }],
+    "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
     "import/no-unassigned-import": "off",
   },
 };
@@ -36,7 +36,7 @@ const allowParentImports = {
   files: ["**/__{tests,mocks}__/**", ".storybook/**/*"],
   rules: {
     "no-restricted-imports": [
-      "warn",
+      "error",
       {
         patterns: [
           {
