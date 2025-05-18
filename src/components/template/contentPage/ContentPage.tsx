@@ -13,7 +13,7 @@ export const ContentPage = (props: IContentPageProps) => {
 
   return (
     <Grid container direction="column" alignItems="center" className="p-4">
-      <Grid className="w-full">
+      <Grid size={12}>
         <Header {...headerProps} />
       </Grid>
 
@@ -25,13 +25,13 @@ export const ContentPage = (props: IContentPageProps) => {
           "bg-[rgb(var(--mui-palette-common-backgroundChannel)/0.1)] "
         )}
       >
-        <Grid className="w-full">
+        <Grid size={12}>
           <h2>{title}</h2>
         </Grid>
 
-        <Grid>{content}</Grid>
+        <Grid size={12}>{content}</Grid>
 
-        <Grid className="w-full">
+        <Grid size={12}>
           <TipBox {...tipBoxProps} />
         </Grid>
       </Grid>
