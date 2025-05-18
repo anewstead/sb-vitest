@@ -16,6 +16,7 @@ const meta = {
 } satisfies Meta<typeof MySelect>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
+type IPlayProps = StoryContext<IStory["args"]>;
 
 /*
 Base: default story props. NO play functions
@@ -51,7 +52,7 @@ Stories: each story should ...spread merge from base as required
 */
 export const Default: IStory = {
   ...base,
-  play: async ({ canvasElement, args }: StoryContext) => {
+  play: async ({ canvasElement, args }: IPlayProps) => {
     const canvas = within(canvasElement);
 
     const languageSelect = canvas.getByLabelText("Select language");

@@ -2,16 +2,33 @@
   window.global = window;
 </script>
 <style>
+  /* background color before story loads */
   :root,
   .sb-preparing-story,
   .sb-preparing-docs,
   .sb-previewBlock,
   .sb-argstableBlock,
   #storybook-preview-iframe {
-    background: #333;
+    background: var(--mui-palette-common-background);
   }
-  /* remove padding when component viewed by itself */
-  .sb-main-padded.sb-show-main {
-    padding: 0;
+
+  /* fix relative height */
+  .sb-story,
+  #storybook-root {
+    height: 100%;
+  }
+
+  /* fix background color */
+  .docs-story {
+    background-color: var(--mui-palette-background-default);
+  }
+
+  /* fix mdx headers in darkmode */
+  .css-1ofkq6d {
+    float: left;
+    line-height: inherit;
+    padding-right: 10px;
+    margin-left: -24px;
+    color: inherit;
   }
 </style>

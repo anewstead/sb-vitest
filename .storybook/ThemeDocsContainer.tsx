@@ -12,20 +12,6 @@ import type { ReactNode } from "react";
 
 const channel = addons.getChannel();
 
-const storybookPreviewIframeDocumentStyles = `
-.docs-story {
-  background-color: var(--mui-palette-background-default);
-}
-/* fix mdx headers in darkmode */
-.css-1ofkq6d {
-  float: left;
-  line-height: inherit;
-  padding-right: 10px;
-  margin-left: -24px;
-  color: inherit;
-}
-`;
-
 type IThemeDocsContainerProps = DocsContainerProps & { children: ReactNode };
 
 export const ThemeDocsContainer = ({
@@ -33,17 +19,6 @@ export const ThemeDocsContainer = ({
   context,
 }: IThemeDocsContainerProps) => {
   const [isDark, setDark] = useState(false);
-
-  // init: add theme styles
-  useEffect(() => {
-    const style = document.createElement("style");
-    style.innerHTML = storybookPreviewIframeDocumentStyles;
-    document.head.appendChild(style);
-    // Cleanup on unmount
-    return () => {
-      document.head.removeChild(style);
-    };
-  }, []);
 
   // init: ensure correct theme on first load
   useEffect(() => {

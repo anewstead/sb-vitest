@@ -3,6 +3,7 @@ import { expect, fn, userEvent, within } from "@storybook/test";
 import { LoginForm } from "./LoginForm";
 
 import type { Meta, StoryContext, StoryObj } from "@storybook/react";
+import type React from "react";
 
 /*
 Meta: ONLY set meta.component
@@ -12,18 +13,34 @@ const meta = {
 } satisfies Meta<typeof LoginForm>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
+type IPlayProps = StoryContext<IStory["args"]>;
 
 /*
 Base: default story props. NO play functions
 */
 const base: IStory = {
+  argTypes: {
+    email: {
+      control: false, // hide browser
+    },
+    password: {
+      control: false, // hide browser
+    },
+  },
   args: {
-    emailLabel: "Email",
-    emailValue: "",
-    passwordLabel: "Password",
-    passwordValue: "",
-    onEmailChange: fn(),
-    onPasswordChange: fn(),
+    email: {
+      id: "email",
+      label: "Email",
+      value: "",
+      onChange: fn(),
+    },
+    password: {
+      id: "password",
+      label: "Password",
+      value: "",
+      placeholder: "Enter your password",
+      onChange: fn(),
+    },
     onSubmit: fn((e: React.FormEvent) => {
       e.preventDefault();
     }),
@@ -39,10 +56,16 @@ export const WithErrors: IStory = {
   ...base,
   args: {
     ...base.args,
-    emailValue: "invalid-email",
-    emailError: "Please enter a valid email address",
-    passwordValue: "short",
-    passwordError: "Password must be at least 8 characters",
+    email: {
+      ...base.args.email,
+      value: "invalid-email",
+      helperText: "Please enter a valid email address",
+    },
+    password: {
+      ...base.args.password,
+      value: "short",
+      helperText: "Password must be at least 8 characters",
+    },
   },
 };
 
@@ -50,25 +73,31 @@ export const WithFilledValues: IStory = {
   ...base,
   args: {
     ...base.args,
-    emailValue: "user@example.com",
-    passwordValue: "password123",
+    email: {
+      ...base.args.email,
+      value: "user@example.com",
+    },
+    password: {
+      ...base.args.password,
+      value: "password123",
+    },
   },
 };
 
 export const WithInteraction: IStory = {
   ...base,
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement, args }: IPlayProps) => {
     const canvas = within(canvasElement);
 
     // Type in email field
-    const emailInput = canvas.getByLabelText("Email");
+    const emailInput = canvas.getByRole("textbox", { name: "Email" });
     await userEvent.type(emailInput, "test@example.com");
-    await expect(base.args.onEmailChange).toHaveBeenCalled();
+    await expect(base.args.email.onChange).toHaveBeenCalled();
 
     // Type in password field
-    const passwordInput = canvas.getByLabelText("Password");
+    const passwordInput = canvas.getByLabelText(args.password.label);
     await userEvent.type(passwordInput, "password123");
-    await expect(base.args.onPasswordChange).toHaveBeenCalled();
+    await expect(base.args.password.onChange).toHaveBeenCalled();
 
     // Submit form
     const submitButton = canvas.getByRole("button", { name: "Login" });

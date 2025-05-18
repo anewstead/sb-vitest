@@ -51,11 +51,9 @@ const allowParentImports = {
 };
 
 /**
- * Should only really be for state. Redux Toolkit allows mutating logic for
- * state in reducers via Immer library. so we allow no-param-reassign
- * specifically for state property in this folder
+ * Redux Toolkit allows mutating param-reassign in reducers via Immer library.
  */
-const allowParamReassign = {
+const allowOnlyInState = {
   files: ["src/app/state/**"],
   rules: {
     "no-param-reassign": [
@@ -68,6 +66,13 @@ const allowParamReassign = {
   },
 };
 
+const allowOnlyInTest = {
+  files: ["src/**/*.stories.tsx", "src/**/*.test.ts"],
+  rules: {
+    "@typescript-eslint/no-non-null-assertion": "off",
+  },
+};
+
 /**
  * Order may be important\
  * Eslint's final config is a merge of all configs\
@@ -77,5 +82,6 @@ export const overrideRules = [
   allowDefaultExport,
   allowRelaxedImports,
   allowParentImports,
-  allowParamReassign,
+  allowOnlyInState,
+  allowOnlyInTest,
 ];

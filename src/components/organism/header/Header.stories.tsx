@@ -18,7 +18,9 @@ Base: default story props. NO play functions
 */
 const base: IStory = {
   argTypes: {
-    loginBarProps: { control: false },
+    loginBarProps: {
+      control: false, // hide in browser
+    },
   },
   args: {
     loginBarProps: {
@@ -36,9 +38,7 @@ const base: IStory = {
   },
 };
 
-/**
- * Stories: merge over base.\
- * TS requires that non-optional props be explicitly set\
- * Or ...spread from base when overriding
- */
+/*
+Stories: each story should ...spread merge from base as required
+*/
 export const Default: IStory = base;

@@ -20,6 +20,7 @@ const meta: Meta<typeof ThemeWrapper> = {
 };
 export default meta;
 type IStory = StoryObj<typeof meta>;
+type IPlayProps = StoryContext<IStory["args"]>;
 
 /*
 Base: default story props. NO play functions
@@ -42,7 +43,7 @@ Stories: each story should ...spread merge from base as required
 */
 export const Default: IStory = {
   ...base,
-  play: async ({ canvasElement, step }: StoryContext) => {
+  play: async ({ canvasElement, step }: IPlayProps) => {
     const canvas = within(canvasElement);
     await step("renders in default theme mode", async () => {
       const content = canvas.getByTestId("child-content");
@@ -84,7 +85,7 @@ export const UnknownTheme: IStory = {
   args: {
     initialTheme: "unknown-theme" as IThemeName,
   },
-  play: async ({ canvasElement, step }: StoryContext) => {
+  play: async ({ canvasElement, step }: IPlayProps) => {
     const canvas = within(canvasElement);
     await step(
       "falls back to default theme when unknown theme is passed",

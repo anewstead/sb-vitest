@@ -18,20 +18,19 @@ const meta = {
 } satisfies Meta<typeof MSWExample>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
+type IPlayProps = StoryContext<IStory["args"]>;
 
 /*
 Base: default story props. NO play functions
 */
 const base: IStory = {};
 
-/**
- * Stories: merge over base.\
- * TS requires that non-optional props be explicitly set\
- * Or ...spread from base when overriding
- */
+/*
+Stories: each story should ...spread merge from base as required
+*/
 export const Default: IStory = {
   ...base,
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText("Loading...")).toBeVisible();
     await waitFor(async () => {
@@ -48,7 +47,7 @@ export const ErrorResponse: IStory = {
       handlers: [sampleError400],
     },
   },
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText("Loading...")).toBeVisible();
     await waitFor(async () => {
@@ -66,7 +65,7 @@ export const BadRequest: IStory = {
       handlers: [sampleNetworkError],
     },
   },
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText("Loading...")).toBeVisible();
     await waitFor(async () => {
@@ -82,7 +81,7 @@ export const NoData: IStory = {
       handlers: [sampleNoData],
     },
   },
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText("Loading...")).toBeVisible();
     await waitFor(async () => {

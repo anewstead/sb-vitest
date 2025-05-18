@@ -12,6 +12,7 @@ const meta = {
 } satisfies Meta<typeof ComponentName>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
+type IPlayProps = StoryContext<IStory["args"]>;
 
 /*
 Base: default story props. NO play functions
@@ -34,7 +35,7 @@ export const Other: IStory = {
     ...base.args,
     exampleText: "another example text",
   },
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button"));
     await expect(base.args.exampleFunction).toHaveBeenCalled();

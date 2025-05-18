@@ -14,6 +14,7 @@ const meta = {
 } satisfies Meta<typeof ThemeSelector>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
+type IPlayProps = StoryContext<IStory["args"]>;
 
 /*
 Base: default story props. NO play functions
@@ -27,7 +28,7 @@ Stories: each story should ...spread merge from base as required
 */
 export const Default: IStory = {
   ...base,
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
 
     // Verify initial theme is blue

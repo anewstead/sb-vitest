@@ -28,11 +28,9 @@ const base: IStory = {
   },
 };
 
-/**
- * Stories: merge over base.\
- * TS requires that non-optional props be explicitly set\
- * Or ...spread from base when overriding
- */
+/*
+Stories: each story should ...spread merge from base as required
+*/
 export const LoggedOut: IStory = base;
 
 export const LoggedIn: IStory = {

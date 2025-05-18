@@ -55,19 +55,25 @@ export const Login = () => {
           Login
         </Typography>
         <LoginForm
-          emailLabel="Email"
-          passwordLabel="Password"
-          emailValue={emailValue}
-          passwordValue={passwordValue}
-          onEmailChange={(value) => {
-            setValue("email", value);
+          email={{
+            id: "email",
+            label: "Email",
+            value: emailValue,
+            helperText: errors.email?.message,
+            onChange: (value: string) => {
+              setValue("email", value);
+            },
           }}
-          onPasswordChange={(value) => {
-            setValue("password", value);
+          password={{
+            id: "password",
+            label: "Password",
+            value: passwordValue,
+            helperText: errors.password?.message,
+            onChange: (value: string) => {
+              setValue("password", value);
+            },
           }}
           onSubmit={handleFormSubmit}
-          emailError={errors.email?.message}
-          passwordError={errors.password?.message}
         />
       </Grid>
     </Grid>

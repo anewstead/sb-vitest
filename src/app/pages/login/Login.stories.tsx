@@ -12,6 +12,7 @@ const meta = {
 } satisfies Meta<typeof Login>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
+type IPlayProps = StoryContext<IStory["args"]>;
 
 /*
 Base: default story props. NO play functions
@@ -25,7 +26,7 @@ export const Default: IStory = base;
 
 export const WithValidationErrors: IStory = {
   ...base,
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
 
     const emailInput = canvas.getByLabelText(/email/i);
@@ -40,7 +41,7 @@ export const WithValidationErrors: IStory = {
 
 export const WithValidSubmission: IStory = {
   ...base,
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
 
     const emailInput = canvas.getByLabelText(/email/i);

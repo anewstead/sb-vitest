@@ -6,17 +6,29 @@ import { ThemeModeButtons } from "./ThemeModeButtons";
 
 import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
-// -----------------------------------------------------------------------------
-const meta: Meta<typeof ThemeModeButtons> = {
+/*
+Meta: ONLY set meta.component
+*/
+const meta = {
   component: ThemeModeButtons,
-};
+} satisfies Meta<typeof ThemeModeButtons>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
-// -----------------------------------------------------------------------------
+type IPlayProps = StoryContext<IStory["args"]>;
 
-export const Default: IStory = {
+/*
+Base: default story props. NO play functions
+*/
+const base: IStory = {
   args: {},
-  play: async ({ canvasElement, step }: StoryContext) => {
+};
+
+/*
+Stories: each story should ...spread merge from base as required
+*/
+export const Default: IStory = {
+  ...base,
+  play: async ({ canvasElement, step }: IPlayProps) => {
     const canvas = within(canvasElement);
     const lightBtn = canvas.getByRole("button", { name: "light" });
     const systemBtn = canvas.getByRole("button", { name: "system" });
@@ -57,5 +69,3 @@ export const Default: IStory = {
     });
   },
 };
-
-// -----------------------------------------------------------------------------

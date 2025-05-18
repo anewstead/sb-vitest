@@ -8,42 +8,16 @@ import { MyInput } from "@src/components/atom/myInput/MyInput";
 import type { ILoginFormProps } from "./loginForm.type";
 
 export const LoginForm = (props: ILoginFormProps) => {
-  const {
-    emailLabel,
-    emailValue,
-    emailError,
-    onEmailChange,
-    onPasswordChange,
-    onSubmit,
-    passwordLabel,
-    passwordValue,
-    passwordError,
-  } = props;
+  const { email, password, onSubmit } = props;
 
   return (
     <form onSubmit={onSubmit} noValidate>
       <Grid container spacing={2}>
         <Grid size={12}>
-          <MyInput
-            labelText={emailLabel}
-            type="email"
-            id="email"
-            initialValue={emailValue}
-            onChange={onEmailChange}
-            required
-            errorText={emailError}
-          />
+          <MyInput {...email} />
         </Grid>
         <Grid size={12}>
-          <MyInput
-            labelText={passwordLabel}
-            type="password"
-            id="password"
-            initialValue={passwordValue}
-            onChange={onPasswordChange}
-            required
-            errorText={passwordError}
-          />
+          <MyInput {...password} />
         </Grid>
         <Grid size={12}>
           <MyButton label="Login" type="submit" />

@@ -14,24 +14,26 @@ const meta = {
 } satisfies Meta<typeof MyInput>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
+type IPlayProps = StoryContext<IStory["args"]>;
 
 /*
 Base: default story props. NO play functions
 */
 const base: IStory = {
   args: {
-    labelText: "Username",
-    initialValue: "",
+    label: "Username",
+    value: "",
     onChange: fn(),
     placeholder: "Enter your username",
     required: true,
+    id: "username-input",
   },
   render: (args) => {
-    const [value, setValue] = useState(args.initialValue);
+    const [value, setValue] = useState(args.value);
     return (
       <MyInput
         {...args}
-        initialValue={value}
+        value={value}
         onChange={(newValue) => {
           setValue(newValue); // Update local state for controlled component
           args.onChange(newValue); // Call mock function for test assertions
@@ -46,16 +48,13 @@ Stories: each story should ...spread merge from base as required
 */
 export const Default: IStory = {
   ...base,
-  play: async ({ canvasElement, args }: StoryContext) => {
+  play: async ({ canvasElement, args }: IPlayProps) => {
     const canvas = within(canvasElement);
-
     const input = canvas.getByRole("textbox", { name: "Username" });
-
     await expect(input).toBeVisible();
     await expect(input).toHaveValue("");
 
     await userEvent.type(input, "john.doe");
-
     await expect(input).toHaveValue("john.doe");
     await expect(args.onChange).toHaveBeenCalledWith("john.doe");
   },
@@ -65,12 +64,33 @@ export const WithInitialValue: IStory = {
   ...base,
   args: {
     ...base.args,
-    initialValue: "pre-filled",
+    value: "pre-filled",
+    id: "pre-filled-input",
   },
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
     const input = canvas.getByRole("textbox", { name: "Username" });
     await expect(input).toHaveValue("pre-filled");
+  },
+};
+
+export const WithError: IStory = {
+  ...base,
+  args: {
+    ...base.args,
+    value: "invalid@email",
+    helperText: "Please enter a valid email address",
+    id: "error-input",
+  },
+  play: async ({ canvasElement }: IPlayProps) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole("textbox", { name: "Username" });
+    const errorMessage = canvas.getByText("Please enter a valid email address");
+
+    await expect(input).toBeVisible();
+    await expect(input).toHaveValue("invalid@email");
+    await expect(input).toHaveAttribute("aria-invalid", "true");
+    await expect(errorMessage).toBeVisible();
   },
 };
 
@@ -78,13 +98,14 @@ export const Password: IStory = {
   ...base,
   args: {
     ...base.args,
-    labelText: "Password",
+    label: "Password",
     type: "password",
     placeholder: "Enter your password",
+    id: "password-input",
   },
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement, args }: IPlayProps) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByLabelText("Password");
+    const input = canvas.getByPlaceholderText(args.placeholder!);
     await expect(input).toHaveAttribute("type", "password");
   },
 };
@@ -93,15 +114,15 @@ export const Number: IStory = {
   ...base,
   args: {
     ...base.args,
-    labelText: "Age",
+    label: "Age",
     type: "number",
     placeholder: "Enter your age",
-    initialValue: "",
+    value: "",
+    id: "age-input",
   },
-  play: async ({ canvasElement, args }: StoryContext) => {
+  play: async ({ canvasElement, args }: IPlayProps) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByLabelText("Age");
-
+    const input = canvas.getByRole("spinbutton", { name: "Age" });
     await expect(input).toBeVisible();
     await expect(input).toHaveValue(null);
     await expect(input).toHaveAttribute("type", "number");
@@ -118,45 +139,22 @@ export const Number: IStory = {
   },
 };
 
-export const Phone: IStory = {
+/**
+ * Note. No have extra validation for tel formats at this level
+ */
+export const Tel: IStory = {
   ...base,
   args: {
     ...base.args,
-    labelText: "Phone Number",
+    label: "Phone Number",
     type: "tel",
     placeholder: "Enter your phone number",
-    initialValue: "",
+    value: "",
+    id: "phone-input",
   },
-  play: async ({ canvasElement, args }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByLabelText("Phone Number");
-
-    await expect(input).toBeVisible();
-    await expect(input).toHaveValue("");
+    const input = canvas.getByRole("textbox", { name: "Phone Number" });
     await expect(input).toHaveAttribute("type", "tel");
-
-    // Test phone number input with numbers
-    await userEvent.type(input, "1234567890");
-    await expect(input).toHaveValue("1234567890");
-    await expect(args.onChange).toHaveBeenCalledWith("1234567890");
-
-    // Test with formatting
-    await userEvent.clear(input);
-    await userEvent.type(input, "(123) 456-7890");
-    await expect(input).toHaveValue("(123) 456-7890");
-    await expect(args.onChange).toHaveBeenCalledWith("(123) 456-7890");
-
-    // Test with international format
-    await userEvent.clear(input);
-    await userEvent.type(input, "+1 (123) 456-7890");
-    await expect(input).toHaveValue("+1 (123) 456-7890");
-    await expect(args.onChange).toHaveBeenCalledWith("+1 (123) 456-7890");
-
-    // Test with invalid characters
-    await userEvent.clear(input);
-    await userEvent.type(input, "abc123");
-    // The input should only accept the numbers
-    await expect(input).toHaveValue("123");
-    await expect(args.onChange).toHaveBeenCalledWith("123");
   },
 };

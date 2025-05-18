@@ -1,10 +1,10 @@
 export type IMyInputProps = {
-  labelText: string;
-  initialValue: string;
+  label: string;
+  value: string;
   onChange: (value: string) => void;
-  id?: string;
+  id: string;
   type?: "text" | "number" | "email" | "password" | "tel";
   placeholder?: string;
   required?: boolean;
-  errorText?: string;
+  helperText?: string;
 };

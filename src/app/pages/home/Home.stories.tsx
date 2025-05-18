@@ -20,6 +20,7 @@ const meta = {
 } satisfies Meta<typeof Home>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
+type IPlayProps = StoryContext<IStory["args"]>;
 
 /*
 Base: default story props. NO play functions
@@ -33,7 +34,7 @@ Stories: each story should ...spread merge from base as required
 */
 export const LoggedOut: IStory = {
   ...base,
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
     const text = canvas.getByTestId("example-text");
     const initialText = text.textContent ?? "";
@@ -71,7 +72,7 @@ export const Error: IStory = {
       handlers: [contentError],
     },
   },
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
     const content = canvas.getByTestId("pageContent");
 
@@ -89,7 +90,7 @@ export const Loading: IStory = {
       handlers: [contentSlow],
     },
   },
-  play: async ({ canvasElement }: StoryContext) => {
+  play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
     const content = canvas.getByTestId("pageContent");
 

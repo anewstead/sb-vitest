@@ -21,11 +21,8 @@ body {
 
 /*
 fix
-- height 100% items that are as if a body
 - relative position/height for child elements
 */
-#root,
-.sb-story,
-#storybook-root {
+#root {
   height: 100%;
 }
