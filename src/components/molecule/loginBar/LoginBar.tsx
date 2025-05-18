@@ -1,9 +1,9 @@
 import React from "react";
 
+import { Grid } from "@mui/material";
+
 import logo from "@src/assets/acme-logo.svg";
 import { MyButton } from "@src/components/atom/myButton/MyButton";
-
-import styles from "./loginBar.module.scss";
 
 import type { ILoginBarProps } from "./loginBar.type";
 
@@ -20,35 +20,48 @@ export const LoginBar = (props: ILoginBarProps) => {
   } = props;
 
   const loggedInContent = (
-    <>
-      <span className={styles.welcome}>
+    <Grid container spacing={2} alignItems="center">
+      <Grid className="mr text-sm text-[var(--mui-palette-text-secondary)]">
         {`${welcomeText} ${user?.name ?? ""}`}
-      </span>
-      <MyButton size="small" onClick={onLogout} label={logoutText} />
-    </>
+      </Grid>
+      <Grid>
+        <MyButton size="small" onClick={onLogout} label={logoutText} />
+      </Grid>
+    </Grid>
   );
 
   const loggedOutContent = (
-    <>
-      <MyButton size="small" onClick={onLogin} label={loginText} />
-      <MyButton
-        secondary
-        size="small"
-        onClick={onCreateAccount}
-        label={signupText}
-      />
-    </>
+    <Grid container spacing={2} alignItems="center">
+      <Grid>
+        <MyButton size="small" onClick={onLogin} label={loginText} />
+      </Grid>
+      <Grid>
+        <MyButton
+          secondary
+          size="small"
+          onClick={onCreateAccount}
+          label={signupText}
+        />
+      </Grid>
+    </Grid>
   );
 
   return (
-    <header>
-      <div className={styles.loginBar}>
-        <div>
-          <img src={logo} alt="Acme Logo" className="inline-block" />
-          <h1>Acme</h1>
-        </div>
-        <div>{user ? loggedInContent : loggedOutContent}</div>
-      </div>
-    </header>
+    <Grid
+      container
+      justifyContent="space-between"
+      alignItems="center"
+      className="border-t border-b border-[var(--mui-palette-divider)] p-3"
+    >
+      <Grid container alignItems="center" spacing={1}>
+        <Grid>
+          <img src={logo} alt="Acme Logo" />
+        </Grid>
+        <Grid>
+          <h1 className="font-bold text-2xl">Acme</h1>
+        </Grid>
+      </Grid>
+      <Grid>{user ? loggedInContent : loggedOutContent}</Grid>
+    </Grid>
   );
 };

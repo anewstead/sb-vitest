@@ -31,7 +31,7 @@ export const ThemeSelector = () => {
   };
 
   return (
-    <Grid container spacing={2} className="flex-grow p-4">
+    <Grid container spacing={2}>
       <Grid size={7}>
         <MySelect
           id="theme-select"
