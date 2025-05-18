@@ -1,6 +1,6 @@
 import { expect, within } from "@storybook/test";
 
-import { selectMuiOption } from "@src/common/test/utils/selectMuiOption";
+import { selectMuiOption } from "@src/test/utils/selectMuiOption";
 
 import { ThemeSelector } from "./ThemeSelector";
 

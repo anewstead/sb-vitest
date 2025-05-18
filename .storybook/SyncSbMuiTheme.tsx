@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from "react";
 
 import { addons } from "@storybook/preview-api";
 
-import { useThemeWrapper } from "@src/app/wrappers/themeWrapper/useThemeWrapper";
+import { useThemeWrapper } from "@src/wrappers/themeWrapper/useThemeWrapper";
 
 import { getThemeFromUrl, updateUrlWithTheme } from "./themeHelpers";
 
-import type { IThemeName } from "@src/common/style/theme.type";
+import type { IThemeName } from "@src/style/theme.type";
 
 const channel = addons.getChannel();
 

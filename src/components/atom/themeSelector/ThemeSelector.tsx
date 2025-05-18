@@ -3,12 +3,12 @@ import React from "react";
 import { Box, Grid } from "@mui/material";
 import clsx from "clsx";
 
-import { useThemeWrapper } from "@src/app/wrappers/themeWrapper/useThemeWrapper";
-import { allThemes } from "@src/common/style/theme";
 import { MySelect } from "@src/components/atom/mySelect/MySelect";
+import { allThemes } from "@src/style/theme";
+import { useThemeWrapper } from "@src/wrappers/themeWrapper/useThemeWrapper";
 
-import type { IThemeName } from "@src/common/style/theme.type";
 import type { IMySelectItem } from "@src/components/atom/mySelect/mySelect.type";
+import type { IThemeName } from "@src/style/theme.type";
 
 export const ThemeSelector = () => {
   /**

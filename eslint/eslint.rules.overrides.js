@@ -20,7 +20,7 @@ const allowRelaxedImports = {
     "./*",
     ".storybook/**",
     "scripts/**",
-    "src/common/test/**",
+    "src/test/**",
     "**/eslint**",
     "**/__tests__/**",
     "**/__mocks__/**",
@@ -54,7 +54,7 @@ const allowParentImports = {
  * Redux Toolkit allows mutating param-reassign in reducers via Immer library.
  */
 const allowOnlyInState = {
-  files: ["src/app/state/**"],
+  files: ["src/state/**"],
   rules: {
     "no-param-reassign": [
       "error",

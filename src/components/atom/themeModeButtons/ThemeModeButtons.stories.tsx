@@ -1,6 +1,6 @@
 import { expect, userEvent, within } from "@storybook/test";
 
-import { DARK_CLASS, LIGHT_CLASS } from "@src/common/style/themes/base";
+import { DARK_CLASS, LIGHT_CLASS } from "@src/style/themes/base";
 
 import { ThemeModeButtons } from "./ThemeModeButtons";
 

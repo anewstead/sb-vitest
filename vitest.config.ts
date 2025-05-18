@@ -32,7 +32,7 @@ export default defineConfig({
         "**/*.d.ts",
         "**/__tests__/**",
         "**/__mocks__/**",
-        "src/common/test/**",
+        "src/test/**",
       ],
       include: ["src/**/*.{ts,tsx}"],
     },

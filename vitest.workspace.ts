@@ -4,7 +4,7 @@ import { defineWorkspace } from "vitest/config";
 import type { PluginOption } from "vite";
 
 const ROOT_TEST_CONFIG = "./vitest.config.ts";
-const SETUP_FN = "src/common/test/setupFnTest.ts";
+const SETUP_FN = "src/test/setupFnTest.ts";
 const SETUP_SB = ".storybook/setupSbTest.ts";
 
 const sbPlugin = storybookTest({

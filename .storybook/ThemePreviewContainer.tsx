@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ThemeWrapper } from "@src/app/wrappers/themeWrapper/ThemeWrapper";
+import { ThemeWrapper } from "@src/wrappers/themeWrapper/ThemeWrapper";
 
 import { SyncSbMuiMode } from "./SyncSbMuiMode";
 import { SyncSbMuiTheme } from "./SyncSbMuiTheme";
