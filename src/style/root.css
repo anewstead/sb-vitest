@@ -7,22 +7,3 @@
 
 /* custom mui/tailwind */
 @import "./muiTailwind.css";
-
-/*
-fix 
-- scroll on mobile (judder and pull refresh)
-- relative position/height for child elements
-*/
-html,
-body {
-  height: 100%;
-  overflow-y: auto;
-}
-
-/*
-fix
-- relative position/height for child elements
-*/
-#root {
-  height: 100%;
-}
