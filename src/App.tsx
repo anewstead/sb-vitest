@@ -6,7 +6,7 @@ import { I18nextProvider } from "react-i18next";
 import { Provider as ReduxProvider } from "react-redux";
 import { RouterProvider } from "react-router";
 
-import { i18n } from "@src/i18n/i18n";
+import { getI18n } from "@src/i18n/i18n";
 import { store } from "@src/state/store";
 import { ThemeWrapper } from "@src/wrappers/themeWrapper/ThemeWrapper";
 
@@ -20,7 +20,7 @@ import { router } from "./routes/routes";
 export const App = () => {
   return (
     <StrictMode>
-      <I18nextProvider i18n={i18n}>
+      <I18nextProvider i18n={getI18n()}>
         <ReduxProvider store={store}>
           <ThemeWrapper>
             <RouterProvider router={router} />

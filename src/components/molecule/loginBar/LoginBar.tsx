@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Grid } from "@mui/material";
+import clsx from "clsx";
 
 import logo from "@src/assets/acme-logo.svg";
 import { MyButton } from "@src/components/atom/myButton/MyButton";
@@ -20,48 +20,38 @@ export const LoginBar = (props: ILoginBarProps) => {
   } = props;
 
   const loggedInContent = (
-    <Grid container spacing={2} alignItems="center">
-      <Grid className="mr text-sm text-[var(--mui-palette-text-secondary)]">
+    <div className="flex items-center gap-4">
+      <span className="text-sm text-[var(--mui-palette-text-secondary)]">
         {`${welcomeText} ${user?.name ?? ""}`}
-      </Grid>
-      <Grid>
-        <MyButton size="small" onClick={onLogout} label={logoutText} />
-      </Grid>
-    </Grid>
+      </span>
+      <MyButton size="small" onClick={onLogout} label={logoutText} />
+    </div>
   );
 
   const loggedOutContent = (
-    <Grid container spacing={2} alignItems="center">
-      <Grid>
-        <MyButton size="small" onClick={onLogin} label={loginText} />
-      </Grid>
-      <Grid>
-        <MyButton
-          secondary
-          size="small"
-          onClick={onCreateAccount}
-          label={signupText}
-        />
-      </Grid>
-    </Grid>
+    <div className="flex items-center gap-4">
+      <MyButton size="small" onClick={onLogin} label={loginText} />
+      <MyButton
+        secondary
+        size="small"
+        onClick={onCreateAccount}
+        label={signupText}
+      />
+    </div>
   );
 
   return (
-    <Grid
-      container
-      justifyContent="space-between"
-      alignItems="center"
-      className="border-t border-b border-[var(--mui-palette-divider)] p-3"
+    <div
+      className={clsx(
+        "flex justify-between items-center p-3",
+        "border-t border-b border-[var(--mui-palette-divider)]"
+      )}
     >
-      <Grid container alignItems="center" spacing={1}>
-        <Grid>
-          <img src={logo} alt="Acme Logo" />
-        </Grid>
-        <Grid>
-          <h1 className="font-bold text-2xl">Acme</h1>
-        </Grid>
-      </Grid>
-      <Grid>{user ? loggedInContent : loggedOutContent}</Grid>
-    </Grid>
+      <div className="flex items-center gap-2">
+        <img src={logo} alt="Acme Logo" />
+        <h1 className="font-bold text-2xl">Acme</h1>
+      </div>
+      {user ? loggedInContent : loggedOutContent}
+    </div>
   );
 };

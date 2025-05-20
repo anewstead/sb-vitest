@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { i18n } from "@src/i18n/i18n";
+import { getI18n } from "@src/i18n/i18n";
 import { I18N } from "@src/i18n/i18n.const";
 import {
   contentError,
@@ -17,6 +17,7 @@ const getHook = (filename: string) => {
     return useContent(filename);
   });
 };
+const i18n = getI18n();
 
 describe("useContent", () => {
   beforeEach(async () => {

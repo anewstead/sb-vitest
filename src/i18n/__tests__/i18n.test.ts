@@ -1,13 +1,14 @@
 import { waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
+import { getI18n } from "@src/i18n/i18n";
 import { I18N } from "@src/i18n/i18n.const";
 import { common } from "@src/test/mocks/i18n/common";
 import { home } from "@src/test/mocks/i18n/home";
 import { i18nError } from "@src/test/msw/handlers/i18nJsonHandlers";
 import { server } from "@src/test/msw/server";
 
-import { i18n } from "../i18n";
+const i18n = getI18n();
 
 describe("i18n setup with MSW", () => {
   beforeEach(async () => {

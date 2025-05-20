@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Grid } from "@mui/material";
 import clsx from "clsx";
 
 import type { ITipBoxProps } from "./tipBox.type";
@@ -9,29 +8,21 @@ export const TipBox = (props: ITipBoxProps) => {
   const { label, text } = props;
 
   return (
-    <Grid
-      container
-      spacing={1}
-      alignItems="flex-start"
+    <div
       className={clsx(
-        "mt-5 p-4",
-        "border border-[var(--mui-palette-primary-main)] rounded"
+        "mt-5 p-4 flex items-start gap-2",
+        "border border-[var(--mui-palette-primary-main)] rounded-lg"
       )}
     >
-      <Grid
-        size="auto"
+      <span
         className={clsx(
-          "border border-[var(--mui-palette-primary-main)] rounded",
-          "px-2 py-1 mr-2",
-          "font-semibold",
-          "self-start"
+          "border border-[var(--mui-palette-primary-main)] rounded-md",
+          "px-3 py-1 font-semibold shrink-0"
         )}
       >
         {label}
-      </Grid>
-      <Grid flex={1} className="min-w-0 text-pretty">
-        {text}
-      </Grid>
-    </Grid>
+      </span>
+      <div className="text-pretty flex-1">{text}</div>
+    </div>
   );
 };

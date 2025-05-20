@@ -2,48 +2,69 @@
   window.global = window;
 </script>
 <style>
-  :root {
-    --storybook-bg-light: #ffffff;
-    --storybook-bg-dark: #1b1c1d;
-  }
-
-  html.light {
-    --storybook-bg: var(--storybook-bg-light);
-  }
-
-  html.dark {
-    --storybook-bg: var(--storybook-bg-dark);
-  }
-
-  /* background color before story loads */
-  :root,
+  /* background color*/
   html,
   body,
   .sb-preparing-story,
   .sb-preparing-docs,
   .sb-previewBlock,
   .sb-argstableBlock,
+  .docs-story,
   #storybook-preview-iframe {
-    background: var(--storybook-bg);
+    background-color: var(--mui-palette-background-default);
   }
 
-  /* fix relative height and background color */
+  /* height fix and remove default overflow scroll */
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* height fix and add overflow scroll where we want it */
   .sb-story,
-  #storybook-root {
-    background-color: var(--mui-palette-background-default);
+  #storybook-root,
+  #storybook-docs {
+    height: 100%;
+    overflow: auto;
   }
 
-  /* fix background color */
-  .docs-story {
-    background-color: var(--mui-palette-background-default);
+  /* remove padding and margin from main */
+  body.sb-main-padded.sb-show-main {
+    padding: 0;
+    margin: 0;
   }
 
-  /* fix mdx headers in darkmode */
-  .css-1ofkq6d {
-    float: left;
-    line-height: inherit;
-    padding-right: 10px;
-    margin-left: -24px;
-    color: inherit;
+  /* fix mdx headers */
+  .sbdocs {
+    &.sbdocs-wrapper {
+      padding: 2rem;
+    }
+    &.sbdocs-content {
+      > h1,
+      > h2,
+      > h3,
+      > h4,
+      > h5,
+      > h6 {
+        display: flex;
+        a {
+          margin-left: -0.5rem;
+          align-self: center;
+          padding-right: 0.25rem;
+          color: inherit;
+          svg {
+            visibility: visible;
+            opacity: 0.5;
+            top: 0;
+          }
+        }
+        &:hover {
+          svg {
+            opacity: 1;
+          }
+        }
+      }
+    }
   }
 </style>

@@ -36,10 +36,10 @@ export const LoggedOut: IStory = {
   ...base,
   play: async ({ canvasElement }: IPlayProps) => {
     const canvas = within(canvasElement);
-    const text = canvas.getByTestId("example-text");
+    const text = await canvas.findByTestId("example-text");
     const initialText = text.textContent ?? "";
 
-    const button = canvas.getByRole("button", { name: /change text/i });
+    const button = canvas.getByRole("button", { name: /change/i });
     button.click();
 
     await waitFor(async () => {

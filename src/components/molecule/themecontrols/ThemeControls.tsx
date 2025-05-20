@@ -1,24 +1,17 @@
 import React from "react";
 
-import { Grid } from "@mui/material";
-
 import { ThemeModeButtons } from "@src/components/atom/themeModeButtons/ThemeModeButtons";
 import { ThemeSelector } from "@src/components/atom/themeSelector/ThemeSelector";
 
 export const ThemeControls = () => {
   return (
-    <Grid
-      container
-      spacing={2}
-      alignItems="center"
-      justifyContent="space-between"
-    >
-      <Grid size={{ xs: 6, sm: 5, md: 4 }}>
+    <div className="flex items-center justify-between gap-4">
+      <div className="w-1/2 sm:w-5/12 md:w-1/3">
         <ThemeSelector />
-      </Grid>
-      <Grid>
+      </div>
+      <div>
         <ThemeModeButtons />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };

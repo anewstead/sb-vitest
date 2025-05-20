@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Grid } from "@mui/material";
+import clsx from "clsx";
 
 import { MyButton } from "@src/components/atom/myButton/MyButton";
 
@@ -13,17 +13,18 @@ export const ExampleRedux = (props: IExampleReduxProps) => {
   const { buttonLabel, exampleText, onChangeText } = props;
 
   return (
-    <Grid
-      container
-      spacing={2}
-      className="my-4 p-4 border rounded-xl [border-color:var(--mui-palette-text-primary)]"
+    <div
+      className={clsx(
+        "my-4 p-4 border rounded-xl",
+        "[border-color:var(--mui-palette-text-primary)]"
+      )}
     >
-      <Grid size={12} data-testid="example-text">
+      <div className="mb-4" data-testid="example-text">
         {exampleText}
-      </Grid>
-      <Grid size={12}>
+      </div>
+      <div>
         <MyButton secondary label={buttonLabel} onClick={onChangeText} />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };

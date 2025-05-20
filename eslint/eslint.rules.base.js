@@ -97,6 +97,10 @@ export const baseRules = {
       selector: "JSXAttribute[name.name='sx']",
       message: "Avoid using MUI sx prop. Use Tailwind classes instead.",
     },
+    {
+      selector: "JSXAttribute[name.name='style']",
+      message: "Avoid using inline styles. Use Tailwind classes instead.",
+    },
   ],
 
   "no-underscore-dangle": "error",

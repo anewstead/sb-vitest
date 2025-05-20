@@ -1,32 +1,29 @@
-# README
+# SB Vitest
+
+Configurable component based application aiming to support multiple industry domains.  
+Objective to provide tailored UI based on industry characteristic need.
 
 ## Top level tech stack
 
-- Vite
-- Typescript
-- React
-- React Router
-- Redux (toolkit)
-- MaterialUI
-- SCSS modules
-- Vitest (inc. browser mode)
-- Mock Service Worker
-- Storybook
-- Eslint
-- axios
-- i18next
+- Typescript, Eslint,
+- Vite, Vitest,
+- Storybook, Mock Service Worker
+- React, React Router, Redux (RTK),
+- MaterialUI, Tailwind,
+- i18next, axios
 
-## Set up must:
+## Setting up:
 
 [nvm](https://github.com/nvm-sh/nvm)  
-Node Version Manager installs and switches uses  
+Node Version Manager installs and switches node  
 On mac ensure **~/.zshrc** is correct as per NVM install instructions  
 (~ = user root on mac, .zshrc is a hidden file)
 
 [pnpm](https://pnpm.io)  
 Performant npm, Install by `npm i -g pnpm`  
 On mac ensure add the following to **~/.zshrc** so it has the correct pnpm path  
-It also provides a command line shortcut: so can type `pn` instead of `pnpm`
+It also provides a command line shortcut: so can type `pn` instead of `pnpm`  
+_note. workspace relies on pnpm so do not try use npm or yarn_
 
 ```bash
 export PNPM_HOME="~/Library/pnpm"
@@ -44,14 +41,14 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
-#### - Code Editors (IDE)
+#### Code Editors (IDE)
 
 [vscode](https://code.visualstudio.com/)  
-Is provisioned with shared workspace settings and recommended extension, which should be installed.  
-If you use other IDE it **must** have equivalent extension and pick up lint formatting configs (see .vscode folder)  
+Is provisioned with shared workspace settings and recommended extension which should be installed.  
+If you use other IDE it **must** have equivalent extension that pick up formatting configs (see .vscode folder)  
 _The IDE should lint as you write and auto-fix on save_  
 **Please avoid in browser editor (e.g github)**  
-you are expected to install and work locally with this repo
+You are expected to install and work locally with this repo
 
 ---
 
@@ -84,7 +81,7 @@ It helps make code easier to read, test, reuse, debug and maintain
 
 #### - Styles
 
-Allows for **SCSS modules** which have namesake **".module.scss"**  
+Styling is via Tailwind.
 More details in styling section below
 
 #### - Testing
@@ -98,7 +95,7 @@ More detail in testing section below.
 #### - Naming
 
 - PascalCase for **.tsx**
-- camelCase for **.ts** **.scss** and generally all others
+- camelCase for **.ts** and all others
 
 ```
 Comp.tsx
@@ -120,15 +117,35 @@ comp.type.ts
 
 ## Styling
 
-Allows for SCSS modules, however use of SCSS language features should be very minimal.  
-MaterialUI has been setup so its theme vars are also accessible by CSS vars.
+Styling is via Tailwind, which has been configured to use/follow MUI theme variables.
 
-Always prefer style **classes** in TSX markup, this reduces the compiled CSS footprint.  
-MaterialUI includes many [utility classes](https://mui.com/system/properties) for margin/padding etc.
+- It is expected we only ever need Tailwind utility classes.
 
-There should no style **values** in TS/TSX, only **classes**  
-Be especially careful of this when using MaterialUI's sx prop.  
-If not using an existing utility class create your own situational class.
+- Do not use styled components or similar CSS-in-JS methodologies
+
+- There should no style **values** in TS/TSX, only **classes**  
+  Scripts should almost always only ever need switch classes
+
+**The following style method are frowned on and will create ESlint errors!**
+
+- Mui's **sx** prop
+- The standard inline **style** prop
+
+Tailwind class strings can famously get lengthy!  
+There are 2 solutions to this:
+
+- Highly modular/granular components keep the amount of markup per file small and targetted.
+- Utility [clsx](https://github.com/lukeed/clsx) is included if you need more advance class injection  
+  Simply clsx merges multiple strings into one,  
+  meaning classes can be logically separated into easy read groups
+
+#### Initial setup allows for SCSS modules!
+
+**WARNING** avoid if possible, current plan is to remove if proven has little/no use.  
+For now the setup is there as failover.  
+If used the use of SCSS language features should be very minimal.  
+I.E. there are a few global helpers, but generally there should be little need for additional complex SCSS functions and mixins  
+_Remember theme var are available via css variables_
 
 Use SCSS as:
 
@@ -137,10 +154,6 @@ import styles from "./comp.modules.scss";
 <div className={styles.myClass} />
 <div className={styles["my-class"]} />
 ```
-
-Utility [clsx](https://github.com/lukeed/clsx) is included if you need more advance class injection
-
-**Do not use styled-components or similar CSS-in-JS**
 
 ---
 
@@ -156,7 +169,7 @@ These test also run on command line in a **headless browser environment**.
 Here we are testing function logic, input, output,  
 I.E. there should not be anything directly requiring display to be tested.  
 This is Front-end code so test files run in a **JSDOM emulated browser environment**.  
-This environment is significantly more effient for functionalhuh wtf, testing than running in actual browser.
+This environment is significantly more effient for testing than running in actual browser.
 
 #### Node scripts (file.spec.ts)
 

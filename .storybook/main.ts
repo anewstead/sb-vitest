@@ -11,7 +11,6 @@ const sbConfig: StorybookConfig = {
     "@storybook/experimental-addon-test",
     "storybook-addon-remix-react-router",
     "storybook-dark-mode",
-    "storybook-react-i18next",
   ],
 
   framework: {

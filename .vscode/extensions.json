@@ -8,7 +8,8 @@
     "stylelint.vscode-stylelint",
     "unifiedjs.vscode-mdx",
     "eamodio.gitlens",
-    "vitest.explorer"
+    "vitest.explorer",
+    "bradlc.vscode-tailwindcss"
   ],
 
   "unwantedRecommendations": []

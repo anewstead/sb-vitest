@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Box, Grid } from "@mui/material";
 import clsx from "clsx";
 
 import { MySelect } from "@src/components/atom/mySelect/MySelect";
@@ -31,8 +30,8 @@ export const ThemeSelector = () => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid size={7}>
+    <div className="flex gap-4">
+      <div className="w-7/12">
         <MySelect
           id="theme-select"
           labelText="Theme"
@@ -40,19 +39,17 @@ export const ThemeSelector = () => {
           items={themeItems}
           onChange={handleThemeChange}
         />
-      </Grid>
-      <Grid size={5}>
-        <Box
-          data-testid="theme-display"
-          className={clsx(
-            "h-full flex items-center justify-center",
-            "bg-[var(--mui-palette-primary-main)]",
-            "border border-[var(--mui-palette-primary-dark)] rounded"
-          )}
-        >
-          {currentTheme}
-        </Box>
-      </Grid>
-    </Grid>
+      </div>
+      <div
+        data-testid="theme-display"
+        className={clsx(
+          "w-5/12 flex items-center justify-center",
+          "bg-[var(--mui-palette-primary-main)]",
+          "rounded-md"
+        )}
+      >
+        {currentTheme}
+      </div>
+    </div>
   );
 };

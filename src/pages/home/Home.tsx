@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import viewportIcon from "@src/assets/viewport-icon.svg";
@@ -39,20 +38,16 @@ export const Home = (props: IHomeProps) => {
   );
 
   const pageContent = (
-    <Grid container data-testid="pageContent">
-      <Grid size={12}>
-        <ExampleRedux
-          buttonLabel={t("home:changeText")}
-          exampleText={reduxText}
-          onChangeText={() => {
-            handleChangeText(dispatch);
-          }}
-        />
-      </Grid>
-      <Grid size={12} data-testid="i18nContent">
-        {i18nContent}
-      </Grid>
-    </Grid>
+    <div className="flex flex-col gap-4" data-testid="pageContent">
+      <ExampleRedux
+        buttonLabel={t("home:changeText")}
+        exampleText={reduxText}
+        onChangeText={() => {
+          handleChangeText(dispatch);
+        }}
+      />
+      <div data-testid="i18nContent">{i18nContent}</div>
+    </div>
   );
 
   return (

@@ -1,7 +1,6 @@
 import React from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Grid, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -45,15 +44,9 @@ export const Login = () => {
   };
 
   return (
-    <Grid
-      container
-      spacing={2}
-      className="flex h-full items-center justify-center"
-    >
-      <Grid size={{ xs: 12, sm: 8, md: 6, lg: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Login
-        </Typography>
+    <div className="flex h-full items-center justify-center">
+      <div className="w-full px-4 sm:w-2/3 md:w-1/2 lg:w-1/3">
+        <h1 className="text-2xl font-semibold mb-4">Login</h1>
         <LoginForm
           email={{
             id: "email",
@@ -75,7 +68,7 @@ export const Login = () => {
           }}
           onSubmit={handleFormSubmit}
         />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };

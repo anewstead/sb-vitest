@@ -1,9 +1,15 @@
-/* fonts */
-@import "@fontsource/roboto/300.css";
-@import "@fontsource/roboto/400.css";
-@import "@fontsource/roboto/500.css";
-@import "@fontsource/roboto/700.css";
-@import "@fontsource/material-icons/index.css";
-
 /* custom mui/tailwind */
 @import "./muiTailwind.css";
+
+/* height fix and remove default overflow scroll */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* height fix and add overflow scroll where we want it */
+#root {
+  height: 100%;
+  overflow: auto;
+}

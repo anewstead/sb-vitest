@@ -1,7 +1,5 @@
 import React from "react";
 
-import { Grid } from "@mui/material";
-
 import { MyButton } from "@src/components/atom/myButton/MyButton";
 import { MyInput } from "@src/components/atom/myInput/MyInput";
 
@@ -11,18 +9,14 @@ export const LoginForm = (props: ILoginFormProps) => {
   const { email, password, onSubmit } = props;
 
   return (
-    <form onSubmit={onSubmit} noValidate>
-      <Grid container spacing={2}>
-        <Grid size={12}>
-          <MyInput {...email} />
-        </Grid>
-        <Grid size={12}>
-          <MyInput {...password} />
-        </Grid>
-        <Grid size={12}>
-          <MyButton label="Login" type="submit" />
-        </Grid>
-      </Grid>
+    <form onSubmit={onSubmit} noValidate className="flex flex-col gap-4">
+      <MyInput {...email} />
+      <MyInput {...password} />
+      <div className="flex justify-center">
+        <div className="w-1/2">
+          <MyButton label="Login" type="submit" className="w-full" />
+        </div>
+      </div>
     </form>
   );
 };

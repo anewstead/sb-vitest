@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Grid } from "@mui/material";
 import clsx from "clsx";
 
 import { TipBox } from "@src/components/atom/tipBox/TipBox";
@@ -12,29 +11,23 @@ export const ContentPage = (props: IContentPageProps) => {
   const { title, content, tipBoxProps, headerProps } = props;
 
   return (
-    <Grid container direction="column" alignItems="center" className="p-4">
-      <Grid size={12}>
+    <div className="flex flex-col items-center p-4">
+      <div className="w-full">
         <Header {...headerProps} />
-      </Grid>
+      </div>
 
-      <Grid
-        container
-        size={{ xs: 12, md: 10, xl: 8 }}
+      <div
         className={clsx(
-          "mt-4 p-4 rounded-2xl",
-          "bg-[rgb(var(--mui-palette-common-backgroundChannel)/0.1)] "
+          "w-full md:w-5/6 xl:w-2/3 mt-4 p-4 rounded-2xl",
+          "bg-[rgb(var(--mui-palette-common-backgroundChannel)/0.1)]"
         )}
       >
-        <Grid size={12}>
-          <h2>{title}</h2>
-        </Grid>
+        <h2>{title}</h2>
 
-        <Grid size={12}>{content}</Grid>
+        {content}
 
-        <Grid size={12}>
-          <TipBox {...tipBoxProps} />
-        </Grid>
-      </Grid>
-    </Grid>
+        <TipBox {...tipBoxProps} />
+      </div>
+    </div>
   );
 };
