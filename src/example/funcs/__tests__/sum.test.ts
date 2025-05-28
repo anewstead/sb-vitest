@@ -1,4 +1,4 @@
-import { sum } from "../sum";
+import { sum } from "@src/example/funcs/sum";
 
 describe("sum", () => {
   it("should add two positive numbers correctly", () => {

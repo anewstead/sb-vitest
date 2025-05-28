@@ -1,6 +1,11 @@
 {
   "jsdocCommentLineStrategy": "keep",
   "jsonRecursiveSort": true,
-  "plugins": ["prettier-plugin-sort-json", "prettier-plugin-jsdoc"],
+  "plugins": [
+    "prettier-plugin-sort-json",
+    "prettier-plugin-jsdoc",
+    "prettier-plugin-tailwindcss"
+  ],
+  "tailwindFunctions": ["clsx"],
   "trailingComma": "es5"
 }

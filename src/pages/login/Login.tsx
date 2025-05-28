@@ -46,7 +46,7 @@ export const Login = () => {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="w-full px-4 sm:w-2/3 md:w-1/2 lg:w-1/3">
-        <h1 className="text-2xl font-semibold mb-4">Login</h1>
+        <h1 className="mb-4 text-2xl font-semibold">Login</h1>
         <LoginForm
           email={{
             id: "email",

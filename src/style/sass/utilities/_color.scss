@@ -1,0 +1,58 @@
+// Custom MUI Theme Variables
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+$-colors: ("primary", "secondary", "error", "info", "success", "warning");
+$-variants: ("main", "light", "dark");
+
+// e.g. bg-primary, text-primary-light, border-error
+@each $color in $-colors {
+  @each $variant in $-variants {
+    $suffix: if($variant == "main", "", "-#{$variant}");
+    .bg-#{$color}#{$suffix} {
+      background-color: var(--mui-palette-#{$color}-#{$variant});
+    }
+    .text-#{$color}#{$suffix} {
+      color: var(--mui-palette-#{$color}-#{$variant});
+    }
+    .border-#{$color}#{$suffix} {
+      border-color: var(--mui-palette-#{$color}-#{$variant});
+    }
+  }
+}
+
+// Text color classes
+.text-text-primary {
+  color: var(--mui-palette-text-primary);
+}
+
+.text-text-secondary {
+  color: var(--mui-palette-text-secondary);
+}
+
+.text-text-disabled {
+  color: var(--mui-palette-text-disabled);
+}
+
+// Common colors
+.bg-common {
+  background-color: var(--mui-palette-common-background);
+}
+
+.text-common {
+  color: var(--mui-palette-common-onBackground);
+}
+
+.divider {
+  background-color: var(--mui-palette-divider);
+}
+
+.bg-paper {
+  background-color: var(--mui-palette-background-paper);
+}
+
+.bg-default {
+  background-color: var(--mui-palette-background-default);
+}

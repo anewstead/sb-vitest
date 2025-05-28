@@ -1,16 +1,17 @@
-@import "./functions";
+@use "./functions" as *;
 
-// Font (matching MUI)
+// Font
 $default-font: "Roboto", "Helvetica", "Arial", sans-serif;
 $default-font-light: 300;
 $default-font-regular: 400;
 $default-font-medium: 500;
 $default-font-bold: 700;
 
-// Font-size (matching Tailwind)
+// Font-size
+$font-xxs: px2rem(10); // 0.625rem
 $font-xs: px2rem(12); // 0.75rem
 $font-sm: px2rem(14); // 0.875rem
-$font-base: px2rem(16); // 1rem
+$font-md: px2rem(16); // 1rem
 $font-lg: px2rem(18); // 1.125rem
 $font-xl: px2rem(20); // 1.25rem
 $font-2xl: px2rem(24); // 1.5rem
@@ -22,13 +23,12 @@ $font-7xl: px2rem(72); // 4.5rem
 $font-8xl: px2rem(96); // 6rem
 $font-9xl: px2rem(128); // 8rem
 
-// Break-points (match mui)
-// e.g. @include breakpoint-up($break-sm)
-$break-sm: px2rem(600);
-$break-md: px2rem(900);
-$break-lg: px2rem(1200);
-$break-xl: px2rem(1536);
-$break-2xl: px2rem(1920);
+// Break-points (matching MUI)
+$sm: px2rem(600);
+$md: px2rem(900);
+$lg: px2rem(1200);
+$xl: px2rem(1536);
+$xxl: px2rem(1920);
 
 // Spacing (matching Tailwind)
 $space-0: px2rem(0); // 0

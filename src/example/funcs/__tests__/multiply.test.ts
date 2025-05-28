@@ -1,4 +1,4 @@
-import { multiply } from "../multiply";
+import { multiply } from "@src/example/funcs/multiply";
 
 describe("multiply", () => {
   it("should multiply two positive numbers correctly", () => {

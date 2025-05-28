@@ -43,13 +43,13 @@ export const LoginBar = (props: ILoginBarProps) => {
   return (
     <div
       className={clsx(
-        "flex justify-between items-center p-3",
+        "flex items-center justify-between p-3",
         "border-t border-b border-[var(--mui-palette-divider)]"
       )}
     >
       <div className="flex items-center gap-2">
         <img src={logo} alt="Acme Logo" />
-        <h1 className="font-bold text-2xl">Acme</h1>
+        <h1 className="text-2xl font-bold">Acme</h1>
       </div>
       {user ? loggedInContent : loggedOutContent}
     </div>

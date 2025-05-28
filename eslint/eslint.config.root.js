@@ -17,6 +17,7 @@ import { checkFileRules } from "./eslint.rules.checkfile.js";
 import { importRules } from "./eslint.rules.import.js";
 import { overrideRules } from "./eslint.rules.overrides.js";
 import { tsRules } from "./eslint.rules.typescript.js";
+import { storybookPlayPlugin } from "./eslint.storybook.playPlugin.js";
 
 /**
  * The eslint config\
@@ -37,12 +38,12 @@ const baseIgnores = {
     "**/build/**",
     "**/dist/**",
     "**/public/**",
+    "**/public-sb/**",
     "**/vendor/**",
     "**/generated/**",
     "**/coverage/**",
-    "!**/.storybook/**",
-    "**/.storybook/static/**",
     "**/storybook-static/**",
+    "!**/.storybook/**",
   ],
 };
 
@@ -54,16 +55,12 @@ const jsonConfig = {
 
 // applies to all script files
 const baseConfig = {
-  extends: [
-    eslintJs.configs.recommended,
-    importPlugin.flatConfigs.recommended,
-    importPlugin.flatConfigs.typescript,
-  ],
+  extends: [eslintJs.configs.recommended, importPlugin.flatConfigs.recommended],
   plugins: {
     "check-file": checkFilePlugin,
   },
   languageOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: "latest",
     sourceType: "module",
     globals: {
       ...globals.node,
@@ -73,7 +70,6 @@ const baseConfig = {
     "import/ignore": ["node_modules"],
     "import/resolver": {
       typescript: true,
-      node: true,
     },
   },
   rules: {
@@ -87,13 +83,13 @@ const baseConfig = {
 const tsConfig = {
   files: ["**/*.{ts,tsx}"],
   extends: [
+    importPlugin.flatConfigs.typescript,
     ...tsEslint.configs.strictTypeChecked,
     ...tsEslint.configs.stylisticTypeChecked,
   ],
   languageOptions: {
     parserOptions: {
-      projectService: true,
-      tsconfigRootDir: import.meta.dirname,
+      project: ["./tsconfig.json"],
     },
   },
   rules: {
@@ -148,8 +144,19 @@ const storiesConfig = {
   files: ["**/*.stories.tsx"],
   plugins: {
     storybook: storybookPlugin,
+    "storybook-play": storybookPlayPlugin,
   },
   extends: [storybookPlugin.configs["flat/recommended"]],
+  rules: {
+    "storybook-play/require-play-test": "error",
+  },
+};
+
+// override eslint-config-prettier if has unwanted conflicts
+const prettierOverride = {
+  rules: {
+    curly: "error",
+  },
 };
 
 /**
@@ -168,5 +175,6 @@ export default tsEslint.config(
   reactConfig,
   storiesConfig,
   ...overrideRules,
-  prettierConfig
+  prettierConfig,
+  prettierOverride
 );

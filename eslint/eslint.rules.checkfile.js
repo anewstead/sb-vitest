@@ -65,7 +65,9 @@ export const checkFileRules = {
   // default camelCase because just simpler to have same general convention
   "check-file/folder-naming-convention": [
     "error",
-    { "/**/!(__{tests,mocks}__|@*)/**/": "CAMEL_CASE" },
+    {
+      "src/**/*": "CAMEL_CASE",
+    },
   ],
 
   "check-file/no-index": "error",

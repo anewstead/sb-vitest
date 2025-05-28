@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { validEmail } from "../validEmail";
+import { validEmail } from "@src/utils/zod/validEmail";
 
 describe("validEmail", () => {
   it("should validate a correct email address", () => {

@@ -1,8 +1,8 @@
-import { fn } from "@storybook/test";
+import { expect, fn, within } from "@storybook/test";
 
 import { MyButton } from "./MyButton";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
 /*
 Meta: ONLY set meta.component
@@ -12,6 +12,7 @@ const meta = {
 } satisfies Meta<typeof MyButton>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
+type IPlayProps = StoryContext<IStory["args"]>;
 
 /*
 Base: default story props. NO play functions
@@ -26,7 +27,15 @@ const base: IStory = {
 /*
 Stories: each story should ...spread merge from base as required
 */
-export const Primary: IStory = base;
+export const Primary: IStory = {
+  ...base,
+  play: async ({ canvasElement, args }: IPlayProps) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole("button", { name: args.label });
+    button.click();
+    await expect(args.onClick).toHaveBeenCalled();
+  },
+};
 
 export const Secondary: IStory = {
   ...base,

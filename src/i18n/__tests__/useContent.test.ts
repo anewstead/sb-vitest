@@ -3,14 +3,13 @@ import { describe, expect, it } from "vitest";
 
 import { getI18n } from "@src/i18n/i18n";
 import { I18N } from "@src/i18n/i18n.const";
+import { INVALID_FILENAME, useContent } from "@src/i18n/useContent";
 import {
   contentError,
   contentSlow,
   contentSuccess,
 } from "@src/test/msw/handlers/i18nContentHandlers";
 import { server } from "@src/test/msw/server";
-
-import { INVALID_FILENAME, useContent } from "../useContent";
 
 const getHook = (filename: string) => {
   return renderHook(() => {
@@ -34,17 +33,13 @@ describe("useContent", () => {
     });
   });
 
-  it("should start in loading state", async () => {
+  it("should start in loading state and load MD content successfully", async () => {
     server.use(contentSlow);
     const { result } = getHook("home.md");
 
     await waitFor(() => {
       expect(result.current).toBe("..");
     });
-  });
-
-  it("should load markdown content successfully", async () => {
-    const { result } = getHook("home.md");
 
     await waitFor(() => {
       const content = result.current;
@@ -52,7 +47,9 @@ describe("useContent", () => {
         expect.arrayContaining([
           expect.objectContaining({
             type: "h2",
-            props: { children: I18N.DEFAULT_LOCALE },
+            props: {
+              children: `${I18N.DEFAULT_LOCALE} Slow MD Content`,
+            },
           }),
           expect.objectContaining({
             type: "h1",

@@ -4,11 +4,11 @@
 
 const allowDefaultExport = {
   files: [
-    "./*",
     ".storybook/**/*",
-    "**/eslint/**",
-    "src/**/*.stories.tsx",
-    "code_template/**/*.stories.tsx",
+    "eslint/**/*",
+    "**/*.stories.tsx",
+    "**/*.config.*",
+    "**/*.workspace.*",
   ],
   rules: {
     "import/no-default-export": "off",
@@ -21,7 +21,7 @@ const allowRelaxedImports = {
     ".storybook/**",
     "scripts/**",
     "src/test/**",
-    "**/eslint**",
+    "eslint**",
     "**/__tests__/**",
     "**/__mocks__/**",
     "**/*.{test,mock,stories}.{js,jsx,ts,tsx}",
@@ -29,24 +29,6 @@ const allowRelaxedImports = {
   rules: {
     "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
     "import/no-unassigned-import": "off",
-  },
-};
-
-const allowParentImports = {
-  files: ["**/__{tests,mocks}__/**", ".storybook/**/*"],
-  rules: {
-    "no-restricted-imports": [
-      "error",
-      {
-        patterns: [
-          {
-            group: ["../.."],
-            message:
-              "Folder allows 1 level relative parent import, otherwise use absolute @ alias path.",
-          },
-        ],
-      },
-    ],
   },
 };
 
@@ -67,9 +49,16 @@ const allowOnlyInState = {
 };
 
 const allowOnlyInTest = {
-  files: ["src/**/*.stories.tsx", "src/**/*.test.ts"],
+  files: ["**/*.stories.tsx", "**/*.test.ts"],
   rules: {
     "@typescript-eslint/no-non-null-assertion": "off",
+  },
+};
+
+const allowFolderNaming = {
+  files: ["**/__tests__/**", "**/__mocks__/**"],
+  rules: {
+    "check-file/folder-naming-convention": "off",
   },
 };
 
@@ -81,7 +70,7 @@ const allowOnlyInTest = {
 export const overrideRules = [
   allowDefaultExport,
   allowRelaxedImports,
-  allowParentImports,
   allowOnlyInState,
   allowOnlyInTest,
+  allowFolderNaming,
 ];

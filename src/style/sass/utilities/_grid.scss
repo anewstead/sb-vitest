@@ -1,0 +1,176 @@
+@use "scale" as *;
+
+// Grid Utilities
+// e.g. <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+
+.grid {
+  display: grid;
+}
+
+// Grid flow
+.grid-flow-row {
+  grid-auto-flow: row;
+}
+
+.grid-flow-col {
+  grid-auto-flow: column;
+}
+
+.grid-flow-dense {
+  grid-auto-flow: dense;
+}
+
+// Auto columns
+.auto-cols-auto {
+  grid-auto-columns: auto;
+}
+
+.auto-cols-min {
+  grid-auto-columns: min-content;
+}
+
+.auto-cols-max {
+  grid-auto-columns: max-content;
+}
+
+.auto-cols-fr {
+  grid-auto-columns: minmax(0, 1fr);
+}
+
+// Auto rows
+.auto-rows-auto {
+  grid-auto-rows: auto;
+}
+
+.auto-rows-min {
+  grid-auto-rows: min-content;
+}
+
+.auto-rows-max {
+  grid-auto-rows: max-content;
+}
+
+.auto-rows-fr {
+  grid-auto-rows: minmax(0, 1fr);
+}
+
+// Place items
+.place-items-auto {
+  place-items: auto;
+}
+
+.place-items-start {
+  place-items: start;
+}
+
+.place-items-end {
+  place-items: end;
+}
+
+.place-items-center {
+  place-items: center;
+}
+
+.place-items-stretch {
+  place-items: stretch;
+}
+
+// Place content
+.place-content-center {
+  place-content: center;
+}
+
+.place-content-start {
+  place-content: start;
+}
+
+.place-content-end {
+  place-content: end;
+}
+
+.place-content-between {
+  place-content: space-between;
+}
+
+.place-content-around {
+  place-content: space-around;
+}
+
+.place-content-evenly {
+  place-content: space-evenly;
+}
+
+.place-content-stretch {
+  place-content: stretch;
+}
+
+// Generated classes below
+$-grid-columns: (
+  1: 1fr,
+  2: repeat(2, 1fr),
+  3: repeat(3, 1fr),
+  4: repeat(4, 1fr),
+  5: repeat(5, 1fr),
+  6: repeat(6, 1fr),
+  7: repeat(7, 1fr),
+  8: repeat(8, 1fr),
+  9: repeat(9, 1fr),
+  10: repeat(10, 1fr),
+  11: repeat(11, 1fr),
+  12: repeat(12, 1fr),
+);
+
+// Grid columns e.g. grid-cols-2
+@each $cols, $value in $-grid-columns {
+  .grid-cols-#{$cols} {
+    grid-template-columns: #{$value};
+  }
+}
+
+// Grid rows e.g. grid-rows-2
+@each $rows, $value in $-grid-columns {
+  .grid-rows-#{$rows} {
+    grid-template-rows: #{$value};
+  }
+}
+
+// Column and Row span e.g. col-span-2, row-span-2
+@for $i from 1 through 12 {
+  .col-span-#{$i} {
+    grid-column: span #{$i} / span #{$i};
+  }
+  .row-span-#{$i} {
+    grid-row: span #{$i} / span #{$i};
+  }
+}
+
+// Column and Row start/end e.g. col-start-2, row-start-2
+@for $i from 1 through 13 {
+  .col-start-#{$i} {
+    grid-column-start: #{$i};
+  }
+  .col-end-#{$i} {
+    grid-column-end: #{$i};
+  }
+  .row-start-#{$i} {
+    grid-row-start: #{$i};
+  }
+  .row-end-#{$i} {
+    grid-row-end: #{$i};
+  }
+}
+
+// Gaps e.g. gap-2
+@each $size, $value in $size-scale {
+  .gap-#{$size} {
+    gap: #{$value};
+  }
+
+  .gap-x-#{$size} {
+    column-gap: #{$value};
+  }
+
+  .gap-y-#{$size} {
+    row-gap: #{$value};
+  }
+}

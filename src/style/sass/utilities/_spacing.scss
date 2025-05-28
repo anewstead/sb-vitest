@@ -1,0 +1,50 @@
+@use "sass:map";
+@use "scale" as *;
+
+// Spacing Utilities
+
+@mixin spacing($property, $value) {
+  #{$property}: map.get($size-scale, $value);
+}
+
+@each $size, $value in $size-scale {
+  .p-#{$size} {
+    @include spacing(padding, $size);
+  }
+
+  .m-#{$size} {
+    @include spacing(margin, $size);
+  }
+
+  .pt-#{$size} {
+    @include spacing(padding-top, $size);
+  }
+
+  .mt-#{$size} {
+    @include spacing(margin-top, $size);
+  }
+
+  .pb-#{$size} {
+    @include spacing(padding-bottom, $size);
+  }
+
+  .mb-#{$size} {
+    @include spacing(margin-bottom, $size);
+  }
+
+  .pl-#{$size} {
+    @include spacing(padding-left, $size);
+  }
+
+  .ml-#{$size} {
+    @include spacing(margin-left, $size);
+  }
+
+  .pr-#{$size} {
+    @include spacing(padding-right, $size);
+  }
+
+  .mr-#{$size} {
+    @include spacing(margin-right, $size);
+  }
+}

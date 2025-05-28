@@ -43,7 +43,7 @@ export const ThemeSelector = () => {
       <div
         data-testid="theme-display"
         className={clsx(
-          "w-5/12 flex items-center justify-center",
+          "flex w-5/12 items-center justify-center",
           "bg-[var(--mui-palette-primary-main)]",
           "rounded-md"
         )}

@@ -1,20 +1,21 @@
-import { fn } from "@storybook/test";
+import { expect, fn, within } from "@storybook/test";
 
 import { Header } from "./Header";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
 /*
-Meta: ONLY set meta.component
+Meta: set ONLY meta.component here
 */
 const meta = {
   component: Header,
 } satisfies Meta<typeof Header>;
 export default meta;
 type IStory = StoryObj<typeof meta>;
+type IPlayProps = StoryContext<IStory["args"]>;
 
 /*
-Base: default story props. NO play functions
+Base: default story props. NO play function here
 */
 const base: IStory = {
   argTypes: {
@@ -41,4 +42,18 @@ const base: IStory = {
 /*
 Stories: each story should ...spread merge from base as required
 */
-export const Default: IStory = base;
+export const Default: IStory = {
+  ...base,
+  play: async ({ canvasElement }: IPlayProps) => {
+    const canvas = within(canvasElement);
+
+    // Verify ThemeControls is present
+    const themeControls = canvas.getByRole("button", {
+      name: /light/i,
+    });
+    await expect(themeControls).toBeVisible();
+
+    const logo = canvas.getByRole("img", { name: "Acme Logo" });
+    await expect(logo).toBeVisible();
+  },
+};

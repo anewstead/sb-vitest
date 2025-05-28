@@ -1,0 +1,137 @@
+@use "scale" as *;
+
+// Sizing Utilities
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+// Viewport-based utilities
+.w-screen {
+  width: 100vw;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.h-fit {
+  height: fit-content;
+}
+
+.w-max {
+  width: max-content;
+}
+
+.h-max {
+  height: max-content;
+}
+
+.w-min {
+  width: min-content;
+}
+
+.h-min {
+  height: min-content;
+}
+
+// Size utilities for viewport units
+.size-screen {
+  width: 100vw;
+  height: 100vh;
+}
+
+.size-auto {
+  width: auto;
+  height: auto;
+}
+
+.size-min {
+  width: min-content;
+  height: min-content;
+}
+
+.size-max {
+  width: max-content;
+  height: max-content;
+}
+
+.size-fit {
+  width: fit-content;
+  height: fit-content;
+}
+
+// Additional viewport-based utilities
+.min-w-screen {
+  min-width: 100vw;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.max-w-screen {
+  max-width: 100vw;
+}
+
+.max-h-screen {
+  max-height: 100vh;
+}
+
+// Generate width and height utilities for rem scale
+// e.g. w-2, h-2, min-w-2, max-w-2, min-h-2, max-h-2, size-2
+@each $size, $value in $size-scale {
+  .w-#{$size} {
+    width: #{$value};
+  }
+  .h-#{$size} {
+    height: #{$value};
+  }
+
+  // Min and max width/height utilities
+  .min-w-#{$size} {
+    min-width: #{$value};
+  }
+  .max-w-#{$size} {
+    max-width: #{$value};
+  }
+  .min-h-#{$size} {
+    min-height: #{$value};
+  }
+  .max-h-#{$size} {
+    max-height: #{$value};
+  }
+
+  // Size utilities (width and height together)
+  .size-#{$size} {
+    width: #{$value};
+    height: #{$value};
+  }
+}
+
+// Percentage-based utilities
+// e.g. w-1/12, h-1/12, w-2/12, h-2/12, etc.
+@for $i from 1 through 12 {
+  $percentage: $i * 8.3333%;
+  .w-#{$i}\/12 {
+    width: $percentage;
+  }
+  .h-#{$i}\/12 {
+    height: $percentage;
+  }
+}

@@ -1,0 +1,98 @@
+@use "../global/mediaQueries" as *;
+@use "../global/variables" as *;
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.collapse {
+  visibility: collapse;
+}
+
+.hide-sm-up {
+  @include sm-up {
+    display: none;
+  }
+}
+
+.hide-md-up {
+  @include md-up {
+    display: none;
+  }
+}
+
+.hide-lg-up {
+  @include lg-up {
+    display: none;
+  }
+}
+
+.hide-xl-up {
+  @include xl-up {
+    display: none;
+  }
+}
+
+.hide-xxl-up {
+  @include xxl-up {
+    display: none;
+  }
+}
+
+// --
+
+.hide-sm-down {
+  @include sm-down {
+    display: none;
+  }
+}
+
+.hide-md-down {
+  @include md-down {
+    display: none;
+  }
+}
+
+.hide-lg-down {
+  @include lg-down {
+    display: none;
+  }
+}
+
+.hide-xl-down {
+  @include xl-down {
+    display: none;
+  }
+}
+
+.hide-xxl-down {
+  @include xxl-down {
+    display: none;
+  }
+}
+
+/*
+special cases to support tablet view only
+use cases found in legacy code.
+should only have rare use!
+*/
+
+.hide-tablet {
+  @include bp-between($sm, $lg) {
+    display: none;
+  }
+}
+
+.hide-not-tablet {
+  @include sm-down {
+    display: none;
+  }
+
+  @include lg-up {
+    display: none;
+  }
+}

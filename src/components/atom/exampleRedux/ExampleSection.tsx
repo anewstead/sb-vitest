@@ -15,7 +15,7 @@ export const ExampleRedux = (props: IExampleReduxProps) => {
   return (
     <div
       className={clsx(
-        "my-4 p-4 border rounded-xl",
+        "my-4 rounded-xl border p-4",
         "[border-color:var(--mui-palette-text-primary)]"
       )}
     >

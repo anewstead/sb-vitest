@@ -10,19 +10,19 @@ export const TipBox = (props: ITipBoxProps) => {
   return (
     <div
       className={clsx(
-        "mt-5 p-4 flex items-start gap-2",
-        "border border-[var(--mui-palette-primary-main)] rounded-lg"
+        "mt-5 flex items-start gap-2 p-4",
+        "rounded-lg border border-[var(--mui-palette-primary-main)]"
       )}
     >
       <span
         className={clsx(
-          "border border-[var(--mui-palette-primary-main)] rounded-md",
-          "px-3 py-1 font-semibold shrink-0"
+          "rounded-md border border-[var(--mui-palette-primary-main)]",
+          "shrink-0 px-3 py-1 font-semibold"
         )}
       >
         {label}
       </span>
-      <div className="text-pretty flex-1">{text}</div>
+      <div className="flex-1 text-pretty">{text}</div>
     </div>
   );
 };

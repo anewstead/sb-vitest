@@ -1,0 +1,128 @@
+@use "./variables" as *;
+
+// buffer to take from max-width to ensure no conflict to min-width
+$-buffer: 0.01rem;
+
+@mixin sm-up {
+  @media only screen and (min-width: $sm) {
+    @content;
+  }
+}
+
+@mixin sm-down {
+  @media only screen and (max-width: ($sm - $-buffer)) {
+    @content;
+  }
+}
+
+@mixin md-up {
+  @media only screen and (min-width: $md) {
+    @content;
+  }
+}
+
+@mixin md-down {
+  @media only screen and (max-width: ($md - $-buffer)) {
+    @content;
+  }
+}
+
+@mixin lg-up {
+  @media only screen and (min-width: $lg) {
+    @content;
+  }
+}
+
+@mixin lg-down {
+  @media only screen and (max-width: ($lg - $-buffer)) {
+    @content;
+  }
+}
+
+@mixin xl-up {
+  @media only screen and (min-width: $xl) {
+    @content;
+  }
+}
+
+@mixin xl-down {
+  @media only screen and (max-width: ($xl - $-buffer)) {
+    @content;
+  }
+}
+
+@mixin xxl-up {
+  @media only screen and (min-width: $xxl) {
+    @content;
+  }
+}
+
+@mixin xxl-down {
+  @media only screen and (max-width: ($xxl - $-buffer)) {
+    @content;
+  }
+}
+
+// --
+// Between
+// --
+
+@mixin bp-between($min, $max) {
+  @media only screen and (min-width: $min) and (max-width: ( $max - $-buffer)) {
+    @content;
+  }
+}
+
+// --
+// Landscape
+// --
+
+@mixin bp-up-landscape($breakpoint) {
+  @media only screen and (min-width: $breakpoint) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin bp-down-landscape($breakpoint) {
+  @media only screen and (max-width: ($breakpoint - $-buffer)) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin bp-between-landscape($min, $max) {
+  @media only screen and (min-width: $min) and (max-width: ($max - $-buffer)) and (orientation: landscape) {
+    @content;
+  }
+}
+
+// --
+// Height
+// --
+
+@mixin bp-up-height($breakpoint) {
+  @media only screen and (min-height: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin bp-down-height($breakpoint) {
+  @media only screen and (max-height: ($breakpoint - $-buffer)) {
+    @content;
+  }
+}
+
+@mixin bp-between-height($min, $max) {
+  @media only screen and (min-height: $min) and (max-height: ($max - $-buffer)) {
+    @content;
+  }
+}
+
+// --
+// Touch device only
+// --
+
+@mixin touch-device-only() {
+  @media (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}

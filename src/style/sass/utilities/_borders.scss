@@ -1,0 +1,182 @@
+// Border Width
+.border-0 {
+  border-width: 0;
+}
+
+.border {
+  border-width: 0.0625rem;
+}
+
+.border-2 {
+  border-width: 0.125rem;
+}
+
+.border-4 {
+  border-width: 0.25rem;
+}
+
+.border-8 {
+  border-width: 0.5rem;
+}
+
+// Border Color
+.border-transparent {
+  border-color: transparent;
+}
+
+.border-current {
+  border-color: currentcolor;
+}
+
+.border-black {
+  border-color: #000;
+}
+
+.border-white {
+  border-color: #fff;
+}
+
+.border-red {
+  border-color: red;
+}
+
+.border-green {
+  border-color: green;
+}
+
+.border-blue {
+  border-color: blue;
+}
+
+// Border Radius
+.rounded-none {
+  border-radius: 0;
+}
+
+.rounded-sm {
+  border-radius: 0.125rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
+.rounded-2xl {
+  border-radius: 1rem;
+}
+
+.rounded-3xl {
+  border-radius: 1.5rem;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+// Border Style
+.border-solid {
+  border-style: solid;
+}
+
+.border-dashed {
+  border-style: dashed;
+}
+
+.border-dotted {
+  border-style: dotted;
+}
+
+.border-double {
+  border-style: double;
+}
+
+.border-none {
+  border-style: none;
+}
+
+// Individual Border Sides
+.border-t {
+  border-top-width: 0.0625rem;
+}
+
+.border-r {
+  border-right-width: 0.0625rem;
+}
+
+.border-b {
+  border-bottom-width: 0.0625rem;
+}
+
+.border-l {
+  border-left-width: 0.0625rem;
+}
+
+// Individual Border Radius
+.rounded-t-none {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.rounded-r-none {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.rounded-b-none {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.rounded-l-none {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.rounded-t-sm {
+  border-top-left-radius: 0.125rem;
+  border-top-right-radius: 0.125rem;
+}
+
+.rounded-r-sm {
+  border-top-right-radius: 0.125rem;
+  border-bottom-right-radius: 0.125rem;
+}
+
+.rounded-b-sm {
+  border-bottom-right-radius: 0.125rem;
+  border-bottom-left-radius: 0.125rem;
+}
+
+.rounded-l-sm {
+  border-top-left-radius: 0.125rem;
+  border-bottom-left-radius: 0.125rem;
+}
+
+// Remove Border
+.border-t-0 {
+  border-top-width: 0;
+}
+
+.border-r-0 {
+  border-right-width: 0;
+}
+
+.border-b-0 {
+  border-bottom-width: 0;
+}
+
+.border-l-0 {
+  border-left-width: 0;
+}

@@ -53,14 +53,26 @@ export const baseRules = {
         },
         {
           group: ["@mui/material"],
-          importNames: ["styled", "css"],
-          message: "\nAvoid using MUI styled. Use Tailwind classes instead.",
+          importNames: [
+            "styled",
+            "css",
+            "Grid",
+            "Typography",
+            "Box",
+            "Container",
+          ],
+          message:
+            "\nAvoid using this MUI component. Use Tailwind classes instead.",
         },
         {
           group: ["@emotion"],
           importNames: ["default", "css", "styled"],
           message:
             "\nAvoid using styled imports. Use Tailwind classes instead.",
+        },
+        {
+          group: ["@storybook/jest", "@storybook/testing-library"],
+          message: "\nImport testing utilities from '@storybook/test' instead.",
         },
       ],
     },

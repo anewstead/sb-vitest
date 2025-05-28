@@ -31,7 +31,9 @@ export const getThemeFromUrl = (): {
 
 // Utility functions for parsing and stringifying globals
 export function parseUrlGlobals(globals: string): Record<string, string> {
-  if (!globals) return {};
+  if (!globals) {
+    return {};
+  }
   return Object.fromEntries(
     globals.split(";").map((pair) => {
       const [key, value] = pair.split(":");

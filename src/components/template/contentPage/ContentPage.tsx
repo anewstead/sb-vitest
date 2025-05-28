@@ -18,7 +18,7 @@ export const ContentPage = (props: IContentPageProps) => {
 
       <div
         className={clsx(
-          "w-full md:w-5/6 xl:w-2/3 mt-4 p-4 rounded-2xl",
+          "mt-4 w-full rounded-2xl p-4 md:w-5/6 xl:w-2/3",
           "bg-[rgb(var(--mui-palette-common-backgroundChannel)/0.1)]"
         )}
       >

@@ -74,12 +74,16 @@ export const useContent = (filename: string) => {
    * Update loading dots animation when loading
    */
   useEffect(() => {
-    if (!loading) return;
+    if (!loading) {
+      return;
+    }
 
     const interval = setInterval(() => {
       setLoadingDots((dots) => {
         /* v8 ignore next */
-        if (dots.length >= 3) return "\u00A0";
+        if (dots.length >= 3) {
+          return "\u00A0";
+        }
         return `${dots}.`;
       });
     }, 200);
